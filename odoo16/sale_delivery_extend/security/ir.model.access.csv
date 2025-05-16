@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_set_delivery_method,set.delivery.method,model_set_delivery_method,,1,1,1,1
-access_delivery_carrier_address,delivery.carrier.address,model_delivery_carrier_address,,1,1,1,1
-access_shipping_order,shipping.order,model_shipping_order,,1,1,1,1
-access_shipping_order_lines,shipping.order.lines,model_shipping_order_lines,,1,1,1,1
-access_reschedule_shipping_line,reschedule.shipping.line,model_reschedule_shipping_line,,1,1,1,1

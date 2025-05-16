@@ -1,7 +1,0 @@
-<odoo>
-    <data>
-        <record id="shipping_order_line_approve" model="res.groups">
-            <field name="name">Shipping Order Line Approval</field>
-        </record>
-    </data>
-</odoo>

@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-res_partner_cus_address_access,res_partner_cus_address_user,model_res_partner_cus_address,base.group_user,1,1,1,1
-res_sync_ecommerce_logs_access,res_sync_ecommerce_logs_user,model_sync_ecommerce_logs,base.group_user,1,1,1,1
-access_sub_stock_location,access_sub_stock_location,external_commerce_integration.model_sub_stock_location,,1,1,1,1
-access_res_website_sync,res.website.sync,model_res_website_sync,,1,1,1,1
-access_res_sync_table,res.sync.table,model_res_sync_table,,1,1,1,1
