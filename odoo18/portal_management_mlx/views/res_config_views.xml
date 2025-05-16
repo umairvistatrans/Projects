@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mlx_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.form.inherit.mlx</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="1"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app data-string="Malex" string="Malex" name="mlx">
+                        <block id="malex_configuration" title="Configuration">
+                            <!-- API URL Setting -->
+                            <setting id="mlx_supplier_link_pass"
+                                     title="Supplier Page Password"
+                                     string="Supplier Page Password"
+                                     help="Enter the password to access submission form for new suppliers.">
+                                <field name="supplier_link_password"/>
+                            </setting>
+                            <setting id="mlx_supplier_link_url"
+                                     title="Supplier Page URL"
+                                     string="Supplier Page URL"
+                                     help="URL where suppliers can register.">
+                                <field name="supplier_link_url"/>
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="malex_config_settings_action" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_id" ref="portal_management_mlx.mlx_config_settings_view_form"/>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'mlx', 'bin_size': False}</field>
+        </record>
+
+    </data>
+</odoo>

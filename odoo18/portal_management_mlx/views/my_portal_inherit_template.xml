@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_menu_requests" name="Portal layout : Factories menu entries"
+              inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li id="portal_breadcrumbs_factories" t-if="page_name == 'factory'"
+                t-attf-class="breadcrumb-item #{'active ' if not sub_request_id else ''}">
+                <a t-if="page_name == 'factory' and sub_request_id"
+                   t-attf-href="/my/factories?{{ keep_query() }}">Factories
+                </a>
+                <t t-else="">Factories</t>
+            </li>
+            <li id="portal_breadcrumbs_products" t-if="page_name == 'product'"
+                t-attf-class="breadcrumb-item #{'active ' if not sub_request_id else ''}">
+
+                <a t-if="page_name == 'product' and sub_request_id"
+                   t-attf-href="/my/products?{{ keep_query() }}">Products
+                </a>
+                <t t-else="">Products</t>
+
+            </li>
+            <li id="portal_breadcrumbs_categories" t-if="page_name == 'category'"
+                t-attf-class="breadcrumb-item #{'active ' if not sub_request_id else ''}">
+
+                <a t-if="page_name == 'category' and sub_request_id"
+                   t-attf-href="/my/categories?{{ keep_query() }}">Categories
+                </a>
+                <t t-else="">Categories</t>
+            </li>
+            <li t-if="sub_request_id" class="breadcrumb-item active">
+                <span t-field="sub_request_id.name"/>
+                <t t-out="sub_request_id.name"/>
+            </li>
+
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_mlx" name="Show Visits" customize_show="True" inherit_id="portal.portal_my_home"
+              priority="100">
+        <!--        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">-->
+        <!--            <t t-set="portal_client_category_enable" t-value="True"/>-->
+        <!--            <t t-set="portal_alert_category_enable" t-value="True"/>-->
+        <!--        </xpath>-->
+        <div id="portal_client_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/portal_management_mlx/static/src/img/factory-1067.svg'"/>
+                <t t-set="title">Factories</t>
+                <t t-set="url" t-value="'/my/factories'"/>
+                <t t-set="text">Follow and view factories</t>
+                <t t-set="placeholder_count" t-value="'order_count'"/>
+            </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'"/>
+                <t t-set="title">Products</t>
+                <t t-set="url" t-value="'/my/products'"/>
+                <t t-set="text">Follow and view products</t>
+                <t t-set="placeholder_count" t-value="'order_count'"/>
+            </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/portal_management_mlx/static/src/img/category-9.svg'"/>
+                <t t-set="title">Categories</t>
+                <t t-set="url" t-value="'/my/categories'"/>
+                <t t-set="text">Follow and view categories</t>
+                <t t-set="placeholder_count" t-value="'order_count'"/>
+            </t>
+        </div>
+    </template>
+
+    <template id="portal_my_factories" name="My Factories Requests">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Your Factory Requests</t>
+            </t>
+            <div t-if="not requests" class="alert alert-warning" role="alert">
+                There are currently no factory requests for your account.
+            </div>
+            <t t-if="requests" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Reference #</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Submission Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <t t-foreach="requests" t-as="request">
+                    <tr>
+                        <td>
+                            <a t-attf-href="/my/factories/#{request.id}?{{ keep_query() }}">
+                                <t t-out="request.name"/>
+                            </a>
+                        </td>
+
+                        <td>
+                            <span t-field="request.factory_name"/>
+                        </td>
+                        <td>
+                            <span t-field="request.factory_location"/>
+                        </td>
+                        <td>
+                            <span t-field="request.create_date" t-options="{'widget': 'date'}"/>&amp;nbsp;
+                            <span class='d-none d-md-inline' t-field="request.create_date"
+                                  t-options="{'time_only': True}"/>
+                        </td>
+                        <td class="lh-1">
+                            <span t-attf-class="badge text-bg-primary fw-normal o_text_overflow"
+                                  t-field="request.state"/>
+                        </td>
+
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_products" name="My Product Requests">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Your Product Requests</t>
+            </t>
+            <div t-if="not requests" class="alert alert-warning" role="alert">
+                There are currently no product requests for your account.
+            </div>
+            <t t-if="requests" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Reference #</th>
+                        <th>Model #</th>
+                        <th>Code</th>
+                        <th>Category</th>
+                        <th>Submission Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <t t-foreach="requests" t-as="request">
+                    <tr>
+                        <td>
+                            <a t-attf-href="/my/products/#{request.id}?{{ keep_query() }}">
+                                <t t-out="request.name"/>
+                            </a>
+                        </td>
+                        <td>
+                            <span t-field="request.product_model_no"/>
+                        </td>
+                        <td>
+                            <span t-field="request.product_unique_identifier"/>
+                        </td>
+                        <td>
+                            <t t-if="request.product_category">
+                                <span t-field="request.product_category.name"/>
+                            </t>
+                        </td>
+                        <td>
+                            <span t-field="request.create_date" t-options="{'widget': 'date'}"/>&amp;nbsp;
+                            <span class='d-none d-md-inline' t-field="request.create_date"
+                                  t-options="{'time_only': True}"/>
+                        </td>
+                        <td class="lh-1">
+                            <span t-attf-class="badge text-bg-primary fw-normal o_text_overflow"
+                                  t-field="request.state"/>
+                        </td>
+
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_categories" name="My Category Requests">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Your Category Requests</t>
+            </t>
+            <div t-if="not requests" class="alert alert-warning" role="alert">
+                There are currently no category requests for your account.
+            </div>
+            <t t-if="requests" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Reference #</th>
+                        <th>Name</th>
+                        <th>Parent Category</th>
+                        <th>Submission Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <t t-foreach="requests" t-as="request">
+                    <tr>
+                        <td>
+                            <a t-attf-href="/my/categories/#{request.id}?{{ keep_query() }}">
+                                <t t-out="request.name"/>
+                            </a>
+                        </td>
+                        <td>
+                            <span t-field="request.category_name"/>
+                        </td>
+                        <td>
+                            <t t-if="request.category_parent_category">
+                                <span t-field="request.category_parent_category.name"/>
+                            </t>
+                        </td>
+                        <td>
+                            <span t-field="request.create_date" t-options="{'widget': 'date'}"/>&amp;nbsp;
+                            <span class='d-none d-md-inline' t-field="request.create_date"
+                                  t-options="{'time_only': True}"/>
+                        </td>
+                        <td class="lh-1">
+                            <span t-attf-class="badge text-bg-primary fw-normal o_text_overflow"
+                                  t-field="request.state"/>
+                        </td>
+
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Complete page of the factory request -->
+    <template id="factory_portal_template" name="Sales Order" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <div class="row o_project_portal_sidebar">
+                <t t-call="portal.portal_record_sidebar">
+                    <t t-set="classes" t-value="'col-lg-3 col-xl-4 d-print-none'"/>
+                    <t t-set="entries">
+                        <div class="d-flex flex-wrap flex-column gap-4">
+                            <div t-if="sub_request_id.partner_id" class="d-flex flex-column gap-4">
+                                <div class="col-12" t-if="sub_request_id.partner_id">
+                                    <t t-foreach="sub_request_id.partner_id" t-as="user">
+                                        <div t-attf-class="o_portal_contact_details d-flex flex-column gap-2 {{ 'mb-3' if len(sub_request_id.partner_id) > 1 else '' }}">
+                                            <div class="d-flex justify-content-start align-items-center gap-2">
+                                                <img class="o_avatar o_portal_contact_img rounded"
+                                                     t-att-src="image_data_uri(user.avatar_128)"/>
+                                                <h6 class="mb-0" t-field="user.name"/>
+                                            </div>
+                                            <div t-out="user"
+                                                 t-options='{"widget": "contact", "fields": ["email", "phone"]}'/>
+                                        </div>
+                                    </t>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </t>
+                <div id="task_content" class="o_portal_content col-12 col-lg-9 col-xl-8">
+                    <div id="card"
+                         style="border-radius: 8px; box-shadow: 0 2px 4px rgba(33, 37, 41, 0.7); background-color: #ffffff; margin-bottom: 7%;">
+                        <!-- Card Header -->
+                        <div id="card_header"
+                             style="padding: 15px; background-color: #f8f9fa; border-bottom: 1px solid #e9ecef;"
+                             data-anchor="true">
+                            <div class="row justify-content-between align-items-end mb-3">
+                                <div class="col-12 col-md-9">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <h3 t-field="sub_request_id.name"
+                                            style="color: #343a40; font-size: 1.5rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"/>
+                                        <small style="color: #6c757d; display: none; display: inline-block; align-self: flex-end;">
+                                            (#<span t-field="sub_request_id.id"/>)
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <small style="color: #6c757d;">Status:</small>
+                                    <span t-field="sub_request_id.state"
+                                          style="font-size: 0.875rem; padding: 0.375rem 0.75rem; background-color: #0dcaf0; color: #000; border-radius: 50rem;"
+                                          title="Current status of this request"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div id="card_body" style="padding: 20px; background-color: #f8f9fa;">
+                            <div class="float-end">
+                                <!-- Optional: Add any buttons or icons here -->
+                            </div>
+                            <div class="row mb-4">
+                                <!-- Factory Details Column -->
+                                <div class="col-12 col-md-6">
+                                    <div t-if="sub_request_id.factory_name" style="margin-bottom: 10px;">
+                                        <strong>Factory Name:</strong>
+                                        <span t-field="sub_request_id.factory_name"
+                                              style="color: #495057; font-weight: 500;"/>
+                                    </div>
+                                    <div t-if="sub_request_id.factory_capacity" style="margin-bottom: 10px;">
+                                        <strong>Capacity:</strong>
+                                        <span t-field="sub_request_id.factory_capacity"
+                                              style="color: #495057; font-weight: 500;"/>
+                                    </div>
+
+                                </div>
+
+                                <!-- Optional Second Column -->
+                                <div class="col-12 col-md-6 d-empty-none" name="portal_my_task_second_column">
+                                    <div t-if="sub_request_id.factory_location" style="margin-bottom: 10px;">
+                                        <strong>Location:</strong>
+                                        <span t-field="sub_request_id.factory_location"
+                                              style="color: #495057; font-weight: 500;"/>
+                                    </div>
+                                    <div t-if="sub_request_id.create_date" style="margin-bottom: 10px;">
+                                        <strong>Submission Date:</strong>
+                                        <span t-field="sub_request_id.create_date"
+                                              style="color: #495057; font-weight: 500;"
+                                              t-options='{"widget": "date"}'/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="factory_chat" data-anchor="true">
+                        <h3>
+                            <small style="color: #6c757d; display: none; display: inline-block; align-self: flex-end;">
+                                Communication History
+                            </small>
+                        </h3>
+                        <t t-call="portal.message_thread">
+                            <t t-set="object" t-value="sub_request_id"/>
+                            <t t-set="token" t-value="access_token"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Complete page of the product request -->
+    <template id="product_portal_template" name="Sales Order" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <div class="row o_project_portal_sidebar">
+                <t t-call="portal.portal_record_sidebar">
+                    <t t-set="classes" t-value="'col-lg-3 col-xl-4 d-print-none'"/>
+                    <t t-set="entries">
+                        <div class="d-flex flex-wrap flex-column gap-4">
+                            <div t-if="sub_request_id.partner_id" class="d-flex flex-column gap-4">
+                                <div class="col-12" t-if="sub_request_id.partner_id">
+                                    <t t-foreach="sub_request_id.partner_id" t-as="user">
+                                        <div t-attf-class="o_portal_contact_details d-flex flex-column gap-2 {{ 'mb-3' if len(sub_request_id.partner_id) > 1 else '' }}">
+                                            <div class="d-flex justify-content-start align-items-center gap-2">
+                                                <img class="o_avatar o_portal_contact_img rounded"
+                                                     t-att-src="image_data_uri(user.avatar_128)"/>
+                                                <h6 class="mb-0" t-field="user.name"/>
+                                            </div>
+                                            <div t-out="user"
+                                                 t-options='{"widget": "contact", "fields": ["email", "phone"]}'/>
+                                        </div>
+                                    </t>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </t>
+                <div id="task_content" class="o_portal_content col-12 col-lg-9 col-xl-8">
+                    <div id="card"
+                         style="border-radius: 8px; box-shadow: 0 2px 4px rgba(33, 37, 41, 0.7); background-color: #ffffff; margin-bottom: 7%;">
+                        <!-- Card Header -->
+                        <div id="card_header"
+                             style="padding: 15px; background-color: #f8f9fa; border-bottom: 1px solid #e9ecef;"
+                             data-anchor="true">
+                            <div class="row justify-content-between align-items-end mb-3">
+                                <div class="col-12 col-md-9">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <h3 t-field="sub_request_id.name"
+                                            style="color: #343a40; font-size: 1.5rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"/>
+                                        <small style="color: #6c757d; display: none; display: inline-block; align-self: flex-end;">
+                                            (#<span t-field="sub_request_id.id"/>)
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <small style="color: #6c757d;">Status:</small>
+                                    <span t-field="sub_request_id.state"
+                                          style="font-size: 0.875rem; padding: 0.375rem 0.75rem; background-color: #0dcaf0; color: #000; border-radius: 50rem;"
+                                          title="Current status of this request"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div id="card_body" style="padding: 20px; background-color: #f8f9fa;">
+                            <div class="float-end">
+                                <!-- Optional: Add any buttons or icons here -->
+                            </div>
+                            <div class="row mb-4">
+                                <!-- Factory Details Column -->
+                                <div class="col-12 col-md-6">
+                                    <div t-if="sub_request_id.product_model_no" style="margin-bottom: 10px;">
+                                        <strong>Model Number:</strong>
+                                        <span t-field="sub_request_id.product_model_no"
+                                              style="color: #495057; font-weight: 500;"/>
+                                    </div>
+                                    <div t-if="sub_request_id.product_unique_identifier" style="margin-bottom: 10px;">
+                                        <strong>Code:</strong>
+                                        <span t-field="sub_request_id.product_unique_identifier"
+                                              style="color: #495057; font-weight: 500;"/>
+                                    </div>
+                                    <div t-if="sub_request_id.create_date" style="margin-bottom: 10px;">
+                                        <strong>Submission Date:</strong>
+                                        <span t-field="sub_request_id.create_date"
+                                              style="color: #495057; font-weight: 500;"
+                                              t-options='{"widget": "date"}'/>
+                                    </div>
+
+                                </div>
+
+                                <!-- Optional Second Column -->
+                                <div class="col-12 col-md-6 d-empty-none" name="portal_my_task_second_column">
+                                    <div t-if="sub_request_id.product_category" style="margin-bottom: 10px;">
+                                        <strong>Category:</strong>
+                                        <span t-field="sub_request_id.product_category.name"
+                                              style="color: #495057; font-weight: 500;"/>
+                                    </div>
+                                    <div t-if="sub_request_id.product_parent_category" style="margin-bottom: 10px;">
+                                        <strong>Parent Category:</strong>
+                                        <span t-field="sub_request_id.product_parent_category.name"
+                                              style="color: #495057; font-weight: 500;"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="factory_chat" data-anchor="true">
+                        <h3>
+                            <small style="color: #6c757d; display: none; display: inline-block; align-self: flex-end;">
+                                Communication History
+                            </small>
+                        </h3>
+                        <t t-call="portal.message_thread">
+                            <t t-set="object" t-value="sub_request_id"/>
+                            <t t-set="token" t-value="access_token"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Complete page of the product request -->
+    <template id="category_portal_template" name="Sales Order" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <div class="row o_project_portal_sidebar">
+                <t t-call="portal.portal_record_sidebar">
+                    <t t-set="classes" t-value="'col-lg-3 col-xl-4 d-print-none'"/>
+                    <t t-set="entries">
+                        <div class="d-flex flex-wrap flex-column gap-4">
+                            <div t-if="sub_request_id.partner_id" class="d-flex flex-column gap-4">
+                                <div class="col-12" t-if="sub_request_id.partner_id">
+                                    <t t-foreach="sub_request_id.partner_id" t-as="user">
+                                        <div t-attf-class="o_portal_contact_details d-flex flex-column gap-2 {{ 'mb-3' if len(sub_request_id.partner_id) > 1 else '' }}">
+                                            <div class="d-flex justify-content-start align-items-center gap-2">
+                                                <img class="o_avatar o_portal_contact_img rounded"
+                                                     t-att-src="image_data_uri(user.avatar_128)"/>
+                                                <h6 class="mb-0" t-field="user.name"/>
+                                            </div>
+                                            <div t-out="user"
+                                                 t-options='{"widget": "contact", "fields": ["email", "phone"]}'/>
+                                        </div>
+                                    </t>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </t>
+                <div id="task_content" class="o_portal_content col-12 col-lg-9 col-xl-8">
+                    <div id="card"
+                         style="border-radius: 8px; box-shadow: 0 2px 4px rgba(33, 37, 41, 0.7); background-color: #ffffff; margin-bottom: 7%;">
+                        <!-- Card Header -->
+                        <div id="card_header"
+                             style="padding: 15px; background-color: #f8f9fa; border-bottom: 1px solid #e9ecef;"
+                             data-anchor="true">
+                            <div class="row justify-content-between align-items-end mb-3">
+                                <div class="col-12 col-md-9">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <h3 t-field="sub_request_id.name"
+                                            style="color: #343a40; font-size: 1.5rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"/>
+                                        <small style="color: #6c757d; display: none; display: inline-block; align-self: flex-end;">
+                                            (#<span t-field="sub_request_id.id"/>)
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <small style="color: #6c757d;">Status:</small>
+                                    <span t-field="sub_request_id.state"
+                                          style="font-size: 0.875rem; padding: 0.375rem 0.75rem; background-color: #0dcaf0; color: #000; border-radius: 50rem;"
+                                          title="Current status of this request"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div id="card_body" style="padding: 20px; background-color: #f8f9fa;">
+                            <div class="float-end">
+                                <!-- Optional: Add any buttons or icons here -->
+                            </div>
+                            <div class="row mb-4">
+                                <!-- Factory Details Column -->
+                                <div class="col-12 col-md-6">
+                                    <div t-if="sub_request_id.category_name" style="margin-bottom: 10px;">
+                                        <strong>Name:</strong>
+                                        <span t-field="sub_request_id.category_name"
+                                              style="color: #495057; font-weight: 500;"/>
+                                    </div>
+                                    <div t-if="sub_request_id.create_date" style="margin-bottom: 10px;">
+                                        <strong>Submission Date:</strong>
+                                        <span t-field="sub_request_id.create_date"
+                                              style="color: #495057; font-weight: 500;"
+                                              t-options='{"widget": "date"}'/>
+                                    </div>
+
+                                </div>
+
+                                <!-- Optional Second Column -->
+                                <div class="col-12 col-md-6 d-empty-none" name="portal_my_task_second_column">
+                                    <div t-if="sub_request_id.category_parent_category" style="margin-bottom: 10px;">
+                                        <strong>Parent Category:</strong>
+                                        <span t-field="sub_request_id.category_parent_category.name"
+                                              style="color: #495057; font-weight: 500;"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="factory_chat" data-anchor="true">
+                        <h3>
+                            <small style="color: #6c757d; display: none; display: inline-block; align-self: flex-end;">
+                                Communication History
+                            </small>
+                        </h3>
+                        <t t-call="portal.message_thread">
+                            <t t-set="object" t-value="sub_request_id"/>
+                            <t t-set="token" t-value="access_token"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

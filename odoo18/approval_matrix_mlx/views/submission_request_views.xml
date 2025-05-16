@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_submission_request_form_supplier" model="ir.ui.view">
+            <field name="name">submission.request.supplier.approval.form</field>
+            <field name="model">submission.request</field>
+            <field name="inherit_id" ref="portal_management_mlx.view_submission_request_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <field name="is_dynamic_approver" invisible="1"/>
+                </xpath>
+                <xpath expr="//header//button[@name='action_cancel']" position="before">
+                    <button name="action_dynamic_approval" string="Approve" type="object"
+                            class="oe_highlight"
+                            invisible="not is_dynamic_approver or state != 'in_approval'" icon="fa-check"/>
+                    <button name="%(approval_matrix_mlx.view_approval_refuse_notification_action)d"
+                            string="Refuse" type="action" invisible="not is_dynamic_approver or state != 'in_approval'" icon="fa-ban"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Approvers" name="approvers" invisible="not approver_ids">
+                        <field name="approver_ids" readonly="1" force_save="1">
+                            <list decoration-success="state =='approved'"
+                                  decoration-warning="state in ['pending']" no_open="1">
+                                <field name="user_ids" widget="many2many_tags" string="Approvers"/>
+                                <field name="approved_by" string="Approved By"/>
+                                <field name="approval_date" string="Approval Date"/>
+                                <field name="state"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_submission_request_form_product" model="ir.ui.view">
+            <field name="name">submission.request.product.approval.form</field>
+            <field name="model">submission.request</field>
+            <field name="inherit_id" ref="portal_management_mlx.view_submission_request_product_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <field name="is_dynamic_approver" invisible="1"/>
+                </xpath>
+                <xpath expr="//header//button[@name='action_cancel']" position="before">
+                    <button name="action_dynamic_approval" string="Approve" type="object"
+                            class="oe_highlight"
+                            invisible="is_dynamic_approver == False or state != 'in_approval'" icon="fa-check"/>
+                    <button name="%(approval_matrix_mlx.view_approval_refuse_notification_action)d"
+                            string="Refuse" type="action" invisible="not is_dynamic_approver or state != 'in_approval'" icon="fa-ban"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Approvers" name="approvers" invisible="not approver_ids">
+                        <field name="approver_ids" readonly="1" force_save="1">
+                            <list decoration-success="state =='approved'"
+                                  decoration-warning="state in ['pending']" no_open="1">
+                                <field name="user_ids" widget="many2many_tags" string="Approvers"/>
+                                <field name="approved_by" string="Approved By"/>
+                                <field name="approval_date" string="Approval Date"/>
+                                <field name="state"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_submission_request_form_category" model="ir.ui.view">
+            <field name="name">submission.request.category.approval.form</field>
+            <field name="model">submission.request</field>
+            <field name="inherit_id" ref="portal_management_mlx.view_submission_request_category_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <field name="is_dynamic_approver" invisible="1"/>
+                </xpath>
+                <xpath expr="//header//button[@name='action_cancel']" position="before">
+                    <button name="action_dynamic_approval" string="Approve" type="object"
+                            class="oe_highlight"
+                            invisible="is_dynamic_approver == False or state != 'in_approval'" icon="fa-check"/>
+                    <button name="%(approval_matrix_mlx.view_approval_refuse_notification_action)d"
+                            string="Refuse" type="action" invisible="not is_dynamic_approver or state != 'in_approval'" icon="fa-ban"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Approvers" name="approvers" invisible="not approver_ids">
+                        <field name="approver_ids" readonly="1" force_save="1">
+                            <list decoration-success="state =='approved'"
+                                  decoration-warning="state in ['pending']" no_open="1">
+                                <field name="user_ids" widget="many2many_tags" string="Approvers"/>
+                                <field name="approved_by" string="Approved By"/>
+                                <field name="approval_date" string="Approval Date"/>
+                                <field name="state"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_submission_request_form_factory" model="ir.ui.view">
+            <field name="name">submission.request.factory.approval.form</field>
+            <field name="model">submission.request</field>
+            <field name="inherit_id" ref="portal_management_mlx.view_submission_request_factory_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <field name="is_dynamic_approver" invisible="1"/>
+                </xpath>
+                <xpath expr="//header//button[@name='action_cancel']" position="before">
+                    <button name="action_dynamic_approval" string="Approve" type="object"
+                            class="oe_highlight"
+                            invisible="is_dynamic_approver == False or state != 'in_approval'" icon="fa-check"/>
+                    <button name="%(approval_matrix_mlx.view_approval_refuse_notification_action)d"
+                            string="Refuse" type="action" invisible="not is_dynamic_approver or state != 'in_approval'" icon="fa-ban"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Approvers" name="approvers" invisible="not approver_ids">
+                        <field name="approver_ids" readonly="1" force_save="1">
+                            <list decoration-success="state =='approved'"
+                                  decoration-warning="state in ['pending']" no_open="1">
+                                <field name="user_ids" widget="many2many_tags" string="Approvers"/>
+                                <field name="approved_by" string="Approved By"/>
+                                <field name="approval_date" string="Approval Date"/>
+                                <field name="state"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

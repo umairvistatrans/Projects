@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--        Product Form Inherit -->
+        <record model="ir.ui.view" id="view_product_template_form_mlx">
+            <field name="name">product.template.form.inherit.mlx</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[last()]" position="after">
+                    <page name="product_images" string="Product Images">
+                        <group>
+                            <group col="6">
+                                <!-- Stacked Image Group -->
+                                <field name="product_image_1" nolabel="1" widget="image"
+                                       options="{'convert_to_webp': True, 'zoom': True}" class="oe_avatar"
+                                       readonly="1"/>
+                                <field name="product_image_2" nolabel="1" widget="image"
+                                       options="{'convert_to_webp': True, 'zoom': true}" class="oe_avatar"
+                                       readonly="1"/>
+                                <field name="product_image_3" nolabel="1" widget="image"
+                                       options="{'convert_to_webp': True, 'zoom': true}" class="oe_avatar"
+                                       invisible="not product_image_3" readonly="1"/>
+                                <field name="product_image_4" nolabel="1" widget="image"
+                                       options="{'convert_to_webp': True, 'zoom': true}" class="oe_avatar"
+                                       invisible="not product_image_4" readonly="1"/>
+                                <field name="product_image_5" nolabel="1" widget="image"
+                                       options="{'convert_to_webp': True, 'zoom': true}" class="oe_avatar"
+                                       invisible="not product_image_5" readonly="1"/>
+                                <field name="product_image_6" nolabel="1" widget="image"
+                                       options="{'convert_to_webp': True, 'zoom': true}" class="oe_avatar"
+                                       invisible="not product_image_6" readonly="1"/>
+                                <field name="product_image_7" nolabel="1" widget="image"
+                                       options="{'convert_to_webp': True, 'zoom': true}" class="oe_avatar"
+                                       invisible="not product_image_7" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- List View -->
+        <record id="view_supplier_factory_list" model="ir.ui.view">
+            <field name="name">supplier.factory.list</field>
+            <field name="model">supplier.factory</field>
+            <field name="arch" type="xml">
+                <list sample="1">
+                    <field name="name" string="Factory Name" decoration-bf="1"/>
+                    <field name="supplier_id" string="Supplier"/>
+                    <field name="location" string="Location"/>
+                    <field name="capacity" string="Capacity"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_supplier_factory_form" model="ir.ui.view">
+            <field name="name">supplier.factory.form</field>
+            <field name="model">supplier.factory</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_certifications"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-certificate" invisible="not certifications_count">
+                                <field string="Certifications" name="certifications_count" widget="statinfo"/>
+                            </button>
+                            <!-- Factory Documents Smart Button -->
+                            <button
+                                    name="action_view_documents"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-file" invisible="not documents_count">
+                                <field string="Documents" name="documents_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <field name="active" invisible="1"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" string="Name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <br/>
+                        <group>
+                            <group>
+                                <field name="supplier_id" string="Related Supplier"
+                                       options="{'no_create': True, 'no_edit': True}" readonly="1"/>
+                                <field name="submission_id" string="Related Submission"
+                                       options="{'no_create': True, 'no_edit': True}" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="location" readonly="1"/>
+                                <field name="capacity" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_supplier_factory_search" model="ir.ui.view">
+            <field name="name">supplier.factory.search</field>
+            <field name="model">supplier.factory</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Factory Name"/>
+                    <field name="supplier_id" string="Supplier"/>
+                    <field name="location" string="Location"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_supplier" string="Suppliers" context="{'group_by': 'supplier_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Partner Kanban View -->
+        <record model="ir.ui.view" id="res_partner_kanban_view_mlx">
+            <field name="name">res.partner.kanban.mlx</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <kanban sample="1">
+                    <field name="avatar_128"/>
+                    <field name="is_company"/>
+                    <field name="active"/>
+                    <templates>
+                        <t t-name="card" class="flex-row">
+                            <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                            <aside class="o_kanban_aside_full">
+                                <t t-if="!record.is_company.raw_value">
+                                    <div class="o_kanban_image_fill position-relative w-100">
+                                        <field name="avatar_128" alt="Contact image" class="h-100" widget="image"
+                                               options="{'img_class': 'object-fit-cover'}"/>
+                                        <field t-if="record.parent_id.raw_value" name="parent_id"
+                                               class="position-absolute bottom-0 end-0 w-25 bg-light" widget="image"
+                                               options="{'preview_image': 'image_128', 'img_class': 'object-fit-contain'}"/>
+                                    </div>
+                                </t>
+                                <t t-else="">
+                                    <field name="avatar_128" class="w-100" widget="image"
+                                           options="{'img_class': 'object-fit-contain w-100 h-100'}"/>
+                                </t>
+                            </aside>
+                            <main class="ps-2 ps-md-0">
+                                <div class="mb-1">
+                                    <field name="display_name" class="mb-0 fw-bold fs-5"/>
+                                    <field t-if="record.parent_id.raw_value and !record.function.raw_value"
+                                           class="text-muted" name="parent_id"/>
+                                    <field t-elif="!record.parent_id.raw_value and record.function.raw_value"
+                                           class="text-muted" name="function"/>
+                                    <div t-elif="record.parent_id.raw_value and record.function.raw_value"
+                                         class="text-muted">
+                                        <field name="function"/>
+                                        at
+                                        <field name="parent_id"/>
+                                    </div>
+                                </div>
+                                <div t-if="record.city.raw_value or record.country_id.raw_value">
+                                    <field name="city"/>
+                                    <span t-if="record.city.raw_value and record.country_id.raw_value">,</span>
+                                    <field name="country_id"/>
+                                </div>
+                                <field name="email" class="text-truncate"/>
+                                <footer>
+                                    <div/>
+                                </footer>
+                            </main>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_factory_mlx" model="ir.actions.act_window">
+            <field name="name">Factories</field>
+            <field name="res_model">supplier.factory</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'create': 0, 'edit': 0, 'delete': 0}</field>
+        </record>
+        <record id="action_supplier_mlx" model="ir.actions.act_window">
+            <field name="name">Suppliers</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('res_partner_kanban_view_mlx')})]"/>
+            <field name="domain">[('supplier', '=', True)]</field>
+            <field name="context">{'create': 0, 'edit': 0, 'delete': 0}</field>
+        </record>
+
+        <record id="product_category_action_mlx" model="ir.actions.act_window">
+            <field name="name">Categories</field>
+            <field name="res_model">product.category</field>
+            <field name="context">{'create': 0, 'edit': 0, 'delete': 0}</field>
+            <field name="search_view_id" ref="product.product_category_search_view"/>
+            <field name="view_id" ref="product.product_category_list_view"/>
+        </record>
+
+        <record id="product_template_action_mlx" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="res_model">product.template</field>
+            <field name="search_view_id" ref="product.product_template_search_view"/>
+            <field name="view_mode">kanban,form</field>
+
+        </record>
+
+        <record id="product_normal_variants_mlx" model="ir.actions.act_window">
+            <field name="name">Variants</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="search_view_id" ref="product.product_search_form_view"/>
+        </record>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_internal_management_product"
+                  name="Products"
+                  parent="portal_management_mlx.menu_submission_app"
+                  sequence="20">
+            <menuitem id="menu_products"
+                      name="Products"
+                      action="product_template_action_mlx"
+                      sequence="10"/>
+            <menuitem id="menu_variants"
+                      name="Variants"
+                      action="product_normal_variants_mlx"
+                      sequence="20"/>
+        </menuitem>
+        <menuitem id="menu_internal_management"
+                  name="Assets"
+                  parent="portal_management_mlx.menu_submission_app"
+                  sequence="30">
+            <menuitem id="menu_factories"
+                      name="Factories"
+                      action="action_factory_mlx"
+                      sequence="10"/>
+            <menuitem id="menu_category"
+                      name="Categories"
+                      action="product_category_action_mlx"
+                      sequence="20"/>
+            <menuitem id="menu_suppliers"
+                      name="Suppliers"
+                      action="action_supplier_mlx"
+                      sequence="30"/>
+        </menuitem>
+        <menuitem id="menu_configuration"
+                  name="Configuration"
+                  parent="portal_management_mlx.menu_submission_app"
+                  sequence="40">
+            <menuitem id="menu_settings"
+                      name="Settings"
+                      action="malex_config_settings_action"
+                      sequence="10"/>
+        </menuitem>
+
+    </data>
+</odoo>

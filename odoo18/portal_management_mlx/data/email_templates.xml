@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="email_template_submission_received" model="mail.template">
+            <field name="name">Submission Received</field>
+            <field name="model_id" ref="model_submission_request"/>
+            <field name="email_from">{{ (object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="subject">Submission Request {{ object.name }} Received</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p>Hello <t t-out="object.partner_id.name"/>,
+                    </p>
+                    <p>Your
+                        <strong>
+                            <t t-out="object.submission_type.capitalize()"/>
+                        </strong>
+                        submission request has been successfully received.
+                    </p>
+                    <p>Thank you for submitting the required information. We will process it and update you as soon as
+                        possible.
+                    </p>
+                    <p>Best regards,</p>
+                    <p>Your Team.</p>
+                </div>
+            </field>
+            <field name="lang">{{ object.create_uid.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="email_template_submission_cancelled" model="mail.template">
+            <field name="name">Submission Cancelled</field>
+            <field name="model_id" ref="model_submission_request"/>
+            <field name="email_from">{{ (object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="subject">Submission Request {{ object.name }} Cancelled</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p>Hello <t t-out="object.partner_id.name"/>,
+                    </p>
+                    <p>We regret to inform you that your
+                        <strong>
+                            <t t-out="object.submission_type.capitalize()"/>
+                        </strong>
+                        submission request has been cancelled.
+                    </p>
+                    <p>If you have any questions or believe this was done in error, please contact support.</p>
+                    <p>Best regards,</p>
+                    <p>Your Team.</p>
+                </div>
+            </field>
+            <field name="lang">{{ object.create_uid.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="email_template_submission_approved" model="mail.template">
+            <field name="name">Submission Approved</field>
+            <field name="model_id" ref="model_submission_request"/>
+            <field name="email_from">{{ (object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="subject">Submission Request {{ object.name }} Approved</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p>Hello <t t-out="object.partner_id.name"/>,</p>
+                    <p>
+                        We are pleased to inform you that your
+                        <strong>
+                            <t t-out="object.submission_type.capitalize()"/>
+                        </strong>
+                        submission request has been approved.
+                    </p>
+                    <p>
+                        You now have access to proceed further with your submission.
+                        For any additional actions or inquiries, please refer to your dashboard or contact support.
+                    </p>
+                    <p>
+                        If you have any questions, feel free to reach out to us.
+                    </p>
+                    <p>Best regards,</p>
+                    <p>Your Team.</p>
+                </div>
+            </field>
+            <field name="lang">{{ object.create_uid.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+
+        <record id="email_template_submission_refused" model="mail.template">
+            <field name="name">Submission Refused</field>
+            <field name="model_id" ref="model_submission_request"/>
+            <field name="email_from">{{ (object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="subject">Submission Request {{ object.name }} Refused</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p>Hello <t t-out="object.partner_id.name"/>,
+                    </p>
+                    <p>
+                        We regret to inform you that your
+                        <strong>
+                            <t t-out="object.submission_type.capitalize()"/>
+                        </strong>
+                        submission request has been refused.
+                    </p>
+                    <p>
+                        <strong>Reason for Refusal:</strong>
+                    </p>
+                    <p>
+                        <t t-esc="ctx.get('refusal_reason', 'No reason provided.')"/>
+                    </p>
+                    <p>If you have any questions or believe this was done in error, please contact support.</p>
+                    <p>Best regards,</p>
+                    <p>Your Team.</p>
+                </div>
+            </field>
+            <field name="lang">{{ object.create_uid.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

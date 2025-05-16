@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_dynamic_approval_configuration_list" model="ir.ui.view">
+            <field name="name">dynamic.approval.configuration.list</field>
+            <field name="model">dynamic.approval.configuration</field>
+            <field name="arch" type="xml">
+                <list editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="user_ids" widget="many2many_tags" column_invisible="parent.process_by != 'user'"/>
+                    <field name="department_ids" widget="many2many_tags" column_invisible="parent.process_by != 'department'"/>
+                    <field name="process_by" widget="badge" decoration-info="process_by in ('user', 'department')"/>
+                    <field name="approval_medium" widget="badge" decoration-primary="approval_medium in ('request')"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_dynamic_approval_form" model="ir.ui.view">
+            <field name="name">view.dynamic.approval.form</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Approval Configuration" name="dynamic_approval_config">
+                        <field name="dynamic_approval_ids">
+                            <list>
+                                <field name="name"/>
+                                <field name="approval_medium"/>
+                                <field name="process_by"/>
+                            </list>
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="process_by"/>
+                                    </group>
+                                    <group>
+                                        <field name="approval_medium"/>
+                                        <field name="submission_type" invisible="not approval_medium == 'request'"/>
+                                    </group>
+                                </group>
+                                <notebook>
+                                    <page string="Approval Conf" name="approval_conf">
+                                        <field name="approval_conf_ids"
+                                               context="{'list_view_ref': 'approval_matrix_mlx.view_dynamic_approval_configuration_list'}">
+                                        </field>
+                                    </page>
+                                </notebook>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

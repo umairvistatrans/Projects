@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="64" height="64" viewBox="0 0 256 256" xml:space="preserve">
+    <defs>
+    </defs>
+    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+        <!-- Dots -->
+        <circle cx="10" cy="20" r="3" style="fill: rgb(0,0,0);" />
+        <circle cx="10" cy="50" r="3" style="fill: rgb(0,0,0);" />
+        <circle cx="10" cy="80" r="3" style="fill: rgb(0,0,0);" />
+
+        <!-- Lines -->
+        <line x1="13" y1="20" x2="190" y2="20" style="stroke: rgb(0,0,0); stroke-width: 2;" />
+        <line x1="13" y1="50" x2="190" y2="50" style="stroke: rgb(0,0,0); stroke-width: 2;" />
+        <line x1="13" y1="80" x2="190" y2="80" style="stroke: rgb(0,0,0); stroke-width: 2;" />
+    </g>
+</svg>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_submission_request,submission.request,model_submission_request,base.group_user,1,1,1,1
+access_supplier_factory,supplier.factory,model_supplier_factory,base.group_user,1,1,1,1

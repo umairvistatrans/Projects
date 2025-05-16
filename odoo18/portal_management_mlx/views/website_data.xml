@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- New Suppliers Submissions Page -->
+        <record id="portal_management_mlx.page_suppliers_new" model="website.page">
+            <field name="name">Submit Supplier Info</field>
+            <field name="url">/requests/supplier</field>
+            <field name="is_published">True</field>
+            <field name="view_id" ref="portal_management_mlx.submit_supplier"/>
+            <field name="track">True</field>
+            <field name="website_id" ref="website.default_website"/>
+            <field name="website_meta_description">Page for new supplier submissions</field>
+        </record>
+        <!-- Products Page -->
+        <record id="portal_management_mlx.page_products" model="website.page">
+            <field name="name">Submit Product</field>
+            <field name="url">/requests/product</field>
+            <field name="is_published">True</field>
+            <field name="view_id" ref="portal_management_mlx.submit_product"/>
+            <field name="track">True</field>
+            <field name="website_id" ref="website.default_website"/>
+            <field name="website_meta_description">Page for product submissions</field>
+        </record>
+
+        <!-- Categories Page -->
+        <record id="portal_management_mlx.page_categories" model="website.page">
+            <field name="name">Submit Category</field>
+            <field name="url">/requests/category</field>
+            <field name="is_published">True</field>
+            <field name="view_id" ref="portal_management_mlx.submit_category"/>
+            <field name="track">True</field>
+            <field name="website_id" ref="website.default_website"/>
+            <field name="website_meta_description">Page for category submissions</field>
+        </record>
+
+        <!-- Factories Page -->
+        <record id="portal_management_mlx.page_factories" model="website.page">
+            <field name="name">Submit Factory</field>
+            <field name="url">/requests/factory</field>
+            <field name="is_published">True</field>
+            <field name="view_id" ref="portal_management_mlx.submit_factory"/>
+            <field name="track">True</field>
+            <field name="website_id" ref="website.default_website"/>
+            <field name="website_meta_description">Page for factory submissions</field>
+        </record>
+
+        <!-- Submissions (Mega Menu) -->
+        <record id="portal_management_mlx.menu_submissions_mlx" model="website.menu">
+            <field name="name">Submissions</field>
+            <field name="url">#</field>
+            <field name="website_id" ref="website.default_website"/>
+            <field name="sequence" type="int">20</field>
+            <field name="group_ids" eval="[(4, ref('group_submission_access'))]"/>
+        </record>
+
+        <!-- Products (Child Menu) -->
+        <record id="portal_management_mlx.menu_products_mlx" model="website.menu">
+            <field name="name">Products</field>
+            <field name="url">/requests/product</field>
+            <field name="parent_id" ref="portal_management_mlx.menu_submissions_mlx"/>
+            <field name="website_id" ref="website.default_website"/>
+            <field name="sequence" type="int">10</field>
+            <field name="group_ids" eval="[(4, ref('portal_management_mlx.group_submission_access'))]"/>
+            <field name="page_id" ref="portal_management_mlx.page_products"/>
+        </record>
+
+        <!-- Categories (Child Menu) -->
+        <record id="portal_management_mlx.menu_categories_mlx" model="website.menu">
+            <field name="name">Categories</field>
+            <field name="url">/requests/category</field>
+            <field name="parent_id" ref="portal_management_mlx.menu_submissions_mlx"/>
+            <field name="website_id" ref="website.default_website"/>
+            <field name="sequence" type="int">20</field>
+            <field name="group_ids" eval="[(4, ref('portal_management_mlx.group_submission_access'))]"/>
+            <field name="page_id" ref="portal_management_mlx.page_categories"/>
+        </record>
+
+        <!-- Factories (Child Menu) -->
+        <record id="portal_management_mlx.menu_factories_mlx" model="website.menu">
+            <field name="name">Factories</field>
+            <field name="url">/requests/factory</field>
+            <field name="parent_id" ref="portal_management_mlx.menu_submissions_mlx"/>
+            <field name="website_id" ref="website.default_website"/>
+            <field name="sequence" type="int">30</field>
+            <field name="group_ids" eval="[(4, ref('portal_management_mlx.group_submission_access'))]"/>
+            <field name="page_id" ref="portal_management_mlx.page_factories"/>
+        </record>
+    </data>
+</odoo>

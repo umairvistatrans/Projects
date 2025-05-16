@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="submit_supplier">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Submit Supplier Details</t>
+
+            <div id="wrap" class="container">
+                <h2 class="my-3">
+                    Supplier Application Form
+                </h2>
+
+                <div id="supplier_section" class="container">
+                    <div class="row">
+                        <section id="forms" class="col-12 col-md-9" data-name="Form">
+                            <div class="container">
+                                <form id="supplier_submission_form" action="/requests/supplier/"
+                                      method="POST" class="o_mark_required row"
+                                      data-mark="*" data-model_name="submission.request" hide-change-model="true"
+                                      enctype="multipart/form-data">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <div class="row s_col_no_bgcolor">
+                                        <!-- Supplier Name -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="supplier_name">
+                                                    <span>Your Name</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="supplier_name" type="text"
+                                                           class="form-control"
+                                                           name="supplier_name" required=""
+                                                           data-fill-with="name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="image_1920">
+                                                    <span>Picture (optional)</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input type="file" name="image_1920" id="image_1920"
+                                                           class="form-control"
+                                                           accept=".jpg, .jpeg, .png"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Supplier Phone -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="supplier_phone">
+                                                    <span>Phone Number</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="supplier_phone" type="tel"
+                                                           class="form-control"
+                                                           name="supplier_phone" required=""
+                                                           data-fill-with="phone"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Supplier Email -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="supplier_email">
+                                                    <span>Email</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="supplier_email" type="email"
+                                                           class="form-control"
+                                                           name="supplier_email" required=""
+                                                           data-fill-with="email"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Supplier City -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="supplier_city">
+                                                    <span>City</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="supplier_city" type="text"
+                                                           class="form-control"
+                                                           name="supplier_city" required=""
+                                                           data-fill-with="city"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Supplier Country -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="supplier_country">
+                                                    <span>Country</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <select id="supplier_country"
+                                                            class="form-control"
+                                                            name="supplier_country" required="">
+                                                        <t t-foreach="countries" t-as="country">
+                                                            <option t-att-value="country.id" t-esc="country.name"/>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Supplier Address -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="supplier_address">
+                                                    <span>Address</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <textarea id="supplier_address"
+                                                              class="form-control"
+                                                              name="supplier_address" rows="5"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h3 class="my-3">
+                                            Factory Details
+                                        </h3>
+
+                                        <!-- Factory Name -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="factory_name">
+                                                    <span>Name</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="factory_name" type="text"
+                                                           class="form-control" name="factory_name"
+                                                           required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Factory Location -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="factory_location">
+                                                    <span>Location</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="factory_location" type="text"
+                                                           class="form-control"
+                                                           name="factory_location" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Factory Capacity -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="factory_capacity">
+                                                    <span>Factory Capacity</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="factory_capacity" type="number"
+                                                           class="form-control"
+                                                           name="factory_capacity"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="factory_certifications">
+                                                    <span>Certifications</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="factory_certifications" type="file"
+                                                           class="form-control"
+                                                           name="factory_certifications" multiple="multiple"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="factory_documents">
+                                                    <span>Documents</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="factory_documents" type="file"
+                                                           class="form-control"
+                                                           name="factory_documents" multiple="multiple"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Submit Button -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row justify-content-end">
+                                                <div class="col-sm-auto">
+                                                    <button type="submit"
+                                                            class="btn btn-primary btn-md"
+                                                            id="apply-btn">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="submit_factory">
+    <t t-call="website.layout">
+        <t t-set="additional_title">Submit Factory Details</t>
+
+        <div id="wrap" class="container">
+            <nav aria-label="breadcrumb" class="mt-5">
+                <ol class="breadcrumb ps-0 mb-0 pb-1">
+                    <li class="breadcrumb-item">
+                        <a href="/my/factories" class="text-secondary fw-bold">Factories</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <a t-attf-href="/requests/factory">
+                            Submit Factory
+                        </a>
+                    </li>
+                </ol>
+            </nav>
+            <h1 class="mb-4">Factory Application Form</h1>
+
+            <div id="factory_section" class="container">
+                <div class="row">
+                    <section id="forms" class="col-12 col-md-9">
+                        <div class="container">
+                            <form id="factory_submission_form" action="/requests/factory" method="POST"
+                                  class="o_mark_required row"
+                                  data-mark="*" data-model_name="submission.request" hide-change-model="true"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <div class="row">
+
+                                    <!-- Factory Name -->
+                                    <div class="col-12 mb-0 py-2">
+                                        <div class="row">
+                                            <label class="col-4 col-sm-auto" style="width: 200px" for="factory_name">
+                                                <span>Name</span>
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input id="factory_name" type="text"
+                                                       class="form-control" name="factory_name"
+                                                       required=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Factory Location -->
+                                    <div class="col-12 mb-0 py-2">
+                                        <div class="row">
+                                            <label class="col-4 col-sm-auto" style="width: 200px" for="factory_location">
+                                                <span>Location</span>
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input id="factory_location" type="text"
+                                                       class="form-control"
+                                                       name="factory_location" required=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Factory Capacity -->
+                                    <div class="col-12 mb-0 py-2">
+                                        <div class="row">
+                                            <label class="col-4 col-sm-auto" style="width: 200px" for="factory_capacity">
+                                                <span>Factory Capacity</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input id="factory_capacity" type="number"
+                                                       class="form-control"
+                                                       name="factory_capacity"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Certifications -->
+                                    <div class="col-12 mb-0 py-2">
+                                        <div class="row">
+                                            <label class="col-4 col-sm-auto" style="width: 200px" for="factory_certifications">
+                                                <span>Certifications</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input id="factory_certifications" type="file"
+                                                       class="form-control"
+                                                       name="factory_certifications" multiple="multiple"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Documents -->
+                                    <div class="col-12 mb-0 py-2">
+                                        <div class="row">
+                                            <label class="col-4 col-sm-auto" style="width: 200px" for="factory_documents">
+                                                <span>Documents</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input id="factory_documents" type="file"
+                                                       class="form-control"
+                                                       name="factory_documents" multiple="multiple"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="col-12 mb-0 py-2">
+                                        <div class="row justify-content-end">
+                                            <div class="col-sm-auto">
+                                                <button type="submit"
+                                                        class="btn btn-primary btn-md"
+                                                        id="apply-btn">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </t>
+</template>
+
+    <template id="product_submission_prompt">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Submit Product Details</t>
+
+            <div id="wrap" class="container">
+                <nav aria-label="breadcrumb" class="mt-5">
+                    <ol class="breadcrumb ps-0 mb-0 pb-1">
+                        <li class="breadcrumb-item">
+                            <a href="/my/products" class="text-secondary fw-bold">Products</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Product Submission
+                        </li>
+                    </ol>
+                </nav>
+
+                <div id="product_prompt_section" class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 mt-3 text-center">
+                            <!-- First bold and larger message -->
+                            <h3 class="fw-bold mb-3">
+                                Would you also like to make a product submission?
+                            </h3>
+                            <!-- Noticeable banner-style prompt message -->
+                            <div class="p-3 mb-1 text-dark rounded" style="background-color: #fff8db;">
+                                <p class="lead mb-0">
+                                    If you do not make a <strong>product submission now</strong>, then you will have to
+                                    wait for the
+                                    <strong>approval of your user</strong>, after which you will be granted access to
+                                    the <strong>dashboard</strong>,
+                                    from where you will be able to make any number of <strong>product
+                                    submissions</strong>, along with
+                                    <strong>factories</strong>
+                                    and <strong>product categories</strong>.
+                                </p>
+                            </div>
+                            <a t-att-href="'/requests/product?request_id=%s' % request_id"
+                               class="btn btn-primary btn-md my-3">
+                                Make a Product Submission
+                            </a>
+                            <a href="/"
+                               class="btn btn-secondary btn-md my-3">
+                                Return to Homepage
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="submit_product">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Submit Product Details</t>
+
+            <div id="wrap" class="container">
+                <nav aria-label="breadcrumb" class="mt-5">
+                    <ol class="breadcrumb ps-0 mb-0 pb-1">
+                        <li class="breadcrumb-item">
+                            <a href="/my/products" class="text-secondary fw-bold">Products</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            <a t-attf-href="/requests/product">
+                                Submit Product
+                            </a>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="mb-4">
+                    Product Application Form
+                </h1>
+
+                <div id="product_section" class="container">
+                    <div class="row">
+                        <section id="forms" class="col-12 col-md-9">
+                            <div class="container">
+                                <form id="product_submission_form" action="/requests/product/" method="POST"
+                                      class="o_mark_required row"
+                                      data-mark="*" data-model_name="submission.request" hide-change-model="true"
+                                      enctype="multipart/form-data">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <input type="hidden" name="request_id" t-att-value="request_id"/>
+                                    <div class="row s_col_no_bgcolor">
+
+                                        <!-- Product Model No -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="product_model_no">
+                                                    <span>Product Model No</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="product_model_no" type="text"
+                                                           class="form-control"
+                                                           name="product_model_no" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Product Unique Identifier -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="product_unique_identifier">
+                                                    <span>Product Unique Identifier</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="product_unique_identifier" type="text"
+                                                           class="form-control"
+                                                           name="product_unique_identifier" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Product Category -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="product_category">
+                                                    <span>Product Category</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <select id="product_category"
+                                                            class="form-control"
+                                                            name="product_category" required="">
+                                                        <t t-foreach="categories" t-as="category">
+                                                            <option t-att-value="category.id" t-esc="category.name"/>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="product_documents">
+                                                    <span>Documents</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="product_documents" type="file"
+                                                           class="form-control"
+                                                           name="product_documents" multiple="multiple"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="product_images">
+                                                    <span>Images</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="product_images" type="file" accept=".jpg, .jpeg, .png"
+                                                           class="form-control"
+                                                           name="product_images" multiple="multiple"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Submit Button -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row justify-content-end">
+                                                <div class="col-sm-auto">
+                                                    <button type="submit"
+                                                            class="btn btn-primary btn-md"
+                                                            id="apply-btn">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="submit_category">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Submit Category Details</t>
+            <div id="wrap" class="container">
+                <nav aria-label="breadcrumb" class="mt-5">
+                    <ol class="breadcrumb ps-0 mb-0 pb-1">
+                        <li class="breadcrumb-item">
+                            <a href="/my/categories" class="text-secondary fw-bold">Categories</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            <a t-attf-href="/requests/category">
+                                Submit Category
+                            </a>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="mb-4">
+                    Category Application Form
+                </h1>
+
+                <div id="category_section" class="container">
+                    <div class="row">
+                        <section id="forms" class="col-12 col-md-9">
+                            <div class="container">
+                                <form id="category_submission_form" action="/requests/category/" method="POST"
+                                      class="o_mark_required row"
+                                      data-mark="*" data-model_name="submission.request" hide-change-model="true"
+                                      enctype="multipart/form-data">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <div class="row s_col_no_bgcolor">
+
+                                        <!-- Category Name -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="category_name">
+                                                    <span>Category Name</span>
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <input id="category_name" type="text"
+                                                           class="form-control"
+                                                           name="category_name" required=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Supplier Country -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row">
+                                                <label class="col-4 col-sm-auto"
+                                                       style="width: 200px" for="parent_category">
+                                                    <span>Parent Category</span>
+                                                </label>
+                                                <div class="col-sm">
+                                                    <select id="parent_category"
+                                                            class="form-control"
+                                                            name="parent_category" required="">
+                                                        <t t-foreach="categories" t-as="category">
+                                                            <option t-att-value="category.id" t-esc="category.name"/>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Submit Button -->
+                                        <div class="col-12 mb-0 py-2">
+                                            <div class="row justify-content-end">
+                                                <div class="col-sm-auto">
+                                                    <button type="submit"
+                                                            class="btn btn-primary btn-md"
+                                                            id="apply-btn">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="thank_you_submission" name="Thank You Submission">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <section class="s_text_block pt40 pb40 o_colored_level">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 offset-lg-1 text-center">
+                                <div class="p-4">
+                                    <i class="fa fa-check-circle fa-3x mb-4 text-success"></i>
+                                    <h1 class="fw-bolder">Thank You!</h1>
+                                    <p class="lead">Your submission has been received successfully.</p>
+                                    <p class="lead">We appreciate your effort and will get back to you as soon as
+                                        possible.
+                                    </p>
+                                    <a href="/" class="btn btn-primary mt-3">Return to Homepage</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 offset-lg-1">
+                                <h5>Contact Us</h5>
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <i class="fa fa-map-marker fa-fw me-2"></i>
+                                        <span class="o_force_ltr">1234 Example Street, City, Country</span>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-phone fa-fw me-2"></i>
+                                        <span class="o_force_ltr">+1 123-456-7890</span>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-envelope fa-fw me-2"></i>
+                                        <span>support@example.com</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+
+</odoo>

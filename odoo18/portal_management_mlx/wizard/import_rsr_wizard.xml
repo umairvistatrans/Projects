@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_rsr_product_import_wizard_form" model="ir.ui.view">
+            <field name="name">rsr.product.import.wizard.form</field>
+            <field name="model">rsr.product.import.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Import RSR Product">
+                    <header>
+                        <button string="Search Products" class="btn-primary" icon="fa-search"
+                                name="action_generate_products" type="object" invisible="import_product_ids"/>
+                        <button string="Import Products" class="btn-primary" icon="fa-download"
+                                name="action_open_import_confirmation_wizard" type="object"
+                                invisible="not import_product_ids"/>
+                        <button string="Refresh Search" class="btn-secondary" icon="fa-refresh"
+                                name="action_generate_products" type="object" invisible="not import_product_ids"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Product Search Criteria">
+                                <field name="id" invisible="1"/>
+                                <field name="department_ids" options="{'no_create': 1, 'no_edit': 1, 'no_open': 1}"
+                                       widget="many2many_tags"/>
+                                <field name="manufacturer_ids" options="{'no_create': 1, 'no_edit': 1, 'no_open': 1}"
+                                       widget="many2many_tags"/>
+                                <field name="import_rule_id" options="{'no_create': 1, 'no_edit': 1, 'no_open': 1}"/>
+                            </group>
+
+                            <group string="Search Filters">
+                                <field name="keywords" placeholder="Enter keywords to search"/>
+                                <field name="sort_by"/>
+                                <!--                                <field name="related_sku" placeholder="Enter stock numbers (comma-separated)"/>-->
+                            </group>
+
+                            <group string="Product Options">
+                                <field name="search_favorites"/>
+                                <field name="with_attributes"/>
+                                <field name="with_restrictions"/>
+                            </group>
+
+                            <group string="Pagination and Date Filters">
+                                <field name="limit"/>
+                                <field name="offset"/>
+                                <field name="modified_since"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="rsr_products" string="RSR Products">
+                                <field name="import_product_ids">
+                                    <list decoration-success="status == 'marked'" multi_edit="True" create="false"
+                                          edit="true" delete="false" editable="bottom">
+                                        <field name="status" column_invisible="True"/>
+                                        <field name="product_title" readonly="1"/>
+                                        <field name="manufacturer_id" readonly="1"/>
+                                        <field name="inventory_on_hand" readonly="1"/>
+                                        <field name="dealer_price" readonly="1"/>
+                                        <field name="upc" readonly="1"/>
+                                        <field name="sku" readonly="1"/>
+                                        <field name="manufacturer_part_number" readonly="1"/>
+                                        <field name="import_rule_id" options="{'no_create': True, 'no_edit': True}"/>
+                                        <button name="action_expand_product" type="object" class="btn-primary"
+                                                icon="fa-expand"
+                                                string="Expand"/>
+                                        <button name="action_mark_for_import" type="object" class="btn-primary"
+                                                string="Add" icon="fa-plus-circle"/>
+                                        <button name="action_remove_from_import" type="object" class="btn-secondary"
+                                                string="Remove" icon="fa-minus-circle"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_rsr_product_import_confirm_wizard_form" model="ir.ui.view">
+            <field name="name">rsr.product.import.confirm.wizard.form</field>
+            <field name="model">rsr.product.import.confirm.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Confirm Import RSR Products">
+                    <sheet>
+                        <!-- Confirmation message -->
+                        <div class="alert alert-warning">
+                            <strong>Warning!</strong>
+                            Are you sure you want to import the following products?
+                            Please note that this action cannot be reversed once you press "Import". Make sure you
+                            review the details carefully.
+                        </div>
+                        <field name="id" invisible="1"/>
+                        <notebook>
+                            <page name="rsr_products" string="RSR Products">
+                                <field name="product_ids" readonly="1"
+                                       context="{'wizard_id': id, 'model_name': 'rsr.product.import.confirm.wizard', 'return_cancel': 1}">
+                                    <list decoration-muted="status == 'ready'" editable="bottom">
+                                        <field name="status" column_invisible="True"/>
+                                        <field name="product_title"/>
+                                        <field name="manufacturer_id"/>
+                                        <field name="inventory_on_hand"/>
+                                        <field name="dealer_price"/>
+                                        <field name="upc"/>
+                                        <field name="sku"/>
+                                        <field name="manufacturer_part_number"/>
+                                        <field name="import_rule_id"/>
+                                        <button name="action_expand_product" type="object" class="btn-primary"
+                                                string="Expand" icon="fa-expand"/>
+                                        <button name="action_remove_from_import" type="object" class="btn-secondary"
+                                                string="Remove" icon="fa-minus-circle"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                        <footer>
+                            <button string="Import" name="action_import" type="object" class="btn-primary"
+                                    icon="fa-download"/>
+                            <button string="Cancel" class="btn-secondary" special="cancel" icon="fa-ban"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_open_rsr_import" model="ir.actions.act_window">
+            <field name="name">Import RSR Products</field>
+            <field name="res_model">rsr.product.import.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">main</field>
+            <field name="context">{'create': 0, 'delete': 0}</field>
+            <field name="view_id" ref="rsr_product.view_rsr_product_import_wizard_form"/>
+        </record>
+
+    </data>
+</odoo>

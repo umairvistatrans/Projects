@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_department_form_inherit_mlx" model="ir.ui.view">
+            <field name="name">hr.department.form.inherit.mlx</field>
+            <field name="model">hr.department</field>
+            <field name="priority" eval="5"/>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='name']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='color']" position="after">
+                    <field name="department_type"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_employee_form_inherit_mlx" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit.mlx</field>
+            <field name="model">hr.employee</field>
+            <field name="priority" eval="5"/>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="readonly">context.get('readonly_user_id', False)</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_malex_department_kanban" model="ir.actions.act_window">
+            <field name="name">Departments</field>
+            <field name="res_model">hr.department</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="domain">[("has_read_access", "=", True)]</field>
+            <field name="search_view_id" ref="hr.view_department_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new department
+                </p><p>
+                    Structure Employees per department and have an overview of e.g.
+                    expenses, timesheets, time off, recruitment, etc.
+                </p>
+            </field>
+        </record>
+
+        <record id="open_view_employee_list_my_malex" model="ir.actions.act_window">
+            <field name="name">Employees</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="domain">[('company_id', 'in', allowed_company_ids), ('user_id', '!=', False)]</field>
+            <field name="context">{'chat_icon': True, 'readonly_user_id': True}</field>
+            <field name="search_view_id" ref="hr.view_employee_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add a new employee
+                </p><p>
+                    Quickly find all the information you need for your employees such as contact data, job position, availability, etc.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="sale.sale_menu_root" active="False"/>
+        <!-- Main Menu -->
+        <menuitem id="menu_sales_management_malex" name="Sales" sequence="10" web_icon="sale_management,static/description/icon.png">
+            <!-- Sub Menu: Sales -->
+            <menuitem id="menu_orders_root" name="Orders" sequence="10">
+                <menuitem id="menu_offers" name="Quotations/Offers" action="sale.action_quotations_with_onboarding"
+                          sequence="10"/>
+                <menuitem id="menu_orders" name="Sale Orders" action="sale.action_quotations_with_onboarding"
+                          sequence="20"/>
+            </menuitem>
+            <!-- Sub Menu: Configuration -->
+            <menuitem id="menu_configuration" name="Configuration" sequence="30">
+                <menuitem id="menu_settings"
+                          name="Settings"
+                          action="portal_management_mlx.malex_config_settings_action"
+                          sequence="10"/>
+                <!-- Sub Menu: Departments -->
+                <menuitem id="menu_departments"
+                          name="Departments"
+                          action="action_malex_department_kanban"
+                          sequence="20"/>
+                <menuitem id="menu_employees"
+                          name="Employees"
+                          action="open_view_employee_list_my_malex"
+                          sequence="20"/>
+            </menuitem>
+        </menuitem>
+
+    </data>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dynamic_approval_configuration,dynamic.approval.configuration,model_dynamic_approval_configuration,,1,1,1,1
+access_dynamic_approval,dynamic.approval,model_dynamic_approval,,1,1,1,1
+access_approval_approver_submission_request,approval.approver.submission.request,model_approval_approver_submission_request,,1,1,1,1
+access_approval_refuse_notification,approval.refuse.notification,model_approval_refuse_notification,,1,1,1,1

@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Views for Suppliers -->
+        <record id="view_submission_request_supplier_list" model="ir.ui.view">
+            <field name="name">submission.request.supplier.list</field>
+            <field name="model">submission.request</field>
+            <field name="arch" type="xml">
+                <list sample="1">
+                    <field name="name" decoration-bf="1"/>
+                    <field name="supplier_name" string="Name" decoration-bf="1"/>
+                    <field name="supplier_email"/>
+                    <field name="supplier_country"/>
+                    <field name="create_date" string="Submission Date" widget="date"/>
+                    <field name="state" widget="badge"
+                           decoration-info="state == 'draft'" decoration-primary="state == 'in_approval'"
+                           decoration-success="state == 'approved'" decoration-danger="state == 'refused'"
+                           decoration-muted="state == 'cancelled'"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_submission_request_supplier_form" model="ir.ui.view">
+            <field name="name">submission.request.supplier.form</field>
+            <field name="model">submission.request</field>
+            <field name="arch" type="xml">
+                <form duplicate="false">
+                    <header>
+                        <button string="Cancel" class="btn-secondary" name="action_cancel" type="object"
+                                invisible="state not in ('approved', 'cancelled')" icon="fa-times"/>
+                        <field name="state" widget="statusbar" statusbar_visible="in_approval,approved"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!-- Button for Supplier -->
+                            <button name="action_view_supplier" type="object" icon="fa-user" class="oe_stat_button"
+                                    invisible="state != 'approved' or submission_type != 'supplier'">
+                                <span class="o_stat_text">Supplier</span>
+                            </button>
+                            <button name="action_view_factory" type="object" icon="fa-building" class="oe_stat_button"
+                                    invisible="state != 'approved' or submission_type != 'supplier'">
+                                <span class="o_stat_text">Factory</span>
+                            </button>
+                            <button name="action_view_product" type="object" icon="fa-cogs" class="oe_stat_button"
+                                    invisible="state != 'approved' or submission_type != 'supplier'">
+                                <span class="o_stat_text">Product</span>
+                            </button>
+                            <button
+                                    name="action_view_factory_certifications"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-certificate" invisible="not factory_certifications_count">
+                                <field string="Factory Certifications" name="factory_certifications_count"
+                                       widget="statinfo"/>
+                            </button>
+
+                            <!-- Factory Documents Smart Button -->
+                            <button
+                                    name="action_view_factory_documents"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-file" invisible="not factory_documents_count">
+                                <field string="Factory Documents" name="factory_documents_count" widget="statinfo"/>
+                            </button>
+                            <button
+                                    name="action_view_product_documents"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-paperclip" invisible="not product_documents_count or state == 'approved'">
+                                <field string="Product Documents" name="product_documents_count" widget="statinfo"/>
+                            </button>
+                            <button
+                                    name="action_view_product_images"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-image" invisible="not product_images_count or state == 'approved'">
+                                <field string="Product Images" name="product_images_count" widget="statinfo"/>
+                            </button>
+                        </div>
+
+                        <widget name="web_ribbon" title="Approved" bg_color="text-bg-success"
+                                invisible="state != 'approved'"/>
+                        <widget name="web_ribbon" title="Refused" bg_color="text-bg-danger"
+                                invisible="state != 'refused'"/>
+                        <field name="active" invisible="1"/>
+                        <field name="supplier_image" widget='image' class="oe_avatar"
+                               options='{"zoom": true, "preview_image":"supplier_image"}'
+                               invisible="not supplier_image"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="state != 'draft'" class="o_mlx"/>
+                            </h1>
+                        </div>
+                        <group string="Supplier Details">
+                            <group>
+                                <field name="supplier_name" readonly="state != 'draft'" class="o_mlx" string="Name"/>
+                                <field name="supplier_phone" readonly="state != 'draft'" class="o_mlx"/>
+                                <field name="supplier_email" readonly="state != 'draft'" class="o_mlx"/>
+                                <field name="create_date" string="Submission Date" widget="date"
+                                       readonly="state != 'draft'" class="o_mlx"/>
+                            </group>
+                            <group>
+                                <field name="supplier_address" readonly="state != 'draft'" class="o_mlx"/>
+                                <field name="supplier_city" readonly="state != 'draft'" class="o_mlx"/>
+                                <field name="supplier_country" readonly="state != 'draft'" class="o_mlx"/>
+                                <field name="submission_type" readonly="1"
+                                       invisible="context.get('default_submission_type', 0)"/>
+                                <field name="partner_id" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="product_details" string="Product Details" invisible="not product_model_no">
+                                <group>
+                                    <group>
+                                        <field name="product_model_no" readonly="state != 'draft'" class="o_mlx"/>
+                                        <field name="product_unique_identifier" readonly="state != 'draft'"
+                                               class="o_mlx"/>
+                                    </group>
+                                    <group>
+                                        <field name="product_category" readonly="state != 'draft'" class="o_mlx"
+                                               options="{'no_create': True, 'no_edit': True}"/>
+                                        <field name="product_parent_category" readonly="state != 'draft'" class="o_mlx"
+                                               options="{'no_create': True, 'no_edit': True}"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="factory_details" string="Factory Details">
+                                <group>
+                                    <group>
+                                        <field name="factory_name" readonly="state != 'draft'" class="o_mlx"/>
+                                        <field name="factory_location" readonly="state != 'draft'" class="o_mlx"/>
+                                    </group>
+                                    <group>
+                                        <field name="factory_capacity" readonly="state != 'draft'" class="o_mlx"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_submission_request_supplier_search" model="ir.ui.view">
+            <field name="name">submission.request.supplier.search</field>
+            <field name="model">submission.request</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Reference No."/>
+                    <field name="supplier_name" string="Name"/>
+                    <field name="create_date" string="Submission Date"/>
+                    <field name="state"/>
+                    <separator/>
+                    <!-- Filters for states -->
+                    <filter name="approved" string="Approved" domain="[('state', '=', 'approved')]"/>
+                    <filter name="in_approval" string="In Approval" domain="[('state', '=', 'in_approval')]"/>
+                    <filter name="refused" string="Refused" domain="[('state', '=', 'refused')]"/>
+                    <filter name="cancelled" string="Cancelled" domain="[('state', '=', 'cancelled')]"/>
+                    <separator/>
+                    <!-- Group By options -->
+                    <group expand="0" string="Group By">
+                        <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+                        <filter name="group_submission_date" string="Submission Date"
+                                context="{'group_by': 'create_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Repeat the above structure for Factories, Products, and Categories -->
+        <record id="view_submission_request_factory_list" model="ir.ui.view">
+            <field name="name">submission.request.factory.list</field>
+            <field name="model">submission.request</field>
+            <field name="arch" type="xml">
+                <list sample="1">
+                    <field name="name" decoration-bf="1"/>
+                    <field name="factory_name" string="Name" decoration-bf="1"/>
+                    <field name="factory_location"/>
+                    <field name="create_date" string="Submission Date" widget="date"/>
+                    <field name="state" widget="badge"
+                           decoration-info="state == 'draft'" decoration-primary="state == 'in_approval'"
+                           decoration-success="state == 'approved'" decoration-danger="state == 'refused'"
+                           decoration-muted="state == 'cancelled'"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_submission_request_factory_form" model="ir.ui.view">
+            <field name="name">submission.request.factory.form</field>
+            <field name="model">submission.request</field>
+            <field name="arch" type="xml">
+                <form duplicate="false">
+                    <header>
+                        <button string="Cancel" class="btn-secondary" name="action_cancel" type="object"
+                                invisible="state not in ('approved', 'cancelled')" icon="fa-times"/>
+                        <field name="state" widget="statusbar" statusbar_visible="in_approval,approved"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!-- Button for Factory -->
+                            <button name="action_view_factory" type="object" icon="fa-building" class="oe_stat_button"
+                                    invisible="state != 'approved' or submission_type != 'factory'">
+                                <span class="o_stat_text">Factory</span>
+                            </button>
+                            <button
+                                    name="action_view_factory_certifications"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-certificate" invisible="not factory_certifications_count">
+                                <field string="Certifications" name="factory_certifications_count" widget="statinfo"/>
+                            </button>
+
+                            <!-- Factory Documents Smart Button -->
+                            <button
+                                    name="action_view_factory_documents"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-file" invisible="not factory_documents_count">
+                                <field string="Documents" name="factory_documents_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <widget name="web_ribbon" title="Approved" bg_color="text-bg-success"
+                                invisible="state != 'approved'"/>
+                        <widget name="web_ribbon" title="Refused" bg_color="text-bg-danger"
+                                invisible="state != 'refused'"/>
+                        <field name="active" invisible="1"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="state != 'draft'" class="o_mlx"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="factory_name" readonly="state != 'draft'" class="o_mlx"/>
+                                <field name="factory_location" readonly="state != 'draft'" class="o_mlx"/>
+                            </group>
+                            <group>
+                                <field name="factory_capacity" readonly="state != 'draft'" class="o_mlx"/>
+                                <field name="create_date" string="Submission Date" widget="date"
+                                       readonly="state != 'draft'" class="o_mlx"/>
+                                <field name="submission_type" readonly="1"
+                                       invisible="context.get('default_submission_type', 0)"/>
+                                <field name="partner_id" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook/>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_submission_request_factory_search" model="ir.ui.view">
+            <field name="name">submission.request.factory.search</field>
+            <field name="model">submission.request</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Reference No."/>
+                    <field name="factory_name" string="Name"/>
+                    <field name="create_date" string="Submission Date"/>
+                    <field name="state"/>
+                    <separator/>
+                    <!-- Filters for states -->
+                    <filter name="approved" string="Approved" domain="[('state', '=', 'approved')]"/>
+                    <filter name="in_approval" string="In Approval" domain="[('state', '=', 'in_approval')]"/>
+                    <filter name="refused" string="Refused" domain="[('state', '=', 'refused')]"/>
+                    <filter name="cancelled" string="Cancelled" domain="[('state', '=', 'cancelled')]"/>
+                    <separator/>
+                    <!-- Group By options -->
+                    <group expand="0" string="Group By">
+                        <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+                        <filter name="group_submission_date" string="Submission Date"
+                                context="{'group_by': 'create_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <!-- List View for Products -->
+        <record id="view_submission_request_product_list" model="ir.ui.view">
+            <field name="name">submission.request.product.list</field>
+            <field name="model">submission.request</field>
+            <field name="arch" type="xml">
+                <list sample="1">
+                    <field name="name" decoration-bf="1"/>
+                    <field name="product_model_no" decoration-bf="1"/>
+                    <field name="product_unique_identifier"/>
+                    <field name="product_category"/>
+                    <field name="create_date" string="Submission Date" widget="date"/>
+                    <field name="state" widget="badge"
+                           decoration-info="state == 'draft'" decoration-primary="state == 'in_approval'"
+                           decoration-success="state == 'approved'" decoration-danger="state == 'refused'"
+                           decoration-muted="state == 'cancelled'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View for Products -->
+        <record id="view_submission_request_product_form" model="ir.ui.view">
+            <field name="name">submission.request.product.form</field>
+            <field name="model">submission.request</field>
+            <field name="arch" type="xml">
+                <form duplicate="false">
+                    <header>
+                        <button string="Cancel" class="btn-secondary" name="action_cancel" type="object"
+                                invisible="state not in ('approved', 'cancelled')" icon="fa-times"/>
+                        <field name="state" widget="statusbar" statusbar_visible="in_approval,approved"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!-- Button for Product -->
+                            <button name="action_view_product" type="object" icon="fa-cogs" class="oe_stat_button"
+                                    invisible="state != 'approved' or submission_type != 'product'">
+                                <span class="o_stat_text">Product</span>
+                            </button>
+                            <button
+                                    name="action_view_product_documents"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-paperclip" invisible="not product_documents_count">
+                                <field string="Documents" name="product_documents_count" widget="statinfo"/>
+                            </button>
+                            <button
+                                    name="action_view_product_images"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-image" invisible="not product_images_count">
+                                <field string="Images" name="product_images_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <widget name="web_ribbon" title="Approved" bg_color="text-bg-success"
+                                invisible="state != 'approved'"/>
+                        <widget name="web_ribbon" title="Refused" bg_color="text-bg-danger"
+                                invisible="state != 'refused'"/>
+                        <field name="active" invisible="1"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="state != 'draft'" class="o_mlx"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="product_model_no" readonly="state != 'draft'" class="o_mlx"/>
+                                <field name="product_unique_identifier" readonly="state != 'draft'" class="o_mlx"/>
+                                <field name="create_date" string="Submission Date" widget="date"
+                                       readonly="state != 'draft'" class="o_mlx"/>
+                            </group>
+                            <group>
+                                <field name="product_category" readonly="state != 'draft'" class="o_mlx"
+                                       options="{'no_create': True, 'no_edit': True}"/>
+                                <field name="product_parent_category" readonly="state != 'draft'" class="o_mlx"
+                                       options="{'no_create': True, 'no_edit': True}"/>
+                                <field name="submission_type" readonly="1"
+                                       invisible="context.get('default_submission_type', 0)"/>
+                                <field name="partner_id" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook/>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View for Products -->
+        <record id="view_submission_request_product_search" model="ir.ui.view">
+            <field name="name">submission.request.product.search</field>
+            <field name="model">submission.request</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="create_date" string="Submission Date"/>
+                    <field name="product_model_no"/>
+                    <field name="product_unique_identifier"/>
+                    <field name="state"/>
+                    <separator/>
+                    <!-- Filters for states -->
+                    <filter name="approved" string="Approved" domain="[('state', '=', 'approved')]"/>
+                    <filter name="in_approval" string="In Approval" domain="[('state', '=', 'in_approval')]"/>
+                    <filter name="refused" string="Refused" domain="[('state', '=', 'refused')]"/>
+                    <filter name="cancelled" string="Cancelled" domain="[('state', '=', 'cancelled')]"/>
+                    <separator/>
+                    <!-- Group By options -->
+                    <group expand="0" string="Group By">
+                        <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+                        <filter name="group_submission_date" string="Submission Date"
+                                context="{'group_by': 'create_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- List View for Categories -->
+        <record id="view_submission_request_category_list" model="ir.ui.view">
+            <field name="name">submission.request.category.list</field>
+            <field name="model">submission.request</field>
+            <field name="arch" type="xml">
+                <list sample="1">
+                    <field name="name" decoration-bf="1"/>
+                    <field name="category_name" string="Name" decoration-bf="1"/>
+                    <field name="category_parent_category" string="Parent Category"/>
+                    <field name="create_date" string="Submission Date" widget="date"/>
+                    <field name="state" widget="badge"
+                           decoration-info="state == 'draft'" decoration-primary="state == 'in_approval'"
+                           decoration-success="state == 'approved'" decoration-danger="state == 'refused'"
+                           decoration-muted="state == 'cancelled'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View for Categories -->
+        <record id="view_submission_request_category_form" model="ir.ui.view">
+            <field name="name">submission.request.category.form</field>
+            <field name="model">submission.request</field>
+            <field name="arch" type="xml">
+                <form duplicate="false">
+                    <header>
+                        <button string="Cancel" class="btn-secondary" name="action_cancel" type="object"
+                                invisible="state not in ('approved', 'cancelled')" icon="fa-times"/>
+                        <field name="state" widget="statusbar" statusbar_visible="in_approval,approved"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!-- Button for Category -->
+                            <button name="action_view_category" type="object" icon="fa-tags" class="oe_stat_button"
+                                    invisible="state != 'approved' or submission_type != 'category'">
+                                <span class="o_stat_value">1</span>
+                                <span class="o_stat_text">Category</span>
+                            </button>
+                        </div>
+                        <widget name="web_ribbon" title="Approved" bg_color="text-bg-success"
+                                invisible="state != 'approved'"/>
+                        <widget name="web_ribbon" title="Refused" bg_color="text-bg-danger"
+                                invisible="state != 'refused'"/>
+                        <field name="active" invisible="1"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="state != 'draft'" class="o_mlx"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="category_name" readonly="state != 'draft'" class="o_mlx" string="Name"/>
+                            </group>
+                            <group>
+                                <field name="category_parent_category" readonly="state != 'draft'" class="o_mlx"
+                                       options="{'no_create': True, 'no_edit': True}" string="Parent Category"/>
+                                <field name="create_date" string="Submission Date" widget="date"
+                                       readonly="state != 'draft'" class="o_mlx"/>
+                                <field name="submission_type" readonly="1"
+                                       invisible="context.get('default_submission_type', 0)"/>
+                                <field name="partner_id" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook/>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View for Categories -->
+        <record id="view_submission_request_category_search" model="ir.ui.view">
+            <field name="name">submission.request.category.search</field>
+            <field name="model">submission.request</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="category_name" string="Name"/>
+                    <field name="create_date" string="Submission Date"/>
+                    <field name="state"/>
+                    <separator/>
+                    <!-- Filters for states -->
+                    <filter name="approved" string="Approved" domain="[('state', '=', 'approved')]"/>
+                    <filter name="in_approval" string="In Approval" domain="[('state', '=', 'in_approval')]"/>
+                    <filter name="refused" string="Refused" domain="[('state', '=', 'refused')]"/>
+                    <filter name="cancelled" string="Cancelled" domain="[('state', '=', 'cancelled')]"/>
+                    <separator/>
+                    <!-- Group By options -->
+                    <group expand="0" string="Group By">
+                        <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+                        <filter name="group_submission_date" string="Submission Date"
+                                context="{'group_by': 'create_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Actions for Suppliers -->
+        <record id="action_submission_request_suppliers" model="ir.actions.act_window">
+            <field name="name">Suppliers</field>
+            <field name="res_model">submission.request</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'list', 'view_id': ref('portal_management_mlx.view_submission_request_supplier_list')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('portal_management_mlx.view_submission_request_supplier_form')})]"/>
+            <field name="search_view_id" ref="portal_management_mlx.view_submission_request_supplier_search"/>
+            <field name="domain">[('submission_type', '=', 'supplier')]</field>
+            <field name="context">{'default_submission_type': 'supplier', 'create': 0, 'delete': 0}</field>
+        </record>
+
+        <record id="action_submission_request_factories" model="ir.actions.act_window">
+            <field name="name">Factories</field>
+            <field name="res_model">submission.request</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'list', 'view_id': ref('portal_management_mlx.view_submission_request_factory_list')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('portal_management_mlx.view_submission_request_factory_form')})]"/>
+            <field name="search_view_id" ref="portal_management_mlx.view_submission_request_factory_search"/>
+            <field name="domain">[('submission_type', '=', 'factory')]</field>
+            <field name="context">{'default_submission_type': 'factory', 'create': 0, 'delete': 0}</field>
+        </record>
+
+        <!-- Action for Products -->
+        <record id="action_submission_request_products" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="res_model">submission.request</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'list', 'view_id': ref('portal_management_mlx.view_submission_request_product_list')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('portal_management_mlx.view_submission_request_product_form')})]"/>
+            <field name="search_view_id" ref="portal_management_mlx.view_submission_request_product_search"/>
+            <field name="domain">[('submission_type', '=', 'product')]</field>
+            <field name="context">{'default_submission_type': 'product', 'create': 0, 'delete': 0}</field>
+        </record>
+
+        <!-- Action for Categories -->
+        <record id="action_submission_request_categories" model="ir.actions.act_window">
+            <field name="name">Categories</field>
+            <field name="res_model">submission.request</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'list', 'view_id': ref('portal_management_mlx.view_submission_request_category_list')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('portal_management_mlx.view_submission_request_category_form')})]"/>
+            <field name="search_view_id" ref="portal_management_mlx.view_submission_request_category_search"/>
+            <field name="domain">[('submission_type', '=', 'category')]</field>
+            <field name="context">{'default_submission_type': 'category', 'create': 0, 'delete': 0}</field>
+        </record>
+
+        <!-- Main Menu -->
+        <menuitem id="menu_submission_app" name="Submissions" sequence="10" action="action_submission_request_products">
+            <!-- Sub Menu: Submissions -->
+            <menuitem id="menu_submissions" name="Requests" sequence="10">
+                <!-- Sub Menus for Submission Types -->
+                <menuitem id="menu_submissions_suppliers" name="Suppliers" action="action_submission_request_suppliers"
+                          sequence="10"/>
+                <menuitem id="menu_submissions_factories" name="Factories" action="action_submission_request_factories"
+                          sequence="20"/>
+                <menuitem id="menu_submissions_products" name="Products" action="action_submission_request_products"
+                          sequence="30"/>
+                <menuitem id="menu_submissions_categories" name="Categories"
+                          action="action_submission_request_categories" sequence="40"/>
+            </menuitem>
+        </menuitem>
+
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Define the new group -->
+        <record id="group_submission_access" model="res.groups">
+            <field name="name">Submission Access Group</field>
+            <field name="category_id" ref="base.module_category_website"/>
+        </record>
+    </data>
+</odoo>

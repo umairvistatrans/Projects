@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Sequence for Supplier -->
+        <record id="seq_submission_request_supplier" model="ir.sequence">
+            <field name="name">Submission Request - Supplier</field>
+            <field name="code">submission.request.supplier</field>
+            <field name="prefix">SUP-</field>
+            <field name="padding">5</field>
+        </record>
+
+        <!-- Sequence for Factory -->
+        <record id="seq_submission_request_factory" model="ir.sequence">
+            <field name="name">Submission Request - Factory</field>
+            <field name="code">submission.request.factory</field>
+            <field name="prefix">FCT-</field>
+            <field name="padding">5</field>
+        </record>
+
+        <!-- Sequence for Product -->
+        <record id="seq_submission_request_product" model="ir.sequence">
+            <field name="name">Submission Request - Product</field>
+            <field name="code">submission.request.product</field>
+            <field name="prefix">PRD-</field>
+            <field name="padding">5</field>
+        </record>
+
+        <!-- Sequence for Category -->
+        <record id="seq_submission_request_category" model="ir.sequence">
+            <field name="name">Submission Request - Category</field>
+            <field name="code">submission.request.category</field>
+            <field name="prefix">CAT-</field>
+            <field name="padding">5</field>
+        </record>
+
+    </data>
+</odoo>
