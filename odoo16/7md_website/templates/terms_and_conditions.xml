@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="7md_website.terms_and_condition_7md" name="Terms and Conditions">
+        <t t-call="website.layout">
+            <section class="privacy-policy-container">
+                <div class="container">
+                    <div class="">
+                        <h3 style="margin-bottom:10px;">
+                            <span style="text-decoration: underline;">
+                                <strong>TERMS AND CONDITIONS OF SALE :</strong>
+                            </span>
+                        </h3>
+                        <p>This page sets out the legal terms and conditions (Terms &amp;
+                            Conditions) under which 7md Store or its relevant affiliated company in
+                            your territory of residence sell any of the products (Products) listed
+                            on this website (Website) to you. We seek to comply with international
+                            standards in distance-selling and e-commerce at all times and if you
+                            have any concerns, please contact us through this website<a
+                                href="/contact-us" target="_blank" rel="noopener noreferrer">
+                            www.7md.ae/contact-us</a></p>
+                        <p></p>
+                        <h3 style="margin-bottom:10px;">
+                            <span style="text-decoration: underline;">
+                                <strong>Placing Your Order :</strong>
+                            </span>
+                        </h3>
+                        <p>By placing an order for Products through our Website, you are confirming
+                            that you intend to enter into a contract with us for the purchase of
+                            those Products.</p>
+                        <p>You place the order for your Products on the Website by clicking the
+                            Confirm Order button at the end of the checkout process.</p>
+                        <p>During the checkout process, you will be asked to complete your payment
+                            details.</p>
+                        <p>All fields indicated as compulsory must be completed (which includes
+                            providing us with a valid phone number email address).</p>
+                        <p>We will then send you an email confirming receipt, the details of your
+                            order and the delivery costs which will be added to the purchase price
+                            (if applicable).</p>
+                        <h3></h3>
+                        <h3 style="margin-bottom:10px;">
+                            <span style="text-decoration: underline;">Note :</span>
+                        </h3>
+                        <p>- Neither completion of the online checkout process nor our confirmatory
+                            email constitute our acceptance of your order. Our acceptance of your
+                            order will take place only upon receipt of full payment from you. </p>
+                        <p>- You can review the orders you have placed and their current status at
+                            any time by visiting our Website and clicking on Log In at the top of
+                            the page followed by selecting Track Your Order.</p>
+                        <p>- If we cannot supply you with the Products you ordered for whatever
+                            reason, we will not process your order and will inform you of this. If
+                            you have already paid for the Products we will provide you with a full
+                            refund as soon as reasonably possible.</p>
+                        <p></p>
+                        <h3 style="margin-bottom:10px;">
+                            <span style="text-decoration: underline;">
+                                <strong>Delivery / Collection :</strong>
+                            </span>
+                        </h3>
+                        <p></p>
+                        <p>- You will be asked to choose a designated store which is convenient for
+                            you. Note that you may only collect from a designated store of the same
+                            brand as the Products being purchased.</p>
+                        <p></p>
+                        <p>- If you opt for delivery, please note that delivery charges and
+                            timescales vary depending on the type of Products ordered, the service
+                            you select and the delivery address.</p>
+                        <p></p>
+                        <p>- We will try our best to either deliver the Products to your address by
+                            the estimated delivery date set out in our order confirmation email. </p>
+                        <p></p>
+                        <p>- If we are unable to meet our estimated delivery date, we will contact
+                            you as soon as we can with a revised estimated date. We will inform you
+                            when the order is ready for collection or has been delivered to your
+                            address, as the case may be.</p>
+                        <p></p>
+                        <p>- If you have selected delivery to your address and no one is available
+                            at the specified address at the time of delivery, our delivery company
+                            will contact you to arrange re-delivery. The Products will only be left
+                            with a third party (such as building caretaker or a maid) with your
+                            express authority.</p>
+                        <p></p>
+                        <p>- All risk in the Products you order (including risk of loss and/or
+                            damage to the products) shall pass to you when they are delivered to the
+                            delivery address specified in your order.<span
+                                class="Apple-converted-space"></span></p>
+                        <p></p>
+                        <p>- Occasionally, the supply of your Products may be delayed or prevented
+                            for reasons beyond our control (e.g. material shortages, import delays
+                            or higher than anticipated demand). Where this is the case, we will make
+                            every effort to keep you informed but shall be under no liability to you
+                            for such delay or failure.</p>
+                        <p></p>
+                        <h3 style="margin-bottom:10px;">
+                            <span style="text-decoration: underline;">
+                                <strong>Cancellation, Returns, Refunds &amp; Exchanges :</strong>
+                            </span>
+                        </h3>
+                        <p>If you wish to cancel your order, you may communicate with our Customer
+                            Services department during working hours and within one hour of having
+                            placed it.</p>
+                        <p></p>
+                        <h3 style="margin-bottom:10px;">
+                            <span style="text-decoration: underline;">Note :</span>
+                        </h3>
+                        <p></p>
+                        <p>- we cannot accept cancellations outside of these periods as the order
+                            will have been processed and can only then be cancelled through our
+                            returns/refunds process.</p>
+                        <p></p>
+                        <p>- If you paid by credit card or debit card, and you have cancelled in
+                            accordance with this clause then we will reverse the authorisation or
+                            process a refund transaction (as the case may be) as soon as possible
+                            but we are not responsible for how long this will take to be reflected
+                            on your account.</p>
+                        <p></p>
+                        <p>- If you wish to return your order for a refund or to exchange certain
+                            Products, you must inform us within 15 days of receipt of your order and
+                            in the same condition as supplied, in their original packaging with a
+                            copy of the relevant invoice.</p>
+                        <p></p>
+                        <p>- Any items which had been provided free-of-charge with the relevant
+                            Products must also be returned.</p>
+                        <p></p>
+                        <p>- Subject to the below exclusions, where you return your order or wish to
+                            exchange certain Products, we will process a refund upon receipt of the
+                            returned/exchanged Products, excluding any delivery charges you paid
+                            for. For an exchange, either you will need to place a new order for
+                            delivery.</p>
+                        <p></p>
+                        <p>- In the case of faulty, damaged or incorrectly supplied goods, we may
+                            offer you a substitute or replacement Product or we will give you a full
+                            refund, including any delivery charges you paid for. In any case you
+                            must return the faulty, damaged or incorrect Products to us as soon as
+                            possible.</p>
+                        <p></p>
+                        <p>- You must take reasonable care of any Products that you wish to return
+                            and not use them. We will not be responsible for any loss or damage
+                            caused to the items during your possession.</p>
+                        <p></p>
+                        <h3 style="margin-bottom:10px;">
+                            <span style="text-decoration: underline;">
+                                <strong>Refund Process for the Rest of the World :</strong>
+                            </span>
+                        </h3>
+                        <p></p>
+                        <p><strong>1)</strong> Youll have to cover postal charges yourself, so make
+                            sure to mark your parcel as returned goods to avoid being charged
+                            additional duties.</p>
+                        <p></p>
+                        <p><strong>2)</strong> Dont forget to ask for a tracking ID/proof of
+                            shipping to track your parcel and to have proof that youve sent it.</p>
+                        <p></p>
+                        <p><strong>3)</strong> Once you have returned the items, it can take up to
+                            28 working days maximum for us to receive the shipment and process the
+                            refund.</p>
+                        <p></p>
+                        <p><strong>4)</strong> The amount would be refunded back to you by cash on
+                            delivery return package after Aramex get to do full check on the items
+                            or the card used for payment based on your selection while returning the
+                            items.</p>
+                        <p></p>
+                        <p><strong>5)</strong> You can check with your bank after this time or Drop
+                            them off at the nearest Aramex branch immediately after creating your
+                            Size change request. If we dont receive the original items within 2
+                            weeksof your request, well have to cancel your request to swap your
+                            size.</p>
+                        <p></p>
+                        <p><strong>6)</strong> Exchange can only be made within 28 daysfrom the date
+                            of delivery.</p>
+                        <p></p>
+                        <p><strong>7)</strong> It should also be in the same brand box you received.</p>
+                        <p></p>
+                        <p><strong>8)</strong> Item should be in a good condition and not used along
+                            with the original tag and a copy of the bill.</p>
+                        <p></p>
+                        <p><strong>9) </strong>Once the items have been picked up and reach our
+                            warehouse we will contact you with an update then you can be able to
+                            purchase our products through our website: <a href="/shop/"
+                                target="_blank" rel="noopener noreferrer">www.7md.ae/shop/</a></p>
+                        <p></p>
+                        <p></p>
+                        <p>
+                            <img style="display: block; margin-left: auto; margin-right: auto;"
+                                src="/7md_website/static/src/images/term-and-condition.jpeg"
+                                alt="" width="973" height="688" />
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+
+</odoo>

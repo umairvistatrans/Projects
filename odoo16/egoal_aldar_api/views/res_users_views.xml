@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_users_form_inherit" model="ir.ui.view">
+            <field name="name">view.users.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="egoal_aldar" string="E-GOAL – ALDAR" groups="base.group_system">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button string='Generate E-GOAL – ALDAR Token' type="object"
+                                        confirm="Are you sure you want to generate E-GOAL – ALDAR token? This action can't be undone."
+                                        name="generate_egoal_aldar_token" class="btn-primary"/>
+                            </div>
+                        </div>
+
+                        <group string="Credentials">
+                            <group string="Odoo">
+                                <field name="egoal_aldar_token"/>
+                                <field name="odoo_server_url" widget="url"/>
+                            </group>
+                            <group string="Allowed Point of Sale">
+                                <field name="oe_config_ids" widget="many2many_tags"
+                                       options="{'no_open': True, 'no_create': True}"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

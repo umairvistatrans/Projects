@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="oe_login_signup.portal_phone_field" inherit_id="portal.portal_my_details_fields"
+        name="Portal Phone Number">
+        <xpath expr="//div[8]/input[1]" position="replace">
+
+            <input type="tel" name="phone"
+                t-attf-class="form-control #{error.get('phone') and 'is-invalid' or ''}"
+                t-att-value="phone or partner.phone" maxlength="16" id="mobile_codes" />
+
+        </xpath>
+    </template>
+
+    <template id="oe_login_signup.signup_phone_field" inherit_id="7md_website.signup_layout"
+        name="Signup Phone Number">
+        <xpath expr="//div[1]/div[1]/form[1]/div[2]/div[2]/input[1]" position="replace">
+
+            <input type="text" name="phone" t-att-value="phone" id="phone"
+                class="login-input form-control form-control-sm"
+                autofocus="autofocus"
+                autocapitalize="off"
+                t-att-readonly="'readonly' if only_passwords else None" required="required"
+                maxlength="16" />
+
+        </xpath>
+    </template>
+    <template id="oe_login_signup.deliery_address_phone" inherit_id="website_sale.address"
+        name="Delivery Phone Number">
+        <xpath expr="//div[1]/div[1]/div[2]/div[2]/div[1]/form[1]/div[1]/div[4]/input[1]" position="replace">
+
+            <input type="text" name="phone"
+                t-attf-class="form-control #{error.get('phone') and 'is-invalid' or ''}"
+                t-att-value="'phone' in checkout and checkout['phone']" maxlength="16" id="mobile_delivery"/>
+
+        </xpath>
+    </template>
+
+</odoo>

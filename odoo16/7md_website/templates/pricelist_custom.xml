@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="pricelist_custom" name="Pricelist custom layout"
+        inherit_id="website_sale.pricelist_list">
+        <xpath expr="//div" position="replace">
+            <div
+                t-attf-class="o_pricelist_dropdown dropdown #{_classes if hasPricelistDropdown else ''}">
+                <t t-set="curr_pl" t-value="website.pricelist_id" />
+
+                <a role="button" href="#" t-attf-class="dropdown-toggle pricelist_custom_class"
+                    data-bs-toggle="dropdown">
+                    <t t-esc="curr_pl and curr_pl.name or ' - '" />
+                </a>
+                <div class="dropdown-menu" role="menu">
+                    <t t-foreach="env['product.pricelist'].search([('active', '=', True)])" t-as="pl">
+                        <a role="menuitem" t-att-href="'/shop/change_pricelist/%s' % pl.id"
+                            class="dropdown-item">
+                            <span class="switcher_pricelist" t-att-data-pl_id="pl.id"
+                                t-esc="pl.name" />
+                        </a>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+
+</odoo>

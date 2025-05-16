@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- carts items on left -->
+    <template id="cart_items_left" name="cart items left" inherit_id="website_sale.cart_lines">
+        <xpath expr="//table[@id=('cart_products')]" position="replace">
+            <table t-if="website_sale_order and website_sale_order.website_order_line"
+                class="mb16 table table-sm js_cart_lines custom_cart_item_table"
+                id="cart_products">
+                <t t-set="show_qty" t-value="is_view_active('website_sale.product_quantity')" />
+                <thead>
+                    <tr>
+                        <th class="td-img">Product</th>
+                        <th></th>
+                        <th class="text-center td-qty">
+                            <t t-if="show_qty">
+                                <span>Quantity</span>
+                            </t>
+                        </th>
+                        <th class="text-center td-price">Price</th>
+                        <th class="text-center td-action"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="website_sale_order.website_order_line" t-as="line">
+                        <tr t-att-class="'optional_product info' if line.linked_line_id else None">
+                            <td t-if="not line.product_id" colspan="2" class='td-img' />
+                            <t t-else="">
+                                <td align="center" class='td-img'>
+                                    <span
+                                        t-if="line._is_not_sellable_line() and line.product_id.image_128">
+                                        <img t-att-src="image_data_uri(line.product_id.image_128)"
+                                            class="img o_image_64_max rounded"
+                                            t-att-alt="line.name_short" alt="cart image"/>
+                                    </span>
+                                    <span t-else=""
+                                        t-field="line.product_id.image_128"
+                                        t-options="{'widget': 'image', 'qweb_img_responsive': False, 'class': 'rounded o_image_64_max'}"
+                                    />
+                                </td>
+                                <td class='td-product_name'>
+                                    <div>
+                                        <t t-call="website_sale.cart_line_product_link">
+                                            <strong t-field="line.name_short" />
+                                        </t>
+
+                                    </div>
+                                    <t t-call="website_sale.cart_line_description_following_lines">
+                                        <t t-set="div_class" t-value="'d-none d-md-block'" />
+                                    </t>
+                                    <p>Available Quantity: <t t-esc="line.product_id.available_qty_wh"/><input type="hidden" class="cart_free_qty" name="cart_free_qty" t-att-value="line.product_id.free_qty or 0" /></p>
+                                </td>
+                            </t>
+                            <td class="text-center td-qty">
+                                <div class="css_quantity input-group mx-auto justify-content-center">
+                                    <t t-if="not line._is_not_sellable_line() and not line.product_id.is_subscription">
+                                        <t t-if="show_qty">
+                                            <a t-attf-href="#"
+                                                class="btn btn-link js_add_cart_json d-none d-md-inline-block"
+                                                aria-label="Remove one" title="Remove one">
+                                                <i class="fa fa-minus"></i>
+                                            </a>
+                                            <input type="text"
+                                                class="js_quantity form-control quantity"
+                                                t-att-data-line-id="line.id"
+                                                t-att-data-product-id="line.product_id.id"
+                                                t-att-value="int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty" />
+                                            <t t-if="line._get_shop_warning(clear=False)">
+                                                <a t-attf-href="#" class="btn btn-link">
+                                                    <i class='fa fa-warning text-warning'
+                                                        t-att-title="line._get_shop_warning()"
+                                                        role="img" aria-label="Warning" />
+                                                </a>
+                                            </t>
+                                            <a t-else='' t-attf-href="#"
+                                                class="btn btn-link float_left js_add_cart_json d-none d-md-inline-block"
+                                                aria-label="Add one" title="Add one">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+
+                                        </t>
+                                        <t t-else="">
+                                            <input type="hidden"
+                                                class="js_quantity form-control quantity"
+                                                t-att-data-line-id="line.id"
+                                                t-att-data-product-id="line.product_id.id"
+                                                t-att-value="int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty" />
+                                        </t>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="text-muted w-100"
+                                            t-esc="int(line.product_uom_qty)" />
+                                        <input type="hidden"
+                                            class="js_quantity form-control quantity"
+                                            t-att-data-line-id="line.id"
+                                            t-att-data-product-id="line.product_id.id"
+                                            t-att-value="line.product_uom_qty" />
+                                    </t>
+                                </div>
+                            </td>
+                            <td class="text-center td-price" name="price">
+                                <t t-set="combination"
+                                    t-value="line.product_id.product_template_attribute_value_ids + line.product_no_variant_attribute_value_ids" />
+                                <t t-set="combination_info"
+                                    t-value="line.product_id.product_tmpl_id._get_combination_info(combination, pricelist=website_sale_order.pricelist_id, add_qty=line.product_uom_qty)" />
+
+                                <t groups="account.group_show_line_subtotals_tax_excluded">
+                                    <span t-field="line.price_reduce_taxexcl"
+                                        style="white-space: nowrap;"
+                                        t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" />
+                                </t>
+                                <t groups="account.group_show_line_subtotals_tax_included">
+                                    <span t-field="line.price_reduce_taxinc"
+                                        style="white-space: nowrap;"
+                                        t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" />
+                                </t>
+                                <t t-if="line.discount">
+                                    <del t-attf-class="#{'text-danger mr8'}"
+                                        style="white-space: nowrap;"
+                                        t-esc="combination_info['list_price']"
+                                        t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}" />
+                                </t>
+                                <small
+                                    t-if="not line._is_not_sellable_line() and line.product_id.base_unit_price"
+                                    class="cart_product_base_unit_price d-block text-muted"
+                                    groups="website_sale.group_show_uom_price">
+                                    <t t-call='website_sale.base_unit_price'>
+                                        <t t-set='product' t-value='line.product_id' />
+                                    </t>
+                                </small>
+                            </td>
+                            <td class="td-action">
+                                <a href='#' aria-label="Remove from cart" title="Remove from cart"
+                                    class='js_delete_product no-decoration'>
+                                    <small>
+                                        <i class='fa fa-trash-o'></i>
+                                    </small>
+                                </a>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </xpath>
+    </template>
+
+    <!-- cart summary on right -->
+    <template id="cart_summary_right_custom" name="cart summary custom right"
+        inherit_id="website_sale.short_cart_summary">
+        <xpath expr="//div[hasclass('js_cart_summary')]" position="replace">
+            <div class="card js_cart_summary custom_cart_summary_class"
+                t-if="website_sale_order and website_sale_order.website_order_line">
+                <div class="card-body">
+                    <h4 class="d-none d-xl-block">Order Total</h4>
+                    <hr class="d-none d-xl-block" />
+                    <div>
+                        <t t-call="website_sale.total">
+                            <t t-set="no_rowspan" t-value="1" />
+                        </t>
+                        <t t-set="redirect_to_sign_in"
+                            t-value="website.account_on_checkout == 'mandatory' and website.is_public_user()" />
+                        <t t-set="redirect_url"
+                            t-value="'/web/login?redirect=/shop/checkout' if redirect_to_sign_in else '/shop/checkout?express=1'" />
+                        <a role="button"
+                            t-if="website_sale_order and website_sale_order.website_order_line"
+                            class="btn btn-primary float-end d-none d-xl-inline-block color-white"
+                            t-attf-href="{{redirect_url}}">
+                            <t t-if="redirect_to_sign_in">
+                                <span>Sign In</span>
+                                <span class="fa fa-sign-in" />
+                            </t>
+                            <t t-else="">
+                                <span>Proceed to Checkout</span>
+                                <span class="fa fa-chevron-right" />
+                            </t>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="progress_wizard_custom" name="progress wizard custom"
+        inherit_id="website_sale.wizard_checkout">
+        <xpath expr="//div[hasclass('progress-wizard')]" position="replace">
+            <div class="progress-wizard">
+                <a class="no-decoration" t-att-href="step&gt;=10 and '/shop/cart' or '#'">
+                    <div id="wizard-step10"
+                        t-att-class="'progress-wizard-step %s' % (step == 10 and 'active' or step&gt;10 and 'complete' or 'disabled')">
+                        <!-- <div class="progress-wizard-bar d-none d-md-block" /> -->
+                        <span
+                            class="progress-wizard-dot d-none d-md-inline-block progress-wizard-dot-custom"></span>
+                        <div class="progress-outer-div">
+                            <div class="image-div">
+                                <img
+                                    src="/7md_website/static/src/images/shopping-cart.png" alt="cart-image"/>
+                            </div>
+                            <div class="text-outer">
+                                <div class="first-text">FIRST STEP </div>
+                                <div class="second-text"> SHOPPING CART </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a class="no-decoration" t-att-href="step&gt;=20 and '/shop/checkout' or '#'">
+                    <div id="wizard-step20"
+                        t-att-class="'progress-wizard-step %s' % (step == 20 and 'active' or step&gt;20 and 'complete' or 'disabled')">
+                        <!-- <div class="progress-wizard-bar d-none d-md-block" /> -->
+                        <span
+                            class="progress-wizard-dot d-none d-md-inline-block progress-wizard-dot-custom"></span>
+                        <div class="progress-outer-div">
+                            <div class="image-div">
+                                <img
+                                    src="/7md_website/static/src/images/checkout.png" alt="checkout image"/>
+                            </div>
+                            <div class="text-outer">
+                                <div class="first-text">SECOND STEP </div>
+                                <div class="second-text"> ADDRESS </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a class="no-decoration" t-att-href="step&gt;=40 and '/shop/payment' or '#'">
+                    <div id="wizard-step40"
+                        t-att-class="'progress-wizard-step %s' % (step == 40 and 'active' or step&gt;40 and 'complete' or 'disabled')">
+                        <!-- <div class="progress-wizard-bar d-none d-md-block" /> -->
+                        <span
+                            class="progress-wizard-dot d-none d-md-inline-block progress-wizard-dot-custom"></span>
+                        <div class="progress-outer-div">
+                            <div class="image-div third-step">
+                                <img
+                                    src="/7md_website/static/src/images/confirmation.png" alt="confirmation image" />
+                            </div>
+                            <div class="text-outer">
+                                <div class="first-text">THIRD STEP </div>
+                                <div class="second-text"> CONFIRM ORDER </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </xpath>
+    </template>
+</odoo>

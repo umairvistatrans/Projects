@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
+body, html {
+    font: normal normal lighter 14px/17px "Cairo";
+}
+.video_desc{
+    padding-right: 5%;
+    padding-left: 0;
+}
+.product-card .offer-label{
+    right:15px;
+    left:0;
+}
+.page-link .fa-angle-left:before {
+    content: "\f105";
+}
+.page-link .fa-angle-right:before {
+    content: "\f104";
+}
+.card{
+    border:0;
+}
+.auth-img-sm,
+.img-camp
+{
+    transform: perspective(400px) rotateY(180deg);
+}
+.product-cat li a .img{
+    padding-right:0;
+    padding-left: 1.5rem;
+}
+
+.title-image{
+    margin-right:0;
+    margin-left: 0.75rem;
+}

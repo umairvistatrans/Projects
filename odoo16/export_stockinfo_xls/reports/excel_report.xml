@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="applicants_report_xlsx_test" model="ir.actions.report">
+        <field name="name">Current Stock History</field>
+        <field name="model">wizard.stock.history</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">export_stockinfo_xls.excel_report_history</field>
+        <field name="report_file">export_stockinfo_xls.excel_report_history</field>
+        <field name="print_report_name">Current Stock History</field>
+        <field name="attachment">False</field>
+        <field name="binding_model_id" ref="model_wizard_stock_history"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+</odoo>

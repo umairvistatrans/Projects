@@ -1,0 +1,855 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="category_tag_tab" name="template_name">
+
+        <div class="col-12 col-lg-10 flex-grow-1 d-lg-block">
+            <div class="tabs category-tag-tabs">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <t t-set="count" t-value="0" />
+                    <t t-set="is_internal_user"
+                        t-value="request.env.user.has_group('base.group_user')" />
+                    <t t-foreach="env['navbar.category.config'].sudo().search([])"
+                        t-as="category">
+                        <t t-set="count" t-value="count+1" />
+                        <li class="nav-item nav-res" role="presentation" t-att-value="category.id">
+                            <button
+                                t-att-class="'nav-link p-3 px-2 ' + ('active' if count == 1 else '')"
+                                t-att-id="category.name.replace(' ','-') + '-tab'"
+                                data-bs-toggle="tab"
+                                t-att-data-bs-target="'#' + category.name.replace(' ','-')"
+                                type="button"
+                                role="tab"
+                                t-att-aria-controls="category.name.replace(' ','-')"
+                                aria-selected="true">
+                                <i t-att-class="category.icon" />
+                                <a class="nav-link">
+                                    <t t-esc="category.name" />
+                                </a>
+                            </button>
+                        </li>
+                    </t>
+                    <li class="nav-item nav-res" role="presentation">
+                        <a href="/shop" class="view-all-btn">
+                            View All
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <t t-set="count" t-value="0" />
+                    <t t-foreach="env['navbar.category.config'].sudo().search([])"
+                        t-as="category">
+                        <t t-set="count" t-value="count+1" />
+                        <div
+                            t-att-class="'tab-pane fade tab-content ' + ('show active' if count == 1 else '')"
+                            t-att-id="category.name.replace(' ','-')"
+                            role="tabpanel"
+                            t-att-aria-labelledby="category.name.replace(' ','-')+'-tab'"
+                        >
+                            <div class="col-12 col-md-12 margin-minuss">
+                                <div
+                                    class="row row-cols-2 row-cols-xxl-5 row-cols-md-4 row-cols-lg-4 product_card_layout_outer">
+                                    <!-- T-call here -->
+                                    <t t-if="category.product_type == 'by_product'">
+                                        <t t-foreach="category.product_ids" t-as="offer_pro">
+                                            <t t-if="is_internal_user or offer_pro.is_published">
+                                                <div class="col-xl-3 px-2 mb-3">
+                                                    <div class="card product-card">
+                                                        <div class="product-card-image p-3">
+                                                            <!-- <t t-esc="offer_pro" /> -->
+                                                            <t t-if="offer_pro.image_1920">
+                                                                <a
+                                                                    t-attf-href="/shop/product/#{ offer_pro.product_tmpl_id.id }"
+                                                                    class="product-image">
+                                                                    <img
+                                                                        t-att-src="image_data_uri(offer_pro.image_1920)"
+                                                                        alt="menu"
+                                                                        class="card-img-top" />
+                                                                </a>
+                                                            </t>
+                                                        </div>
+                                                        <t t-if="offer_pro.default_code">
+                                                            <div class="product_sku badge bg-danger">
+                                                                <t t-esc="offer_pro.default_code" />
+                                                            </div>
+                                                        </t>
+                                                        <t
+                                                            t-if="offer_pro.available_qty_wh == 0">
+                                                            <div
+                                                                class="product_sku badge bg-danger out_of_stock_custom">Out
+                                                                of Stock</div>
+                                                        </t>
+                                                        <t t-set="cat_one_template_price_vals"
+                                                            t-value="get_product_prices[offer_pro.product_tmpl_id.id]" />
+                                                        <t
+                                                            t-if="'base_price' in cat_one_template_price_vals">
+                                                            <t t-set="_new_offer_discount"
+                                                                t-value="((cat_one_template_price_vals['base_price'] - cat_one_template_price_vals['price_reduce']) / cat_one_template_price_vals['base_price']) * 100" />
+
+                                                            <div class="offer-label">
+                                                                <t t-esc="_new_offer_discount"
+                                                                    t-options="{'widget': 'integer'}" />
+                                                                % </div>
+                                                        </t>
+
+                                                        <div class="fav-label fav-label-custom">
+                                                            <t
+                                                                t-nocache="The wishlist depends on the user and must not be shared with other users. As this rendering is in the loop, the product value is set in the template, we must retain the id of the product on which we are."
+                                                                t-nocache-product_template_id="offer_pro.product_tmpl_id.id">
+                                                                <t t-set="product"
+                                                                    t-value="offer_pro.product_tmpl_id" />
+                                                                <t t-set="in_wish"
+                                                                    t-value="product._is_in_wishlist()" />
+                                                                <t t-set="product_variant_id"
+                                                                    t-value="offer_pro.id" />
+                                                                <button t-if="product_variant_id"
+                                                                    type="button" role="button"
+                                                                    class="btn btn-outline-primary bg-white o_homepage_add_wishlist"
+                                                                    t-att-disabled='in_wish or None'
+                                                                    title="Add to Wishlist"
+                                                                    t-att-data-product-template-id="product.id"
+                                                                    t-att-data-product-product-id="product_variant_id"
+                                                                    data-action="website_sale.o_wishlist">
+                                                                    <t t-if="not in_wish">
+                                                                        <i
+                                                                            class="fa fa-heart-o me-2"
+                                                                            aria-hidden="true"
+                                                                            role="img"
+                                                                            aria-label="Add to wishlist" />
+                                                                    </t>
+                                                                    <t t-elif="in_wish">
+                                                                        <i class="fa fa-heart me-2"
+                                                                            aria-hidden="true"
+                                                                            role="img"
+                                                                            aria-label="Add to wishlist" />
+                                                                    </t>
+
+                                                                </button>
+                                                            </t>
+                                                        </div>
+
+                                                        <div class="card-body p-lg-4 text-center">
+                                                             <div t-raw="offer_pro.sudo().star_rating_html" class="small-ratings justify-content-center d-flex"></div>
+<!--                                                            <div-->
+<!--                                                                class="small-ratings justify-content-center">-->
+<!--                                                                <i class="fa fa-star rating-color"></i>-->
+<!--                                                                <i class="fa fa-star rating-color"></i>-->
+<!--                                                                <i class="fa fa-star rating-color"></i>-->
+<!--                                                                <i class="fa fa-star"></i>-->
+<!--                                                                <i class="fa fa-star"></i>-->
+<!--                                                            </div>-->
+                                                            <h5 class="card-title">
+                                                                <a
+                                                                    class="product-text-decoration-custom"
+                                                                    t-attf-href="/shop/product/#{ offer_pro.product_tmpl_id.id }">
+                                                                    <t t-esc="offer_pro.name" />
+                                                                </a>
+
+                                                            </h5>
+                                                            <div class="prices">
+
+                                                                <span class="price"
+                                                                    style="white-space: nowrap;"
+                                                                    t-esc="cat_one_template_price_vals['price_reduce']"
+                                                                    t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+                                                                <t
+                                                                    t-if="'base_price' in cat_one_template_price_vals and (cat_one_template_price_vals['base_price'] &gt; cat_one_template_price_vals['price_reduce']) and (cat_one_template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                                                    <del
+                                                                        t-attf-class="text-muted me-1 h6 mb-0"
+                                                                        style="white-space: nowrap;">
+                                                                        <em class="small"
+                                                                            t-esc="cat_one_template_price_vals['base_price']"
+                                                                            t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                                                    </del>
+                                                                </t>
+                                                            </div>
+
+                                                            <div class="cart-buy-now-outer-div">
+                                                                <t
+                                                                    t-if="offer_pro.sudo().available_qty_wh > 0">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary js_add_cart_json"
+                                                                        t-attf-data-product-id="{{ offer_pro.id }}">Add
+                                                                        to Cart
+                                                                    </button>
+                                                                    <button
+                                                                        class="buy-now-btn btn btn-outline-primary"
+                                                                        t-attf-data-product-id="{{ offer_pro.id }}">Buy
+                                                                        Now
+                                                                    </button>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary"
+                                                                        t-attf-data-product-id="#"
+                                                                        disabled="1">Add
+                                                                        to Cart
+                                                                    </button>
+                                                                    <button
+                                                                        class="btn btn-outline-primary"
+                                                                        t-attf-data-product-id="#"
+                                                                        disabled="1">Buy
+                                                                        Now
+                                                                    </button>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </t>
+                                    </t>
+
+                                    <t t-if="category.product_type == 'by_wishlist'">
+                                        <t t-set="wishlist"
+                                            t-value="request.env['product.wishlist'].with_context(display_default_code=False).current().mapped('product_id')" />
+                                        <t t-foreach="wishlist" t-as="offer_pro">
+                                            <t t-if="is_internal_user or offer_pro.is_published">
+                                                <div class="col-xl-3 px-2 mb-3">
+                                                    <div class="card product-card">
+                                                        <div class="product-card-image p-3">
+                                                            <!-- <t t-esc="offer_pro" /> -->
+                                                            <t t-if="offer_pro.image_1920">
+                                                                <a
+                                                                    t-attf-href="/shop/product/#{ offer_pro.product_tmpl_id.id }"
+                                                                    class="product-image">
+                                                                    <img
+                                                                        t-att-src="image_data_uri(offer_pro.image_1920)"
+                                                                        alt="menu"
+                                                                        class="card-img-top" />
+                                                                </a>
+                                                            </t>
+                                                        </div>
+                                                        <t t-if="offer_pro.default_code">
+                                                            <div class="product_sku badge bg-danger">
+                                                                <t t-esc="offer_pro.default_code" />
+                                                            </div>
+                                                        </t>
+                                                        <t
+                                                            t-if="offer_pro.available_qty_wh == 0">
+                                                            <div
+                                                                class="product_sku badge bg-danger out_of_stock_custom">Out
+                                                                of Stock</div>
+                                                        </t>
+                                                        <t t-set="cat_two_template_price_vals"
+                                                            t-value="get_product_prices[offer_pro.product_tmpl_id.id]" />
+                                                        <t
+                                                            t-if="'base_price' in cat_two_template_price_vals">
+                                                            <t t-set="_new_offer_discount"
+                                                                t-value="((cat_two_template_price_vals['base_price'] - cat_two_template_price_vals['price_reduce']) / cat_two_template_price_vals['base_price']) * 100" />
+
+                                                            <div class="offer-label">
+                                                                <t t-esc="_new_offer_discount"
+                                                                    t-options='{"widget": "integer"}' />
+                                                                % </div>
+                                                        </t>
+                                                        <div class="fav-label fav-label-custom">
+                                                            <t
+                                                                t-nocache="The wishlist depends on the user and must not be shared with other users. As this rendering is in the loop, the product value is set in the template, we must retain the id of the product on which we are."
+                                                                t-nocache-product_template_id="offer_pro.product_tmpl_id.id">
+                                                                <t t-set="product"
+                                                                    t-value="offer_pro.product_tmpl_id" />
+                                                                <t t-set="in_wish"
+                                                                    t-value="product._is_in_wishlist()" />
+                                                                <t t-set="product_variant_id"
+                                                                    t-value="offer_pro.id" />
+                                                                <button t-if="product_variant_id"
+                                                                    type="button" role="button"
+                                                                    class="btn btn-outline-primary bg-white o_homepage_add_wishlist"
+                                                                    t-att-disabled='in_wish or None'
+                                                                    title="Add to Wishlist"
+                                                                    t-att-data-product-template-id="product.id"
+                                                                    t-att-data-product-product-id="product_variant_id"
+                                                                    data-action="website_sale.o_wishlist">
+                                                                    <t t-if="not in_wish">
+                                                                        <i
+                                                                            class="fa fa-heart-o me-2"
+                                                                            aria-hidden="true"
+                                                                            role="img"
+                                                                            aria-label="Add to wishlist" />
+                                                                    </t>
+                                                                    <t t-elif="in_wish">
+                                                                        <i class="fa fa-heart me-2"
+                                                                            aria-hidden="true"
+                                                                            role="img"
+                                                                            aria-label="Add to wishlist" />
+                                                                    </t>
+
+                                                                </button>
+                                                            </t>
+                                                        </div>
+
+                                                        <div class="card-body p-lg-4 text-center">
+                                                             <div t-raw="offer_pro.sudo().star_rating_html" class="small-ratings justify-content-center d-flex"></div>
+<!--                                                            <div-->
+<!--                                                                class="small-ratings justify-content-center">-->
+<!--                                                                <i class="fa fa-star rating-color"></i>-->
+<!--                                                                <i class="fa fa-star rating-color"></i>-->
+<!--                                                                <i class="fa fa-star rating-color"></i>-->
+<!--                                                                <i class="fa fa-star"></i>-->
+<!--                                                                <i class="fa fa-star"></i>-->
+<!--                                                            </div>-->
+                                                            <h5 class="card-title">
+                                                                <a
+                                                                    class="product-text-decoration-custom"
+                                                                    t-attf-href="/shop/product/#{ offer_pro.product_tmpl_id.id }">
+                                                                    <t t-esc="offer_pro.name" />
+                                                                </a>
+                                                            </h5>
+                                                            <div class="prices">
+                                                                <span class="price"
+                                                                    style="white-space: nowrap;"
+                                                                    t-esc="cat_two_template_price_vals['price_reduce']"
+                                                                    t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+                                                                <t
+                                                                    t-if="'base_price' in cat_two_template_price_vals and (cat_two_template_price_vals['base_price'] &gt; cat_two_template_price_vals['price_reduce']) and (cat_two_template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                                                    <del
+                                                                        t-attf-class="text-muted me-1 h6 mb-0"
+                                                                        style="white-space: nowrap;">
+                                                                        <em class="small"
+                                                                            t-esc="cat_two_template_price_vals['base_price']"
+                                                                            t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                                                    </del>
+
+                                                                </t>
+
+                                                            </div>
+
+                                                            <div class="cart-buy-now-outer-div">
+                                                                <t
+                                                                    t-if="offer_pro.sudo().available_qty_wh > 0">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary js_add_cart_json"
+                                                                        t-attf-data-product-id="{{ offer_pro.id }}">Add
+                                                                        to Cart
+                                                                    </button>
+                                                                    <button
+                                                                        class="buy-now-btn btn btn-outline-primary"
+                                                                        t-attf-data-product-id="{{ offer_pro.id }}">Buy
+                                                                        Now
+                                                                    </button>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary"
+                                                                        t-attf-data-product-id="#"
+                                                                        disabled="1">Add
+                                                                        to Cart
+                                                                    </button>
+                                                                    <button
+                                                                        class="btn btn-outline-primary"
+                                                                        t-attf-data-product-id="#"
+                                                                        disabled="1">Buy
+                                                                        Now
+                                                                    </button>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </t>
+                                    </t>
+
+                                    <t t-if="category.product_type == 'top_selling'">
+                                        <t t-set="top_selling"
+                                            t-value="request.env['sale.order.line'].sudo().get_top_selling_products(category.limit)" />
+                                        <t t-foreach="top_selling" t-as="offer_pro">
+                                            <t t-if="is_internal_user or offer_pro.is_published">
+                                                <div class="col-xl-3 px-2 mb-3">
+                                                    <div class="card product-card">
+                                                        <div class="product-card-image p-3">
+                                                            <!-- <t t-esc="offer_pro" /> -->
+                                                            <t t-if="offer_pro.image_1920">
+                                                                <a
+                                                                    t-attf-href="/shop/product/#{ offer_pro.product_tmpl_id.id }"
+                                                                    class="product-image">
+                                                                    <img
+                                                                        t-att-src="image_data_uri(offer_pro.image_1920)"
+                                                                        alt="menu"
+                                                                        class="card-img-top" />
+                                                                </a>
+                                                            </t>
+                                                        </div>
+                                                        <t t-if="offer_pro.default_code">
+                                                            <div class="product_sku badge bg-danger">
+                                                                <t t-esc="offer_pro.default_code" />
+                                                            </div>
+                                                        </t>
+                                                        <t
+                                                            t-if="offer_pro.available_qty_wh == 0">
+                                                            <div
+                                                                class="product_sku badge bg-danger out_of_stock_custom">Out
+                                                                of Stock</div>
+                                                        </t>
+                                                        <t t-set="cat_three_template_price_vals"
+                                                            t-value="get_product_prices[offer_pro.product_tmpl_id.id]" />
+                                                        <t
+                                                            t-if="'base_price' in cat_three_template_price_vals">
+                                                            <t t-set="_new_offer_discount"
+                                                                t-value="((cat_three_template_price_vals['base_price'] - cat_three_template_price_vals['price_reduce']) / cat_three_template_price_vals['base_price']) * 100" />
+
+                                                            <div class="offer-label">
+                                                                <t t-esc="_new_offer_discount"
+                                                                    t-options='{"widget": "integer"}' />
+                                                                % </div>
+                                                        </t>
+
+                                                        <div class="fav-label fav-label-custom">
+                                                            <t
+                                                                t-nocache="The wishlist depends on the user and must not be shared with other users. As this rendering is in the loop, the product value is set in the template, we must retain the id of the product on which we are."
+                                                                t-nocache-product_template_id="offer_pro.product_tmpl_id.id">
+                                                                <t t-set="product"
+                                                                    t-value="offer_pro.product_tmpl_id" />
+                                                                <t t-set="in_wish"
+                                                                    t-value="product._is_in_wishlist()" />
+                                                                <t t-set="product_variant_id"
+                                                                    t-value="offer_pro.id" />
+                                                                <button t-if="product_variant_id"
+                                                                    type="button" role="button"
+                                                                    class="btn btn-outline-primary bg-white o_homepage_add_wishlist"
+                                                                    t-att-disabled='in_wish or None'
+                                                                    title="Add to Wishlist"
+                                                                    t-att-data-product-template-id="product.id"
+                                                                    t-att-data-product-product-id="product_variant_id"
+                                                                    data-action="website_sale.o_wishlist">
+                                                                    <t t-if="not in_wish">
+                                                                        <i
+                                                                            class="fa fa-heart-o me-2"
+                                                                            aria-hidden="true"
+                                                                            role="img"
+                                                                            aria-label="Add to wishlist" />
+                                                                    </t>
+                                                                    <t t-elif="in_wish">
+                                                                        <i class="fa fa-heart me-2"
+                                                                            aria-hidden="true"
+                                                                            role="img"
+                                                                            aria-label="Add to wishlist" />
+                                                                    </t>
+
+                                                                </button>
+                                                            </t>
+                                                        </div>
+
+                                                        <div class="card-body p-lg-4 text-center">
+                                                             <div t-raw="offer_pro.sudo().star_rating_html" class="small-ratings justify-content-center d-flex"></div>
+<!--                                                            <div-->
+<!--                                                                class="small-ratings justify-content-center">-->
+<!--                                                                <i class="fa fa-star rating-color"></i>-->
+<!--                                                                <i class="fa fa-star rating-color"></i>-->
+<!--                                                                <i class="fa fa-star rating-color"></i>-->
+<!--                                                                <i class="fa fa-star"></i>-->
+<!--                                                                <i class="fa fa-star"></i>-->
+<!--                                                            </div>-->
+                                                            <h5 class="card-title">
+                                                                <a
+                                                                    class="product-text-decoration-custom"
+                                                                    t-attf-href="/shop/product/#{ offer_pro.product_tmpl_id.id }">
+                                                                    <t t-esc="offer_pro.name" />
+                                                                </a>
+
+                                                            </h5>
+                                                            <div class="prices">
+
+                                                                <span class="price"
+                                                                    style="white-space: nowrap;"
+                                                                    t-esc="cat_three_template_price_vals['price_reduce']"
+                                                                    t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+                                                                <t
+                                                                    t-if="'base_price' in cat_three_template_price_vals and (cat_three_template_price_vals['base_price'] &gt; cat_three_template_price_vals['price_reduce']) and (cat_three_template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                                                    <del
+                                                                        t-attf-class="text-muted me-1 h6 mb-0"
+                                                                        style="white-space: nowrap;">
+                                                                        <em class="small"
+                                                                            t-esc="cat_three_template_price_vals['base_price']"
+                                                                            t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                                                    </del>
+
+                                                                </t>
+                                                            </div>
+
+                                                            <div class="cart-buy-now-outer-div">
+                                                                <t
+                                                                    t-if="offer_pro.sudo().available_qty_wh > 0">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary js_add_cart_json"
+                                                                        t-attf-data-product-id="{{ offer_pro.id }}">Add
+                                                                        to Cart
+                                                                    </button>
+                                                                    <button
+                                                                        class="buy-now-btn btn btn-outline-primary"
+                                                                        t-attf-data-product-id="{{ offer_pro.id }}">Buy
+                                                                        Now
+                                                                    </button>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary"
+                                                                        t-attf-data-product-id="#"
+                                                                        disabled="1">Add
+                                                                        to Cart
+                                                                    </button>
+                                                                    <button
+                                                                        class="btn btn-outline-primary"
+                                                                        t-attf-data-product-id="#"
+                                                                        disabled="1">Buy
+                                                                        Now
+                                                                    </button>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </t>
+                                    </t>
+
+                                    <t t-if="category.product_type == 'top_trending'">
+                                        <t t-set="top_selling"
+                                            t-value="request.env['sale.order.line'].sudo().get_top_selling_products(category.limit)" />
+                                        <t t-foreach="top_selling" t-as="offer_pro">
+                                            <div class="col-xl-3 px-2 mb-3">
+                                                <div class="card product-card">
+                                                    <div class="product-card-image p-3">
+                                                        <!-- <t t-esc="offer_pro" /> -->
+                                                        <t t-if="offer_pro.image_1920">
+                                                            <a
+                                                                t-attf-href="/shop/product/#{ offer_pro.product_tmpl_id.id }"
+                                                                class="product-image">
+                                                                <img
+                                                                    t-att-src="image_data_uri(offer_pro.image_1920)"
+                                                                    alt="menu"
+                                                                    class="card-img-top" />
+                                                            </a>
+                                                        </t>
+                                                    </div>
+                                                    <t t-if="offer_pro.default_code">
+                                                        <div class="product_sku badge bg-danger">
+                                                            <t t-esc="offer_pro.default_code" />
+                                                        </div>
+                                                    </t>
+                                                    <t
+                                                        t-if="offer_pro.available_qty_wh == 0">
+                                                        <div
+                                                            class="product_sku badge bg-danger out_of_stock_custom">Out
+                                                            of Stock</div>
+                                                    </t>
+                                                    <t t-set="cat_four_template_price_vals"
+                                                        t-value="get_product_prices[offer_pro.product_tmpl_id.id]" />
+                                                    <t
+                                                        t-if="'base_price' in cat_four_template_price_vals">
+                                                        <t t-set="_new_offer_discount"
+                                                            t-value="((cat_four_template_price_vals['base_price'] - cat_four_template_price_vals['price_reduce']) / cat_four_template_price_vals['base_price']) * 100" />
+
+                                                        <div class="offer-label">
+                                                            <t t-esc="_new_offer_discount"
+                                                                t-options='{"widget": "integer"}' />
+                                                            % </div>
+                                                    </t>
+
+                                                    <div class="fav-label fav-label-custom">
+                                                        <t
+                                                            t-nocache="The wishlist depends on the user and must not be shared with other users. As this rendering is in the loop, the product value is set in the template, we must retain the id of the product on which we are."
+                                                            t-nocache-product_template_id="offer_pro.product_tmpl_id.id">
+                                                            <t t-set="product"
+                                                                t-value="offer_pro.product_tmpl_id" />
+                                                            <t t-set="in_wish"
+                                                                t-value="product._is_in_wishlist()" />
+                                                            <t t-set="product_variant_id"
+                                                                t-value="offer_pro.id" />
+                                                            <button t-if="product_variant_id"
+                                                                type="button" role="button"
+                                                                class="btn btn-outline-primary bg-white o_homepage_add_wishlist"
+                                                                t-att-disabled='in_wish or None'
+                                                                title="Add to Wishlist"
+                                                                t-att-data-product-template-id="product.id"
+                                                                t-att-data-product-product-id="product_variant_id"
+                                                                data-action="website_sale.o_wishlist">
+                                                                <t t-if="not in_wish">
+                                                                    <i class="fa fa-heart-o me-2"
+                                                                        aria-hidden="true"
+                                                                        role="img"
+                                                                        aria-label="Add to wishlist" />
+                                                                </t>
+                                                                <t t-elif="in_wish">
+                                                                    <i class="fa fa-heart me-2"
+                                                                        aria-hidden="true"
+                                                                        role="img"
+                                                                        aria-label="Add to wishlist" />
+                                                                </t>
+
+                                                            </button>
+                                                        </t>
+                                                    </div>
+
+                                                    <div class="card-body p-lg-4 text-center">
+                                                         <div t-raw="offer_pro.sudo().star_rating_html" class="small-ratings justify-content-center d-flex"></div>
+<!--                                                        <div-->
+<!--                                                            class="small-ratings justify-content-center">-->
+<!--                                                            <i class="fa fa-star rating-color"></i>-->
+<!--                                                            <i class="fa fa-star rating-color"></i>-->
+<!--                                                            <i class="fa fa-star rating-color"></i>-->
+<!--                                                            <i class="fa fa-star"></i>-->
+<!--                                                            <i class="fa fa-star"></i>-->
+<!--                                                        </div>-->
+                                                        <h5 class="card-title">
+                                                            <a
+                                                                class="product-text-decoration-custom"
+                                                                t-attf-href="/shop/product/#{ offer_pro.product_tmpl_id.id }">
+                                                                <t t-esc="offer_pro.name" />
+                                                            </a>
+
+                                                        </h5>
+                                                        <div class="prices">
+
+                                                            <span class="price"
+                                                                style="white-space: nowrap;"
+                                                                t-esc="cat_four_template_price_vals['price_reduce']"
+                                                                t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+
+                                                            <t
+                                                                t-if="'base_price' in cat_four_template_price_vals and (cat_four_template_price_vals['base_price'] &gt; cat_four_template_price_vals['price_reduce']) and (cat_four_template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                                                <del
+                                                                    t-attf-class="text-muted me-1 h6 mb-0"
+                                                                    style="white-space: nowrap;">
+                                                                    <em class="small"
+                                                                        t-esc="cat_four_template_price_vals['base_price']"
+                                                                        t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                                                </del>
+
+                                                            </t>
+                                                        </div>
+
+
+                                                        <div class="cart-buy-now-outer-div">
+                                                            <t
+                                                                t-if="offer_pro.sudo().available_qty_wh > 0">
+                                                                <button type="button"
+                                                                    class="btn btn-primary js_add_cart_json"
+                                                                    t-attf-data-product-id="{{ offer_pro.id }}">Add
+                                                                    to Cart
+                                                                </button>
+                                                                <button
+                                                                    class="buy-now-btn btn btn-outline-primary"
+                                                                    t-attf-data-product-id="{{ offer_pro.id }}">Buy
+                                                                    Now
+                                                                </button>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <button type="button"
+                                                                    class="btn btn-primary"
+                                                                    t-attf-data-product-id="#"
+                                                                    disabled="1">Add
+                                                                    to Cart
+                                                                </button>
+                                                                <button
+                                                                    class="btn btn-outline-primary"
+                                                                    t-attf-data-product-id="#"
+                                                                    disabled="1">Buy
+                                                                    Now
+                                                                </button>
+                                                            </t>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </t>
+
+                                    <t t-if="category.product_type == 'by_category'">
+                                        <t
+                                            t-foreach="env['product.product'].search([('product_tmpl_id', 'in',env['product.template'].search([('public_categ_ids','in', category.product_category_ids.ids)]).ids)])"
+                                            t-as="offer_cat_pro">
+                                            <t t-if="is_internal_user or offer_cat_pro.is_published">
+                                                <div class="col-xl-3 px-2 mb-3">
+                                                    <div class="card product-card">
+                                                        <div class="product-card-image p-3">
+                                                            <t t-esc="offer_cat_pro" />
+                                                            <t t-if="offer_cat_pro.image_1920">
+                                                                <a
+                                                                    t-attf-href="/shop/product/#{ offer_cat_pro.product_tmpl_id.id }"
+                                                                    class="product-image">
+                                                                    <img
+                                                                        t-att-src="image_data_uri(offer_cat_pro.image_1920)"
+                                                                        alt="menu"
+                                                                        class="card-img-top" />
+                                                                </a>
+                                                            </t>
+                                                        </div>
+                                                        <t t-if="offer_cat_pro.default_code">
+                                                            <div class="product_sku badge bg-danger">
+                                                                <t
+                                                                    t-esc="offer_cat_pro.default_code" />
+                                                            </div>
+                                                        </t>
+                                                        <t
+                                                            t-if="offer_cat_pro.available_qty_wh == 0">
+                                                            <div
+                                                                class="product_sku badge bg-danger out_of_stock_custom">Out
+                                                                of Stock</div>
+                                                        </t>
+                                                        <t t-set="cat_five_template_price_vals"
+                                                            t-value="get_product_prices[offer_cat_pro.product_tmpl_id.id]" />
+                                                        <t
+                                                            t-if="'base_price' in cat_five_template_price_vals">
+                                                            <t t-set="_new_offer_discount"
+                                                                t-value="((cat_five_template_price_vals['base_price'] - cat_five_template_price_vals['price_reduce']) / cat_five_template_price_vals['base_price']) * 100" />
+
+                                                            <div class="offer-label">
+                                                                <t t-esc="_new_offer_discount"
+                                                                    t-options='{"widget": "integer"}' />
+                                                                % </div>
+                                                        </t>
+                                                        <div class="fav-label fav-label-custom">
+                                                            <t
+                                                                t-nocache="The wishlist depends on the user and must not be shared with other users. As this rendering is in the loop, the product value is set in the template, we must retain the id of the product on which we are."
+                                                                t-nocache-product_template_id="offer_cat_pro.product_tmpl_id.id">
+                                                                <t t-set="product"
+                                                                    t-value="offer_cat_pro.product_tmpl_id" />
+                                                                <t t-set="in_wish"
+                                                                    t-value="product._is_in_wishlist()" />
+                                                                <t t-set="product_variant_id"
+                                                                    t-value="offer_cat_pro.id" />
+                                                                <button t-if="product_variant_id"
+                                                                    type="button" role="button"
+                                                                    class="btn btn-outline-primary bg-white o_homepage_add_wishlist"
+                                                                    t-att-disabled='in_wish or None'
+                                                                    title="Add to Wishlist"
+                                                                    t-att-data-product-template-id="product.id"
+                                                                    t-att-data-product-product-id="product_variant_id"
+                                                                    data-action="website_sale.o_wishlist">
+                                                                    <t t-if="not in_wish">
+                                                                        <i
+                                                                            class="fa fa-heart-o me-2"
+                                                                            aria-hidden="true"
+                                                                            role="img"
+                                                                            aria-label="Add to wishlist" />
+                                                                    </t>
+                                                                    <t t-elif="in_wish">
+                                                                        <i class="fa fa-heart me-2"
+                                                                            aria-hidden="true"
+                                                                            role="img"
+                                                                            aria-label="Add to wishlist" />
+                                                                    </t>
+
+                                                                </button>
+                                                            </t>
+                                                        </div>
+
+                                                        <div class="card-body p-lg-4 text-center">
+                                                             <div t-raw="offer_cat_pro.sudo().star_rating_html" class="small-ratings justify-content-center d-flex"></div>
+<!--                                                            <div-->
+<!--                                                                class="small-ratings justify-content-center">-->
+<!--                                                                <i class="fa fa-star rating-color"></i>-->
+<!--                                                                <i class="fa fa-star rating-color"></i>-->
+<!--                                                                <i class="fa fa-star rating-color"></i>-->
+<!--                                                                <i class="fa fa-star"></i>-->
+<!--                                                                <i class="fa fa-star"></i>-->
+<!--                                                            </div>-->
+                                                            <h5 class="card-title">
+                                                                <a
+                                                                    class="product-text-decoration-custom"
+                                                                    t-attf-href="/shop/product/#{ offer_cat_pro.product_tmpl_id.id }">
+                                                                    <t t-esc="offer_cat_pro.name" />
+                                                                </a>
+                                                            </h5>
+                                                            <div class="prices">
+
+                                                                <span class="price"
+                                                                    style="white-space: nowrap;"
+                                                                    t-esc="cat_five_template_price_vals['price_reduce']"
+                                                                    t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+                                                                <t
+                                                                    t-if="'base_price' in cat_five_template_price_vals and (cat_five_template_price_vals['base_price'] &gt; cat_five_template_price_vals['price_reduce']) and (cat_five_template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                                                    <del
+                                                                        t-attf-class="text-muted me-1 h6 mb-0"
+                                                                        style="white-space: nowrap;">
+                                                                        <em class="small"
+                                                                            t-esc="cat_five_template_price_vals['base_price']"
+                                                                            t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                                                    </del>
+
+
+                                                                </t>
+                                                            </div>
+
+                                                            <div class="cart-buy-now-outer-div">
+                                                                <t
+                                                                    t-if="offer_cat_pro.sudo().available_qty_wh > 0">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary js_add_cart_json"
+                                                                        t-attf-data-product-id="{{ offer_cat_pro.id }}">
+                                                                        Add
+                                                                        to Cart
+                                                                    </button>
+                                                                    <button
+                                                                        class="buy-now-btn btn btn-outline-primary"
+                                                                        t-attf-data-product-id="{{ offer_cat_pro.id }}">
+                                                                        Buy
+                                                                        Now
+                                                                    </button>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary"
+                                                                        t-attf-data-product-id="#"
+                                                                        disabled="1">
+                                                                        Add
+                                                                        to Cart
+                                                                    </button>
+                                                                    <button
+                                                                        class="btn btn-outline-primary"
+                                                                        t-attf-data-product-id="#"
+                                                                        disabled="1">
+                                                                        Buy
+                                                                        Now
+                                                                    </button>
+                                                                </t>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </t>
+
+                </div>
+            </div>
+        </div>
+
+    </template>
+
+
+    <template id="mobile_category_dropdown" name="mobile_category_dropdown"
+        inherit_id="7md_website.home">
+        <xpath expr="//section[hasclass('filter-product-layout')]" position="before">
+            <div class="custom-filter-category-dropdown">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Filter By Categories
+                    </button>
+                    <ul class="dropdown-menu">
+                        <t t-foreach="env['product.public.category'].search([])"
+                            t-as="category">
+                            <li t-att-value="category.id"
+                                t-attf-class="dropdown-item">
+                                <t t-esc="category.name" />
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+
+            </div>
+        </xpath>
+    </template>
+</odoo>

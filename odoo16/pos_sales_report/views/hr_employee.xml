@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="view_employee_form_mods" model="ir.ui.view">
+            <field name="name">Employee Form View Modified</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button string="Print 945" name="%(action_p45_wizard_form)d" type="action"
+                            attrs="{'invisible': [('payroll_type', '!=', 'uk'), ('leaving_date', '=', False)]}"
+                            class="oe_highlight"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

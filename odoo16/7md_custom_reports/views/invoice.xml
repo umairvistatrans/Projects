@@ -1,0 +1,74 @@
+<odoo>
+    <data>
+        <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+            <!-- <xpath expr="//div[hasclass('page')]//h2" position="after">
+                <t t-set="picking_names" t-value="o.get_picking_names()"/>
+                <t t-if="picking_names and o.type == 'out_invoice'">
+                    <div class="row justify-content-end mb16">
+                        <t t-foreach="picking_names" t-as="picking_name">
+                            <div class="col-4" name="right_box">
+                                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', picking_name, 600, 100)" style="width:300px;height:50px;" alt="Barcode"/>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </xpath> -->
+            <xpath expr="//div[@class='page']/h2[1]" position="after">
+                <div class="row">
+                    <div class="col-4 justify-content-start" style="text-align: center;">
+                        <t t-if="o.name != '/'">
+                            <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"
+                                 style="width:300px;height:50px;" alt="Barcode"/>
+                            <p style="font-size:8px">
+                                <t t-esc="o.name"/>
+                            </p>
+                        </t>
+                    </div>
+                    <t t-set="picking_names" t-value="o.get_picking_names()"/>
+                    <t t-if="picking_names and o.move_type == 'out_invoice'">
+                        <div class="row justify-content mb16">
+                            <t t-foreach="picking_names" t-as="picking_name">
+                                <div class="col-4" name="right_box">
+                                    <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', picking_name, 600, 100)"
+                                         style="width:300px;height:50px;" alt="Barcode"/>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                </div>
+            </xpath>
+
+
+            <xpath expr="//div[@name='address_same_as_shipping']" position="replace">
+                <div class="col-6" name="address_same_as_shipping">
+                    <address class="mb-0" t-field="o.partner_id"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone", "email"], "no_marker": True}'/>
+                    <div t-if="o.partner_id.vat" id="partner_vat_address_same_as_shipping">
+                        <t t-if="o.company_id.account_fiscal_country_id.vat_label"
+                           t-esc="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
+                        <t t-else="">Tax ID</t>:
+                        <span t-field="o.partner_id.vat"/>
+                    </div>
+                </div>
+            </xpath>
+
+
+            <!--            <xpath expr="//t/t[2]/address" position="replace">-->
+            <!--            <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name","phone","email"], "no_marker": True}' />-->
+
+            <!--            </xpath>-->
+
+            <!-- <xpath expr="//table[@class='table table-sm o_main_table']//thead//th[@name='th_taxes']" position="replace">
+                <th name="th_taxes" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                    <span>Tax Amount</span>
+                </th>  
+            </xpath> -->
+
+            <!-- <xpath expr="//table[@class='table table-sm o_main_table']//tbody[@class='invoice_tbody']//td//span[@id='line_tax_ids']" position="replace"> -->
+            <!-- <span t-esc="line.total_tax_amt"/> -->
+            <!-- <span t-esc="'%.2f'% line.total_tax_amt"/>
+
+        </xpath> -->
+        </template>
+    </data>
+</odoo>

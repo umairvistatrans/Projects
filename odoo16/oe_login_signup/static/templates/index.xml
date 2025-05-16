@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="oe_login_signup.website_home_page" inherit_id="7md_website.home"
+        name="7md HomePage">
+        <xpath expr="//t[1]/section[9]/div[1]/div[2]/div[1]/div[1]//ul[1]" position="replace">
+            <ul id="lightslider-new-offer" style="width: 100%;">
+                <t t-foreach="new_offered_products" t-as="offer_pro">
+                    <li>
+                        <div class="card product-card">
+                            <div class="product-card-image p-3">
+                                <a
+                                    t-attf-href="/shop/product/#{ offer_pro.product_tmpl_id.id }"
+                                    class="product-image">
+                                    <t t-if="offer_pro.image_1920">
+                                        <img
+                                            t-att-src="image_data_uri(offer_pro.image_1920)"
+                                            alt="menu"
+                                            class="card-img-top" />
+                                    </t>
+
+                                </a>
+                            </div>
+                            <t t-if="offer_pro.default_code">
+                                <div class="product_sku badge bg-danger">
+                                    <t t-esc="offer_pro.default_code" />
+                                </div>
+                            </t>
+                            <t t-if="offer_pro.available_qty_wh == 0">
+                                <div class="product_sku badge bg-danger out_of_stock_custom">Out of
+                                    Stock</div>
+                            </t>
+                            <div class="fav-label fav-label-custom">
+                                <t
+                                    t-nocache="The wishlist depends on the user and must not be shared with other users. As this rendering is in the loop, the product value is set in the template, we must retain the id of the product on which we are."
+                                    t-nocache-product_template_id="offer_pro.product_tmpl_id.id">
+                                    <t t-set="product" t-value="offer_pro.product_tmpl_id" />
+                                    <t t-set="in_wish" t-value="product._is_in_wishlist()" />
+                                    <t t-set="product_variant_id" t-value="offer_pro.id" />
+                                    <button t-if="product_variant_id" type="button" role="button"
+                                        class="btn btn-outline-primary bg-white o_homepage_add_wishlist"
+                                        t-att-disabled='in_wish or None' title="Add to Wishlist"
+                                        t-att-data-product-template-id="product.id"
+                                        t-att-data-product-product-id="product_variant_id"
+                                        data-action="website_sale.o_wishlist">
+                                        <t t-if="not in_wish">
+                                            <i class="fa fa-heart-o me-2" aria-hidden="true"
+                                                role="img"
+                                                aria-label="Add to wishlist" />
+                                        </t>
+                                        <t t-elif="in_wish">
+                                            <i class="fa fa-heart me-2" aria-hidden="true"
+                                                role="img"
+                                                aria-label="Add to wishlist" />
+                                        </t>
+
+                                    </button>
+                                </t>
+                            </div>
+                            <t t-set="offer_template_price_vals"
+                                t-value="get_product_prices[offer_pro.product_tmpl_id.id]" />
+                            <t t-if="'base_price' in offer_template_price_vals">
+                                <t t-set="_new_offer_discount"
+                                    t-value="((offer_template_price_vals['base_price'] - offer_template_price_vals['price_reduce']) / offer_template_price_vals['base_price']) * 100" />
+
+                                <div class="offer-label">
+                                    <t t-esc="_new_offer_discount" t-options='{"widget": "integer"}' />
+                                    % </div>
+                            </t>
+
+                            <div class="card-body p-lg-4 text-center">
+                                <div t-raw="offer_pro.sudo().star_rating_html" class="small-ratings justify-content-center d-flex"></div>
+<!--                                <div-->
+<!--                                    class="small-ratings justify-content-center">-->
+<!--                                    <i class="fa fa-star rating-color"></i>-->
+<!--                                    <i class="fa fa-star rating-color"></i>-->
+<!--                                    <i class="fa fa-star rating-color"></i>-->
+<!--                                    <i class="fa fa-star"></i>-->
+<!--                                    <i class="fa fa-star"></i>-->
+<!--                                </div>-->
+                                <h5 class="card-title">
+                                    <a class="product-text-decoration-custom"
+                                        t-attf-href="/shop/product/#{ offer_pro.product_tmpl_id.id }">
+                                        <t t-esc="offer_pro.name" />
+                                    </a>
+
+                                </h5>
+                                <div class="prices">
+
+                                    <span class="price" style="white-space: nowrap;"
+                                        t-esc="offer_template_price_vals['price_reduce']"
+                                        t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+
+                                    <t
+                                        t-if="'base_price' in offer_template_price_vals and (offer_template_price_vals['base_price'] &gt; offer_template_price_vals['price_reduce']) and (offer_template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                        <del t-attf-class="text-muted me-1 h6 mb-0"
+                                            style="white-space: nowrap;">
+                                            <em class="small"
+                                                t-esc="offer_template_price_vals['base_price']"
+                                                t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                        </del>
+
+
+                                    </t>
+                                </div>
+
+                                <div class="cart-buy-now-outer-div">
+                                    <t t-if="request.env['product.product'].sudo().search([('id','=',product_variant_id)]).sudo().available_qty_wh > 0">
+                                        <button type="button"
+                                            class="btn btn-primary js_add_cart_json"
+                                            t-attf-data-product-id="{{ offer_pro.id }}">Add to Cart
+                                        </button>
+                                        <button class="buy-now-btn btn btn-outline-primary"
+                                            t-attf-data-product-id="{{ offer_pro.id }}">Buy Now
+                                        </button>
+                                    </t>
+                                    <t t-else="">
+                                        <button type="button" class="btn btn-primary"
+                                            t-attf-data-product-id="#" disabled="1">Add to Cart
+                                        </button>
+                                        <button class="btn btn-outline-primary"
+                                            t-attf-data-product-id="#" disabled="1">Buy Now
+                                        </button>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </t>
+
+
+            </ul>
+        </xpath>
+        <xpath expr="//t[1]/section[13]/div[1]/div[2]/div[1]/div[1]//ul[1]" position="replace">
+            <ul id="lightslider-best-selling" style="width: 100%;">
+                <t t-foreach="best_selling_product" t-as="best_pro">
+                    <li>
+                        <div class="card product-card">
+                            <div class="product-card-image p-3">
+                                <!--                                <t t-esc="best_pro"/>-->
+                                <a
+                                    t-attf-href="/shop/product/#{ best_pro.product_tmpl_id.id }"
+                                    class="product-image">
+                                    <t t-if="best_pro.image_1920">
+                                        <img
+                                            t-att-src="image_data_uri(best_pro.image_1920)"
+                                            alt="menu"
+                                            class="card-img-top" />
+                                    </t>
+
+                                </a>
+                            </div>
+                            <t t-if="best_pro.default_code">
+                                <div class="product_sku badge bg-danger">
+                                    <t t-esc="best_pro.default_code" />
+                                </div>
+                            </t>
+                            <t t-if="best_pro.available_qty_wh == 0">
+                                <div class="product_sku badge bg-danger out_of_stock_custom">Out of
+                                    Stock</div>
+                            </t>
+                            <div class="fav-label fav-label-custom">
+                                <t
+                                    t-nocache="The wishlist depends on the user and must not be shared with other users. As this rendering is in the loop, the product value is set in the template, we must retain the id of the product on which we are."
+                                    t-nocache-product_template_id="best_pro.product_tmpl_id.id">
+                                    <t t-set="product" t-value="best_pro.product_tmpl_id" />
+                                    <t t-set="in_wish" t-value="product._is_in_wishlist()" />
+                                    <t t-set="product_variant_id" t-value="best_pro.id" />
+                                    <button t-if="product_variant_id" type="button" role="button"
+                                        class="btn btn-outline-primary bg-white o_homepage_add_wishlist"
+                                        t-att-disabled='in_wish or None' title="Add to Wishlist"
+                                        t-att-data-product-template-id="product.id"
+                                        t-att-data-product-product-id="product_variant_id"
+                                        data-action="website_sale.o_wishlist">
+                                        <t t-if="not in_wish">
+                                            <i class="fa fa-heart-o me-2" aria-hidden="true"
+                                                role="img"
+                                                aria-label="Add to wishlist" />
+                                        </t>
+                                        <t t-elif="in_wish">
+                                            <i class="fa fa-heart me-2" aria-hidden="true"
+                                                role="img"
+                                                aria-label="Add to wishlist" />
+                                        </t>
+
+                                    </button>
+                                </t>
+                            </div>
+                            <t t-set="best_template_price_vals"
+                                t-value="get_product_prices[best_pro.product_tmpl_id.id]" />
+                            <t t-if="'base_price' in best_template_price_vals">
+                                <t t-set="_best_selling_discount"
+                                    t-value="((best_template_price_vals['base_price'] - best_template_price_vals['price_reduce']) / best_template_price_vals['base_price']) * 100" />
+
+                                <div class="offer-label">
+                                    <t t-esc="_best_selling_discount"
+                                        t-options='{"widget": "integer"}' />% </div>
+                            </t>
+
+                            <div class="card-body p-lg-4 text-center">
+                                <div t-raw="best_pro.sudo().star_rating_html" class="small-ratings justify-content-center d-flex"></div>
+<!--                                <div-->
+<!--                                    class="small-ratings justify-content-center">-->
+<!--                                    <i class="fa fa-star rating-color"></i>-->
+<!--                                    <i class="fa fa-star rating-color"></i>-->
+<!--                                    <i class="fa fa-star rating-color"></i>-->
+<!--                                    <i class="fa fa-star"></i>-->
+<!--                                    <i class="fa fa-star"></i>-->
+<!--                                </div>-->
+                                <h5 class="card-title">
+                                    <a class="product-text-decoration-custom"
+                                        t-attf-href="/shop/product/#{ best_pro.product_tmpl_id.id }">
+                                        <t t-esc="best_pro.name" />
+                                    </a>
+
+                                </h5>
+                                <div class="prices">
+
+                                    <span class="price" style="white-space: nowrap;"
+                                        t-esc="best_template_price_vals['price_reduce']"
+                                        t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+                                    <t
+                                        t-if="'base_price' in best_template_price_vals and (best_template_price_vals['base_price'] &gt;best_template_price_vals['price_reduce']) and (best_template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                        <del t-attf-class="text-muted me-1 h6 mb-0"
+                                            style="white-space: nowrap;">
+                                            <em class="small"
+                                                t-esc="best_template_price_vals['base_price']"
+                                                t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                        </del>
+                                    </t>
+                                </div>
+                                <div class="cart-buy-now-outer-div">
+                                    <t t-if="best_pro.sudo().available_qty_wh > 0">
+                                        <button type="button"
+                                            class="btn btn-primary js_add_cart_json"
+                                            t-attf-data-product-id="{{ best_pro.id }}">Add to Cart
+                                        </button>
+                                        <button class="buy-now-btn btn btn-outline-primary"
+                                            t-attf-data-product-id="{{ best_pro.id }}">Buy Now
+                                        </button>
+                                    </t>
+                                    <t t-else="">
+                                        <button type="button" class="btn btn-primary"
+                                            t-attf-data-product-id="#" disabled="1">Add to Cart
+                                        </button>
+                                        <button class="btn btn-outline-primary"
+                                            t-attf-data-product-id="#" disabled="1">Buy Now
+                                        </button>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </t>
+
+
+            </ul>
+        </xpath>
+        <xpath expr="//t[1]/section[4]/div[1]/div[1]/div[1]/div[1]//ul[1]" position="replace">
+            <ul class="list-group product-cat">
+                <t t-foreach="product_category" t-as="cat">
+                    <li class="list-group-item mb-3 border-none">
+                        <a t-attf-href="/shop/category/#{ cat.id }">
+                            <t t-if="cat.icon">
+                                <span class="img">
+                                    <i t-att-class="cat.icon" />
+                                </span>
+                            </t>
+                            <span class="nav_selected_button_text">
+                                <t t-esc="cat.name" />
+                            </span>
+                        </a>
+                    </li>
+                </t>
+            </ul>
+
+        </xpath>
+        <xpath expr="//t[1]/section[6]/div[1]/ul[1]" position="replace">
+            <ul id="lightslider-multi-product" style="width: 100%;!important">
+                <t t-foreach="card_product_ids" t-as="multi_pro">
+                    <li>
+                        <div class="card product-card">
+                            <div class="product-card-image p-3">
+                                <a
+                                    t-attf-href="/shop/product/#{ multi_pro.product_tmpl_id.id }"
+                                    class="product-image">
+                                    <t t-if="multi_pro.image_1920">
+                                        <img
+                                            t-att-src="image_data_uri(multi_pro.image_1920)"
+                                            alt="menu"
+                                            class="card-img-top" />
+                                    </t>
+
+                                </a>
+                            </div>
+                            <t t-if="multi_pro.default_code">
+                                <div class="product_sku badge bg-danger">
+                                    <t t-esc="multi_pro.default_code" />
+                                </div>
+                            </t>
+                            <t t-if="multi_pro.available_qty_wh == 0">
+                                <div
+                                    class="product_sku badge bg-danger out_of_stock_custom out_of_stock_custom">Out
+                                    of Stock</div>
+                            </t>
+                            <div class="fav-label fav-label-custom">
+                                <t
+                                    t-nocache="The wishlist depends on the user and must not be shared with other users. As this rendering is in the loop, the product value is set in the template, we must retain the id of the product on which we are."
+                                    t-nocache-product_template_id="multi_pro.product_tmpl_id.id">
+                                    <t t-set="product" t-value="multi_pro.product_tmpl_id" />
+                                    <t t-set="in_wish" t-value="product._is_in_wishlist()" />
+                                    <t t-set="product_variant_id" t-value="multi_pro.id" />
+                                    <button t-if="product_variant_id" type="button" role="button"
+                                        class="btn btn-outline-primary bg-white o_homepage_add_wishlist"
+                                        t-att-disabled='in_wish or None' title="Add to Wishlist"
+                                        t-att-data-product-template-id="product.id"
+                                        t-att-data-product-product-id="product_variant_id"
+                                        data-action="website_sale.o_wishlist">
+                                        <t t-if="not in_wish">
+                                            <i class="fa fa-heart-o me-2" aria-hidden="true"
+                                                role="img"
+                                                aria-label="Add to wishlist" />
+                                        </t>
+                                        <t t-elif="in_wish">
+                                            <i class="fa fa-heart me-2" aria-hidden="true"
+                                                role="img"
+                                                aria-label="Add to wishlist" />
+                                        </t>
+
+                                    </button>
+                                </t>
+                            </div>
+
+                            <t t-set="template_price_vals"
+                                t-value="get_product_prices[multi_pro.product_tmpl_id.id]" />
+                            <t t-if="'base_price' in template_price_vals">
+                                <t t-set="_multi_pro_discount"
+                                    t-value="((template_price_vals['base_price'] - template_price_vals['price_reduce']) / template_price_vals['base_price']) * 100" />
+                                <div class="offer-label">
+                                    <t t-esc="_multi_pro_discount" t-options='{"widget": "integer"}' />
+                                    % </div>
+                            </t>
+
+                            <div class="card-body p-lg-4 text-center">
+                                <div t-raw="multi_pro.sudo().star_rating_html" class="small-ratings justify-content-center d-flex"></div>
+<!--                                <div-->
+<!--                                    class="small-ratings justify-content-center">-->
+<!--                                    <i class="fa fa-star rating-color"></i>-->
+<!--                                    <i class="fa fa-star rating-color"></i>-->
+<!--                                    <i class="fa fa-star rating-color"></i>-->
+<!--                                    <i class="fa fa-star"></i>-->
+<!--                                    <i class="fa fa-star"></i>-->
+<!--                                </div>-->
+                                <h5 class="card-title">
+                                    <a class="product-text-decoration-custom"
+                                        t-attf-href="/shop/product/#{ multi_pro.product_tmpl_id.id }">
+                                        <t t-esc="multi_pro.name" />
+                                    </a>
+
+                                </h5>
+                                <div class="prices">
+
+                                    <span class="price" style="white-space: nowrap;"
+                                        t-esc="template_price_vals['price_reduce']"
+                                        t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+                                    <t
+                                        t-if="'base_price' in template_price_vals and (template_price_vals['base_price'] &gt; template_price_vals['price_reduce']) and (template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                        <del t-attf-class="text-muted me-1 h6 mb-0"
+                                            style="white-space: nowrap;">
+                                            <em class="small"
+                                                t-esc="template_price_vals['base_price']"
+                                                t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                        </del>
+
+                                    </t>
+                                </div>
+
+                                <div class="cart-buy-now-outer-div">
+                                    <t t-if="multi_pro.sudo().available_qty_wh > 0">
+                                        <button type="button"
+                                            class="btn btn-primary js_add_cart_json"
+                                            t-attf-data-product-id="{{ multi_pro.id }}">Add to Cart
+                                        </button>
+                                        <button class="buy-now-btn btn btn-outline-primary"
+                                            t-attf-data-product-id="{{ multi_pro.id }}">Buy Now
+                                        </button>
+                                    </t>
+                                    <t t-else="">
+                                        <button type="button" class="btn btn-primary"
+                                            t-attf-data-product-id="#" disabled="1">Add to Cart
+                                        </button>
+                                        <button class="btn btn-outline-primary"
+                                            t-attf-data-product-id="#" disabled="1">Buy Now
+                                        </button>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </t>
+
+
+            </ul>
+        </xpath>
+        <xpath expr="//t[1]/section[11]/div[1]/div[3]/section[1]/div[1]/div[1]" position="replace">
+            <div class="slide-track">
+                <t t-foreach="top_brand_ids" t-as="top_brand">
+                    <div class="slide">
+                        <a t-attf-href="/shop/brand/#{ top_brand.id }">
+                            <t t-if="top_brand.logo">
+                                <img
+                                    t-att-src="image_data_uri(top_brand.logo)"
+                                    height="100" width="250" alt="" />
+                            </t>
+                            <t t-else="">
+                                <img
+                                    src="/oe_login_signup/static/description/assets/brand-svgrepo-com.svg"
+                                    alt="brand image" style="height: 80px; width: 80px;" />
+
+                            </t>
+                        </a>
+                    </div>
+                </t>
+            </div>
+        </xpath>
+    </template>
+
+
+    <template id="oe_login_signup.website_top_categ" inherit_id="7md_website.home"
+        name="7MD Top categories">
+        <xpath expr="//t[1]/section[7]/div[1]/div[2]/div[1]/ul[1]" position="replace">
+            <ul>
+                <t t-foreach="top_categories" t-as="top_cat">
+                    <li>
+                        <div class="p-2 text-center">
+                            <a href="#"
+                                class="top_categories_text text-dark text-decoration-none">
+                                <div
+                                    class="d-flex flex-column justify-content-center align-items-center">
+                                    <a
+                                        t-attf-href="/shop/category/#{ top_cat.id }">
+                                        <img
+                                            t-att-src="image_data_uri(top_cat.image_1920)"
+                                            class="top_categories_img" />
+                                    </a>
+                                    <h5 class="pt-3">
+                                        <t t-esc="top_cat.name" />
+
+                                    </h5>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </t>
+            </ul>
+        </xpath>
+
+        <xpath expr="//t[1]/section[10]/div[1]/div[1]/div[1]" position="replace">
+            <div class="row">
+                <t t-foreach="sidecard_product" t-as="side_card">
+                    <div class="col-sm-12 col-md-6 col-lg-12 pb-3">
+
+                        <div class="card product-card">
+                            <t t-set="side_card_template_price_vals"
+                                t-value="get_product_prices[side_card.product_tmpl_id.id]" />
+                            <t t-if="'base_price' in side_card_template_price_vals">
+                                <t t-set="_side_car_discount"
+                                    t-value="((side_card_template_price_vals['base_price'] - side_card_template_price_vals['price_reduce']) / side_card_template_price_vals['base_price']) * 100" />
+
+                                <div class="offer-label">
+                                    <t t-esc="_side_car_discount" t-options='{"widget": "integer"}' />
+                                    % </div>
+                            </t>
+
+                            <div class="card-horizontal">
+                                <div class="card-img-container">
+                                    <t t-if="side_card.image_1920">
+                                        <img t-att-src="image_data_uri(side_card.image_1920)"
+                                            alt="alt image here" class="card-img-top" />
+                                    </t>
+                                </div>
+
+
+                                <div class="card-body p-lg-4">
+                                    <h5 class="card-title fw-light">
+                                        <a
+                                            t-attf-href="/shop/product/#{ side_card.product_tmpl_id.id }">
+                                            <t t-esc="side_card.name" />
+                                        </a>
+
+
+                                    </h5>
+                                     <div t-raw="side_card.sudo().star_rating_html" class="small-ratings justify-content-start d-flex"></div>
+<!--                                    <div class="small-ratings justify-content-start">-->
+<!--                                        <i class="fa fa-star rating-color"></i>-->
+<!--                                        <i class="fa fa-star rating-color"></i>-->
+<!--                                        <i class="fa fa-star rating-color"></i>-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                    </div>-->
+                                    <div class="prices">
+
+                                        <span class="price" style="white-space: nowrap;"
+                                            t-esc="side_card_template_price_vals['price_reduce']"
+                                            t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+                                        <t
+                                            t-if="'base_price' in side_card_template_price_vals and (side_card_template_price_vals['base_price'] &gt; side_card_template_price_vals['price_reduce']) and (side_card_template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                            <del t-attf-class="text-muted me-1 h6 mb-0"
+                                                style="white-space: nowrap;">
+                                                <em class="small"
+                                                    t-esc="side_card_template_price_vals['base_price']"
+                                                    t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                            </del>
+
+
+                                        </t>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </div>
+        </xpath>
+        <xpath expr="//t[1]/section[10]/div[1]/div[3]/div[1]" position="replace">
+            <div class="row">
+                <t t-foreach="sidecard_product_r" t-as="side_card">
+                    <div class="col-sm-12 col-md-6 col-lg-12 pb-3">
+
+                        <div class="card product-card">
+                            <t t-set="side_r_card_template_price_vals"
+                                t-value="get_product_prices[side_card.product_tmpl_id.id]" />
+                            <t t-if="'base_price' in side_r_card_template_price_vals">
+                                <t t-set="_side_card_r_discount"
+                                    t-value="((side_r_card_template_price_vals['base_price'] - side_r_card_template_price_vals['price_reduce']) / side_r_card_template_price_vals['base_price']) * 100" />
+
+                                <div class="offer-label">
+                                    <t t-esc="_side_card_r_discount"
+                                        t-options='{"widget": "integer"}' />% </div>
+                            </t>
+
+                            <div class="card-horizontal">
+                                <div class="card-img-container">
+                                    <t t-if="side_card.image_1920">
+                                        <img t-att-src="image_data_uri(side_card.image_1920)"
+                                            alt="alt image here" class="card-img-top" />
+                                    </t>
+                                </div>
+                                <div class="card-body p-lg-4">
+                                    <h5 class="card-title fw-light">
+                                        <a
+                                            t-attf-href="/shop/product/#{ side_card.product_tmpl_id.id }">
+                                            <t t-esc="side_card.name" />
+                                        </a>
+
+                                    </h5>
+                                    <div t-raw="side_card.sudo().star_rating_html" class="small-ratings justify-content-start d-flex"></div>
+<!--                                    <div class="small-ratings justify-content-start">-->
+<!--                                        <i class="fa fa-star rating-color"></i>-->
+<!--                                        <i class="fa fa-star rating-color"></i>-->
+<!--                                        <i class="fa fa-star rating-color"></i>-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                    </div>-->
+                                    <div class="prices">
+
+                                        <span class="price" style="white-space: nowrap;"
+                                            t-esc="side_r_card_template_price_vals['price_reduce']"
+                                            t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+                                        <t
+                                            t-if="'base_price' in side_r_card_template_price_vals and (side_r_card_template_price_vals['base_price'] &gt; side_r_card_template_price_vals['price_reduce']) and (side_r_card_template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                            <del t-attf-class="text-muted me-1 h6 mb-0"
+                                                style="white-space: nowrap;">
+                                                <em class="small"
+                                                    t-esc="side_r_card_template_price_vals['base_price']"
+                                                    t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                            </del>
+
+
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </div>
+        </xpath>
+
+        <xpath expr="//t[1]/section[12]/div[1]/div[1]/div[1]" position="replace">
+            <div class="row">
+                <t t-foreach="s_sidecard_product" t-as="side_card">
+                    <div class="col-sm-12 col-md-6 col-lg-12 pb-3">
+
+                        <div class="card product-card">
+                            <t t-set="s_side_r_card_template_price_vals"
+                                t-value="get_product_prices[side_card.product_tmpl_id.id]" />
+                            <t t-if="'base_price' in s_side_r_card_template_price_vals">
+                                <t t-set="_s_side_card_discount"
+                                    t-value="((s_side_r_card_template_price_vals['base_price'] - s_side_r_card_template_price_vals['price_reduce']) / s_side_r_card_template_price_vals['base_price']) * 100" />
+
+                                <div class="offer-label">
+                                    <t t-esc="_s_side_card_discount"
+                                        t-options='{"widget": "integer"}' />% </div>
+                            </t>
+                            <div class="card-horizontal">
+                                <div class="card-img-container">
+                                    <t t-if="side_card.image_1920">
+                                        <img t-att-src="image_data_uri(side_card.image_1920)"
+                                            alt="alt image here" class="card-img-top" />
+                                    </t>
+                                </div>
+                                <div class="card-body p-lg-4">
+                                    <h5 class="card-title fw-light">
+                                        <a
+                                            t-attf-href="/shop/product/#{ side_card.product_tmpl_id.id }">
+                                            <t t-esc="side_card.name" />
+                                        </a>
+
+
+                                    </h5>
+                                    <div t-raw="side_card.sudo().star_rating_html" class="small-ratings justify-content-start d-flex"></div>
+<!--                                    <div class="small-ratings justify-content-start">-->
+<!--                                        <i class="fa fa-star rating-color"></i>-->
+<!--                                        <i class="fa fa-star rating-color"></i>-->
+<!--                                        <i class="fa fa-star rating-color"></i>-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                    </div>-->
+                                    <div class="prices">
+
+                                        <span class="price" style="white-space: nowrap;"
+                                            t-esc="s_side_r_card_template_price_vals['price_reduce']"
+                                            t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+
+                                        <t
+                                            t-if="'base_price' in s_side_r_card_template_price_vals and (s_side_r_card_template_price_vals['base_price'] &gt; s_side_r_card_template_price_vals['price_reduce']) and (s_side_r_card_template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                            <del t-attf-class="text-muted me-1 h6 mb-0"
+                                                style="white-space: nowrap;">
+                                                <em class="small"
+                                                    t-esc="s_side_r_card_template_price_vals['base_price']"
+                                                    t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                            </del>
+
+                                        </t>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </div>
+        </xpath>
+
+        <xpath expr="//t[1]/section[12]/div[1]/div[3]/div[1]" position="replace">
+            <div class="row">
+                <t t-foreach="s_sidecard_product_r" t-as="side_card">
+                    <div class="col-sm-12 col-md-6 col-lg-12 pb-3">
+
+                        <div class="card product-card">
+                            <t t-set="ss_side_r_card_template_price_vals"
+                                t-value="get_product_prices[side_card.product_tmpl_id.id]" />
+                            <t t-if="'base_price' in ss_side_r_card_template_price_vals">
+                                <t t-set="_s_sidecard_product_r_discount"
+                                    t-value="((ss_side_r_card_template_price_vals['base_price'] - ss_side_r_card_template_price_vals['price_reduce']) / ss_side_r_card_template_price_vals['base_price']) * 100" />
+
+                                <div class="offer-label">
+                                    <t t-esc="_s_sidecard_product_r_discount"
+                                        t-options='{"widget": "integer"}' />% </div>
+                            </t>
+                            <div class="card-horizontal">
+                                <div class="card-img-container">
+                                    <t t-if="side_card.image_1920">
+                                        <img t-att-src="image_data_uri(side_card.image_1920)"
+                                            alt="alt image here" class="card-img-top" />
+                                    </t>
+                                </div>
+                                <div class="card-body p-lg-4">
+                                    <h5 class="card-title fw-light">
+                                        <a
+                                            t-attf-href="/shop/product/#{ side_card.product_tmpl_id.id }">
+                                            <t t-esc="side_card.name" />
+                                        </a>
+
+
+                                    </h5>
+                                    <div t-raw="side_card.sudo().star_rating_html" class="small-ratings justify-content-start d-flex"></div>
+<!--                                    <div class="small-ratings justify-content-start">-->
+<!--                                        <i class="fa fa-star rating-color"></i>-->
+<!--                                        <i class="fa fa-star rating-color"></i>-->
+<!--                                        <i class="fa fa-star rating-color"></i>-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                    </div>-->
+                                    <div class="prices">
+
+                                        <span class="price" style="white-space: nowrap;"
+                                            t-esc="ss_side_r_card_template_price_vals['price_reduce']"
+                                            t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+                                        <t
+                                            t-if="'base_price' in ss_side_r_card_template_price_vals and (ss_side_r_card_template_price_vals['base_price'] &gt; ss_side_r_card_template_price_vals['price_reduce']) and (ss_side_r_card_template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                            <del t-attf-class="text-muted me-1 h6 mb-0"
+                                                style="white-space: nowrap;">
+                                                <em class="small"
+                                                    t-esc="ss_side_r_card_template_price_vals['base_price']"
+                                                    t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                            </del>
+
+                                        </t>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </div>
+        </xpath>
+    </template>
+</odoo>

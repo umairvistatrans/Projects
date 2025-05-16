@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_custom_body" name="product body custom"
+        inherit_id="website_sale.dynamic_filter_template_product_product_borderless_1">
+        <xpath expr="//div[hasclass('o_carousel_product_card')]" position="replace">
+            <div class="o_carousel_product_card w-100 card border-0">
+                <div t-if="is_sample" class="h5 o_ribbon_right bg-primary text-uppercase">Sample</div>
+                <input type="hidden" name="product-id" t-att-data-product-id="record.id" />
+                <a class="o_carousel_product_img_link o_dynamic_product_hovered"
+                    t-att-href="record.website_url">
+                    <div class="overflow-hidden rounded">
+                        <img
+                            class="card-img-top o_img_product_square o_img_product_cover h-auto"
+                            loading="lazy" t-att-src="data['image_512']"
+                            t-att-alt="record.display_name" />
+                    </div>
+
+                </a>
+                <div
+                    class="o_carousel_product_card_body d-flex flex-wrap flex-column justify-content-between h-100 p-3 card-body p-lg-4 text-center">
+                    <div
+                        class="small-ratings justify-content-center mb-4 mt-4">
+                        <i class="fa fa-star rating-color"></i>
+                        <i class="fa fa-star rating-color"></i>
+                        <i class="fa fa-star rating-color"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <h5 class="h5 card-title" t-field="record.display_name" />
+                    <div>
+                        <t t-if="is_view_active('website_sale.product_comment')"
+                            t-call="portal_rating.rating_widget_stars_static">
+                            <t t-set="rating_avg" t-value="record.rating_avg" />
+                            <t t-set="rating_count" t-value="record.rating_count" />
+                        </t>
+                        <div class="prices mb-4">
+                            <span class="price">
+                                <t
+                                    t-call="website_sale.price_dynamic_filter_template_product_product" />
+                            </span>
+                            <span class="price-old">AED600</span>
+                        </div>
+                        <div class="o_dynamic_snippet_btn_wrapper mt-2"
+                            t-if="record._website_show_quick_add()">
+                            <button type="button"
+                                role="button"
+                                class="btn btn-primary js_add_cart ms-auto flex-grow-1 bg-white text-primary rounded-0 border-primary"
+                                title="Add to Cart">
+                                <span class="item_button_text">Add To Cart</span>
+                                <i class="fa fa-fw fa-shopping-cart" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

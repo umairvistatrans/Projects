@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="oe_login_signup.brand" inherit_id="7md_website.brand" name="Brand Page">
+        <xpath expr="//t[1]/section[1]" position="replace">
+             <section class="brand-section container-fluid bg-white  py-2 breadcrumb-section mb-4">
+              <div class="row justify-content-end">
+                    <div class="col-sm-6 mt-3 mb-4 pull-right">
+                        <div class="input-icon-left search-container-brands">
+                            <i class="fa fa-search"></i>
+                            <input type="search" name="search_brand" id="search_brand"
+                                placeholder="Search Brands" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            <div class="row search_result_div">
+                <t t-foreach="brand_ids" t-as="brand_id">
+                    <div t-att-data-brand_name="brand_id.name" class="col-lg-2 col-md-3 brand_box">
+                        <a t-attf-href="/shop/brand/#{ brand_id.id }" class="brand-image">
+                            <t t-if="brand_id.logo">
+                                <img
+                                        t-att-src="image_data_uri(brand_id.logo)" alt="brand image"/>
+                            </t>
+                            <t t-else="">
+                                <img
+                                        src="/oe_login_signup/static/description/assets/brand-svgrepo-com.svg"
+                                        alt="brand image"/>
+
+                            </t>
+                        </a>
+                    </div>
+                </t>
+            </div>
+             </section>
+        </xpath>
+    </template>
+</odoo>

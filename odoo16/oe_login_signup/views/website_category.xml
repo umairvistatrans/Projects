@@ -1,0 +1,12 @@
+<odoo>
+    <record model="ir.ui.view" id="product_public_category_form_inherit">
+        <field name="name">product.public.category.form.inherit</field>
+        <field name="model">product.public.category</field>
+        <field name="inherit_id" ref="website_sale.product_public_category_form_view"></field>
+        <field name="arch" type="xml">
+           <field name="sequence" position="after">
+               <field name="icon"/>
+           </field>
+        </field>
+    </record>
+</odoo>

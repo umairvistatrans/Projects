@@ -1,0 +1,25 @@
+.oe-pos-product {
+    max-width: 800px !important;
+}
+
+.oe-pos-product .body {
+    max-height: 600px;
+    overflow: auto;
+}
+
+.oe-pos-product table {
+    text-align: left;
+    border: 2px solid black !important;
+    width: 100%;
+}
+
+.oe-pos-product table td {
+    padding-right: 15px;
+    border: 2px solid;
+}
+.oe-pos-product table th {
+    padding-right: 15px;
+    border: 2px solid;
+}
+
+

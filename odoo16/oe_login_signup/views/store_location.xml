@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+    <!--page history-->
+    <record id="oe_store_location_view_tree" model="ir.ui.view">
+        <field name="name">oe.store.location.view.tree</field>
+        <field name="model">oe.store.location</field>
+        <field name="arch" type="xml">
+            <tree string="Stores Location" editable="bottom">
+                <field name="name"/>
+                <field name="phone_number"/>
+                <field name="longitude"/>
+                <field name="latitude"/>
+                <field name="url_name" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+     <record id="oe_store_location_action" model="ir.actions.act_window">
+        <field name="name">Store Location</field>
+        <field name="res_model">oe.store.location</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Store Location
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Stores Location"
+        id="menu_oe_store_location"
+        action="oe_store_location_action"
+        parent="website.menu_website_global_configuration"
+        groups="base.group_system"
+        sequence="11"/>
+</data></odoo>

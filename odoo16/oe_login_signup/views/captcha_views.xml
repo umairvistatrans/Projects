@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Login page-->
+    <template id="login" inherit_id="7md_website.credentials_layout" name="Login Inherit">
+    <xpath expr="//div[1]/div[1]/form[1]/div[3]" position="after">
+        <div class="form-group field-remember" style="margin-bottom: 3%;">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember_me" id="remember_me" />
+                        Remember Me
+                    </label>
+                </div>
+        </div>
+
+        <script src="https://www.google.com/recaptcha/api.js"/>
+        <div id="captcha" class="imageContainer">
+            <div class="form-group">
+                <!-- Specify your site key in data-sitekey attribute -->
+                <div class="g-recaptcha"
+                     data-sitekey="6Le5nMQUAAAAALpK02mtPPGnpjVlnq6orhz4Zj0u"
+                     data-callback="verifyRecaptchaCallback"
+                     data-expired-callback="expiredRecaptchaCallback"></div>
+                <input id="recaptcha_verified" type="hidden" data-recaptcha="true"/>
+                <div class="help-block with-errors" id="err" style='color: red'></div>
+            </div>
+        </div>
+    </xpath>
+</template>
+
+    <!--    signup page-->
+    <template id="signup" inherit_id="7md_website.signup_layout" name="Signup Inherit">
+        <xpath expr="//div[1]/div[1]/form[1]/div[4]" position="after">
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div id="captcha" class="imageContainer">
+                <div class="g-recaptcha" data-sitekey="6Le5nMQUAAAAALpK02mtPPGnpjVlnq6orhz4Zj0u"
+                     data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div>
+                <input class="form-control d-none" data-recaptcha="true"/>
+                <div class="help-block with-errors" id="err" style='color: red' required="required"></div>
+            </div>
+        </xpath>>
+    </template>
+</odoo>

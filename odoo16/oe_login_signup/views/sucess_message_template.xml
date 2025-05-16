@@ -1,0 +1,12 @@
+<odoo>
+    <template id="template_success_message">
+        <t t-call="website.layout">
+            <div class="container mt16 mb16">
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Thank You to Contacting Us!</h4>
+                    <p>Your form has been successfully submitted. We will get back to you soon.</p>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

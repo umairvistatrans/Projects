@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="7md_website.brand" name="brand custom page">
+        <t t-call="website.layout">
+            <section class="brand-section container-fluid bg-white  py-2 breadcrumb-section mb-4">
+                <!-- Search row here -->
+                <div class="row justify-content-end">
+                    <div class="col-sm-6 mt-3 mb-4 pull-right">
+                        <div class="input-icon-left search-container-brands">
+                            <i class="fa fa-search"></i>
+                            <input type="search" name="search_brand" id="search_brand"
+                                placeholder="Search Brands" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div data-brand_name="baseus" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/baseus/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/qOt7WKbWtpeHAyjL0yCvHbiaXz75vtDug9NdASUf.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="brave" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/brave/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/D7ytgSPa1buBBnn4G0P9Sm3l2Dww8eLGONP6VL3F.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="hoco" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/hoco/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/KKN0n8b6lVAY6aY1BrkdwHP0WmhbILT8binIZI1k.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="porodo" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/porodo/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/FmURREX0Gj9U1g93V3OzPXHfsp8ALANmmUw3T2rW.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="momax" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/momax/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/g1McDRQcdkVoLoHOmEfHvdlJG1HnPNxXPT91Z5uk.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="xiaomi" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/xiaomi/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/msIX9tUWRVAJCHbHzElbYYSiA64Isr5KtJ6gtRK0.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="jbl" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/jbl/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/v6CeTZesz3aPHw1p9oQfZ3VUpzRNLScRg7B5qqza.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="promate" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/promate/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/zNJlXGJRF2mqkpA2ttEgblKWfZGEW5lOJ9J0Q0CS.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="huawei" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/huawei/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/45k0UTljUlkwYBHMM7M4BsvKWmGPYQxNxwob9qm0.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="anker" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/anker/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/KDFinOxQsvHba3siQKI7439tK9Mzkr0jX0xU9RMP.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="goui" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/goui/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/qUVT3ZGUC42WujIn8xBHxL5DXj9Y9XRGA8chND3f.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="xpower" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/xpower/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/C3ZrTmYoK66yDV4ywDF4UO3hsduVyKt5JfV81cvP.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="zendure" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/zendure/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/M7ApODbmyzclfigKazNt9wLwlsg6Kuv6IQlmSUsH.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="omthing" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/omthing/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/e49ZGRiLVwfzquYyOZNVfNPDe6DCgfovU915K8UA.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="crony" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/crony/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/1bGTLjmLjjuMCT3uyu3Stw9ROyVVvFbVRva1W1Bn.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="powerology" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/powerology/products"
+                            class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/Vz4SQwjasQI9nhF64dlPeZEH1TNtJzz8WddJVUHO.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="toby's" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/tobys/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/h6wNNKA4dM1NxbJxLLbq8toXDF6bCZmMFZIrvHWy.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="sony" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/sony/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/010KlJjoeTQdFnTo7lt8xCXKQkxcwqxXjJ1iEU9x.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="amazingthing" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/amazingthing/products"
+                            class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/KIO3XzSr8rluqQVGYOVL6NUde8T4ytW3YJzcaiiD.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="other's" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/others/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/kwGeDiypwLfAWdieeFVYocDTWhbzYl0druS9MJO1.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="philips" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/philips/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/iMldnusaNmww7sSOUVBOImaMu53PCk2CYNyCighB.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="nano leaf" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/nano-leaf/products"
+                            class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/WKbuxUvcusznMdxIMsCTVNdjvd00kjrCzeB5SWyf.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="green lion" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/rav-power-YVdiowms/products"
+                            class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/Wwp68Ko6wpudxjN6kqVLTzKQ4TS7MwAhdULvJySU.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="rav power" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/rav-power-NJbwtUqv/products"
+                            class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/QNvhORo9grzClyzzMAav6s6BIXfbTnwKYMK3anpP.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="alfajr" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/alfajr/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/u1HDwosQyEoqvr8iBADIPd21fzFHhpch4J8u3im8.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="wiwu" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/wiwu/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/WTd2n1pMxa2Fmk6pz0QA8Yxvcby2KU4qLZKzyR7I.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="fischer-technik" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/fischer-technik/products"
+                            class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/mBl2RKTQ6Rd5P8MZO0DJkk8ByjEwmYK1T4qrMhaB.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="saachi" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/saachi/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/mqJR2fzsbq7NBFRmjpWucl44oI3eEpPBDK7X69pP.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="airmyfun" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/airmyfun/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/7AB64mQnowh8CIVaDN1BxXG4J2MSLy3hc7eAqm8a.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="7mdstore package's" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/7mdstore-packages/products"
+                            class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/dRDpFIAY93eiqSbv0vcLiLDWCYNJGtXllmTYuqou.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="deerma" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/deerma/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/R5O1U3VnLzRHhnjIPXKetPCMZHxNkaElXInPf2ES.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="laila store" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/laila-store/products"
+                            class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/7sW1mj152cnRHlh4QpelRA0ZEvi8BlsICktZCtEw.jpeg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="uniq" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/uniq/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/Ns62FZY59uBMP7bj6KmCEeKonimPEViGydgUhttF.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="7mdstore" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/7mdstore/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/uh0LnHbHZBUGyHifQzdajtMcZA08eIYszEacFVzh.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="aqara" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/aqara/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/MeJDhGNG0EeH5pq6bUnbqJ0Jz9oY3zvMCr8VWyBa.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="clickon" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/clickon/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/1iN0wVOCrz5xQXlDkfoVb4dwxjJnshnsI9tSA1ZT.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="urbanista" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/urbanista/products"
+                            class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/0TOAJUkwUBTjsW2Ex4QeDTr6U9LXysBsdmMiMnH8.jpg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="recci" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/recci/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/qErtBuxKcQQWvrMt8VGIX5JGMLj4uWX0zpBt11RH.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="phanfone" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/phanfone/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/xjPWVbleLx4ZGLoBlLxfWMDxVljqPpq88lMmLofh.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="ugreen" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/ugreen/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/31jQcoMQW4dzRYTXRvQz8cYIcGgK1Be0tgVuJlwz.jpg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="123 publishing house" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/123-Publishing-House/products"
+                            class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/vwKFTl6vHjgkDYiiaLfLkelgsXVjn3tF8cD1LJlT.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="lepresso" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/lepressi/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/IyP6QHb58Xsl5vqLbkk5A1dBxCO7Tnit3sn3pubE.png"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                    <div data-brand_name="boss" class="col-lg-2 col-md-3 brand_box">
+                        <a href="https://www.7md.ae/en/brands/boss/products" class="brand-image">
+                            <img
+                                src="https://www.7md.ae/storage/media/BsdhmRxnlTJq56QEF7ZyhBKYy4NLtSA1z5E6uIrm.jpg"
+                                alt="brand image" />
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+</odoo>

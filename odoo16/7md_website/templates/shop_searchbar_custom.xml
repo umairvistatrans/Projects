@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="shop_searchbar_custom" name="shop_searchbar_custom"
+        inherit_id="website_sale.products">
+        <xpath expr="//div[hasclass('products_header')]" position="replace">
+            <div
+                class="products_header btn-toolbar flex-nowrap align-items-center justify-content-between mb-3 custom-product-header">
+                <!-- Shop custom searchbar here -->
+                <!-- <div class="input-icon-left search-container-brands search_custom_shop">
+                    <i class="fa fa-search"></i>
+                    <input type="search" name="search_brand" id="search_brand"
+                        placeholder="Search for a product" class="form-control" />
+                </div> -->
+                <div class="header-outer-div-shop">
+                    <div class="search-form-div">
+                        <t t-call="website_sale.search">
+                            <t t-set="search" t-value="original_search or search" />
+                            <!-- <t t-set="_form_classes" t-valuef="d-lg-inline {{'d-inline' if not category
+                            else 'd-none'}}"/> -->
+                        </t>
+                    </div>
+                    <div class="other-filters-div">
+                        <t t-call="website_sale.pricelist_list" t-cache="pricelist">
+                            <t t-set="_classes" t-valuef="d-none d-lg-inline ms-3" />
+                        </t>
+
+                        <t t-if="is_view_active('website_sale.sort')" t-call="website_sale.sort">
+                            <t t-set="_classes" t-valuef="d-none d-lg-inline-block ms-3" />
+                        </t>
+
+                        <div t-if="category" class="d-flex align-items-center d-lg-none me-auto">
+                            <t t-if="not category.parent_id" t-set="backUrl" t-valuef="/shop" />
+                            <t t-else="" t-set="backUrl"
+                                t-value="keep('/shop/category/' + slug(category.parent_id), category=0)" />
+
+                            <a t-attf-class="btn btn-{{navClass}} me-2"
+                                t-att-href="category.parent_id and keep('/shop/category/' + slug(category.parent_id), category=0) or '/shop'">
+                                <i class="fa fa-angle-left" />
+                            </a>
+                            <h4 t-out="category.name" class="mb-0 me-auto" />
+                        </div>
+
+                        <t t-if="is_view_active('website_sale.add_grid_or_list_option')"
+                            t-call="website_sale.add_grid_or_list_option">
+                            <t t-set="_classes" t-valuef="d-flex ms-3" />
+                        </t>
+
+                        <button
+                            t-if="is_view_active('website_sale.sort') or opt_wsale_categories or opt_wsale_attributes or opt_wsale_attributes_top"
+                            t-attf-class="btn btn-{{navClass}} position-relative ms-3 {{not opt_wsale_attributes_top and 'd-lg-none'}}"
+                            data-bs-toggle="offcanvas"
+                            data-bs-target="#o_wsale_offcanvas">
+                            <i class="fa fa-sliders" />
+                            <span t-if="isFilteringByPrice or attrib_set"
+                                t-attf-class="position-absolute top-0 start-100 translate-middle badge border border-{{navClass}} rounded-circle bg-danger p-1">
+                                <span class="visually-hidden">filters active</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+
+    <template id="shop_header_custom_icon" name="shop_header_custom_icon"
+        inherit_id="website_sale.add_grid_or_list_option">
+        <xpath expr="//i[hasclass('oi-view-list')]" position="replace">
+            <i class="fa fa-list" />
+        </xpath>
+    </template>
+
+
+    <!-- Remove product detail searchbar -->
+    <template id="product_detail_searchbar" name="product_detail_searchbar"
+        inherit_id="website_sale.product">
+        <xpath expr="//t[@t-call='website_sale.search']" position="replace">
+
+        </xpath>
+    </template>
+    <!-- Remove product detail pricelist_list -->
+    <template id="product_detail_pricelist_list" name="product_detail_pricelist_list"
+        inherit_id="website_sale.product">
+        <xpath expr="//t[@t-call='website_sale.pricelist_list']" position="replace">
+
+        </xpath>
+    </template>
+</odoo>

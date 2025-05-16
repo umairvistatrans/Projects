@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="7md_website.social_links" name="Social Links">
+        <t t-call="website.layout">
+            <section class="social-links-page">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-md-12 mt-4">
+                            <a href="https://www.7md.ae">
+                                <img
+                                    src="https://www.7md.ae/themes/sevenmd/public/assets/images/7md_logo.jpg?v=2.1.2"
+                                    alt="Logo" class="rounded mx-auto d-block logo_img" />
+                            </a>
+                        </div>
+                        <div class="col-12 col-md-12 mt-4 text-center">
+                            <h1 class="text-uppercase">7md</h1>
+                        </div>
+                        <div class="col-12 col-md-12 mt-4 text-center">
+                            <ul class="social-links">
+                                <li>
+                                    <a href="https://www.7md.ae" target="_blank"
+                                        data-event_name="website_button_click"
+                                        data-category="Visit Website" data-label="Website"
+                                        class="link_click md-square">
+                                        <i class="fa fa-globe"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="https://play.google.com/store/apps/details?id=com.ibox.hamadstore"
+                                        target="_blank" data-event_name="website_button_click"
+                                        data-category="Visit Website" data-label="Website"
+                                        class="link_click md-square">
+                                        <i class="fa fa-android"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://apps.apple.com/ae/app/7md-store/id1535805820"
+                                        target="_blank" data-event_name="website_button_click"
+                                        data-category="Visit Website" data-label="Website"
+                                        class="link_click md-square">
+                                        <i class="fa fa-apple"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.7md.ae/en/contact"
+                                        data-event_name="website_contact_button_click"
+                                        data-category="Visit Contact Us" data-label="Contact Us"
+                                        target="_blank" class="link_click">
+                                        <i class="fa fa-envelope"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://wa.me/971544441888"
+                                        data-event_name="whatsapp_button_click"
+                                        data-category="Whatsapp Message" data-label="Whatsapp"
+                                        target="_blank" class="link_click">
+                                        <i class="fa fa-whatsapp"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.snapchat.com/add/store7md"
+                                        data-event_name="snapchat_button_click"
+                                        data-category="Snapchat Message" data-label="Snapchat"
+                                        target="_blank" class="link_click">
+                                        <i class="fa fa-snapchat-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/7mdstore/?hl=en"
+                                        data-event_name="instagram_button_click"
+                                        data-category="Instagram Message" data-label="Instagram"
+                                        target="_blank" class="link_click">
+                                        <i class="fa fa-instagram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="tel:+971544441888" data-category="Phone Call"
+                                        data-event_name="phone_call_button_click"
+                                        data-label="Phone Call">
+                                        <i class="fa fa-phone-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.tiktok.com/@7mdst"
+                                        data-event_name="tiktok_button_click"
+                                        data-category="Tiktok Show" data-label="Tiktok"
+                                        target="_blank"
+                                        class="link_click md-square">
+                                        <i class="fa fa-tiktok"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12 text-center img_box">
+                            <img
+                                src="https://www.7md.ae/themes/sevenmd/public/assets/images/social.png?v=2.1.2"
+                                alt="Logo" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+
+</odoo>

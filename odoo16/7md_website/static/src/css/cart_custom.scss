@@ -1,0 +1,171 @@
+.custom_cart_summary_class {
+    border: none;
+    #cart_total {
+        margin-bottom: 16px;
+        .oe_website_sale_gift_card {
+            .alert-success {
+                .d-flex.flex-row {
+                    gap: 8px;
+                    align-items: center;
+                    .flex-grow-1 {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+    td {
+        font-size: 14px !important;
+        span {
+            font-size: 15px;
+        }
+    }
+    #order_total {
+        td {
+            padding-top: 16px;
+            font-weight: 600;
+        }
+    }
+    .coupon_form {
+        a {
+            background-color: #d9981c;
+            color: white;
+        }
+    }
+    .color-white {
+        color: white;
+    }
+}
+
+.progress-outer-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 48px;
+    background-color: white;
+    padding: 16px;
+    .image-div {
+        max-width: 80px;
+        img {
+            width: 100%;
+        }
+    }
+    .third-step {
+        max-width: 125px;
+    }
+    .text-outer {
+        .first-text {
+            color: #6c757d;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .second-text {
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+    }
+}
+.progress-wizard-dot-custom {
+    width: 85% !important;
+    height: 2px !important;
+    border-radius: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 54px !important;
+    top: unset !important;
+    margin: 0 auto !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+.progress-wizard-step-custom.active {
+    box-shadow: none !important;
+    background: #d9981c !important;
+}
+.progress-wizard .progress-wizard-step.active .progress-wizard-dot {
+    background: #d9981c !important;
+}
+
+.progress-wizard .progress-wizard-step.complete .progress-wizard-dot:after {
+    top: -95px !important;
+    left: 0 !important;
+    bottom: unset !important;
+    margin: 0 auto !important;
+    right: 0 !important;
+}
+
+.checkout_custom_class_summary {
+    max-width: 100% !important;
+    box-shadow: 0px 3px 10px #0000000f;
+    padding: 8px;
+    .oe_website_sale_gift_card {
+        .alert-success {
+            .d-flex.flex-row {
+                gap: 8px;
+                align-items: center;
+                .flex-grow-1 {
+                    text-align: left;
+                }
+            }
+        }
+    }
+    td {
+        font-size: 14px !important;
+        span {
+            font-size: 15px;
+        }
+    }
+    td.td-qty {
+        text-align: center;
+    }
+    thead {
+        tr {
+            th {
+                padding: 10px;
+            }
+        }
+    }
+    #order_total {
+        td {
+            padding-top: 16px;
+            font-weight: 600;
+        }
+    }
+    .coupon_form {
+        a {
+            background-color: #d9981c;
+            color: white;
+        }
+    }
+    .color-white {
+        color: white;
+    }
+}
+
+.custom_address_second_step {
+    .js_edit_address {
+        margin-right: 8px;
+    }
+}
+
+.custom_edit_address_temp {
+    background-color: white;
+    padding: 12px 24px;
+    .form-control {
+        padding: 12px 10px;
+        border-radius: 6px;
+    }
+    select {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border-radius: 6px;
+    }
+}
+
+.custom_confirm_order_temp {
+    #shipping_and_billing {
+        a {
+            margin-right: 10px;
+        }
+    }
+}

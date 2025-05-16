@@ -1,0 +1,2498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <template id="frontend_layout1" name="7md theme" inherit_id="web.frontend_layout">
+        <xpath expr="//head/script[@id='web.layout.odooscript']" position="after">
+            <link rel="stylesheet" type="text/css"
+                href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+            <link rel="stylesheet" type="text/css"
+                href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+        </xpath>
+    </template> -->
+    <template id="7md_website.home" name="7md">
+        <t t-call="website.layout">
+            <!-- Video Banner -->
+            <section class="container-fluid p-0 m-0 home-slider">
+                <div class="row p-0 m-0">
+                    <div class="col-12 p-0 m-0 slider_container">
+                        <div class="video_slider position-relative">
+                            <video class="video" autoplay="autoplay" muted="muted" loop="loop">
+                                <source src="/7md_website/static/src/videos/slider_video1.mp4"
+                                    type="video/mp4" loading="lazy" />
+                            </video>
+                            <div class="video_desc">
+                                <div class="text-content">
+                                    <p class="video_desc_title mt-5">Your Life Made Easy</p>
+                                    <a href="/shop"
+                                        class="btn btn-primary mt-2 btn-lg text-white px-5 visit-our-shop-btn">VISIT
+                                        OUR SHOP
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="container-fluid px-lg-4 features">
+                <section class="feature-card-section">
+                    <div class="container-fluid px-lg-4">
+                        <div class="row">
+                            <div class="col-6 col-md-6 col-lg-3 discount_col pb-4">
+                                <div class="features-card">
+                                    <img
+                                        src="/7md_website/static/src/images/header_cart_01_en.jpg"
+                                        alt="features image" />
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-6 col-lg-3 discount_col pb-4">
+                                <div class="features-card">
+                                    <img
+                                        src="/7md_website/static/src/images/header_cart_02_en.jpg"
+                                        alt="header image" />
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-6 col-lg-3 discount_col pb-4">
+                                <div class="features-card">
+
+                                    <img
+                                        src="/7md_website/static/src/images/header_cart_03_en.jpg"
+                                        alt="header image" />
+
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-6 col-lg-3 discount_col pb-4">
+                                <div class="features-card">
+
+                                    <img
+                                        src="/7md_website/static/src/images/header_cart_04_en.jpg"
+                                        alt="header image" />
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                <!-- Features Offer -->
+                <section class="feature-offers-section">
+                    <div class="container-fluid px-lg-4">
+                        <div class="row">
+                            <div class="col-6 col-md-6 col-lg-3 discount_col pb-4">
+                                <div class="features-card" style="cursor:pointer;">
+                                    <a href="/shop?top_selling=1">
+                                        <img
+                                            src="/7md_website/static/src/images/feature-offer-1.jpg"
+                                            alt="header image" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-6 col-lg-3 discount_col pb-4">
+                                <div class="features-card" style="cursor:pointer;">
+                                    <a href="/shop?new_arrival=1">
+                                        <img
+                                            src="/7md_website/static/src/images/feature-offer-2.jpg"
+                                            alt="header image" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-6 col-lg-3 discount_col pb-4">
+                                <div class="features-card" style="cursor:pointer;">
+                                    <a href="shop/brand/7mdstore-261">
+                                        <img
+                                            src="/7md_website/static/src/images/feature-offer-3.jpg"
+                                            alt="header image" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-6 col-lg-3 discount_col pb-4">
+                                <div class="features-card" style="cursor:pointer;">
+                                    <a href="/shop?sale=1">
+                                        <img
+                                            src="/7md_website/static/src/images/feature-offer-4.jpg"
+                                            alt="header image" />
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Banner Slider Section -->
+            <section class="home-slidersectionn">
+                <div t-attf-id="myCarousel{{uniq}}"
+                    class="s_carousel s_carousel_default carousel slide" data-bs-interval="4000">
+                    <div class="carousel-inner">
+                        <!-- #01 -->
+                        <div
+                            class="carousel-item active oe_img_bg o_bg_img_center pt152 pb152 d-flex align-items-center text-center"
+                            style="background-image: url('/7md_website/static/src/images/full-banner-1.webp');"
+                            data-name="Slide">
+                            <div class="container oe_unremovable">
+                                <div class="row content justify-content-center text-center">
+                                    <div class="carousel-content col-lg-6">
+                                        <p>
+                                            <a href="/shop" class="btn btn-primary mb-2">Shop Now</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- #02 -->
+                        <div
+                            class="carousel-item oe_img_bg o_bg_img_center pt152 pb152s d-flex align-items-center"
+                            style="background-image: url('/7md_website/static/src/images/full-banner-2.webp');"
+                            data-name="Slide">
+                            <div class="container oe_unremovable">
+                                <div class="row content justify-content-center text-center">
+                                    <div
+                                        class="carousel-content col-lg-6">
+                                        <p>
+                                            <a href="/shop" class="btn btn-primary mb-2">Shop Now</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- #03 -->
+                        <div class="carousel-item oe_img_bg o_bg_img_center pt128 pb128"
+                            style="background-image: url('/7md_website/static/src/images/full-banner-3.webp');"
+                            data-name="Slide">
+                            <div class="container oe_unremovable">
+                                <div class="row content justify-content-center text-center">
+                                    <div
+                                        class="carousel-content col-lg-6">
+                                        <p>
+                                            <a href="/shop" class="btn btn-primary mb-2">Shop Now</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 04 -->
+                        <div class="carousel-item oe_img_bg o_bg_img_center pt96 pb96"
+                            style="background-image: url('/7md_website/static/src/images/full-banner-4.webp');"
+                            data-name="Slide">
+                            <div class="container oe_unremovable">
+                                <div class="row content justify-content-center text-center">
+                                    <div
+                                        class="carousel-content col-lg-6">
+
+                                        <p>
+                                            <a href="/" class="btn btn-primary mb-2">Shop Now</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 05 -->
+                        <div class="carousel-item oe_img_bg o_bg_img_center pt96 pb96"
+                            style="background-image: url('/7md_website/static/src/images/full-banner-5.webp');"
+                            data-name="Slide">
+                            <div class="container oe_unremovable">
+                                <div class="row content justify-content-center text-center">
+                                    <div
+                                        class="carousel-content col-lg-6">
+                                        <p>
+                                            <a href="/" class="btn btn-primary mb-2">Shop Now</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- 06 -->
+                        <div class="carousel-item oe_img_bg o_bg_img_center pt96 pb96"
+                            style="background-image: url('/7md_website/static/src/images/full-banner-6.webp');"
+                            data-name="Slide">
+                            <div class="container oe_unremovable">
+                                <div class="row content justify-content-center text-center">
+                                    <div
+                                        class="carousel-content col-lg-6">
+                                        <p>
+                                            <a href="/" class="btn btn-primary mb-2">Shop Now</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="carousel-control-prev o_not_editable" contenteditable="false"
+                        t-attf-href="#myCarousel{{uniq}}" data-bs-slide="prev" role="img"
+                        aria-label="Previous" title="Previous">
+                        <span class="carousel-control-prev-icon" />
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next o_not_editable" contenteditable="false"
+                        t-attf-href="#myCarousel{{uniq}}" data-bs-slide="next" role="img"
+                        aria-label="Next" title="Next">
+                        <span class="carousel-control-next-icon" />
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Tabs Section -->
+            <section
+                class="container-fluid px-lg-4 main_container pt-4 filter-product-layout">
+                <div class="row pb-4">
+                    <div
+                        class="col-12 col-lg-2 d-flex justify-content-center product-side-filter">
+                        <div class="card shadow-lg flex-grow-1 w-100">
+                            <div
+                                class="card-body d-none d-lg-flex flex-column justify-content-between">
+                                <ul class="list-group product-cat">
+                                    <li class="list-group-item mb-3 border-none">
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/imac icon.svg"
+                                                    alt="icon image" />
+                                            </span>
+                                            <span class="nav_selected_button_text">Electric &#38;
+                                                Electronics
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item mb-3 border-none">
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/Path 46660.svg"
+                                                    alt="icon image" />
+                                            </span>
+                                            <span class="nav_button_text">Health &#38; Personal Care</span>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item mb-3 border-none">
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/noun-home-appliances-4976489.svg"
+                                                    alt="icon image" />
+                                            </span>
+                                            <span class="nav_button_text">Home Improvement &#38;
+                                                Tools
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item mb-3 border-none">
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/Path 46658.svg"
+                                                    alt="icon image" />
+                                            </span>
+                                            <span class="nav_button_text">Men's &#38; Women's
+                                                Fashion
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item mb-3 border-none">
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/phone icon.svg"
+                                                    alt="icon image" />
+                                            </span>
+                                            <span class="nav_button_text">Mobiles, Tablets &#38;
+                                                Accessories
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item mb-3 border-none">
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/Path 46669.svg"
+                                                    alt="icon image" />
+                                            </span>
+                                            <span class="nav_button_text">Outdoors, Fitness &#38;
+                                                Sports
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item mb-3 border-none">
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/Group 15825.svg"
+                                                    alt="icon image" />
+                                            </span>
+                                            <span class="nav_button_text">Smart Devices &#38;
+                                                Accessories
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item mb-3 border-none">
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/noun-games-3323124.svg"
+                                                    alt="icon image" />
+                                            </span>
+                                            <span class="nav_button_text">Smart Watch &#38; Band</span>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="p-2 d-none d-lg-flex">
+                                    <div class="card rounded-3">
+                                        <picture class="w-100 card-img">
+                                            <source
+                                                srcset="/7md_website/static/src/images/all-products.png"
+                                                media="(min-width: 768px)" />
+                                            <img
+                                                src="/7md_website/static/src/images/all-products.png"
+                                                class="img-camp" style="width: 100%"
+                                                alt="icon image" />
+                                        </picture>
+                                        <div class="card-img-overlay">
+                                            <div
+                                                class="d-flex flex-column align-items-start justify-content-between h-100 p-3">
+                                                <h4
+                                                    class="px-2 text-dark fs-4 text-uppercase fbold text-center">
+                                                    all products
+                                                </h4>
+                                                <a href="/shop"
+                                                    class="btn btn-primary btn-outline-light text-white bg-transparent px-5 mt-2">
+                                                    View
+                                                    All
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-group w-100 d-lg-none d-none">
+                                <button class="btn py-3 btn-primary btn-lg" type="button"
+                                    id="filter-by" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <img class="" src="/7md_website/static/src/images/filter.svg"
+                                        alt="icon image" />
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="filter-by">
+                                    <li>
+                                        <a class="dropdown-item" href="#">Top Selling Items</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Trending Items</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">You May Like</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Recently Viewed</a>
+                                    </li>
+                                </ul>
+                                <button
+                                    class="btn py-3 btn-primary w-100 btn-lg text-white dropdown-toggle"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">Filter By Categories <span
+                                        class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu product-cat w-100">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/noun-home-appliances-4976489.svg"
+                                                    class="nav_selected__button_icon"
+                                                    alt="icon image" />
+                                            </span>
+                                            <span class="nav_selected_button_text">Home
+                                                Appliances
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/imac icon.svg"
+                                                    alt="nav_button_icon" />
+                                            </span>
+                                            <span class="nav_button_text">Electronics</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/Path 46658.svg"
+                                                    alt="nav_button_icon" />
+                                            </span>
+                                            <span class="nav_button_text">Fashion</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/Path 46660.svg"
+                                                    alt="nav_button_icon" />
+                                            </span>
+                                            <span class="nav_button_text">Health personal
+                                                care
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/Group 15825.svg"
+                                                    alt="nav_button_icon" />
+                                            </span>
+                                            <span class="nav_button_text">Projectors</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/noun-teddy-bear-1041229.svg"
+                                                    alt="nav_button_icon" />
+                                            </span>
+                                            <span class="nav_button_text">Kids</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/phone icon.svg"
+                                                    alt="nav_button_icon" />
+                                            </span>
+                                            <span class="nav_button_text">Cell Phones</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/Path 46669.svg"
+                                                    alt="nav_button_icon" />
+                                            </span>
+                                            <span class="nav_button_text">Sports</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="img">
+                                                <img
+                                                    src="/7md_website/static/src/images/noun-games-3323124.svg"
+                                                    alt="nav_button_icon" />
+                                            </span>
+                                            <span class="nav_button_text">Game consoles</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <t t-call="7md_website.category_tag_tab" />
+                </div>
+            </section>
+
+
+            <!-- Seasonal Product Banner -->
+            <section class="container-fluid px-lg-4 main_container pt-4">
+                <div class="row pb-0">
+                    <div class="col-12">
+                        <div class="card" style="cursor:pointer;">
+                            <picture class="w-100 card-img">
+                                <source media="(min-width:768px)"
+                                    srcset="/7md_website/static/src/images/seasonal-products-lg-en.webp" />
+                                <img
+                                    src="/7md_website/static/src/images/seasonal-products-lg-en.webp"
+                                    class="img-camp" style="width: 100%" alt="icon image" />
+                            </picture>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Light slider multi product slider -->
+            <section class="multiii">
+                <!-- Whole page slider -->
+                <div class="carousel-multi-product-lightslider">
+                    <ul id="lightslider-multi-product">
+                        <li>
+                            <div class="card product-card">
+                                <div class="product-card-image p-3">
+                                    <a
+                                        href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                        class="product-image">
+                                        <img
+                                            src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                            alt="menu"
+                                            class="card-img-top" />
+                                    </a>
+                                </div>
+
+                                <div class="product_sku badge bg-danger">
+                                    10026
+                                </div>
+                                <div class="fav-label">
+                                    <a href="javascript:void(0);"
+                                        class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                        <img class="heart-like-icon "
+                                            src="/7md_website/static/src/images/heart@2x.png"
+                                            alt="icon image" />
+                                    </a>
+                                </div>
+                                <div class="offer-label">50%</div>
+
+                                <div class="card-body p-lg-4 text-center">
+                                    <div
+                                        class="small-ratings justify-content-center">
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <h5 class="card-title">
+                                        11Electric Multi-Functional Tea
+                                        Coffee Pot11
+                                    </h5>
+                                    <div class="prices">
+                                        <span class="price">AED499</span>
+                                        <span class="price-old">AED600</span>
+                                    </div>
+                                    <button
+                                        class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                        <img
+                                            class="cart-add-to-cart-icon"
+                                            src="/7md_website/static/src/images/cart-icon.svg"
+                                            alt="icon image" />
+                                        <span class="item_button_text">Add
+                                            To Cart
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card product-card">
+                                <div class="product-card-image p-3">
+                                    <a
+                                        href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                        class="product-image">
+                                        <img
+                                            src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                            alt="menu"
+                                            class="card-img-top" />
+                                    </a>
+                                </div>
+
+                                <div class="product_sku badge bg-danger">
+                                    10026
+                                </div>
+                                <div class="fav-label">
+                                    <a href="javascript:void(0);"
+                                        class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                        <img class="heart-like-icon "
+                                            src="/7md_website/static/src/images/heart@2x.png"
+                                            alt="icon image" />
+                                    </a>
+                                </div>
+                                <div class="offer-label">50%</div>
+
+                                <div class="card-body p-lg-4 text-center">
+                                    <div
+                                        class="small-ratings justify-content-center">
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <h5 class="card-title">
+                                        11Electric Multi-Functional Tea
+                                        Coffee Pot11
+                                    </h5>
+                                    <div class="prices">
+                                        <span class="price">AED499</span>
+                                        <span class="price-old">AED600</span>
+                                    </div>
+                                    <button
+                                        class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                        <img
+                                            class="cart-add-to-cart-icon"
+                                            src="/7md_website/static/src/images/cart-icon.svg"
+                                            alt="icon image" />
+                                        <span class="item_button_text">Add
+                                            To Cart
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card product-card">
+                                <div class="product-card-image p-3">
+                                    <a
+                                        href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                        class="product-image">
+                                        <img
+                                            src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                            alt="menu"
+                                            class="card-img-top" />
+                                    </a>
+                                </div>
+
+                                <div class="product_sku badge bg-danger">
+                                    10026
+                                </div>
+                                <div class="fav-label">
+                                    <a href="javascript:void(0);"
+                                        class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                        <img class="heart-like-icon "
+                                            src="/7md_website/static/src/images/heart@2x.png"
+                                            alt="icon image" />
+                                    </a>
+                                </div>
+                                <div class="offer-label">50%</div>
+
+                                <div class="card-body p-lg-4 text-center">
+                                    <div
+                                        class="small-ratings justify-content-center">
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <h5 class="card-title">
+                                        11Electric Multi-Functional Tea
+                                        Coffee Pot11
+                                    </h5>
+                                    <div class="prices">
+                                        <span class="price">AED499</span>
+                                        <span class="price-old">AED600</span>
+                                    </div>
+                                    <button
+                                        class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                        <img
+                                            class="cart-add-to-cart-icon"
+                                            src="/7md_website/static/src/images/cart-icon.svg"
+                                            alt="icon image" />
+                                        <span class="item_button_text">Add
+                                            To Cart
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="card product-card">
+                                <div class="product-card-image p-3">
+                                    <a
+                                        href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                        class="product-image">
+                                        <img
+                                            src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                            alt="menu"
+                                            class="card-img-top" />
+                                    </a>
+                                </div>
+
+                                <div class="product_sku badge bg-danger">
+                                    10026
+                                </div>
+                                <div class="fav-label">
+                                    <a href="javascript:void(0);"
+                                        class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                        <img class="heart-like-icon "
+                                            src="/7md_website/static/src/images/heart@2x.png"
+                                            alt="icon image" />
+                                    </a>
+                                </div>
+                                <div class="offer-label">50%</div>
+
+                                <div class="card-body p-lg-4 text-center">
+                                    <div
+                                        class="small-ratings justify-content-center">
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <h5 class="card-title">
+                                        11Electric Multi-Functional Tea
+                                        Coffee Pot11
+                                    </h5>
+                                    <div class="prices">
+                                        <span class="price">AED499</span>
+                                        <span class="price-old">AED600</span>
+                                    </div>
+                                    <button
+                                        class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                        <img
+                                            class="cart-add-to-cart-icon"
+                                            src="/7md_website/static/src/images/cart-icon.svg"
+                                            alt="icon image" />
+                                        <span class="item_button_text">Add
+                                            To Cart
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="card product-card">
+                                <div class="product-card-image p-3">
+                                    <a
+                                        href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                        class="product-image">
+                                        <img
+                                            src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                            alt="menu"
+                                            class="card-img-top" />
+                                    </a>
+                                </div>
+
+                                <div class="product_sku badge bg-danger">
+                                    10026
+                                </div>
+                                <div class="fav-label">
+                                    <a href="javascript:void(0);"
+                                        class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                        <img class="heart-like-icon "
+                                            src="/7md_website/static/src/images/heart@2x.png"
+                                            alt="icon image" />
+                                    </a>
+                                </div>
+                                <div class="offer-label">50%</div>
+
+                                <div class="card-body p-lg-4 text-center">
+                                    <div
+                                        class="small-ratings justify-content-center">
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <h5 class="card-title">
+                                        11Electric Multi-Functional Tea
+                                        Coffee Pot11
+                                    </h5>
+                                    <div class="prices">
+                                        <span class="price">AED499</span>
+                                        <span class="price-old">AED600</span>
+                                    </div>
+                                    <button
+                                        class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                        <img
+                                            class="cart-add-to-cart-icon"
+                                            src="/7md_website/static/src/images/cart-icon.svg"
+                                            alt="icon image" />
+                                        <span class="item_button_text">Add
+                                            To Cart
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="card product-card">
+                                <div class="product-card-image p-3">
+                                    <a
+                                        href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                        class="product-image">
+                                        <img
+                                            src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                            alt="menu"
+                                            class="card-img-top" />
+                                    </a>
+                                </div>
+
+                                <div class="product_sku badge bg-danger">
+                                    10026
+                                </div>
+                                <div class="fav-label">
+                                    <a href="javascript:void(0);"
+                                        class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                        <img class="heart-like-icon "
+                                            src="/7md_website/static/src/images/heart@2x.png"
+                                            alt="icon image" />
+                                    </a>
+                                </div>
+                                <div class="offer-label">50%</div>
+
+                                <div class="card-body p-lg-4 text-center">
+                                    <div
+                                        class="small-ratings justify-content-center">
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star rating-color"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <h5 class="card-title">
+                                        11Electric Multi-Functional Tea
+                                        Coffee Pot11
+                                    </h5>
+                                    <div class="prices">
+                                        <span class="price">AED499</span>
+                                        <span class="price-old">AED600</span>
+                                    </div>
+                                    <button
+                                        class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                        <img
+                                            class="cart-add-to-cart-icon"
+                                            src="/7md_website/static/src/images/cart-icon.svg"
+                                            alt="icon image" />
+                                        <span class="item_button_text">Add
+                                            To Cart
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </section>
+
+
+            <!-- Top Category Section -->
+            <section class="category-slider">
+                <div class="row pb-4">
+                    <div
+                        class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-start align-items-center pb-2">
+                        <h2 class="section-title fw-bold">
+                            <img src="/7md_website/static/src/images/Group 15824.png "
+                                class="title-image" alt="icon image" /> Top Categories </h2>
+                    </div>
+                    <div class="category-slider-col">
+                        <div id="category-types-slider">
+                            <div class="category-arrow-next">
+                                &#10095;
+                            </div>
+                            <div class="category-arrow-prev">
+                                &#10094;
+                            </div>
+                            <ul>
+                                <li>
+                                    <div class="p-2 text-center">
+                                        <a href="#"
+                                            class="top_categories_text text-dark text-decoration-none">
+                                            <div
+                                                class="d-flex flex-column justify-content-center align-items-center">
+                                                <img
+                                                    src="/7md_website/static/src/images/electronics-category.png"
+                                                    class="top_categories_img" alt="icon image" />
+                                                <h5 class="pt-3">Electronics and Mobiles</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="p-2 text-center">
+                                        <a href="#"
+                                            class="top_categories_text text-dark text-decoration-none">
+                                            <div
+                                                class="d-flex flex-column justify-content-center align-items-center">
+                                                <img
+                                                    src="/7md_website/static/src/images/healthcare-category.png"
+                                                    class="top_categories_img" alt="icon image" />
+                                                <h5 class="pt-3">Health and Personal Care</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="p-2 text-center">
+                                        <a href="#"
+                                            class="top_categories_text text-dark text-decoration-none">
+                                            <div
+                                                class="d-flex flex-column justify-content-center align-items-center">
+                                                <img
+                                                    src="/7md_website/static/src/images/home-appliances-category.png"
+                                                    class="top_categories_img" alt="icon image" />
+                                                <h5 class="pt-3">Home Appliances</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="p-2 text-center">
+                                        <a href="#"
+                                            class="top_categories_text text-dark text-decoration-none">
+                                            <div
+                                                class="d-flex flex-column justify-content-center align-items-center">
+                                                <img
+                                                    src="/7md_website/static/src/images/baby-products-category.png"
+                                                    class="top_categories_img" alt="icon image" />
+                                                <h5 class="pt-3">Baby Products</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="p-2 text-center">
+                                        <a href="#"
+                                            class="top_categories_text text-dark text-decoration-none">
+                                            <div
+                                                class="d-flex flex-column justify-content-center align-items-center">
+                                                <img
+                                                    src="/7md_website/static/src/images/sport-category.png"
+                                                    class="top_categories_img" alt="icon image" />
+                                                <h5 class="pt-3">Sports and Fitness</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="p-2 text-center">
+                                        <a href="#"
+                                            class="top_categories_text text-dark text-decoration-none">
+                                            <div
+                                                class="d-flex flex-column justify-content-center align-items-center">
+                                                <img
+                                                    src="/7md_website/static/src/images/home-improvement-category.png"
+                                                    class="top_categories_img" alt="icon image" />
+                                                <h5 class="pt-3">Home Improvement Tools</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="p-2 text-center">
+                                        <a href="#"
+                                            class="top_categories_text text-dark text-decoration-none">
+                                            <div
+                                                class="d-flex flex-column justify-content-center align-items-center">
+                                                <img
+                                                    src="/7md_website/static/src/images/projector-category.png"
+                                                    class="top_categories_img" alt="icon image" />
+                                                <h5 class="pt-3">Projectors</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="p-2 text-center">
+                                        <a href="#"
+                                            class="top_categories_text text-dark text-decoration-none">
+                                            <div
+                                                class="d-flex flex-column justify-content-center align-items-center">
+                                                <img
+                                                    src="/7md_website/static/src/images/massage-category.png"
+                                                    class="top_categories_img" alt="icon image" />
+                                                <h5 class="pt-3">Massage and Relaxation</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="p-2 text-center">
+                                        <a href="#"
+                                            class="top_categories_text text-dark text-decoration-none">
+                                            <div
+                                                class="d-flex flex-column justify-content-center align-items-center">
+                                                <img
+                                                    src="/7md_website/static/src/images/7md-packages-category.png"
+                                                    class="top_categories_img" alt="icon image" />
+                                                <h5 class="pt-3">7md packages</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="p-2 text-center">
+                                        <a href="#"
+                                            class="top_categories_text text-dark text-decoration-none">
+                                            <div
+                                                class="d-flex flex-column justify-content-center align-items-center">
+                                                <img
+                                                    src="/7md_website/static/src/images/winter-category.png"
+                                                    class="top_categories_img" alt="icon image" />
+                                                <h5 class="pt-3">Winter and Camping Special</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Welcome banner section-->
+            <section class="container-fluid px-lg-4 main_container pt-4">
+                <div class="row pb-4">
+                    <div class="col-12">
+                        <div class="card orange-offer-card">
+                            <picture class="w-100 card-img">
+                                <source
+                                    srcset="/7md_website/static/src/images/7md-virtual-store.jpg"
+                                    media="(min-width: 768px)" />
+                                <img
+                                    src="/7md_website/static/src/images/7md-virtual-store-mobile.jpg"
+                                    class="img-camp rounded-3 " alt="icon image"
+                                    style="width: 100%;" />
+                            </picture>
+                            <!-- <div
+                                class="card-img-overlay col-12 flex-grow-1 d-flex flex-column flex-md-row justify-content-center
+                            justify-content-md-between p-3 p-lg-5 align-items-center">
+                                <div
+                                    class="col-12 col-md-8 col-lg-7 col-xl-10 d-flex flex-column align-items-center
+                            justify-content-center">
+                                    <h3 class="px-2 fs-2 text-dark text-uppercase">welcome to <span
+                                            class="fbold">7md
+                                        </span>
+                                    </h3>
+                                    <p class="px-2 fs-3 text-dark text-uppercase">meta-store</p>
+                                    <p class="px-2 fs-3 text-white">Try it your self <span
+                                            class="fs-1 fbold">50%
+                                        </span>
+                                    </p>
+                                    <a href="/shop" class="btn btn-lg btn-primary text-white px-2">Get
+                                        it Now
+                                    </a>
+                                </div>
+                                <div
+                                    class="col-12 col-md-3 col-xl-2 d-none d-md-flex flex-column align-items-center
+                            justify-content-center h-100 bg-white">
+                                    <img src="/7md_website/static/src/images/offer-product.png"
+                                        class="mw-100 orange-offer-img " alt="icon image" />
+                                    <h3 class="px-2 fs-4 mt-2 text-dark text-uppercase fbold">
+                                        Vr headset
+                                    </h3>
+                                    <a href="/shop"
+                                        class="btn btn-lg btn-primary text-white px-5 mt-2">Get
+                                        it Now
+                                    </a>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- New Offer Slider Section -->
+            <section class="container-fluid px-lg-4 main_container new-offer-slider-section">
+                <div class="row pb-4">
+                    <!-- Banner Column -->
+                    <div class="col-sm-12 col-md-12 col-sm-12 col-lg-3 product-side-filter">
+                        <div class="card offer-banner h-100 justify-content-end rounded-3">
+
+                            <picture class="w-100 card-img">
+                                <source media="(min-width:992px)"
+                                    srcset="/7md_website/static/src/images/offer-bg.jpg" />
+                                <source srcset="/7md_website/static/src/images/offer-bg-mobile.jpg"
+                                    media="(min-width: 768px)" />
+                                <img src="/7md_website/static/src/images/offer-bg-mobile.jpg"
+                                    class="img-camp rounded-3 " alt="icon image" style="width: 100%" />
+                            </picture>
+
+                            <div
+                                class="card-img-overlay col-12 flex-grow-1 d-flex flex-row flex-md-column justify-content-center p-3 p-lg-5 align-items-center">
+                                <div
+                                    class="col-8 col-md-12 d-flex flex-column align-items-center justify-content-center">
+                                    <h4 class="px-2 text-dark fs-2 text-uppercase fbold text-center">
+                                        New offers
+                                    </h4>
+                                    <a href="/shop?new_arrival=1"
+                                        class="btn btn-lg d-block btn-danger text-white px-5 mt-2">View
+                                        All
+                                    </a>
+
+                                </div>
+                                <div
+                                    class="col-4 col-md-12 d-flex flex-column align-items-center justify-content-center">
+                                    <img src="/7md_website/static/src/images/alert.png"
+                                        alt="icon image"
+                                        class="img-fluid " />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slider Column -->
+                    <div
+                        class="col-md-12 col-sm-12 pt-md-0 pt-3 justify-content-center flex-grow-1 align-items-center col-md-8 col-lg-9">
+                        <div class="slider w-100 slider-offer-bottom-fix">
+                            <!-- Light slider new offer -->
+                            <div class="carousel-multi-product-lightslider">
+                                <ul id="lightslider-new-offer">
+                                    <li>
+                                        <div class="card product-card">
+                                            <div class="product-card-image p-3">
+                                                <a
+                                                    href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                                    class="product-image">
+                                                    <img
+                                                        src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                                        alt="menu"
+                                                        class="card-img-top" />
+                                                </a>
+                                            </div>
+
+                                            <div class="product_sku badge bg-danger">
+                                                10026
+                                            </div>
+                                            <div class="fav-label">
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                                    <img class="heart-like-icon "
+                                                        src="/7md_website/static/src/images/heart@2x.png"
+                                                        alt="icon image" />
+                                                </a>
+                                            </div>
+                                            <div class="offer-label">50%</div>
+
+                                            <div class="card-body p-lg-4 text-center">
+                                                <div
+                                                    class="small-ratings justify-content-center">
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <h5 class="card-title">
+                                                    11Electric Multi-Functional Tea
+                                                    Coffee Pot11
+                                                </h5>
+                                                <div class="prices">
+                                                    <span class="price">AED499</span>
+                                                    <span class="price-old">AED600</span>
+                                                </div>
+                                                <button
+                                                    class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                                    <img
+                                                        class="cart-add-to-cart-icon"
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/cart-icon.svg" />
+                                                    <span class="item_button_text">Add
+                                                        To Cart
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="card product-card">
+                                            <div class="product-card-image p-3">
+                                                <a
+                                                    href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                                    class="product-image">
+                                                    <img
+                                                        src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                                        alt="menu"
+                                                        class="card-img-top" />
+                                                </a>
+                                            </div>
+
+                                            <div class="product_sku badge bg-danger">
+                                                10026
+                                            </div>
+                                            <div class="fav-label">
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                                    <img class="heart-like-icon " alt="icon image"
+                                                        src="/7md_website/static/src/images/heart@2x.png" />
+                                                </a>
+                                            </div>
+                                            <div class="offer-label">50%</div>
+
+                                            <div class="card-body p-lg-4 text-center">
+                                                <div
+                                                    class="small-ratings justify-content-center">
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <h5 class="card-title">
+                                                    11Electric Multi-Functional Tea
+                                                    Coffee Pot11
+                                                </h5>
+                                                <div class="prices">
+                                                    <span class="price">AED499</span>
+                                                    <span class="price-old">AED600</span>
+                                                </div>
+                                                <button
+                                                    class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                                    <img
+                                                        class="cart-add-to-cart-icon"
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/cart-icon.svg" />
+                                                    <span class="item_button_text">Add
+                                                        To Cart
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="card product-card">
+                                            <div class="product-card-image p-3">
+                                                <a
+                                                    href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                                    class="product-image">
+                                                    <img
+                                                        src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                                        alt="menu"
+                                                        class="card-img-top" />
+                                                </a>
+                                            </div>
+
+                                            <div class="product_sku badge bg-danger">
+                                                10026
+                                            </div>
+                                            <div class="fav-label">
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                                    <img class="heart-like-icon " alt="icon image"
+                                                        src="/7md_website/static/src/images/heart@2x.png" />
+                                                </a>
+                                            </div>
+                                            <div class="offer-label">50%</div>
+
+                                            <div class="card-body p-lg-4 text-center">
+                                                <div
+                                                    class="small-ratings justify-content-center">
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <h5 class="card-title">
+                                                    11Electric Multi-Functional Tea
+                                                    Coffee Pot11
+                                                </h5>
+                                                <div class="prices">
+                                                    <span class="price">AED499</span>
+                                                    <span class="price-old">AED600</span>
+                                                </div>
+                                                <button
+                                                    class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                                    <img
+                                                        class="cart-add-to-cart-icon"
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/cart-icon.svg" />
+                                                    <span class="item_button_text">Add
+                                                        To Cart
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="card product-card">
+                                            <div class="product-card-image p-3">
+                                                <a
+                                                    href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                                    class="product-image">
+                                                    <img
+                                                        src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                                        alt="menu"
+                                                        class="card-img-top" />
+                                                </a>
+                                            </div>
+
+                                            <div class="product_sku badge bg-danger">
+                                                10026
+                                            </div>
+                                            <div class="fav-label">
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                                    <img class="heart-like-icon " alt="icon image"
+                                                        src="/7md_website/static/src/images/heart@2x.png" />
+                                                </a>
+                                            </div>
+                                            <div class="offer-label">50%</div>
+
+                                            <div class="card-body p-lg-4 text-center">
+                                                <div
+                                                    class="small-ratings justify-content-center">
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <h5 class="card-title">
+                                                    11Electric Multi-Functional Tea
+                                                    Coffee Pot11
+                                                </h5>
+                                                <div class="prices">
+                                                    <span class="price">AED499</span>
+                                                    <span class="price-old">AED600</span>
+                                                </div>
+                                                <button
+                                                    class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                                    <img
+                                                        class="cart-add-to-cart-icon"
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/cart-icon.svg" />
+                                                    <span class="item_button_text">Add
+                                                        To Cart
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="card product-card">
+                                            <div class="product-card-image p-3">
+                                                <a
+                                                    href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                                    class="product-image">
+                                                    <img
+                                                        src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                                        alt="menu"
+                                                        class="card-img-top" />
+                                                </a>
+                                            </div>
+
+                                            <div class="product_sku badge bg-danger">
+                                                10026
+                                            </div>
+                                            <div class="fav-label">
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                                    <img class="heart-like-icon " alt="icon image"
+                                                        src="/7md_website/static/src/images/heart@2x.png" />
+                                                </a>
+                                            </div>
+                                            <div class="offer-label">50%</div>
+
+                                            <div class="card-body p-lg-4 text-center">
+                                                <div
+                                                    class="small-ratings justify-content-center">
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <h5 class="card-title">
+                                                    11Electric Multi-Functional Tea
+                                                    Coffee Pot11
+                                                </h5>
+                                                <div class="prices">
+                                                    <span class="price">AED499</span>
+                                                    <span class="price-old">AED600</span>
+                                                </div>
+                                                <button
+                                                    class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                                    <img
+                                                        class="cart-add-to-cart-icon"
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/cart-icon.svg" />
+                                                    <span class="item_button_text">Add
+                                                        To Cart
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="card product-card">
+                                            <div class="product-card-image p-3">
+                                                <a
+                                                    href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                                    class="product-image">
+                                                    <img
+                                                        src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                                        alt="menu"
+                                                        class="card-img-top" />
+                                                </a>
+                                            </div>
+
+                                            <div class="product_sku badge bg-danger">
+                                                10026
+                                            </div>
+                                            <div class="fav-label">
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                                    <img class="heart-like-icon " alt="icon image"
+                                                        src="/7md_website/static/src/images/heart@2x.png" />
+                                                </a>
+                                            </div>
+                                            <div class="offer-label">50%</div>
+
+                                            <div class="card-body p-lg-4 text-center">
+                                                <div
+                                                    class="small-ratings justify-content-center">
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <h5 class="card-title">
+                                                    11Electric Multi-Functional Tea
+                                                    Coffee Pot11
+                                                </h5>
+                                                <div class="prices">
+                                                    <span class="price">AED499</span>
+                                                    <span class="price-old">AED600</span>
+                                                </div>
+                                                <button
+                                                    class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                                    <img
+                                                        class="cart-add-to-cart-icon"
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/cart-icon.svg" />
+                                                    <span class="item_button_text">Add
+                                                        To Cart
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 3 columns section -->
+            <section class="container-fluid px-lg-4 main_container pt-4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-12 pb-3">
+                                <div class="card product-card">
+                                    <div class="offer-label">50%</div>
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                alt="alt image here" class="card-img-top " />
+                                        </div>
+                                        <div class="card-body p-lg-4">
+                                            <h5 class="card-title fw-light">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device
+                                                With Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div class="small-ratings justify-content-start">
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="prices">
+                                                <span class="price">AED499</span>
+                                                <span class="price-old">AED600</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-12 pb-3">
+                                <div class="card product-card">
+                                    <div class="offer-label">50%</div>
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                alt="alt image here" class="card-img-top " />
+                                        </div>
+                                        <div class="card-body p-lg-4">
+                                            <h5 class="card-title fw-light">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device
+                                                With Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div class="small-ratings justify-content-start">
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="prices">
+                                                <span class="price">AED499</span>
+                                                <span class="price-old">AED600</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-4 pb-3">
+                        <div class="card-overlay shadow-lg d-none d-lg-flex rounded-2"
+                            style="background-image: url('/7md_website/static/src/images/personal-care_2x.webp')">
+                            <div class="text">
+                                <h4 class="fw-light text-white">
+                                    we have best products in the market
+                                </h4>
+                                <a href="/shop"
+                                    class="btn btn-lg text-white btn-light bg-transparent btn-view-all-transparent">
+                                    View All
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-overlay shadow-lg d-flex d-lg-none rounded-2"
+                            style="
+                          background-image: url('/7md_website/static/src/images/personal care -mobile @2x.png');
+                        ">
+                            <div class="text">
+                                <h4 class="fw-light text-white">
+                                    we have best products in the market
+                                </h4>
+                                <a href="/shop"
+                                    class="btn btn-lg text-white btn-light bg-transparent">
+                                    View All
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-12 pb-3">
+                                <div class="card product-card">
+                                    <div class="offer-label">50%</div>
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                alt="alt image here" class="card-img-top " />
+                                        </div>
+                                        <div class="card-body p-lg-4">
+                                            <h5 class="card-title fw-light">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device
+                                                With Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div class="small-ratings justify-content-start">
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="prices">
+                                                <span class="price">AED499</span>
+                                                <span class="price-old">AED600</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-12 pb-3">
+                                <div class="card product-card">
+                                    <div class="offer-label">50%</div>
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                alt="alt image here" class="card-img-top " />
+                                        </div>
+                                        <div class="card-body p-lg-4">
+                                            <h5 class="card-title fw-light">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device
+                                                With Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div class="small-ratings justify-content-start">
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="prices">
+                                                <span class="price">AED499</span>
+                                                <span class="price-old">AED600</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Top Brands Section -->
+            <section class="container-fluid px-lg-4 main_container pt-4 top-brand-slider-section">
+                <div class="row pb-4">
+                    <div
+                        class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-start align-items-center pb-2">
+                        <h2 class="section-title fw-bold">
+                            <img src="/7md_website/static/src/images/Group 16964.png"
+                                class="top_categories_title_img " alt="icon image" /> Top Brands </h2>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3 product-side-filter">
+                        <div class="card offer-banner h-100 justify-content-end rounded-3">
+                            <picture class="w-100 card-img">
+                                <source media="(min-width:992px)"
+                                    srcset="/7md_website/static/src/images/top-brands-side.webp" />
+                                <source srcset="/7md_website/static/src/images/top-brands-side.webp"
+                                    media="(min-width: 768px)" />
+                                <img src="/7md_website/static/src/images/top-brands-side.webp"
+                                    class="img-camp rounded-3 "
+                                    style="width: 100%;max-height: 110px;object-fit: cover;object-position: bottom;"
+                                    alt="icon image" />
+                            </picture>
+
+                        </div>
+                    </div>
+                    <div
+                        class="col-sm-12 pt-md-0 pt-3 justify-content-center flex-grow-1 align-items-center col-md-8 col-lg-9">
+                        <section class="brand-slider-outer">
+                            <div class="slider">
+                                <div class="slide-track">
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-1.png"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-2.png"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-3.png"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-4.jpeg"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-5.png"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-6.png"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-7.jpeg"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-8.jpeg"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-9.jpeg"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-10.jpeg"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-11.jpeg"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-12.jpeg"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+                                    <div class="slide">
+                                        <a href="#">
+                                            <img
+                                                src="/7md_website/static/src/images/brand-13.jpeg"
+                                                height="100" width="250" alt="icon image" />
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 3 columns section -->
+            <section class="container-fluid px-lg-4 main_container pt-4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-12 pb-3">
+                                <div class="card product-card">
+                                    <div class="offer-label">50%</div>
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                alt="alt image here" class="card-img-top " />
+                                        </div>
+                                        <div class="card-body p-lg-4">
+                                            <h5 class="card-title fw-light">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device
+                                                With Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div class="small-ratings justify-content-start">
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="prices">
+                                                <span class="price">AED499</span>
+                                                <span class="price-old">AED600</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-12 pb-3">
+                                <div class="card product-card">
+                                    <div class="offer-label">50%</div>
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                alt="alt image here" class="card-img-top " />
+                                        </div>
+                                        <div class="card-body p-lg-4">
+                                            <h5 class="card-title fw-light">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device
+                                                With Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div class="small-ratings justify-content-start">
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="prices">
+                                                <span class="price">AED499</span>
+                                                <span class="price-old">AED600</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-4 pb-3">
+                        <div
+                            class="card-overlay d-none shadow-lg d-lg-flex flex-column align-items-start justify-content-between rounded-2"
+                            style="background-image: url('/7md_website/static/src/images/hmd-store.webp')">
+                            <div class="text d-flex flex-column justify-content-start">
+                                <h2 class="fw-light fs-1 text-white">7md Store</h2>
+                                <p class="text-white fs-3">All New and Exclusive</p>
+                            </div>
+                            <div class="text d-flex align-self-center justify-content-center">
+                                <a href="/shop" class="btn btn-lg text-white btn-primary">
+                                    View All
+                                </a>
+                            </div>
+                        </div>
+                        <div
+                            class="card-overlay d-flex d-lg-none shadow-lg flex-column align-items-start justify-content-between rounded-2"
+                            style="
+                          background-image: url('/7md_website/static/src/images/hmd-store-mobile@2x.png');
+                        ">
+                            <div class="text d-flex flex-column justify-content-start">
+                                <h2 class="fw-light fs-1 text-white">7md Store</h2>
+                                <p class="text-white fs-3">All New and Exclusive</p>
+                            </div>
+                            <div class="text d-flex align-self-center justify-content-center">
+                                <a href="/shop" class="btn btn-lg text-white btn-primary">
+                                    View All
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-12 pb-3">
+                                <div class="card product-card">
+                                    <div class="offer-label">50%</div>
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                alt="alt image here" class="card-img-top " />
+                                        </div>
+                                        <div class="card-body p-lg-4">
+                                            <h5 class="card-title fw-light">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device
+                                                With Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div class="small-ratings justify-content-start">
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="prices">
+                                                <span class="price">AED499</span>
+                                                <span class="price-old">AED600</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-12 pb-3">
+                                <div class="card product-card">
+                                    <div class="offer-label">50%</div>
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                alt="alt image here" class="card-img-top " />
+                                        </div>
+                                        <div class="card-body p-lg-4">
+                                            <h5 class="card-title fw-light">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device
+                                                With Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div class="small-ratings justify-content-start">
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="prices">
+                                                <span class="price">AED499</span>
+                                                <span class="price-old">AED600</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Best Selling Slider Section -->
+            <section class="container-fluid px-lg-4 main_container pt-4 best-seller-slider-section">
+                <div class="row align-items-center pb-4">
+                    <!-- Banner Column -->
+                    <div class="col-sm-12 col-md-3 col-lg-3 product-side-filter">
+                        <div class="card offer-banner h-100 justify-content-end rounded-3">
+                            <a href="/shop?top_selling=1">
+                                <picture class="w-100 card-img">
+                                    <source media="(min-width:992px)"
+                                        srcset="/7md_website/static/src/images/best-seller-side.jpg" />
+                                    <source
+                                        srcset="/7md_website/static/src/images/best-seller-side.jpg"
+                                        media="(min-width: 768px)" />
+                                    <img src="/7md_website/static/src/images/best-seller-side.jpg"
+                                        class="img-camp rounded-3 " alt="icon image"
+                                        style="width: 100%" />
+                                </picture>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Slider Column -->
+                    <div
+                        class="col-sm-12 pt-md-0 pt-3 justify-content-center flex-grow-1 align-items-center col-md-8 col-lg-9">
+                        <div class="slider w-100 slider-offer-bottom-fix">
+                            <!-- Light Slider -->
+                            <div class="carousel-multi-product-lightslider">
+                                <ul id="lightslider-best-selling">
+                                    <li>
+                                        <div class="card product-card">
+                                            <div class="product-card-image p-3">
+                                                <a
+                                                    href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                                    class="product-image">
+                                                    <img
+                                                        src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                                        alt="menu"
+                                                        class="card-img-top" />
+                                                </a>
+                                            </div>
+
+                                            <div class="product_sku badge bg-danger">
+                                                10026
+                                            </div>
+                                            <div class="fav-label">
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                                    <img class="heart-like-icon "
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/heart@2x.png" />
+                                                </a>
+                                            </div>
+                                            <div class="offer-label">50%</div>
+
+                                            <div class="card-body p-lg-4 text-center">
+                                                <div
+                                                    class="small-ratings justify-content-center">
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <h5 class="card-title">
+                                                    11Electric Multi-Functional Tea
+                                                    Coffee Pot11
+                                                </h5>
+                                                <div class="prices">
+                                                    <span class="price">AED499</span>
+                                                    <span class="price-old">AED600</span>
+                                                </div>
+                                                <button
+                                                    class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                                    <img
+                                                        class="cart-add-to-cart-icon"
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/cart-icon.svg" />
+                                                    <span class="item_button_text">Add
+                                                        To Cart
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="card product-card">
+                                            <div class="product-card-image p-3">
+                                                <a
+                                                    href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                                    class="product-image">
+                                                    <img
+                                                        src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                                        alt="menu"
+                                                        class="card-img-top" />
+                                                </a>
+                                            </div>
+
+                                            <div class="product_sku badge bg-danger">
+                                                10026
+                                            </div>
+                                            <div class="fav-label">
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                                    <img class="heart-like-icon "
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/heart@2x.png" />
+                                                </a>
+                                            </div>
+                                            <div class="offer-label">50%</div>
+
+                                            <div class="card-body p-lg-4 text-center">
+                                                <div
+                                                    class="small-ratings justify-content-center">
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <h5 class="card-title">
+                                                    11Electric Multi-Functional Tea
+                                                    Coffee Pot11
+                                                </h5>
+                                                <div class="prices">
+                                                    <span class="price">AED499</span>
+                                                    <span class="price-old">AED600</span>
+                                                </div>
+                                                <button
+                                                    class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                                    <img
+                                                        class="cart-add-to-cart-icon"
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/cart-icon.svg" />
+                                                    <span class="item_button_text">Add
+                                                        To Cart
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="card product-card">
+                                            <div class="product-card-image p-3">
+                                                <a
+                                                    href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                                    class="product-image">
+                                                    <img
+                                                        src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                                        alt="menu"
+                                                        class="card-img-top" />
+                                                </a>
+                                            </div>
+
+                                            <div class="product_sku badge bg-danger">
+                                                10026
+                                            </div>
+                                            <div class="fav-label">
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                                    <img class="heart-like-icon " alt="icon image"
+                                                        src="/7md_website/static/src/images/heart@2x.png" />
+                                                </a>
+                                            </div>
+                                            <div class="offer-label">50%</div>
+
+                                            <div class="card-body p-lg-4 text-center">
+                                                <div
+                                                    class="small-ratings justify-content-center">
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <h5 class="card-title">
+                                                    11Electric Multi-Functional Tea
+                                                    Coffee Pot11
+                                                </h5>
+                                                <div class="prices">
+                                                    <span class="price">AED499</span>
+                                                    <span class="price-old">AED600</span>
+                                                </div>
+                                                <button
+                                                    class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                                    <img
+                                                        class="cart-add-to-cart-icon"
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/cart-icon.svg" />
+                                                    <span class="item_button_text">Add
+                                                        To Cart
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="card product-card">
+                                            <div class="product-card-image p-3">
+                                                <a
+                                                    href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                                    class="product-image">
+                                                    <img
+                                                        src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                                        alt="menu"
+                                                        class="card-img-top" />
+                                                </a>
+                                            </div>
+
+                                            <div class="product_sku badge bg-danger">
+                                                10026
+                                            </div>
+                                            <div class="fav-label">
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                                    <img class="heart-like-icon " alt="icon image"
+                                                        src="/7md_website/static/src/images/heart@2x.png" />
+                                                </a>
+                                            </div>
+                                            <div class="offer-label">50%</div>
+
+                                            <div class="card-body p-lg-4 text-center">
+                                                <div
+                                                    class="small-ratings justify-content-center">
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <h5 class="card-title">
+                                                    11Electric Multi-Functional Tea
+                                                    Coffee Pot11
+                                                </h5>
+                                                <div class="prices">
+                                                    <span class="price">AED499</span>
+                                                    <span class="price-old">AED600</span>
+                                                </div>
+                                                <button
+                                                    class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                                    <img
+                                                        class="cart-add-to-cart-icon"
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/cart-icon.svg" />
+                                                    <span class="item_button_text">Add
+                                                        To Cart
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="card product-card">
+                                            <div class="product-card-image p-3">
+                                                <a
+                                                    href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                                    class="product-image">
+                                                    <img
+                                                        src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                                        alt="menu"
+                                                        class="card-img-top" />
+                                                </a>
+                                            </div>
+
+                                            <div class="product_sku badge bg-danger">
+                                                10026
+                                            </div>
+                                            <div class="fav-label">
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                                    <img class="heart-like-icon " alt="icon image"
+                                                        src="/7md_website/static/src/images/heart@2x.png" />
+                                                </a>
+                                            </div>
+                                            <div class="offer-label">50%</div>
+
+                                            <div class="card-body p-lg-4 text-center">
+                                                <div
+                                                    class="small-ratings justify-content-center">
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <h5 class="card-title">
+                                                    11Electric Multi-Functional Tea
+                                                    Coffee Pot11
+                                                </h5>
+                                                <div class="prices">
+                                                    <span class="price">AED499</span>
+                                                    <span class="price-old">AED600</span>
+                                                </div>
+                                                <button
+                                                    class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                                    <img
+                                                        class="cart-add-to-cart-icon"
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/cart-icon.svg" />
+                                                    <span class="item_button_text">Add
+                                                        To Cart
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="card product-card">
+                                            <div class="product-card-image p-3">
+                                                <a
+                                                    href="https://www.7md.ae/en/products/wireless-arcade-game-box-with-10-full-hd-screen-two-controllers-comes-with-26800-built-in-games"
+                                                    class="product-image">
+                                                    <img
+                                                        src="https://www.7md.ae/storage/media/5RwvGeOLqB3nazQgJNA3SVFL1orNyLCjKIUCJlB0.jpg"
+                                                        alt="menu"
+                                                        class="card-img-top" />
+                                                </a>
+                                            </div>
+
+                                            <div class="product_sku badge bg-danger">
+                                                10026
+                                            </div>
+                                            <div class="fav-label">
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-light p-2 m-0 rounded-circle btn-wishlist">
+                                                    <img class="heart-like-icon " alt="icon image"
+                                                        src="/7md_website/static/src/images/heart@2x.png" />
+                                                </a>
+                                            </div>
+                                            <div class="offer-label">50%</div>
+
+                                            <div class="card-body p-lg-4 text-center">
+                                                <div
+                                                    class="small-ratings justify-content-center">
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star rating-color"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <h5 class="card-title">
+                                                    11Electric Multi-Functional Tea
+                                                    Coffee Pot11
+                                                </h5>
+                                                <div class="prices">
+                                                    <span class="price">AED499</span>
+                                                    <span class="price-old">AED600</span>
+                                                </div>
+                                                <button
+                                                    class="btn btn-light flex-grow-1 bg-white text-primary rounded-0 border-primary">
+                                                    <img
+                                                        class="cart-add-to-cart-icon"
+                                                        alt="icon image"
+                                                        src="/7md_website/static/src/images/cart-icon.svg" />
+                                                    <span class="item_button_text">Add
+                                                        To Cart
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Download the app and explore more section -->
+            <section class="container-fluid px-lg-4 main_container pt-4 download-the-app-section">
+                <div class="row pb-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <picture class="w-100 card-img">
+                                <source media="(min-width:768px)"
+                                    srcset="/7md_website/static/src/images/mobile-banner.png" />
+                                <img src="/7md_website/static/src/images/monile-app-mobile.png"
+                                    class="img-camp rounded-3 " alt="icon image"
+                                    style="width: 100%; min-height: 175px" />
+                            </picture>
+                            <div
+                                class="card-img-overlay col-12 flex-grow-1 d-flex flex-column flex-md-row justify-content-center p-3 p-lg-5 align-items-center">
+                                <div
+                                    class="col-12 col-md-4 col-xl-3 d-flex flex-column align-items-center justify-content-center">
+                                    <h4
+                                        class="px-2 text-primary fs-3 text-uppercase fbold app-banner-txt position-relative"
+                                        data-text="don't miss a thing">
+                                        don't miss a thing
+                                    </h4>
+                                </div>
+
+                                <div
+                                    class="col-12 col-md-4 col-xl-3 d-flex flex-column align-items-center justify-content-center">
+                                    <h4
+                                        class="px-2 fs-3 mt-2 text-dark text-center text-capitalize fbold">
+                                        Download The App
+                                    </h4>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="p-2">
+                                            <a
+                                                href="https://apps.apple.com/ae/app/7md-store/id1535805820"
+                                                target="_blank">
+                                                <img
+                                                    src="/7md_website/static/src/images/download-on-the-app-store.svg"
+                                                    alt="Logo"
+                                                    class="store_btn img-fluid " />
+                                            </a>
+                                        </div>
+                                        <div class="p-2">
+                                            <a
+                                                href="https://play.google.com/store/apps/details?id=com.ibox.hamadstore"
+                                                target="_blank">
+                                                <img
+                                                    src="/7md_website/static/src/images/download-on-google-play.svg"
+                                                    alt="Logo"
+                                                    class="play_btn img-fluid" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div
+                        class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-start align-items-center">
+                        <h2 class="section-title fw-bold">
+                            <img src="/7md_website/static/src/images/Group 16959.png"
+                                alt="icon image"
+                                class="top_categories_title_img " /> Explore More </h2>
+                    </div>
+                </div>
+                <div class="row row-cols-2 row-cols-xxl-5 row-cols-md-4 row-cols-lg-4 mb-4">
+                    <t t-foreach="env['product.product'].search([],limit=12)" t-as="offer_pro">
+                        <div class="col pt-4">
+                            <div class="card product-card">
+                                <div class="product-card-image p-3">
+                                    <a t-if="offer_pro.image_1920"
+                                        t-attf-href="/shop/product/#{ offer_pro.product_tmpl_id.id }"
+                                        class="product-image">
+                                        <img
+                                            t-att-src="image_data_uri(offer_pro.image_1920)"
+                                            alt="menu"
+                                            class="card-img-top" />
+                                    </a>
+                                </div>
+                                <t t-if="offer_pro.default_code">
+                                    <div class="product_sku badge bg-danger">
+                                        <t t-esc="offer_pro.default_code" />
+                                    </div>
+                                </t>
+                                <t t-if="offer_pro.available_qty_wh == 0">
+                                    <div class="product_sku badge bg-danger out_of_stock_custom">Out
+                                        of Stock</div>
+                                </t>
+                                <t t-set="view_more_template_price_vals"
+                                    t-value="get_product_prices[offer_pro.product_tmpl_id.id]" />
+                                <t t-if="'base_price' in view_more_template_price_vals">
+                                    <t t-set="_new_offer_discount"
+                                        t-value="((view_more_template_price_vals['base_price'] - view_more_template_price_vals['price_reduce']) / view_more_template_price_vals['base_price']) * 100" />
+
+                                    <div class="offer-label">
+                                        <t t-esc="_new_offer_discount"
+                                            t-options='{"widget": "integer"}' /> % </div>
+                                </t>
+                                <div class="fav-label fav-label-custom">
+                                    <t
+                                        t-nocache="The wishlist depends on the user and must not be shared with other users. As this rendering is in the loop, the product value is set in the template, we must retain the id of the product on which we are."
+                                        t-nocache-product_template_id="offer_pro.product_tmpl_id.id">
+                                        <t t-set="product" t-value="offer_pro.product_tmpl_id" />
+                                        <t t-set="in_wish" t-value="product._is_in_wishlist()" />
+                                        <t t-set="product_variant_id" t-value="offer_pro.id" />
+                                        <button t-if="product_variant_id" type="button"
+                                            role="button"
+                                            class="btn btn-outline-primary bg-white o_homepage_add_wishlist"
+                                            t-att-disabled='in_wish or None' title="Add to Wishlist"
+                                            t-att-data-product-template-id="product.id"
+                                            t-att-data-product-product-id="product_variant_id"
+                                            data-action="website_sale.o_wishlist">
+                                            <t t-if="not in_wish">
+                                                <i class="fa fa-heart-o me-2" aria-hidden="true"
+                                                    role="img"
+                                                    aria-label="Add to wishlist" />
+                                            </t>
+                                            <t t-elif="in_wish">
+                                                <i class="fa fa-heart me-2" aria-hidden="true"
+                                                    role="img"
+                                                    aria-label="Add to wishlist" />
+                                            </t>
+
+                                        </button>
+                                    </t>
+                                </div>
+
+                                <div class="card-body p-lg-4 text-center">
+                                    <div t-raw="offer_pro.sudo().star_rating_html"
+                                        class="small-ratings justify-content-center d-flex"></div>
+                                    <!--                                    <div-->
+                                    <!--                                        class="small-ratings justify-content-center">-->
+                                    <!--                                        <i class="fa fa-star rating-color"></i>-->
+                                    <!--                                        <i class="fa fa-star rating-color"></i>-->
+                                    <!--                                        <i class="fa fa-star rating-color"></i>-->
+                                    <!--                                        <i class="fa fa-star"></i>-->
+                                    <!--                                        <i class="fa fa-star"></i>-->
+                                    <!--                                    </div>-->
+                                    <h5 class="card-title">
+                                        <a class="product-text-decoration-custom"
+                                            t-attf-href="/shop/product/#{ offer_pro.product_tmpl_id.id }">
+                                            <t t-esc="offer_pro.name" />
+                                        </a>
+                                    </h5>
+                                    <div class="prices">
+
+                                        <span class="price" style="white-space: nowrap;"
+                                            t-esc="view_more_template_price_vals['price_reduce']"
+                                            t-options="{'widget': 'monetary', 'display_currency': website.currency_id, 'precision': 2}" />
+
+                                        <t
+                                            t-if="'base_price' in view_more_template_price_vals and (view_more_template_price_vals['base_price'] &gt; view_more_template_price_vals['price_reduce']) and (view_more_template_price_vals['price_reduce'] or not website.prevent_zero_price_sale)">
+                                            <del t-attf-class="text-muted me-1 h6 mb-0"
+                                                style="white-space: nowrap;">
+                                                <em class="small"
+                                                    t-esc="view_more_template_price_vals['base_price']"
+                                                    t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                            </del>
+
+
+                                        </t>
+                                    </div>
+
+                                    <div class="cart-buy-now-outer-div">
+                                        <t t-if="offer_pro.sudo().available_qty_wh > 0">
+                                            <button type="button"
+                                                class="btn btn-primary js_add_cart_json  mt-2"
+                                                t-attf-data-product-id="{{ offer_pro.id }}">Add to
+                                                Cart
+                                            </button>
+                                            <button class="buy-now-btn btn btn-outline-primary"
+                                                t-attf-data-product-id="{{ offer_pro.id }}"
+                                                style="margin-top: 7px;">Buy
+                                                Now
+                                            </button>
+                                        </t>
+                                        <t t-else="">
+                                            <button type="button" class="btn btn-primary mt-2"
+                                                t-attf-data-product-id="#" disabled="1">Add to Cart
+                                            </button>
+                                            <button class="btn btn-outline-primary"
+                                                t-attf-data-product-id="#" style="margin-top: 7px;"
+                                                disabled="1">Buy
+                                                Now
+                                            </button>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <div class="row pb-4">
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <a class="btn px-5 text-white btn-lg btn-primary" href="/shop">View More</a>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+</odoo>

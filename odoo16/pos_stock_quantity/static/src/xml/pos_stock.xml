@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_stock_quantity.template" inherit_id="point_of_sale.template">
+
+    <t  t-name="ProductItem" t-inherit="point_of_sale.ProductItem" t-inherit-mode="extension" owl="1">
+        <xpath expr="//article[hasclass('product')]" position="attributes">
+            <attribute name="t-attf-class">
+                #{get_stock_qty &lt;= 0 and props.product.type == 'product' ? 'product.disable' : ''}
+            </attribute>
+            <attribute name="class" remove="w-75" add="w-50" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('product-content')]" position="inside">
+            <div t-if="env.pos.config.show_qty_available or env.pos.config.show_qty_available_res" class="stock-info">
+                <div class="flex" t-if="env.pos.config.show_qty_available or env.pos.config.show_qty_available_res">
+                    <div class="available_stock_total"
+                        title="Available Total"
+                    >
+                        <i class="fa fa-dropbox" />
+                        <span
+                            t-attf-class="qty-tag {{get_stock_qty > env.pos.config.limit_qty ? 'available' : 'not-available'}}"
+                        >
+                            <t t-esc="get_stock_qty" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_my_home_comments" name="Show comments" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Comments/Reviews</t>
+                <t t-set="url" t-value="'/my/reviews'" />
+                <div>Total Reviews: <span t-esc="total_reviews"/></div>
+                <!-- <t t-set="placeholder_count" t-value="'total_comments'"/> -->
+                <!-- <t t-set="placeholder_count" t-value="'rfq_count'"/> -->
+            </t>
+        </xpath>
+    </template>
+
+    <template id="product_detail_screen.reviews" name="7md Reviews">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <section class="row">
+                    <div class="col-12">
+                        <t t-set="myreviews"
+                            t-value="request.env['product.custom.review'].search([])" />
+                        <!-- 'user_id','=',user.id) -->
+
+
+                        <table class="table review-table-custom">
+                            <tr>
+                                <th>
+                                    Image
+                                </th>
+                                <th>
+                                    Product
+                                </th>
+                                <th>
+                                    Review
+                                </th>
+                            </tr>
+                            <tbody>
+                                <t t-foreach="myreviews" t-as="review">
+                                    <tr>
+                                       <td>
+                                        <t t-if="review.product_id.image_1920">
+                                            <img t-att-src="image_data_uri(review.product_id.image_1920)" alt="Product Image" class="product-image" width="100px" height="115px"/>
+                                        </t>
+                                       </td>
+                                        <td>
+                                            <span t-field="review.product_id" />
+                                        </td>
+                                        <td>
+                                            <span t-field="review.comments" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </section>
+            </div>
+        </t>
+    </template>
+
+</odoo>

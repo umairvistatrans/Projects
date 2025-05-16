@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="oe_login_signup.shop_customized_three_products" name="shop three products"
+        inherit_id="dynamic_product_category.shop_customized_layout">
+        <!-- <xpath expr="//aside[1]/div[1]/div[1]/div[1]/ul[2]" position="replace"> -->
+        <xpath expr="//ul[hasclass('latest-product-ul')]" position="replace">
+
+            <ul class="latest-product-ul">
+                <t t-foreach="s_product_three" t-as="product_three">
+                    <li class="mb-4 border-none">
+                        <a href="javascript:void(0);">
+                            <div class="latest-product-outer-div">
+                                <div class="img-div">
+                                        <t t-if="product_three.image_1920">
+                                            <img
+                                                t-att-src="image_data_uri(product_three.image_1920)"
+                                                alt="card-img-top" />
+                                        </t>
+                                </div>
+                                <div class="details-div">
+                                    <div class="products-name">
+                                        <a
+                                        t-attf-href="/shop/product/#{ product_three.product_tmpl_id.id }">
+                                        <t t-esc="product_three.name" />
+                                        </a>
+                                    </div>
+                                    <div class="ratings-div">
+                                         <div t-raw="product_three.sudo().star_rating_html" class="small-ratings justify-content-center d-flex"></div>
+<!--                                        <div-->
+<!--                                            class="small-ratings justify-content-center mt-4">-->
+<!--                                            <i class="fa fa-star rating-color"></i>-->
+<!--                                            <i class="fa fa-star rating-color"></i>-->
+<!--                                            <i class="fa fa-star rating-color"></i>-->
+<!--                                            <i class="fa fa-star rating-color"></i>-->
+<!--                                            <i class="fa fa-star"></i>-->
+<!--                                        </div>-->
+                                    </div>
+                                    <div class="price-div">
+                                        <t t-esc="product_three.list_price" />
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </t>
+            </ul>
+
+
+        </xpath>
+    </template>
+
+</odoo>

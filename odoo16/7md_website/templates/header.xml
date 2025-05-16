@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="website.submenu" name="Submenu">
+        <t t-set="show_dropdown"
+           t-value="(submenu.is_mega_menu and submenu.is_visible) or submenu.child_id.filtered(lambda menu: menu.is_visible)"/>
+
+        <li t-if="submenu.is_visible and not (submenu.child_id or submenu.is_mega_menu)" class="nav-item flex-shrink-0">
+            <a t-att-href="submenu.clean_url()"
+               t-attf-class="#{link_class or ''} nav-link text-white #{'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else ''}"
+               role="menuitem"
+               t-ignore="true"
+               aria-current="page"
+               t-att-target="'_blank' if submenu.new_window else None">
+                <span t-field="submenu.name"/>
+            </a>
+
+        </li>
+        <li t-elif="show_dropdown" t-attf-class="#{item_class or ''} dropdown #{
+        (submenu.clean_url() and submenu.clean_url() != '/' and any(request.httprequest.path == child.url for child in submenu.child_id if child.url) or
+         (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'
+        } #{submenu.is_mega_menu and 'position-static'} nav-link text-white" aria-current="page">
+            <a t-attf-class="#{link_class or ''} dropdown-toggle #{submenu.is_mega_menu and 'o_mega_menu_toggle'}"
+               data-bs-toggle="dropdown" href="#">
+                <span t-field="submenu.name"/>
+            </a>
+            <div t-if="submenu.is_mega_menu"
+                 t-attf-class="dropdown-menu o_mega_menu #{submenu.mega_menu_classes}"
+                 data-name="Mega Menu"
+                 t-field="submenu.mega_menu_content"/>
+            <ul t-else="" class="dropdown-menu" role="menu">
+                <t t-foreach="submenu.child_id" t-as="submenu">
+                    <t t-call="website.submenu">
+                        <t t-set="item_class" t-value="None"/>
+                        <t t-set="link_class" t-valuef="dropdown-item"/>
+                    </t>
+                </t>
+            </ul>
+        </li>
+    </template>
+
+    <template id="custom_header" inherit_id="website.layout" name="Custom Header">
+        <xpath expr="//header" position="replace">
+            <header>
+
+                <nav class="navbar bg-black p-0 m-0 top_nav">
+                    <div class="container-fluid py-2 fixed-top bg-black header-top-fixed">
+                        <div
+                                class="col-12 d-flex col-md-12 col-lg-2 flex-row-reverse flex-lg-row justify-content-between align-items-center">
+                            <a
+                                    class="flex-grow-1 flex-lg-grow-0 align-self-md-start text-center d-none d-lg-block"
+                                    href="/">
+                                <img src="/7md_website/static/src/images/7md-logo-322@2x.png"
+                                     alt="Logo" width="118"
+                                     height="68"
+                                     class="d-inline-block align-text-top"/>
+                            </a>
+                            <button class="navbar-toggler text-light border-0 d-none d-lg-block"
+                                    type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#main-menu" aria-controls="main-menu"
+                                    aria-label="Main Menu">
+                                <img src="/7md_website/static/src/images/hamburger.png"
+                                     alt="hamburger icon"
+                                     class="img-fluid hamburger-icon" width="22" height="22"/>
+                            </button>
+                        </div>
+                        <div class="col flex-grow-1 pt-2 pt-lg-0">
+                            <div class="d-flex flex-md-row flex-column w-100">
+                                <div
+                                        class="d-flex px-lg-4 col-md-6 col-12 px-2 flex-grow-1 justify-content-around align-items-center">
+                                    <button type="button" data-bs-toggle="offcanvas"
+                                            data-bs-target="#main-menu" aria-controls="main-menu"
+                                            aria-label="Main Menu"
+                                            class="navbar-toggler text-light border-0 d-block d-lg-none">
+                                        <img src="/7md_website/static/src/images/hamburger.png"
+                                             alt="hamburger icon"
+                                             class="img-fluid hamburger-icon" width="22" height="22"/>
+                                    </button>
+
+                                    <div class="main_search_box">
+                                        <div class="header-search">
+                                            <!-- <form class="search-form"> -->
+                                            <form method="get"
+                                                  class="o_searchbar_form s_searchbar_input o_wsale_products_searchbar_form me-auto flex-grow-1 d-lg-inline d-inline"
+                                                  action="/shop" data-snippet="s_searchbar_input">
+                                                <div class="input-group search_input_container">
+                                                    <!--                                                    <input type="text" name="query"-->
+                                                    <!--                                                        autocomplete="off"-->
+                                                    <!--                                                        placeholder="I am shopping for......."-->
+                                                    <!--                                                        class="form-control search-input" />-->
+                                                    <!-- <t
+                                                    t-call="website.website_search_box_input"> -->
+                                                    <t t-call="7md_website.header_searchbar">
+                                                        <t t-set="search_type" t-valuef="all"/>
+                                                        <t t-set="action" t-valuef="/website/search"/>
+                                                        <t t-set="limit" t-valuef="5"/>
+                                                        <t t-set="display_image" t-valuef="true"/>
+                                                        <t t-set="display_description"
+                                                           t-valuef="true"/>
+                                                        <t t-set="display_extra_link"
+                                                           t-valuef="true"/>
+                                                        <t t-set="display_detail" t-valuef="true"/>
+                                                    </t>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!---->
+                                    </div>
+                                </div>
+                                <div
+                                        class="d-flex pt-2 pt-md-0 col header-icons justify-content-start justify-content-md-end align-items-center">
+                                    <div class="col-4">
+                                        <div
+                                                class="d-flex pt-2 pt-md-0 ustify-content-start align-items-center">
+                                            <!-- Price List -->
+                                            <t t-call="7md_website.pricelist_custom">
+                                            </t>
+                                            <!-- Language Selector -->
+                                            <t t-call="website.language_selector"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="px-md-2 d-flex justify-content-center">
+                                            <a href="/"
+                                               class="d-block d-lg-none">
+                                                <img
+                                                        src="/7md_website/static/src/images/7md-logo-322@2x.png"
+                                                        alt="Logo"
+                                                        class="img-fluid mobile-logo-header"/>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-5">
+                                        <div
+                                                class="px-md-2 flex-grow-1 flex-md-grow-0 d-flex justify-content-center align-items-center three-cta-link-outer">
+                                            <div class="dropdown d-inline-block profile-dropdown-div">
+                                                <button
+                                                        class="btn btn-sm bg-transparent text-white dropdown-toggle"
+                                                        type="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <img
+                                                            src="/7md_website/static/src/images/PROFILE.png"
+                                                            width="36" height="36" alt="header image"/>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                           href="/my/account">My Profiles
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                           t-attf-href="/web/session/logout?redirect=/shop/cart">
+                                                            <span class="o_field_translate">My Orders</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                           t-attf-href="/my/subscription">
+                                                            <span class="o_field_translate">My Subscriptions</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item text-danger"
+                                                           t-attf-href="/web/session/logout?redirect=/web/login">
+                                                            Logout
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <t t-set="wishcount"
+                                                t-value="len(request.env['product.wishlist'].current())" />
+                                            <a
+                                                    t-attf-href="/shop/wishlist"
+                                                    class="bg-transparent btn text-white wishlist-link">
+                                                <img
+                                                        src="/7md_website/static/src/images/favourite.png"
+                                                        width="36" height="36" alt="header image"/>
+                                                <sup t-esc="wishcount"
+                                                    t-attf-class="my_wish_quantity o_animate_blink badge text-bg-primary" />
+                                            </a>
+                                            <div class="dropdown d-inline-block cart-div-header">
+                                                <!-- Cart Icon -->
+                                                <t t-call="website_sale.header_cart_link"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                            class="container-fluid d-flex flex-row-reverse flex-lg-row bg-primary py-2 header-social-icons-links">
+                        <div class="div header-menu d-none d-lg-flex" id="header-menu">
+                            <div class="navbar-expand navbar-collapse">
+
+                                <ul class="navbar-nav text-white">
+                                    <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                        <t t-call="website.submenu" class="nav-item flex-shrink-0">
+                                            <t t-set="item_class" t-value="'nav-item'"/>
+                                            <t t-set="link_class" t-value="'nav-link'"/>
+                                        </t>
+                                    </t>
+                                </ul>
+                            </div>
+                        </div>
+                        <div
+                                class="offers-header-btn-group gap-2 flex-grow-0 d-flex justify-content-center justify-content-md-end justify-content-lg-end">
+                            <!-- <a href="https://www.instagram.com/7mdstore/?hl=en"
+                               data-event_name="instagram_button_click"
+                               data-category="Instagram Message" data-label="Instagram"
+                               target="_blank"
+                               class="btn-primary text-white border-white mx-2 py-2 btn nav-social-icon link_click instagram-icon">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@7mdst"
+                               data-event_name="tiktok_button_click" data-category="Tiktok Show"
+                               data-label="Tiktok" target="_blank"
+                               class="btn-primary text-white border-white mx-2 py-2 btn nav-social-icon link_click tiktok-icon">
+                                <i class="fa fa-tiktok"></i>
+                            </a>
+                            <a href="https://wa.me/971544441888"
+                               data-event_name="whatsapp_button_click"
+                               data-category="Whatsapp Message" data-label="Whatsapp"
+                               target="_blank"
+                               class="btn-primary text-white border-white mx-2 py-2 btn nav-social-icon link_click whatsapp-icon">
+                                <i class="fa fa-whatsapp"></i>
+                            </a>
+                            <a href="https://www.snapchat.com/add/store7md"
+                               data-event_name="snapchat_button_click"
+                               data-category="Snapchat Message" data-label="Snapchat"
+                               target="_blank"
+                               class="btn-primary text-white border-white mx-2 py-2 btn nav-social-icon link_click snapchat-icon">
+                                <i class="fa fa-snapchat"></i>
+                            </a> -->
+                            <a class="social-icon-custom-link" href="https://www.instagram.com/7mdstore/?hl=en"
+                            data-event_name="instagram_button_click"
+                            data-category="Instagram Message" data-label="Instagram"
+                            target="_blank">
+                                <img src="/7md_website/static/src/images/instagram-icon.jpg"
+                                alt="alt image here"  />
+                            </a>
+                            <a class="social-icon-custom-link"  href="https://www.tiktok.com/@7mdst"
+                            data-event_name="tiktok_button_click" data-category="Tiktok Show"
+                            data-label="Tiktok" target="_blank">
+                                <img src="/7md_website/static/src/images/tiktok-icon.png"
+                                alt="alt image here"  />
+                            </a>
+                            <a class="social-icon-custom-link" href="https://wa.me/971544441888"
+                            data-event_name="whatsapp_button_click"
+                            data-category="Whatsapp Message" data-label="Whatsapp"
+                            target="_blank">
+                                <img src="/7md_website/static/src/images/whatsapp-icon.jpg"
+                                alt="alt image here"  />
+                            </a>
+                            <a class="social-icon-custom-link"  href="https://www.snapchat.com/add/store7md"
+                            data-event_name="snapchat_button_click"
+                            data-category="Snapchat Message" data-label="Snapchat"
+                            target="_blank">
+                                <img src="/7md_website/static/src/images/snapchat-icon.png"
+                                alt="alt image here"  />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="shopping-cart-offcanvas"
+                         aria-labelledby="shopping-cart-offcanvas-label">
+                        <div class="offcanvas-header border">
+                            <h2 class="offcanvas-title text-center text-primary"
+                                id="shopping-cart-offcanvas-label">
+                                My Cart
+                            </h2>
+                            <button type="button" class="btn-close rounded-circle bg-primary"
+                                    data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body d-flex flex-column justify-content-between">
+                            <div class="cart-content flex-grow-1">
+                                <div class="product-card pb-1 border-bottom">
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                 alt="alt image here" class="card-img-top"/>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <h5 class="card-title fw-light mb-1 mt-2">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device With
+                                                Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div
+                                                    class="input-group-sm w-50 rounded-3 border input-group">
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    -
+                                                </button>
+                                                <input class="form-control text-center"
+                                                       name="item-quantity" value="2"/>
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    +
+                                                </button>
+                                            </div>
+                                            <div class="prices pt-1">
+                                                <span class="price">AED499</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="product-card pb-1 border-bottom">
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                 alt="alt image here" class="card-img-top"/>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <h5 class="card-title fw-light mb-1 mt-2">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device With
+                                                Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div
+                                                    class="input-group-sm w-50 rounded-3 border input-group">
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    -
+                                                </button>
+                                                <input class="form-control text-center"
+                                                       name="item-quantity" value="2"/>
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    +
+                                                </button>
+                                            </div>
+                                            <div class="prices pt-1">
+                                                <span class="price">AED499</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-card pb-1 border-bottom">
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                 alt="alt image here" class="card-img-top"/>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <h5 class="card-title fw-light mb-1 mt-2">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device With
+                                                Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div
+                                                    class="input-group-sm w-50 rounded-3 border input-group">
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    -
+                                                </button>
+                                                <input class="form-control text-center"
+                                                       name="item-quantity" value="2"/>
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    +
+                                                </button>
+                                            </div>
+                                            <div class="prices pt-1">
+                                                <span class="price">AED499</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-card pb-1 border-bottom">
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                 alt="alt image here" class="card-img-top"/>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <h5 class="card-title fw-light mb-1 mt-2">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device With
+                                                Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div
+                                                    class="input-group-sm w-50 rounded-3 border input-group">
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    -
+                                                </button>
+                                                <input class="form-control text-center"
+                                                       name="item-quantity" value="2"/>
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    +
+                                                </button>
+                                            </div>
+                                            <div class="prices pt-1">
+                                                <span class="price">AED499</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-card pb-1 border-bottom">
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                 alt="alt image here" class="card-img-top"/>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <h5 class="card-title fw-light mb-1 mt-2">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device With
+                                                Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div
+                                                    class="input-group-sm w-50 rounded-3 border input-group">
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    -
+                                                </button>
+                                                <input class="form-control text-center"
+                                                       name="item-quantity" value="2"/>
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    +
+                                                </button>
+                                            </div>
+                                            <div class="prices pt-1">
+                                                <span class="price">AED499</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-card pb-1 border-bottom">
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                 alt="alt image here" class="card-img-top"/>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <h5 class="card-title fw-light mb-1 mt-2">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device With
+                                                Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div
+                                                    class="input-group-sm w-50 rounded-3 border input-group">
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    -
+                                                </button>
+                                                <input class="form-control text-center"
+                                                       name="item-quantity" value="2"/>
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    +
+                                                </button>
+                                            </div>
+                                            <div class="prices pt-1">
+                                                <span class="price">AED499</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-card pb-1 border-bottom">
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                 alt="alt image here" class="card-img-top"/>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <h5 class="card-title fw-light mb-1 mt-2">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device With
+                                                Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div
+                                                    class="input-group-sm w-50 rounded-3 border input-group">
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    -
+                                                </button>
+                                                <input class="form-control text-center"
+                                                       name="item-quantity" value="2"/>
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    +
+                                                </button>
+                                            </div>
+                                            <div class="prices pt-1">
+                                                <span class="price">AED499</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-card pb-1 border-bottom">
+                                    <div class="card-horizontal">
+                                        <div class="card-img-container">
+                                            <img src="/7md_website/static/src/images/item-small.png"
+                                                 alt="alt image here" class="card-img-top"/>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <h5 class="card-title fw-light mb-1 mt-2">
+                                                Multi-Functional Baby Bedwetting Alarm Reminder
+                                                Device With
+                                                Receiver Clip Transmitter Adult Care Training
+                                            </h5>
+                                            <div
+                                                    class="input-group-sm w-50 rounded-3 border input-group">
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    -
+                                                </button>
+                                                <input class="form-control text-center"
+                                                       name="item-quantity" value="2"/>
+                                                <button type="button"
+                                                        class="btn-sm btn border btn-light">
+                                                    +
+                                                </button>
+                                            </div>
+                                            <div class="prices pt-1">
+                                                <span class="price">AED499</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                    class="d-flex flex-column border border-light justify-content-between">
+                                <div class="total d-flex p-2 justify-content-between">
+                                    <div class="fw-bold">Total:</div>
+                                    <div class="price">AED12000</div>
+                                </div>
+                                <div class="d-flex justify-content-between p-2">
+                                    <button class="btn btn-success btn-lg px-3">Check Out</button>
+                                    <button class="btn btn-primary btn-lg">Continue Shopping</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="main-menu"
+                         aria-labelledby="main-menu-label">
+                        <div class="offcanvas-header bg-black">
+                        <a href="/">    <img src="/7md_website/static/src/images/7md-logo-322@2x.png"
+                                 width="118" height="68" alt="header image"/> </a>
+                            <button type="button" class="btn-close bg-primary rounded-circle"
+                                    data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body d-flex flex-column justify-content-between">
+                            <ul class="list-group product-cat">
+                                <t t-foreach="website.menu_id.child_id" t-as="submenu" t-idx="index">
+                                    <li class="list-group-item">
+                                        <a t-att-href="submenu.clean_url()"
+                                           t-attf-class="nav_selected_button_text"
+                                           t-att-target="'_blank' if submenu.new_window else None">
+                                            <span t-field="submenu.name"/>
+                                        </a>
+                                    </li>
+                                </t>
+                            </ul>
+
+
+                            <!--                                <li class="list-group-item">-->
+                            <!--                                    <a class="active">-->
+                            <!--                                        <span class="nav_selected_button_text">NEW ARRIVALS</span>-->
+                            <!--                                    </a>-->
+                            <!--                                </li>-->
+
+                        </div>
+                    </div>
+                </nav>
+            </header>
+        </xpath>
+    </template>
+
+
+</odoo>

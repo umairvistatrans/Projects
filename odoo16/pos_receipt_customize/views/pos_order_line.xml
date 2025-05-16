@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form Product.Template -->
+        <record id="view_inherit_pos_order_form" model="ir.ui.view">
+            <field name="name">view.inherit.pos.order.form</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+            <xpath expr="//notebook//page[@name='products']//field[@name='full_product_name']" position="replace">
+                <field name="full_product_display"/>
+                </xpath>
+                
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="is_pos_refund"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

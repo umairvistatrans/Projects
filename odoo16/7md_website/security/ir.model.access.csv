@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_home_slider_config,home.slider.config,model_home_slider_config,base.group_user,1,1,1,1
+access_navbar_category_config,navbar.category.config,model_navbar_category_config,base.group_user,1,1,1,1

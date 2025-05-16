@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="pre_order_product_page" name="Pre-Order" inherit_id="website_sale.product" customize_show="True">
+        <xpath expr="//section[@id='product_detail']" position="after">
+            <t t-set="preorder" t-value="product.env['website.preorder'].search([('status','=',True)])"/>
+            <div class="container pre_order_policy d-none">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a href="#info" role="tab" data-toggle="tab"
+                        class="nav-link active" style="background-color:#47469B;color:#FFF;"> Pre-Order Policy </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" role="tabpanel" id="info">
+                        <div class="pre_order_content pl-4 pt-3" style="font-size:14px;">
+                            <t t-if='preorder.display_preorder_qty_range'>
+                                <li class="product_qty_range">
+                                    <t t-if="product.is_default">
+                                        Minimum <span><b><t t-esc="product.minimum_preorder_qty"/></b></span> and maximum <span><b><t t-esc="product.maximum_preorder_qty"/></b></span> Unit(s) are allowed for pre-order.
+                                    </t>
+                                    <t t-else="">
+                                        Minimum <span><b><t t-esc="preorder.minimum_preorder_qty"/></b></span> and maximum <span><b><t t-esc="preorder.maximum_preorder_qty"/></b></span> Unit(s) are allowed for pre-order.
+                                    </t>
+                                </li>
+                            </t>
+                            <t t-if="product.preorder_payment_type == 'partial'">
+                                <t t-set="list_preorder_price_converted" t-value="website.currency_id._convert(combination_info['list_price']*(product.percent/100), website.currency_id, website.company_id ,time.strftime('%%Y-%%m-%%d'))"/>
+                                <li class="product_preorder_price">
+                                    <t t-if="product.is_default">
+                                        Pay <b><span><t t-esc="list_preorder_price_converted"/></span> (<span><t t-esc="product.percent"/></span>%)</b> to confirm Pre-Order.Pay the remaining amount once pre-order is confirmed.
+                                    </t>
+                                    <t t-else="">
+                                        Pay <b><span><t t-esc="list_preorder_price_converted"/></span> (<span><t t-esc="preorder.percent"/></span>%)</b> to confirm Pre-Order.Pay the remaining amount once pre-order is confirmed. 
+                                    </t>
+                                </li>
+                            </t>
+                            <t t-if="preorder.available_date_on_preorder_product">
+                                <li class="product_preorder_date_message">
+                                    <t t-if="product.is_default">
+                                        Order available Upto <span><b><t t-esc="product.preorder_expiry" t-options="{'widget': 'date'}"/></b></span>
+                                    </t>
+                                    <t t-else="">
+                                        Order available Upto <span><b><t t-esc="preorder.preorder_expiry" t-options="{'widget': 'date'}"/></b></span>
+                                    </t>
+                                </li>
+                            </t>
+                            <t t-if="preorder.custom_message">
+                                <li class="preorder_custom_message">
+                                    <i><b><span><t t-esc="preorder.custom_message"/></span></b></i>
+                                </li>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </xpath>
+        <xpath expr="//a[@id='add_to_cart']" position="replace">
+            <a data-animation-selector=".o_wsale_product_images" role="button" id="add_to_cart" class="btn btn-primary btn-lg js_check_product a-submit my-1 mr-1 px-5 font-weight-bold flex-grow-1 d-none" href="#"><i class="fa fa-shopping-cart mr-2"/>Add to cart</a>
+            <a role="button" id="preorder_to_cart" class="btn btn-primary btn-md mt-2 ml8 add_cart_preorder d-none" href="#" data-toggle="popover" data-placement="top"><i class="fa fa-shopping-cart"/> Pre Order</a>
+            <a role="button" id="add_to_cart_custom" class="btn btn-primary btn-md add_to_cart_custom mt-2 px-3 ml8 font-weight-bold flex-grow-1 d-none" href="#" data-toggle="popover" data-placement="top"><i class="fa fa-shopping-cart mr-2"/>Add to cart</a>
+        </xpath>
+    </template>
+
+    <template id="product_images_custom" inherit_id="website_sale.shop_product_carousel">
+        <xpath expr="//div[hasclass('carousel-outer')]" position="after">
+            <t t-if="product.get_preorder_label() == 'preorder'">
+               <div class="ribbon">
+                    <div class="corner-ribbon">
+                        <span class="ribbon-inner">
+                            <span class="ribbon-text ml16">Available for Pre-Order</span>
+                        </span>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="website_sale.product_quantity" inherit_id="website_sale.product" customize_show="True" name="Select Quantity">
+      <xpath expr="//div[@id='add_to_cart_wrap']" position="before">
+        <t t-set="preorder" t-value="product.env['website.preorder'].search([('status','=',True)])"/>
+        <div t-attf-class="css_quantity input-group d-inline-flex mr-2 my-1 align-middle #{'hidden_qty' if product.get_preorder_label() == 'out_stock' else ''}" contenteditable="false" title="Warning" data-toggle="popover" data-placement="top">
+            <div class="input-group-prepend">
+                <a t-attf-href="#" class="btn btn-primary js_add_cart_json" aria-label="Remove one" title="Remove one">
+                    <i class="fa fa-minus"></i>
+                </a>
+            </div>
+            <t t-if="preorder and preorder.display_preorder_qty_range and product.get_preorder_label() == 'preorder'">
+                <t t-if="product.is_default and product.minimum_preorder_qty">
+                    <input type="text" class="form-control quantity text-center" t-att-data-min="1 if 1 > int(product.minimum_preorder_qty) else int(product.minimum_preorder_qty)" name="add_qty" t-att-value="add_qty if add_qty >= int(product.minimum_preorder_qty) else int(product.minimum_preorder_qty)"/>
+                </t>
+                <t t-else="">
+                    <input type="text" class="form-control quantity text-center" t-att-data-min="1 if 1 > int(preorder.minimum_preorder_qty) else int(preorder.minimum_preorder_qty)" name="add_qty" t-att-value="add_qty if add_qty >= int(preorder.minimum_preorder_qty) else int(preorder.minimum_preorder_qty)" />
+                </t>
+            </t>
+            <t t-else="">
+                <input type="text" class="form-control quantity text-center" data-min="1" name="add_qty" t-att-value="add_qty"/>
+            </t>
+            <div class="input-group-append">
+                <a t-attf-href="#" class="btn btn-primary float_left js_add_cart_json" aria-label="Add one" title="Add one">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </div>
+      </xpath>
+    </template>
+
+    <template id="shop_products_stock_custom" name="Show Stock" inherit_id="website_sale.products_item">
+        <xpath expr="//div[hasclass('o_wsale_product_information_text')]" position="inside">
+            <t t-set="combination_info" t-value="product._get_combination_info(combination, add_qty=add_qty)"/>
+            <t t-if="combination_info['product_quant']">
+                <u><i><t t-esc="combination_info['product_quant']"/> Unit(s) left</i></u>
+            </t>
+            <t t-if="product.get_preorder_label() == 'out_stock'">
+                <u><i>Out of stock</i></u>
+            </t>
+        </xpath>
+        <xpath expr="//form[hasclass('oe_product_cart')]" position="inside">
+            <t t-set="product_href" t-value="keep(product.website_url, page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))" />
+            <t t-if="product.get_preorder_label() == 'preorder'">
+                <a t-att-href="product_href">
+                    <div class="ribbon">
+                        <div class="corner-ribbon">
+                            <span class="ribbon-inner">
+                                <span class="ribbon-text ml16">Available for Pre-Order</span>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </t>
+        </xpath>
+<!--        <xpath expr="//div[hasclass('oe_product_image')]" position="attributes">-->
+<!--            <attribute name="t-attf-class">card-body p-1 oe_product_image #{'out_stock_blur' if product.get_preorder_label() == 'out_stock' else ''}</attribute>-->
+<!--        </xpath>-->
+        <xpath expr="//div[hasclass('o_wsale_product_information')]" position="attributes">
+            <attribute name="t-attf-class">card-body p-0 text-center o_wsale_product_information #{'out_stock_blur' if product.get_preorder_label() == 'out_stock' else ''}</attribute>
+        </xpath>
+    </template>
+
+
+    <template id="preorder_cart_lines_inherit" name="Show Note" inherit_id="website_sale.cart_lines" customize_show="True">
+        <xpath expr="//input[hasclass('js_quantity')]" position="replace">
+            <t t-set="preorder" t-value="request.env['website.preorder'].search([('status','=',True)], limit=1)"/>
+            <t t-if="preorder and preorder.display_preorder_qty_range">
+                <t t-if="line.product_id.is_default and line.product_id.minimum_preorder_qty">
+                   <input type="text" class="js_quantity form-control quantity"  readonly="readonly" t-att-data-line-id="line.id" t-att-data-product-id="line.product_id.id" t-att-data-min="1 if 1 > int(line.product_id.minimum_preorder_qty) else int(line.product_id.minimum_preorder_qty)" t-att-value="int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty" />
+                </t>
+                <t t-else="">
+                    <input type="text" class="js_quantity form-control quantity"  readonly="readonly" t-att-data-line-id="line.id" t-att-data-product-id="line.product_id.id" t-att-data-min="1 if 1 > int(line.product_id.minimum_preorder_qty) else int(line.product_id.minimum_preorder_qty)" t-att-value="int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty" />
+                </t>
+            </t>
+            <t t-else="">
+        	    <input type="text" class="js_quantity form-control quantity" t-att-data-line-id="line.id" t-att-data-product-id="line.product_id.id" t-att-value="int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty" />
+            </t>
+        </xpath>
+    </template>
+</odoo>

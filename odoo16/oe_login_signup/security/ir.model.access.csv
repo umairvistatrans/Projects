@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_oe_store_location,access_oe_store_location,model_oe_store_location,website.group_website_designer,1,1,1,1

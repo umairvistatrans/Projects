@@ -1,0 +1,27 @@
+.HoverCard {
+    display: none !important;
+    display: none;
+}
+
+.Feedback {
+    display: none !important;
+}
+
+.SocialProof {
+    display: none !important;
+}
+
+.Footer {
+    display: none !important;
+}
+
+.Header {
+    display: none !important;
+}
+
+@media(max-width:992px){
+    .product-desc-row{
+        flex-direction: column-reverse;
+        gap: 12px;
+    }
+}

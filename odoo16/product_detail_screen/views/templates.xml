@@ -1,0 +1,896 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Product detail description -->
+    <template id="product_details_custom" name="Product details custom template"
+        inherit_id="website_sale.product">
+
+        <xpath expr="//div[@id=('product_detail_main')]" position="replace">
+            <div class="row"
+                id="product_detail_main" data-name="Product Page"
+                t-att-data-image_width="website.product_page_image_width"
+                t-att-data-image_layout="website.product_page_image_layout">
+                <t t-set="image_cols" t-value="website._get_product_page_proportions()" />
+                <div
+                    t-attf-class="col-lg-#{image_cols[0]} mt-lg-4 o_wsale_product_images position-relative"
+                    t-if="website.product_page_image_width != 'none'">
+                    <t
+                        t-if="website.product_page_image_width != 'none'" />
+                    <t t-call="website_sale.shop_product_images" />
+                </div>
+                <div t-attf-class="col-lg-#{image_cols[1]} mt-md-4" id="product_details">
+                    <div class="card product-details-card bg-transparent shadow-none">
+                        <div class="card-body">
+                            <t t-set="base_url" t-value="product.get_base_url()" />
+                            <h1 class="card-title text-capitalize" itemprop="name"
+                                t-field="product.name">Product
+                                Name
+                            </h1>
+                            <p t-field="product.description_sale" class="text-muted my-2"
+                                placeholder="A short description that will also appear on documents." />
+
+                            <div class="small-ratings justify-content-center mb-2">
+                                <div t-raw="product.sudo().star_rating_html"></div>
+                                <t t-if="product_variant.available_qty_wh">
+                                    <div class="h4 text-success mb-2">In Stock</div>
+                                </t>
+                                <!--                            <t t-elif="product.sudo().detailed_type!='product'">-->
+                                <!--                                <div class="h4 text-success mb-2">Service</div>-->
+                                <!--                            </t>-->
+                                <t t-else="">
+                                    <div class="h4 text-success mb-2">Out of Stock</div>
+                                </t>
+                            </div>
+                            <div class="d-flex align-items-center mb-2 product-sku">
+                                <span class="h4 text-capitalize" style="margin-right:6px">sku:</span>
+                                <span id="product_sku" class="h4 text-primary"
+                                    t-field="product_variant.default_code" />
+
+                            </div>
+                            <div class="d-flex align-items-center mb-2 product-meta">
+                                <span class="h4 text-capitalize" style="margin-right:6px">
+                                    Categories:
+                                </span>
+                                <t t-set="category_count" t-value="0" />
+                                <t t-foreach="product.public_categ_ids" t-as="category">
+                                    <t t-set="category_count" t-value="category_count + 1" />
+                                    <span class="h4 text-primary" t-field="category.name" />
+                                    <t t-if="category_count &lt; len(product.public_categ_ids)">,</t>
+                                </t>
+                            </div>
+
+                            <hr />
+                            <!-- Dummy Data ends here -->
+                            <span itemprop="url" style="display:none;"
+                                t-esc="base_url + product.website_url" />
+                            <span itemprop="image" style="display:none;"
+                                t-esc="base_url + website.image_url(product, 'image_1920')" />
+                            <t t-if="is_view_active('website_sale.product_comment')">
+                                <a href="#o_product_page_reviews"
+                                    class="o_product_page_reviews_link text-decoration-none">
+                                    <t t-call="portal_rating.rating_widget_stars_static">
+                                        <t t-set="rating_avg" t-value="product.rating_avg" />
+                                        <t t-set="trans_text_plural">%s reviews</t>
+                                        <t t-set="trans_text_singular">%s review</t>
+                                        <t t-set="rating_count"
+                                            t-value="(trans_text_plural if product.rating_count > 1 else trans_text_singular) % product.rating_count" />
+                                    </t>
+                                </a>
+                            </t>
+
+                            <form t-if="product._is_add_to_cart_possible()"
+                                action="/shop/cart/update"
+                                method="POST">
+                                <input type="hidden" name="csrf_token"
+                                    t-att-value="request.csrf_token()"
+                                    t-nocache="The csrf token must always be up to date." />
+                                <div class="js_product js_main_product mb-3">
+                                    <div>
+                                        <t t-call="website_sale.product_price" />
+                                        <small t-if="combination_info['base_unit_price']"
+                                            class="ms-1 text-muted o_base_unit_price_wrapper d-none"
+                                            groups="website_sale.group_show_uom_price">
+                                            <t t-call='website_sale.base_unit_price' />
+                                        </small>
+                                    </div>
+                                    <t t-placeholder="select">
+                                        <input type="hidden" class="product_id" name="product_id"
+                                            t-att-value="product_variant.id" />
+                                        <input type="hidden" class="product_template_id"
+                                            name="product_template_id" t-att-value="product.id" />
+                                        <input t-if="product.public_categ_ids.ids" type="hidden"
+                                            class="product_category_id" name="product_category_id"
+                                            t-att-value="product.public_categ_ids.ids[0]" />
+                                        <input t-if="product.product_tag_ids.ids" type="hidden"
+                                            class="product_tag_id" name="product_tag_id"
+                                            t-att-value="product.product_tag_ids.ids[0]" />
+                                        <t t-if="combination" t-call="sale.variants">
+                                            <t t-set="ul_class" t-valuef="flex-column" />
+                                            <t t-set="parent_combination" t-value="None" />
+                                        </t>
+                                        <t t-else="">
+                                            <ul class="d-none js_add_cart_variants mb-0"
+                                                t-att-data-attribute_exclusions="{'exclusions: []'}" />
+                                        </t>
+                                    </t>
+                                    <p t-if="True" class="css_not_available_msg alert alert-warning">This
+                                        combination does not exist.
+                                    </p>
+
+                                    <!-- SELECT QUANTITY TO CART-->
+                                    <div
+                                        t-attf-class="css_quantity input-group {{'d-none' if combination_info['prevent_zero_price_sale'] else 'd-inline-flex'}} me-2 mb-2 align-middle #{'input-group-lg' if ctaSizeBig else ''}"
+                                        contenteditable="false">
+                                        <a t-attf-href="#" class="btn btn-link js_add_cart_json"
+                                            aria-label="Remove one"
+                                            title="Remove one">
+                                            <i class="fa fa-minus"></i>
+                                        </a>
+                                        <input type="text" class="form-control quantity text-center"
+                                            data-min="1"
+                                            name="add_qty" t-att-value="add_qty or 1" />
+                                        <a t-attf-href="#"
+                                            class="btn btn-link float_left js_add_cart_json"
+                                            aria-label="Add one" title="Add one">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                        <div>
+
+                                        </div>
+                                    </div>
+                                    <t t-set="av_qty" t-value="product_variant.available_qty_wh" />
+                                    <div id="threshold_message"
+                                        t-attf-class="availability_message_#{product_template} text-warning fw-bold">
+                                        Only <t t-esc='av_qty' />
+                                        <t
+                                            t-esc="product_variant.uom_id.name" /> left in stock. <input
+                                            type="hidden" class="p_free_qty" name="p_free_qty"
+                                            t-att-value="product_variant.available_qty_wh" />
+                                    </div>
+
+
+                                    <div id="o_wsale_cta_wrapper"
+                                        class="d-flex flex-wrap align-items-center">
+                                        <t t-set="hasQuantities" t-value="false" />
+                                        <t t-set="hasBuyNow" t-value="false" />
+                                        <t t-set="ctaSizeBig"
+                                            t-value="not hasQuantities or not hasBuyNow" />
+
+
+                                        <div class="card w-100 wsale_cart">
+                                            <div class="card-body p-3 pb-1">
+                                                <div
+                                                    class="d-flex justify-content-center product-cart">
+                                                    <div
+                                                        class="d-flex flex-column align-items-center justify-content-center flex-grow-1">
+                                                        <h2 class="card-title fw-bold">
+                                                            <!--                                                                                                                        <t t-set="amount_with_tax"-->
+                                                            <!--
+                                                            t-value="product.get_price_with_tax(website,
+                                                            combination_info['price'])"/>-->
+                                                            <span
+                                                                t-out="combination_info['amount_with_vat']"
+                                                                class="oe_price oe_amount_with_vat"
+                                                                t-options='{"widget": "monetary", "display_currency": website.pricelist_id.currency_id}' />
+
+                                                        </h2>
+                                                        <span>All prices include VAT</span>
+                                                    </div>
+                                                    <div
+                                                        class="d-flex flex-wrap align-items-center justify-content-evenly flex-grow-1">
+
+                                                        <div id="add_to_cart_wrap"
+                                                            t-attf-class="{{'d-none' if combination_info['prevent_zero_price_sale'] else 'd-inline-flex'}} align-items-center mb-2 me-auto">
+
+                                                            <t
+                                                                t-if="product_variant.available_qty_wh">
+                                                                <a
+                                                                    data-animation-selector=".o_wsale_product_images"
+                                                                    role="button" id="add_to_cart"
+                                                                    t-attf-class="btn btn-primary js_check_product a-submit flex-grow-1 bg-primary d-flex align-items-center justify-content-between text-uppercase text-white fw-light #{'btn-lg' if ctaSizeBig else ''}"
+                                                                    href="#">
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="19.628"
+                                                                        height="19.473"
+                                                                        viewBox="0 0 19.628 19.473"
+                                                                        class="me-3"
+                                                                    >
+                                                                        <path
+                                                                            id="icon"
+                                                                            d="M1189.578,905.578a1.947,1.947,0,1,0,1.947,1.948A1.945,1.945,0,0,0,1189.578,905.578Zm-11.674,1.948a1.943,1.943,0,1,0,1.937-1.948A1.945,1.945,0,0,0,1177.9,907.526Zm12.949-13.631h-11.829l2.18,4.605.126.263h6.836Zm-12.754-1.947h15.374l.155.935-3.759,6.825a1.936,1.936,0,0,1-1.7,1h-7.254l-.876,1.587-.029.117a.248.248,0,0,0,.243.243h11.275V904.6h-11.684a1.952,1.952,0,0,1-1.946-1.947,1.87,1.87,0,0,1,.243-.935l1.315-2.385-3.505-7.39H1174V890h3.183Z"
+                                                                            transform="translate(-1174 -890)"
+                                                                            fill="#fff"
+                                                                        ></path>
+                                                                    </svg>
+                                                                    ADD TO CART </a>
+                                                                <a role="button"
+                                                                    t-attf-class="btn btn-outline-primary o_we_buy_now ms-1 #{'btn-lg' if ctaSizeBig else ''}"
+                                                                    href="#">
+                                                                    <i class="fa fa-bolt me-2" />
+                                                                    <span style="font-weight:bold">BUY
+                                                                        NOW
+                                                                    </span>
+                                                                </a>
+
+                                                            </t>
+
+
+                                                            <t t-else="">
+                                                                <a role="button"
+                                                                    id="preorder_to_cart"
+                                                                    t-attf-class="btn btn-primary o_we_buy_now ms-1 add_cart_preorder d-none #{'btn-lg' if ctaSizeBig else ''}"
+                                                                    href="#"
+                                                                    data-toggle="popover"
+                                                                    data-placement="top">
+                                                                    <i
+                                                                        class="fa fa-shopping-cart mx-2" />
+                                                                    Pre Order </a>
+                                                                <a
+                                                                    data-animation-selector=".o_wsale_product_images"
+                                                                    role="button"
+                                                                    id="add_to_cart"
+                                                                    class="btn btn-primary btn-lg js_check_product a-submit my-1 mr-1 px-5 font-weight-bold flex-grow-1 d-none"
+                                                                    href="#"
+                                                                    style="display: none!important"><i
+                                                                        class="fa fa-shopping-cart mr-2" />Add
+                                                                    to cart </a>
+                                                            </t>
+
+                                                            <a role="button">
+                                                                <div id="product_option_block"
+                                                                    class="d-flex flex-wrap w-100" />
+                                                            </a>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <t t-call="product_detail_screen.product_custom_social_share" />
+                                    <div id="contact_us_wrapper"
+                                        t-attf-class="{{'d-flex' if combination_info['prevent_zero_price_sale'] else 'd-none'}} oe_structure oe_structure_solo #{_div_classes}">
+                                        <section class="s_text_block" data-snippet="s_text_block"
+                                            data-name="Text">
+                                            <div class="container">
+                                                <a t-att-href="website.contact_us_button_url"
+                                                    class="btn btn-primary btn_cta">Contact Us
+                                                </a>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </form>
+                            <p t-elif="not product.active" class="alert alert-warning">This product
+                                is no
+                                longer available.
+                            </p>
+                            <p t-else="" class="alert alert-warning">This product has no valid
+                                combination.
+                            </p>
+                            <div id="product_attributes_simple">
+                                <t t-set="single_value_attributes"
+                                    t-value="product.valid_product_template_attribute_line_ids._prepare_single_value_for_display()" />
+                                <table
+                                    t-attf-class="table table-sm text-muted {{'' if single_value_attributes else 'd-none'}}">
+                                    <t t-foreach="single_value_attributes" t-as="attribute">
+                                        <tr>
+                                            <td>
+                                                <span t-field="attribute.name" />: <t
+                                                    t-foreach="single_value_attributes[attribute]"
+                                                    t-as="ptal">
+                                                    <span
+                                                        t-field="ptal.product_template_value_ids._only_active().name" />
+                                                    <t t-if="not ptal_last">,</t>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                            <div id="o_product_terms_and_share"
+                                class="d-flex justify-content-between flex-column flex-md-row align-items-md-end mb-3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+    </template>
+
+
+    <!-- Product review and description tabs -->
+    <template id="product_details_review_description"
+        name="Product details custom reviews and description"
+        inherit_id="website_sale.product">
+
+        <xpath expr="//div[@id=('product_detail_main')]" position="after">
+            <section class="container-fluid px-lg-5 main_container">
+                <div class="row py-4">
+                    <div class="col-12 p-0">
+                        <div class="tabs product-tabs">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item nav-res" role="presentation">
+                                    <button
+                                        class="nav-link active p-3 px-5"
+                                        id="description-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#description"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="description"
+                                        aria-selected="true"
+                                    >
+                                        Description
+                                    </button>
+                                </li>
+                                <li class="nav-item nav-res" role="presentation">
+                                    <button
+                                        class="nav-link nav-res p-3 px-5"
+                                        id="reviews-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#reviews"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="reviews"
+                                        aria-selected="false"
+                                    >
+                                        Reviews
+                                    </button>
+                                </li>
+                                <li class="nav-item nav-res" role="presentation">
+                                    <button
+                                        class="nav-link p-3 px-5 d-none"
+                                        id="preorder-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#preorder_policy"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="preorder_policy"
+                                    >
+                                        Pre-order Policy
+                                    </button>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content bg-white" id="myTabContent">
+                                <!-- <div class="container">
+                                    <div class="row"> -->
+                                <!-- First column -->
+                                <!-- <div class="col-6"> -->
+                                <div class="tab-pane fade tab-content show active p-4"
+                                    id="description"
+                                    role="tabpanel" aria-labelledby="description-tab">
+                                    <div class="container-fluid px-0">
+                                        <div class="row px-0 product-desc-row">
+                                            <div class="col-lg-12 col-md-12">
+                                                <blockquote class="instagram-media"
+                                                    t-att-data-instgrm-permalink="product.instagram_link"
+                                                    data-instgrm-version="14"
+                                                    style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                                                    <div style="padding:16px;">
+                                                        <a t-att-href="product.instagram_link"
+                                                            style="color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;"
+                                                            target="_blank">Loading...
+                                                        </a>
+                                                    </div>
+                                                </blockquote>
+                                                <div id="instagram-script-placeholder"></div>
+                                                <h6 class="mt-4">
+                                                    <span t-field="product.ecommerce_description" />
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- </div> -->
+
+
+                                <!-- </div>
+                                </div> -->
+                                <div
+                                    class="tab-pane fade tab-content p-4"
+                                    id="reviews"
+                                    role="tabpanel"
+                                    aria-labelledby="reviews-tab"
+                                >
+
+
+                                    <!-- reviews -->
+                                    <div class="review-outer-div">
+                                        <div class="row"
+                                            t-attf-class="row align-items-{{'start' if product.customer_review_lines else 'center'}}">
+                                            <div class="col-12 col-md-6 mb-4">
+                                                <!-- if reviews -->
+                                                <t t-if="product.sudo().customer_review_lines">
+                                                    <div class="review-widget">
+                                                        <p class="mb-4 customer-review-heading">CUSTOMER
+                                                            REVIEWS
+                                                        </p>
+                                                        <t t-foreach="product.customer_review_lines"
+                                                            t-as="review">
+                                                            <div class="review">
+                                                                <p class="review-title">
+                                                                    <span t-field="review.title" />
+                                                                </p>
+                                                                <t t-set="rating_stars"
+                                                                    t-value="'★' * int(review.rating) + '☆' * (5 - int(review.rating))" />
+                                                                <div class="review-rating">
+                                                                    <span t-esc="rating_stars" />
+                                                                </div>
+                                                                <p class="review-text">
+                                                                    <span t-field="review.comments" />
+                                                                </p>
+                                                                <t
+                                                                    t-if="review.name and review.name != 'Public user'">
+                                                                    <p class="review-author">- <span
+                                                                            t-field="review.name" />
+                                                                    </p>
+                                                                </t>
+
+                                                            </div>
+                                                        </t>
+                                                    </div>
+                                                </t>
+
+                                                <!-- if reviews not available -->
+                                                <t t-else="">
+                                                    <!-- Be the first one to review -->
+                                                    <div class="user-review-wrap">
+                                                        <div class="empty-message">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                viewBox="0 0 500 500"
+                                                                preserveAspectRatio="xMidYMid meet">
+                                                                <path
+                                                                    d="M226.53,300a10.1,10.1,0,1,0,3,7.14,10.15,10.15,0,0,0-3-7.14Zm0,0"></path>
+                                                                <path
+                                                                    d="M219.32,280.5a10,10,0,0,1-3.19-.43c-4.41-1.4-5-5.74-5.3-9.09v-.11c-2.54-28.07-4.18-56.14-6.71-84.21-.18-2-.34-4.12.73-5.94a10.13,10.13,0,0,1,3.83-4c3.16-1.9,6.65-3.83,10.59-3.84s7.25,1.8,10.35,3.61a10.13,10.13,0,0,1,4.6,4.89,9.21,9.21,0,0,1,.37,4.66c-2.56,28.56-4.24,57.11-6.8,85.66a11.09,11.09,0,0,1-1.53,5.57C224.87,279.27,222.1,280.42,219.32,280.5Z"></path>
+                                                                <path
+                                                                    d="M382.92,118.81l-168.17,0q-60.94,0-121.87,0-10.23,0-20.48,0h-24c-22.18,0-41.58,19-41.62,40.93q-.15,88.1,0,176.18c0,20.66,16.7,39.23,37.25,40.86,11.79.94,23.71.41,35.56.53,1.71,0,3.42,0,5.47,0v69l1.16.58c1.06-1.22,2-2.53,3.2-3.68,20.6-20.7,41.27-41.35,61.8-62.13l.16-.16a14.24,14.24,0,0,1,2.42-2,11.17,11.17,0,0,1,6.3-1.67q111.21.15,222.44.06c27.06,0,45.13-18.1,45.13-45.19v-41q0-63.81,0-127.63C427.66,137.19,409.34,118.81,382.92,118.81Zm24.23,213c0,16-9,25-25.1,25q-103.18,0-206.35-.06-12,0-24.06,0c-.32,0-.62,0-.93,0a11.18,11.18,0,0,0-8,3.7c-12,12.26-24.24,24.34-37.23,37.34V357.08c-1.8-.08-3.36-.21-4.93-.21q-24.69,0-49.37,0c-14.85,0-24-9.28-24-24.18q0-84.72,0-169.46c0-14.62,9.25-23.93,23.81-23.93H383.26c14.44,0,23.88,9.48,23.89,24Z"></path>
+                                                                <path
+                                                                    d="M493.34,97.83c0-26.34-18.3-44.72-44.72-44.72l-168.17,0q-83.2,0-166.39,0c-22.17,0-41.58,19-41.62,40.93,0,8.25,0,16.5,0,24.76q0,10.23,0,20.46h20.5V97.52c0-14.62,9.25-23.93,23.81-23.93H449c14.44,0,23.88,9.48,23.89,24V266.14c0,16-9,25-25.1,25h-40.6v20.48h41c27.06,0,45.13-18.1,45.13-45.19Q493.32,182.14,493.34,97.83ZM153.75,379c.43-.49.86-1,1.32-1.44q10.31-10.36,20.63-20.71-12,0-24.06,0c-.32,0-.62,0-.93,0v23.81l.62.31Z"></path>
+                                                            </svg>
+                                                            <h4>Be the first to review this product.</h4>
+                                                        </div>
+                                                    </div>
+                                                </t>
+
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="review-form-wrap">
+                                                    <form action="/customer_review" method="post"
+                                                        class="o_mark_required"
+                                                        data-mark="*" data-model_name=""
+                                                        data-success-page=""
+                                                    >
+                                                        <input type="hidden" name="csrf_token"
+                                                            t-att-value="request.csrf_token()" />
+                                                        <input type="hidden" name="product_id"
+                                                            t-att-value="product.id" />
+
+                                                        <div class="review-form">
+                                                            <h4>Add a review</h4>
+                                                            <div class="row">
+                                                                <div class="col-md-18">
+                                                                    <div class="form-group mb-4">
+                                                                        <label class="form-label">Your
+                                                                            Rating <span>*</span>
+                                                                        </label>
+                                                                        <div class="rating-input">
+                                                                            <input type="radio"
+                                                                                name="rating"
+                                                                                id="star-5"
+                                                                                value="5"
+                                                                                checked="true"
+                                                                            />
+                                                                            <label for="star-5"
+                                                                                title="5 star">
+                                                                                <i
+                                                                                    class="fa fa-star"></i>
+                                                                            </label>
+                                                                            <input type="radio"
+                                                                                name="rating"
+                                                                                id="star-4"
+                                                                                value="4" />
+                                                                            <label for="star-4"
+                                                                                title="4 star">
+                                                                                <i
+                                                                                    class="fa fa-star"></i>
+                                                                            </label>
+                                                                            <input type="radio"
+                                                                                name="rating"
+                                                                                id="star-3"
+                                                                                value="3" />
+                                                                            <label for="star-3"
+                                                                                title="3 star">
+                                                                                <i
+                                                                                    class="fa fa-star"></i>
+                                                                            </label>
+                                                                            <input type="radio"
+                                                                                name="rating"
+                                                                                id="star-2"
+                                                                                value="2" />
+                                                                            <label for="star-2"
+                                                                                title="2 star">
+                                                                                <i
+                                                                                    class="fa fa-star"></i>
+                                                                            </label>
+                                                                            <input type="radio"
+                                                                                name="rating"
+                                                                                id="star-1"
+                                                                                value="1" />
+                                                                            <label for="star-1"
+                                                                                title="1 star">
+                                                                                <i
+                                                                                    class="fa fa-star"></i>
+                                                                            </label>
+                                                                        </div> <!---->
+                                                                    </div>
+                                                                    <div class="form-group mb-4">
+                                                                        <label for="name"
+                                                                            class="form-label">Name <span>
+                                                                            *
+                                                                            </span>
+                                                                        </label>
+                                                                        <input type="text"
+                                                                            name="reviewer_name"
+                                                                            id="name"
+                                                                            required="True"
+                                                                            class="form-control form-control-lg rounded-0" /> <!---->
+                                                                    </div>
+                                                                    <div class="form-group mb-4">
+                                                                        <label for="comment"
+                                                                            class="form-label">
+                                                                            Comment <span>
+                                                                                *
+                                                                            </span>
+                                                                        </label>
+                                                                        <textarea rows="5"
+                                                                            name="comment"
+                                                                            id="comment"
+                                                                            required="True"
+                                                                            class="form-control form-control-lg rounded-0" />
+                                                                    </div>
+                                                                    <div
+                                                                        class="form-group p-t-5 mb-4">
+
+
+                                                                        <script
+                                                                            src="https://www.google.com/recaptcha/api.js" />
+                                                                        <div id="captcha"
+                                                                            class="imageContainer">
+                                                                            <div class="form-group">
+                                                                                <!-- Specify your
+                                                                                site key in
+                                                                                data-sitekey
+                                                                                attribute -->
+                                                                                <div
+                                                                                    class="g-recaptcha"
+                                                                                    data-sitekey="6Le5nMQUAAAAALpK02mtPPGnpjVlnq6orhz4Zj0u"
+                                                                                    data-callback="verifyRecaptchaCallback"
+                                                                                    data-expired-callback="expiredRecaptchaCallback"></div>
+                                                                                <input
+                                                                                    id="recaptcha_verified"
+                                                                                    type="hidden"
+                                                                                    data-recaptcha="true" />
+                                                                                <div
+                                                                                    class="help-block with-errors"
+                                                                                    id="err"
+                                                                                    style='color: red'></div>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <!-- old captcha commented -->
+                                                                        <!--                                                                        <img-->
+                                                                        <!--
+                                                                        src="https://www.7md.ae/captcha/image?1928276962"-->
+                                                                        <!--                                                                            title="Update Code"-->
+                                                                        <!--
+                                                                        onclick="this.setAttribute('src','https://www.7md.ae/captcha/image?1928276962?_='+Math.random());var
+                                                                        captcha=document.getElementById('captcha');if(captcha){captcha.focus()}"-->
+                                                                        <!--                                                                            style="cursor: pointer;
+                                                                        width: 180px; height: 50px;"
+                                                                        />-->
+                                                                        <!--                                                                        <input type="text"-->
+                                                                        <!--                                                                            name="captcha"-->
+                                                                        <!--                                                                            placeholder="Enter
+                                                                        captcha code"-->
+                                                                        <!--                                                                            class="captcha-input
+                                                                        form-control-lg rounded-0"
+                                                                        />
+                                                                        &lt;!&ndash;&ndash;&gt;-->
+                                                                    </div>
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary btn-submit">
+                                                                        SUBMIT
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pre order policy -->
+                                <div
+                                    class="tab-pane fade tab-content p-4"
+                                    id="preorder_policy"
+                                    role="tabpanel"
+                                    aria-labelledby="preorder-tab"
+                                >
+
+
+                                    <!-- preorder policy -->
+                                    <div class="review-outer-div">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 mb-4">
+                                                <t t-set="preorder"
+                                                    t-value="product.env['website.preorder'].search([('status','=',True)])" />
+                                                <div class="container pre_order_policy d-none">
+                                                    <div class="pre_order_content pl-4 pt-3"
+                                                        style="font-size:14px;">
+                                                        <t t-set="preorder"
+                                                            t-value="product.env['website.preorder'].search([('status','=',True)])" />
+
+                                                        <t
+                                                            t-if='preorder.display_preorder_qty_range'>
+                                                            <li class="product_qty_range">
+                                                                <t t-if="product.is_default">
+                                                                    Minimum <span>
+                                                                        <b>
+                                                                            <t
+                                                                                t-esc="product.minimum_preorder_qty" />
+                                                                        </b>
+                                                                    </span>
+                                                                    and maximum <span>
+                                                                        <b>
+                                                                            <t
+                                                                                t-esc="product.maximum_preorder_qty" />
+                                                                        </b>
+                                                                    </span>
+                                                                    Unit(s) are allowed for
+                                                                    pre-order. </t>
+                                                                <t t-else=""> Minimum <span>
+                                                                        <b>
+                                                                            <t
+                                                                                t-esc="preorder.minimum_preorder_qty" />
+                                                                        </b>
+                                                                    </span>
+                                                                    and maximum <span>
+                                                                        <b>
+                                                                            <t
+                                                                                t-esc="preorder.maximum_preorder_qty" />
+                                                                        </b>
+                                                                    </span>
+                                                                    Unit(s) are allowed for
+                                                                    pre-order. </t>
+                                                            </li>
+                                                        </t>
+                                                        <t
+                                                            t-if="product.preorder_payment_type == 'partial'">
+                                                            <t t-set="list_preorder_price_converted"
+                                                                t-value="website.currency_id._convert(combination_info['list_price']*(product.percent/100), website.currency_id, website.company_id ,time.strftime('%%Y-%%m-%%d'))" />
+                                                            <li class="product_preorder_price">
+                                                                <t t-if="product.is_default"> Pay <b>
+                                                                        <span>
+                                                                            <t
+                                                                                t-esc="list_preorder_price_converted" />
+                                                                        </span>
+                                                                    ( <span>
+                                                                            <t
+                                                                                t-esc="product.percent" />
+                                                                        </span>
+                                                                    %) </b> to confirm Pre-Order.Pay
+                                                                    the remaining amount once
+                                                                    pre-order is confirmed. </t>
+                                                                <t t-else=""> Pay <b>
+                                                                        <span>
+                                                                            <t
+                                                                                t-esc="list_preorder_price_converted" />
+                                                                        </span>
+                                                                    ( <span>
+                                                                            <t
+                                                                                t-esc="preorder.percent" />
+                                                                        </span>
+                                                                    %) </b> to confirm Pre-Order.Pay
+                                                                    the remaining amount once
+                                                                    pre-order is confirmed. </t>
+                                                            </li>
+                                                        </t>
+                                                        <t
+                                                            t-if="preorder.available_date_on_preorder_product">
+                                                            <li
+                                                                class="product_preorder_date_message">
+                                                                <t t-if="product.is_default"> Order
+                                                                    available Upto <span>
+                                                                        <b>
+                                                                            <t
+                                                                                t-esc="product.preorder_expiry"
+                                                                                t-options="{'widget': 'date'}" />
+                                                                        </b>
+                                                                    </span>
+                                                                </t>
+                                                                <t t-else=""> Order available Upto <span>
+                                                                        <b>
+                                                                            <t
+                                                                                t-esc="preorder.preorder_expiry"
+                                                                                t-options="{'widget': 'date'}" />
+                                                                        </b>
+                                                                    </span>
+                                                                </t>
+                                                            </li>
+                                                        </t>
+                                                        <t t-if="preorder.custom_message">
+                                                            <li class="preorder_custom_message">
+                                                                <i>
+                                                                    <b>
+                                                                        <span>
+                                                                            <t
+                                                                                t-esc="preorder.custom_message" />
+                                                                        </span>
+                                                                    </b>
+                                                                </i>
+                                                            </li>
+                                                        </t>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+
+    </template>
+
+
+    <!-- Added a class and removed container from product detail layout -->
+
+    <template id="product_details_custom_class" name="Product details container class"
+        inherit_id="website_sale.product">
+
+        <xpath expr="//section[@id=('product_detail')]" position="attributes">
+            <attribute name="t-attf-class">product-detail-container py-4 oe_website_sale
+                #{'discount' if
+                combination_info['has_discounted_price'] else ''}
+            </attribute>
+        </xpath>
+
+    </template>
+
+
+    <!-- Added a class in product carousel layout -->
+
+    <template id="product_details_carousel_custom_class" name="Product details carousel class"
+        inherit_id="website_sale.shop_product_carousel">
+
+        <xpath expr="//div[@id=('o-carousel-product')]" position="attributes">
+            <attribute name="class">carousel slide position-sticky mb-3 overflow-hidden
+                custom-product-detail-carousel
+            </attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('carousel-outer')]" position="after">
+            <t t-if="product.get_preorder_label() == 'preorder'">
+                <div class="ribbon">
+                    <div class="corner-ribbon-inner">
+                        <span class="ribbon-inner">
+                            <span class="ribbon-text-inner ml16">Available for Pre-Order</span>
+                        </span>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+
+    </template>
+    <template id="product_images_custom" inherit_id="website_sale.shop_product_carousel">
+
+    </template>
+
+    <!-- Inherit Terms and condition to show dynamic -->
+    <template id="product_custom_text"
+        active="True" name="Terms and Conditions"
+        inherit_id="website_sale.product_custom_text"
+        priority="21"
+    >
+        <xpath expr="//div[@id='o_product_terms_and_share']//p" position="replace">
+            <div class="justify-content-bottom">
+                <p class="text-muted mb-0">
+                    <a href="/terms" class="text-muted">
+                        <u>Terms and Conditions</u>
+                    </a>
+                    <br />
+                    <t t-esc="product.terms_and_conditions" />
+                </p>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Inherit Terms and condition to show dynamic and custom share icons -->
+    <template id="product_custom_social_share" name="custom social share">
+        <div class="row mt-4 mb-4 align-items-start justify-content-between">
+            <div class="col-lg-6">
+                <div class="justify-content-bottom">
+                    <p class="text-muted mb-1">
+                        <a href="/terms" class="text-muted">
+                            <u>Terms and Conditions</u>
+                        </a>
+                        <br />
+                        <t t-esc="product.terms_and_conditions" />
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div t-attf-class="s_share text-start #{_classes}">
+                    <h4 t-if="not _no_title" class="s_share_title d-none">Share</h4>
+                    <a t-if="not _exclude_share_links or not 'facebook' in _exclude_share_links"
+                        href="https://www.facebook.com/sharer/sharer.php?u={url}"
+                        t-attf-class="s_share_facebook #{_link_classes}" target="_blank">
+                        <i
+                            t-attf-class="fa fa-facebook #{not _link_classes and 'rounded shadow-sm'}" />
+                    </a>
+                    <a t-if="not _exclude_share_links or not 'twitter' in _exclude_share_links"
+                        href="https://twitter.com/intent/tweet?text={title}&amp;url={url}"
+                        t-attf-class="s_share_twitter #{_link_classes}" target="_blank">
+                        <i t-attf-class="fa fa-x #{not _link_classes and 'rounded shadow-sm'}" />
+                    </a>
+                    <a t-if="not _exclude_share_links or not 'linkedin' in _exclude_share_links"
+                        href="https://www.linkedin.com/sharing/share-offsite/?url={url}"
+                        t-attf-class="s_share_linkedin #{_link_classes}" target="_blank">
+                        <i
+                            t-attf-class="fa fa-linkedin #{not _link_classes and 'rounded shadow-sm'}" />
+                    </a>
+                    <a t-if="not _exclude_share_links or not 'whatsapp' in _exclude_share_links"
+                        href="https://wa.me/?text={title}"
+                        t-attf-class="s_share_whatsapp #{_link_classes}"
+                        target="_blank">
+                        <i
+                            t-attf-class="fa fa-whatsapp #{not _link_classes and 'rounded shadow-sm'}" />
+                    </a>
+                    <a t-if="not _exclude_share_links or not 'pinterest' in _exclude_share_links"
+                        href="https://pinterest.com/pin/create/button/?url={url}&amp;media={media}&amp;description={title}"
+                        t-attf-class="s_share_pinterest #{_link_classes}" target="_blank">
+                        <i
+                            t-attf-class="fa fa-pinterest #{not _link_classes and 'rounded shadow-sm'}" />
+                    </a>
+                    <a t-if="not _exclude_share_links or not 'email' in _exclude_share_links"
+                        href="mailto:?body={url}&amp;subject={title}"
+                        t-attf-class="s_share_email #{_link_classes}">
+                        <i
+                            t-attf-class="fa fa-envelope #{not _link_classes and 'rounded shadow-sm'}" />
+                    </a>
+
+                    <!-- Snapchat (using Snapchat URL scheme, assuming you want to share a URL) -->
+                    <a t-if="not _exclude_share_links or not 'snapchat' in _exclude_share_links"
+                        href="https://snapchat.com/add?shareurl={url}"
+                        t-attf-class="s_share_snapchat #{_link_classes}" target="_blank">
+                        <i
+                            t-attf-class="fa fa-snapchat-ghost #{not _link_classes and 'rounded shadow-sm'}" />
+                    </a>
+
+                    <!-- YouTube (for sharing a YouTube link) -->
+                    <a t-if="not _exclude_share_links or not 'youtube' in _exclude_share_links"
+                        href="https://www.youtube.com/share?url={url}"
+                        t-attf-class="s_share_youtube #{_link_classes}" target="_blank">
+                        <i
+                            t-attf-class="fa fa-youtube-play #{not _link_classes and 'rounded shadow-sm'}" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

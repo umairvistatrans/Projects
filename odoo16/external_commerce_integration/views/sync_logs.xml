@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sync_commerce_log_tree_view" model="ir.ui.view">
+        <field name="name">sync_commerce.log.tree</field>
+        <field name="model">sync.ecommerce.logs</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="status=='success'" decoration-danger="status=='failed'" create="false">
+                <field name="user_id"/>
+                <field name="date"/>
+                <field name="status"/>
+                <field name="message"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sync_commerce_log_form_view" model="ir.ui.view">
+        <field name="name">sync_commerce.log.form</field>
+        <field name="model">sync.ecommerce.logs</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <sheet string="Sync Logs">
+                    <div class="oe_title">
+                        <group>
+                            <group>
+                                <field name="date"/>
+                            </group>
+                            <group>
+                                <field name="status"/>
+                            </group>
+                            <group>
+                                <field name="user_id"/>
+                            </group>
+                        </group>
+                    </div>
+                    <group >
+                        <field name="message"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sync_commerce365_logs_filter" model="ir.ui.view">
+        <field name="name">Sync Logs Filter</field>
+        <field name="model">sync.ecommerce.logs</field>
+        <field name="arch" type="xml">
+            <search string="Logs">
+                <field name="user_id"/>
+                <field name="date"/>
+                <field name="status"/>
+                <field name="message"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="sync_logs_action_item_id" model="ir.actions.act_window">
+        <field name="name">Sync Logs</field>
+        <field name="res_model">sync.ecommerce.logs</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+<menuitem name="Website Synchronization"
+          id="menu_website_sync"
+          web_icon="external_commerce_integration,static/description/7md_logo.png"
+          sequence="40"
+          groups="purchase.group_purchase_manager"/>
+    <menuitem id="menu_sync_logs_action_item_id" name="Sync Logs" sequence="2" action="sync_logs_action_item_id"
+              parent="external_commerce_integration.menu_website_sync" groups="purchase.group_purchase_manager"/>
+
+</odoo>

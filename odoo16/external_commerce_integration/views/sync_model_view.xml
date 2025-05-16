@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_template_form_sp_add" model="ir.ui.view">
+            <field name="name">product.template.product.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="categ_id" position="after">
+                    <field name="special_price"/>
+                    <field name="special_price_type"/>
+                    <field name="special_price_start"/>
+                    <field name="special_price_end"/>
+                    <field name="external_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_product_variant_form_brand" model="ir.ui.view">
+            <field name="name">product brand</field>
+            <field name="model">product.brand</field>
+            <field name="inherit_id" ref="app_product_brand.view_product_brand_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="brand_slug" readonly="1"/>
+                    <field name="brand_external_id" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="view_product_category_sync_add" model="ir.ui.view">
+            <field name="name">product brand</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <field name="parent_id" position="after">
+                    <field name="categ_slug" readonly="1"/>
+                    <field name="categ_image_url" readonly="1"/>
+                    <field name="categ_external_id" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="view_res_partner_sync_add" model="ir.ui.view">
+            <field name="name">res partner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="vat" position="after">
+                    <field name="ref_customer_id" readonly="1"/>
+                </field>
+                <xpath expr="//notebook[last()]" position="inside">
+                    <page string="Partner Address Details" name="other_data">
+                        <field name="customer_address_ids">
+                            <tree>
+                                <field name="customer_first_name" readonly="1"/>
+                                <field name="customer_last_name" readonly="1"/>
+                                <field name="billing_first_name" readonly="1"/>
+                                <field name="billing_last_name" readonly="1"/>
+                                <field name="billing_address_1" readonly="1"/>
+                                <field name="billing_address_2" readonly="1"/>
+                                <field name="billing_city" readonly="1"/>
+                                <field name="billing_state" readonly="1"/>
+                                <field name="billing_zip" readonly="1"/>
+                                <field name="billing_country" readonly="1"/>
+                                <field name="shipping_first_name" readonly="1"/>
+                                <field name="shipping_last_name" readonly="1"/>
+                                <field name="shipping_address_1" readonly="1"/>
+                                <field name="shipping_address_2" readonly="1"/>
+                                <field name="shipping_city" readonly="1"/>
+                                <field name="shipping_state" readonly="1"/>
+                                <field name="shipping_zip" readonly="1"/>
+                                <field name="shipping_country" readonly="1"/>
+                                <field name="customer_email" readonly="1"/>
+                                <field name="customer_phone" readonly="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="picking_view" model="ir.ui.view">
+            <field name="name">PICKING CUSTOMIZED</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="external_id" readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='location_id']" position="after">
+                    <field name="invoice_number"/>
+                    <field name="website_invoice_number"/>
+                    <field name="total_invoice_amount"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="picking_tree_view" model="ir.ui.view">
+            <field name="name">PICKING TREE</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="external_id" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_search_inherit_view" model="ir.ui.view">
+            <field name="name">sale.order.search</field>
+            <field name="model">sale.order</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="extern_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
+            <field name="name">Quotations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="search_view_id" ref="sale_order_search_inherit_view"/>
+            <field name="context">{'search_default_my_quotation': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new quotation, the first step of a new sale!
+                </p>
+                <p>
+                    Once the quotation is confirmed by the customer, it becomes a sales order.
+                    <br/>
+                    You will be able to create an invoice and collect the payment.
+                </p>
+            </field>
+        </record>
+
+        <record id="view_sale_order_tree_inherit" model="ir.ui.view">
+            <field name="name">sale order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="external_id" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_sale_order_sync_add" model="ir.ui.view">
+            <field name="name">sale order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="external_id" readonly="1"/>
+                    <field name="payment_method_desc" readonly="1"/>
+                </field>
+                <xpath expr="//notebook[last()]" position="inside">
+                    <page string="Partner Address Details" name="other_data">
+                        <group>
+                            <group>
+                                <field name="customer_first_name" readonly="1"/>
+                                <field name="customer_last_name" readonly="1"/>
+                                <field name="billing_first_name" readonly="1"/>
+                                <field name="billing_last_name" readonly="1"/>
+                                <field name="billing_address_1" readonly="1"/>
+                                <field name="billing_address_2" readonly="1"/>
+                                <field name="billing_city" readonly="1"/>
+                                <field name="billing_state" readonly="1"/>
+                                <field name="billing_zip" readonly="1"/>
+                                <field name="billing_country" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="shipping_first_name" readonly="1"/>
+                                <field name="shipping_last_name" readonly="1"/>
+                                <field name="shipping_address_1" readonly="1"/>
+                                <field name="shipping_address_2" readonly="1"/>
+                                <field name="shipping_city" readonly="1"/>
+                                <field name="shipping_state" readonly="1"/>
+                                <field name="shipping_zip" readonly="1"/>
+                                <field name="shipping_country" readonly="1"/>
+                                <field name="customer_email" readonly="1"/>
+                                <field name="customer_phone" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

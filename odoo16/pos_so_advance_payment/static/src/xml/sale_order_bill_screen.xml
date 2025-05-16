@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<!-- Bill Printing Screen upon Save/Print Click -->
+    <t t-name="SaleOrderBillScreenWidget" owl="1">
+        <div class="receipt-screen screen">
+            <div class="screen-content">
+                <div class="top-content">
+                    <span class="float-start button next highlight" t-on-click="click_back">
+                        Back
+                        <i class="fa fa-angle-double-left"></i>
+                    </span>
+                    <div class="top-content-center">
+                        <h1 class="center">Bill Printing</h1>    
+                    </div>
+                    <span class="button next highlight" t-on-click="click_next">
+                        Ok 
+                        <i class="fa fa-angle-double-right"></i>
+                    </span>
+                </div>
+                <div class="default-view">
+                    <div class="centered-content">
+                        <div class="buttons" style="width:479px;">
+                            <!-- <div class="button print" t-on-click="print_web"> -->
+                            <div class="button print" t-on-click="printReceipt">
+                                <i class='fa fa-print'></i> Print 
+                            </div>
+                        </div>
+                        <div class="pos-receipt-container" t-ref="order-receipt">
+                            <OrderReceipt order="currentOrder" t-props="props"/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </t>
+
+<!-- Providing an identification to the payment line in the Order Receipt -->
+
+    <t t-name="pos_so_advance_payment.billscreen" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-foreach='receipt.paymentlines']" position="attributes">
+            <atrribute name="class">receipt-paymentlines</atrribute>
+        </xpath>
+        <xpath expr="//div[hasclass('before-footer')]" position='before'>
+            <t t-if="props.order_ref">
+                Sale Order Ref: <t t-esc="props.order_ref"/>
+            </t>
+            <br/>
+            <t t-if="props.so_notes">
+                Note: <t t-esc="props.so_notes"/>
+            </t>
+        </xpath>
+    </t>
+</templates>

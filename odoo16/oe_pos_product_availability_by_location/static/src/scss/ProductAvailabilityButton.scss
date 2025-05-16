@@ -1,0 +1,13 @@
+.oe-pos-product{
+    .table.oe-table{
+        border: 1px solid black !important;
+        th.text-left, td.text-left{
+            text-align: left !important;
+            padding: 8px;
+        }
+        th, td{
+            border: 1px solid black !important;
+            padding: 8px;
+        }
+    }
+}

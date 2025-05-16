@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+
+        <record id="pos_payment_method_view_form" model="ir.ui.view">
+            <field name="name">pos.payment.method</field>
+            <field name="model">pos.payment.method</field>
+            <field name="inherit_id" ref="point_of_sale.pos_payment_method_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='journal_id']" position="before">
+                   <field name="is_bank_count"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+    <record id="pos_sales_wizard_form" model="ir.ui.view">
+        <field name="name">POS Sales Wizard</field>
+        <field name="model">pos.sales.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="pos_ids"/>
+<!--                        <group>-->
+<!--                            <field name="print_type"/>-->
+<!--                        </group>-->
+<!--                        <group></group>-->
+                    </group>
+                </sheet>
+
+                <footer>
+                    <button string="Print" name="print_report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pos_sales_wizard_form" model="ir.actions.act_window">
+        <field name="name">POS Sale Wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pos.sales.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_type">report</field>
+    </record>
+
+    <menuitem id="menu_report_sale_order_details" name="POS Sales Details" action="action_pos_sales_wizard_form" parent="point_of_sale.menu_point_rep" sequence="5"/>
+
+</odoo>

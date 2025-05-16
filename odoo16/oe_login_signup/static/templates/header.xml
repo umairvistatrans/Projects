@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="login_custom_header" inherit_id="7md_website.custom_header" name="Login Custom Header">
+        <xpath expr="//nav[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/ul[1]" position="replace">
+            <t t-if="website.user_id != user_id">
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item"
+                           href="/my/account">My Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item"
+                           t-attf-href="/my/orders">My
+                            Orders
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item"
+                           t-attf-href="/my/subscription">
+                            <span class="o_field_translate">My Subscriptions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item text-danger"
+                           t-attf-href="/web/session/logout?redirect=/web/login">
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </t>
+            <t t-if="website.user_id == user_id">
+                <!-- User is not logged in -->
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" href="/web/login">Login</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item"
+                           t-attf-href="/web/session/logout?redirect=/web/login">My
+                            Orders
+                        </a>
+                    </li>
+                </ul>
+            </t>
+        </xpath>
+    </template>
+
+
+</odoo>

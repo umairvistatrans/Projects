@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_picking_form_inherit2">
+        <field name="name">view_picking_form_inherit2</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='button_scrap']" position="after">
+                <button name="create_shipping_order_wizard" string="Create Shipping Order" class="btn-primary" type="object" attrs="{'invisible':['|',('shipping_order_id','!=',False),('state','!=','done')]}"/>
+                <!--<button name="create_shipping_order" string="Create Shipping Order" class="btn-primary" type="object" attrs="{'invisible':['|',('carrier_id','=',False),('shipping_order_id','!=',False),('state','!=','done')]}"/>-->
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="after">
+
+                <field name="carrier_id" force_save="1" attrs="{'readonly':[('shipping_order_id','!=',False)]}"/>
+                <field name="city_route_id" force_save="1" attrs="{'readonly':[('shipping_order_id','!=',False)]}"/>
+                <field name="shipping_notes" attrs="{'invisible':[('carrier_id','=',False)]}"/>
+                <field name="shipping_state" invisible="1" force_save="1"/>
+                <field name="shipping_order_id" readonly="1" attrs="{'invisible':[('carrier_id','=',False)]}"/>
+                <field name="delivery_pay_type" invisible="1"/>
+                <field name="type_code" invisible="1"/>
+                <field name="carrier_po_id" invisible="1"/>
+                <!--<field name="to_country_id" string="From Country"-->
+                       <!--attrs="{'invisible': ['|',('delivery_pay_type', '!=', 'hide_and_po'),('type_code','!=','outgoing')], 'required': ['|',('delivery_pay_type', '=', 'hide_and_po'),('type_code','=','outgoing')]}"/>-->
+                <field name="to_country_id" string="From Country" invisible="1"/>
+                <!--<field name="to_state_id"  string="From State"-->
+                       <!--attrs="{'invisible': ['|',('delivery_pay_type', '!=', 'hide_and_po'),('type_code','!=','outgoing')], 'required': ['|',('delivery_pay_type', '=', 'hide_and_po'),('type_code','=','outgoing')]}"/>-->
+
+                <field name="to_state_id"  string="From State" invisible="1"/>
+
+                <field name="ship_price" />
+
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_inherit_vpicktree_form22" model="ir.ui.view">
+        <field name="name">view_inherit_vpicktree_form33</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            
+            <!-- position: after|before|replace|attributes|inside -->
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="shipping_state"/>
+                <field name="carrier_id"/>
+                <field name="city_route_id"/>
+                <field name="shipping_order_id"/>
+            </xpath>
+             <!-- position: after|before|replace|attributes|inside -->
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="invoice_no"/>
+            </xpath>
+            
+        </field>
+    </record>
+    
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_inherit_view_picking_internal_search" model="ir.ui.view">
+        <field name="name">view_inherit_view_picking_internal_search</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="arch" type="xml">
+            
+            <!-- position: after|before|replace|attributes|inside -->
+            <xpath expr="//filter[@name='activities_exception']" position="after">
+                <filter string="Shipping Assigned" name="shipping_state" domain="[('shipping_state', '=', 'assigned')]"/>
+                <filter string="Shipping Not Assigned" name="shipping_state" domain="[('shipping_state', '=', 'not_assigned')]"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+    <record id="view_set_delivery_mthod_form" model="ir.ui.view">
+        <field name="name">view_set_delivery_mthod_form</field>
+        <field name="model">set.delivery.method</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group string="You can set Delivery Method only or set delivery method and create shipping order">
+                        <group>
+                            <field name="company_id" invisible="1"/>
+                            <field name="carrier_id"/>
+                            <field name="city_route_id"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="set_delivery_methods" string="Only Set Method/State" type="object" class="btn-primary"/>
+                    OR
+                    <button name="set_delivery_method_and_create_shipping_order" string=" Set Method/State and Create Shipping Order" type="object" class="btn-primary"/>
+                    OR
+                    <button string="Cancel" special="cancel" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+     <record id="action_view_picking_set_delivery_method" model="ir.actions.act_window">
+            <field name="name">Set Delivery Methods</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">set.delivery.method</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="stock.model_stock_picking" />
+            <field name="binding_view_types">list</field>
+        </record>
+</odoo>

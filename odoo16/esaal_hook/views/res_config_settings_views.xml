@@ -1,0 +1,184 @@
+<odoo>
+    <record id="view_res_config_settings_form_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Esaal" data-key="esaal_hook" string="Esaal">
+                    <div class="app_settings_heading">
+                        <img src="/esaal_hook/static/description/branding.png" width="400" height="400" alt="Esaal" class="oe_app_icon"/>
+                        <h2>Esaal Configuration</h2>
+                    </div>
+                    <div class="mt16 o_settings_container" id="esaal_merchant_pos_settings">
+                        <div class="o_setting_box" id="esaal_merchant_id">
+                            <label class="o_form_label" for="esaal_merchant_id"></label>
+                            <div class="o_setting_right_pane">
+                                <field name="esaal_merchant_id" class="o_input" style="width: 100%" attrs="{'readonly': [('esaal_registered', '=', True)]}"/>
+                                <div class="text-muted">
+                                    Enter Merchant ID for Esaal integration
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt16 o_settings_container" id="esaal_pos_id">
+                        <div class="o_setting_box" id="esaal_pos_id">
+                            <label class="o_form_label" for="esaal_pos_id"></label>
+                            <div class="o_setting_right_pane">
+                                <field name="esaal_pos_id" class="o_input" password="True" style="width: 100%" attrs="{'readonly': [('esaal_registered', '=', True)]}"/>
+                                <div class="text-muted">
+                                    Enter PoS ID for Esaal integration
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt16 o_settings_container" id="esaal_ote_id">
+                        <div class="o_setting_box" id="esaal_ote_id">
+                            <label class="o_form_label" for="esaal_ote_id"></label>
+                            <div class="o_setting_right_pane">
+                                <field name="esaal_ote_id" class="o_input" password="True" style="width: 100%" attrs="{'readonly': [('esaal_registered', '=', True)]}"/>
+                                <div class="text-muted">
+                                    Enter OTE ID for Esaal integration
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt16 o_settings_container" id="esaal_mapper_mode">
+                        <div class="o_setting_box" id="esaal_mapper_mode">
+                            <label class="o_form_label" for="esaal_mapper_mode"></label>
+                            <div class="o_setting_right_pane">
+                                <div>
+                                    <field name="esaal_mapper_mode"/>
+                                </div>
+                                <div class="text-muted">
+                                    Enable PoS ID Mapping mode.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt16 o_settings_container" id="esaal_mapper_state" attrs="{'invisible': [('esaal_mapper_mode', '=', False)] }">
+                        <div class="o_setting_box" id="esaal_mapper_state">
+                            <label class="o_form_label" for="esaal_mapper_state"></label>
+                            <div class="o_setting_right_pane">
+                                <div>
+                                    <field name="esaal_mapper_state"/>
+                                </div>
+                                <div class="text-muted">
+                                    Mapper Configuration
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt16 o_settings_container" id="pos_name_id_map_json" attrs="{'invisible': [('esaal_mapper_state', '=', True)] }">
+                        <div class="o_setting_box" id="pos_name_id_map_json">
+                            <label class="o_form_label" for="pos_name_id_map_json"></label>
+                            <div invisible="1">
+                                <field name="esaal_mapper_state" id="configuration" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <div style="height: 100px;">
+                                    <field name="pos_name_id_map_json" class="o_input" type="textarea" style="height: 100%; width: 100%; border: 1px solid #ccc; padding: 8px; word-break: break-word;" attrs="{'readonly': [('esaal_mapper_state', '=', True)]}"/>
+                                </div>
+                                <div class="text-muted">
+                                    PoS Name to PoS ID Mapping (JSON format)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt16 o_settings_container">
+                        <div class="o_setting_box">
+                            <p class="o_form_label">Registration</p>
+                            <div class="o_setting_right_pane" id="configuration">
+                                <div>
+                                    <div invisible="1">
+                                        <field name="esaal_registered" id="configuration" />
+                                    </div>
+                                    <button string="Register" type="object" name="action_register"
+                                            class="btn btn-primary o_form_button_save" 
+                                            attrs="{'invisible': [('esaal_registered', '=', True)] }" 
+                                            confirm="Are you sure the configuration is correct ?" />
+                                    <button string="Registered" type="object" class="btn-secondary disabled" name="action_register"
+                                            attrs="{'invisible': [('esaal_registered', '=', False)]}" 
+                                            readonly="1" />
+                                </div>
+                                <div>
+                                    <div invisible="1">
+                                        <field name="esaal_registered" id="configuration" />
+                                    </div>
+                                    <button string="Unregister" type="object" class="btn-primary" name="action_unregister"
+                                            attrs="{'invisible': [('esaal_registered', '=', False)]}" 
+                                            readonly="1" 
+                                            confirm="Are you sure you want to un-register from Esaal ?" />
+                                </div>
+                                <div class="text-muted">
+                                    <label class="o_form_label" for="esaal_connection_status" string="Esaal Connection Status: "></label><field name="esaal_connection_status" readonly="1"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app_settings_heading">
+                        <h2>Esaal Options</h2>
+                    </div>
+                    <div class="mt16 o_settings_container" id="esaal_customer_info">
+                        <div class="o_setting_box" id="esaal_customer_info">
+                            <label class="o_form_label" for="esaal_customer_info"></label>
+                            <div class="o_setting_right_pane">
+                                <div>
+                                    <field name="esaal_customer_info"/>
+                                </div>
+                                <div class="text-muted">
+                                    Display error when customer information is missing.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt16 o_settings_container" id="esaal_auto_send">
+                        <div class="o_setting_box" id="esaal_auto_send">
+                            <label class="o_form_label" for="esaal_auto_send"></label>
+                            <div class="o_setting_right_pane">
+                                <div>
+                                    <field name="esaal_auto_send"/>
+                                </div>
+                                <div class="text-muted">
+                                    Check if customer exists and automatically send receipt.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt16 o_settings_container" id="esaal_branding">
+                        <div class="o_setting_box" id="esaal_branding">
+                            <label class="o_form_label" for="esaal_branding"></label>
+                            <div invisible="1">
+                                <field name="esaal_branding" id="configuration" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <div>
+                                    <field name="esaal_branding"/>
+                                </div>
+                                <div class="text-muted">
+                                    Enable Esaal branding on Receipt.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt16 o_settings_container" id="esaal_branding_qr" attrs="{'invisible': [('esaal_branding', '=', False)] }">
+                        <div class="o_setting_box" id="esaal_branding_qr">
+                            <label class="o_form_label" for="esaal_branding_qr"></label>
+                            <div invisible="1">
+                                <field name="esaal_branding_qr" id="configuration" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <div>
+                                    <field name="esaal_branding_qr"/>
+                                </div>
+                                <div class="text-muted">
+                                    Enable Esaal QR Code on Receipt.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

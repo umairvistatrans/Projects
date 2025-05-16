@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_home_slider_config_form" model="ir.ui.view">
+        <field name="name">home.slider.config.form</field>
+        <field name="model">home.slider.config</field>
+        <field name="arch" type="xml">
+            <form string="Home Slider Configuration">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="best_selling_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="active" widget="boolean_toggle"/>
+                            <field name="new_offer_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
+            </form>
+        </field>
+    </record>
+    <record id="view_home_slider_config_tree" model="ir.ui.view">
+        <field name="name">home.slider.config.tree</field>
+        <field name="model">home.slider.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="best_selling_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                <field name="new_offer_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                <field name="active" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Optionally, add this to include the form in the menu -->
+    <record id="home_slider_config_action" model="ir.actions.act_window">
+        <field name="name">Home Slider Configuration</field>
+        <field name="res_model">home.slider.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to define a new Home Slider Configuration.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="home_slider_config_menu" name="Home Slider"
+              parent="website.menu_website_global_configuration" action="home_slider_config_action"/>
+
+
+</odoo>

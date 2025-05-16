@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="7md_website.membership_subscription" name="membership and subscription">
+        <t t-call="website.layout">
+            <section class="bg-white py-2 breadcrumb-section mb-4 pricing-section-custom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 mx-auto mt-5">
+                            <div class="pricingTable">
+                                <div class="pricingTable-header"
+                                    style="background: rgb(217, 160, 55);">
+                                    <h3 class="title">Monthly Membership - 7md Subscription</h3>
+                                </div>
+                                <ul class="pricing-content">
+                                    <li>is free 7md subscription</li>
+                                    <li>10% Discount on Order</li>
+                                </ul>
+                                <div class="price-value">
+                                    <span class="amount">110.00</span>
+                                    <span class="duration">per month</span>
+                                </div>
+                                <div class="pricingTable-signup"
+                                    style="background: rgb(217, 160, 55);">
+                                    <a
+                                        href="https://www.7md.ae/en/membership/checkout/eyJpdiI6ImpLQU1TaHFXTXNOb2NPMXFIU2dPWkE9PSIsInZhbHVlIjoidVZ6eEFVYm5TRHk5dmdpbGx6MnIxQT09IiwibWFjIjoiZTdmY2YyYzZlZjg1MzEwNGYxN2QwNDMwMDE3NWM4MGVmMjczYWRkYWRmY2U4N2ZiNmI5MTY2ZDJjYmY4MmJlMyIsInRhZyI6IiJ9">Get
+                                        Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 mx-auto mt-5">
+                            <div class="pricingTable">
+                                <div class="pricingTable-header" style="background: rgb(37, 26, 5);">
+                                    <h3 class="title">Monthly Membership - Lily Subscription</h3>
+                                </div>
+                                <ul class="pricing-content">
+                                    <li>is free lily subscription</li>
+                                    <li>10% Discount on Order</li>
+                                </ul>
+                                <div class="price-value">
+                                    <span class="amount">110.00</span>
+                                    <span class="duration">per month</span>
+                                </div>
+                                <div class="pricingTable-signup" style="background: rgb(37, 26, 5);">
+                                    <a
+                                        href="https://www.7md.ae/en/membership/checkout/eyJpdiI6IjlFNWQyeW14RjlQMVUzMjdPaGVLamc9PSIsInZhbHVlIjoiTkZYWEIxM3ZDYzlTQUQ1MGR5SlJwQT09IiwibWFjIjoiZTg5ZGM5NWU4YWRhMTI1Y2VmMDU4MDU5ZTMwMzk3ZmRiNWQ1MDM4M2RmNWRmNmI1MjBhZjE2NzY2NzlhYWExNyIsInRhZyI6IiJ9">Get
+                                        Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+</odoo>

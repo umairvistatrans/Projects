@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <template id="report_report_picking_inherit" inherit_id="stock.report_picking">
+            <xpath expr="//table/thead/tr/th[1]" position="before">
+                <th name="th_image" class="text-left">Image</th>
+            </xpath>
+
+            <xpath expr="//table/tbody/t/tr/td[1]" position="before">
+                <td>
+                    <img t-if="ml.product_id.image_1920" t-att-src="image_data_uri(ml.product_id.image_1920)"
+                         alt="Image" style="width: 60px;height:auto"/>
+
+                    <!--                    <img t-if="ml.product_id.image_1920"-->
+                    <!--                         t-att-src="'data:image/png;base64,%s' % to_text(ml.product_id.image_1920)"-->
+                    <!--                         style="width: 60px;height:auto"/>-->
+                </td>
+            </xpath>
+
+        </template>
+    </data>
+</odoo>

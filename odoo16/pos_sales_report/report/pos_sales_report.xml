@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <template id="sales_report_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page" style="page-break-inside: avoid;">
+                    <style>
+                        .table-condensed td{padding: 0.3rem; border: 1px solid black !important;}
+                        .table-condensed th{border: 1px solid black !important;padding: 0.3rem;}
+                    </style>
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <h2>
+                            <br/>
+                            <strong>7md Store</strong>
+                        </h2>
+                        <br/>
+                        <strong>Branch:</strong>
+                        <span t-field="doc.name"/>
+                        <br/>
+                        <strong>Date:</strong>
+                        <span style="margin-left:3px;" t-esc="date_value['date_from']"/>
+                        <span style="margin-left:3px;"/>/
+                        <span t-esc="date_value['date_to']"/>
+
+                        <br/>
+                        <br/>
+                    </div>
+
+                    <table class="table table-condensed" style="1px solid black;">
+                        <thead>
+                            <th style="1px solid black;" class="text-center" width="5%">S.No.</th>
+                            <th style="1px solid black;" class="text-center" width="10%">Invoice #</th>
+                            <th style="1px solid black;" class="text-center" width="30%">Description</th>
+                            <th style="1px solid black;" class="text-center" width="10%">Unit Price</th>
+                            <th style="1px solid black;" class="text-center" width="5%">Qty</th>
+                            <th style="1px solid black;" class="text-center" width="5%">Amount</th>
+                            <th style="1px solid black;" class="text-center" width="5%">Discount</th>
+                            <th style="1px solid black;" class="text-center" width="10%">Tax Amount</th>
+                            <th style="1px solid black;" class="text-center" width="10%">Sale Amount</th>
+                            <th style="1px solid black;" class="text-center" width="10%">Payment Method</th>
+                        </thead>
+                        <tbody>
+                            <t t-set="lines" t-value="_get_sales(doc, date_from, date_to)"/>
+                            <t t-set="serial" t-value="0"/>
+                            <t t-set="amount" t-value="0"/>
+                            <t t-set="discount" t-value="0"/>
+                            <t t-set="tax_amount" t-value="0"/>
+                            <t t-set="card" t-value="0"/>
+                            <t t-set="cash" t-value="0"/>
+                            <t t-foreach="lines" t-as="l">
+                                <t t-set="serial" t-value="serial + 1"/>
+                                <t t-set="amount" t-value="amount + l.price_subtotal"/>
+                                <t t-set="discount" t-value="discount + l.discount"/>
+                                <t t-set="tax_amount" t-value="tax_amount + l.price_subtotal_incl - l.price_subtotal"/>
+                                <tr>
+                                    <td width="5%" class="text-center">
+                                        <span t-esc="serial"/>
+                                    </td>
+                                    <td width="10%">
+                                        <span t-field="l.order_id.name"/>
+                                    </td>
+                                    <td width="30%">
+                                        <span t-field="l.product_id.display_name"/>
+                                    </td>
+                                    <td width="10%" class="text-center">
+                                        <span t-esc="'{0:,.2f}'.format(l.price_unit)"/>
+                                    </td>
+                                    <td width="5%" class="text-center">
+                                        <span t-esc="'{0:,.2f}'.format(l.qty)"/>
+                                    </td>
+                                    <td width="5%" class="text-center">
+                                        <span t-field="l.price_subtotal"/>
+                                    </td>
+                                    <td width="5%" class="text-center">
+                                        <span t-field="l.discount"/>
+                                    </td>
+                                    <td width="10%" class="text-center">
+                                        <span t-esc="'{0:,.2f}'.format(l.price_subtotal_incl - l.price_subtotal)"/>
+                                    </td>
+                                    <td width="10%" class="text-center">
+                                        <span t-esc="'{0:,.2f}'.format(l.price_subtotal_incl)"/>
+                                    </td>
+
+                                    <td width="10%" class="text-center">
+                                        <t t-if="l.order_id.payment_ids">
+                                            <t t-if="l.order_id.payment_ids[0].payment_method_id.is_bank_count">
+                                                <t t-set="card" t-value="card + l.price_subtotal_incl"/>
+                                                Card
+                                            </t>
+                                            <t t-if="l.order_id.payment_ids[0].payment_method_id.is_cash_count">
+                                                <t t-set="cash" t-value="cash + l.price_subtotal_incl"/>
+                                                Cash
+                                            </t>
+                                        </t>
+                                        <!--                                        <span t-field="l.price_subtotal"/>-->
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+
+                    </table>
+                    <style>
+                        .table-bordered th{border: 1px solid white !important;padding: 0.3rem;}
+                    </style>
+                    <br/>
+                    <br/>
+                    <table class="table table-bordered" style="page-break-inside: avoid">
+                        <tbody>
+                            <tr>
+                                <td width="25%"></td>
+                                <td width="45%">
+                                    <strong>Payment</strong>
+                                </td>
+                                <td width="45%"></td>
+                                <td width="25%"></td>
+                            </tr>
+                            <tr>
+                                <td width="25%"></td>
+                                <td width="45%">Name</td>
+                                <td width="45%" class="text-center">Total</td>
+                                <td width="25%"></td>
+                            </tr>
+                            <tr>
+                                <td width="25%"></td>
+                                <td width="45%">Cash</td>
+                                <td width="45%" class="text-center"><span t-esc="'{0:,.2f}'.format(cash)"/></td>
+                                <td width="25%"></td>
+                            </tr>
+                            <tr>
+                                <td width="25%"></td>
+                                <td width="45%">Bank</td>
+                                <td width="45%" class="text-center"><span t-esc="'{0:,.2f}'.format(card)"/></td>
+                                <td width="25%"></td>
+                            </tr>
+                            <tr>
+                                <td width="25%"></td>
+                                <td width="45%"></td>
+                                <td width="45%"></td>
+                                <td width="25%"></td>
+                            </tr>
+                            <tr>
+                                <td width="25%"></td>
+                                <td width="45%"></td>
+                                <td width="45%"></td>
+                                <td width="25%"></td>
+                            </tr>
+                            <tr>
+                                <td width="25%"></td>
+                                <td width="45%"></td>
+                                <td width="45%"></td>
+                                <td width="25%"></td>
+                            </tr>
+                            <tr>
+                                <td width="25%"></td>
+                                <td width="45%">
+                                    <strong>Total</strong>
+                                </td>
+                                <td width="45%"></td>
+                                <td width="25%"></td>
+                            </tr>
+                            <tr>
+                                <td width="25%"></td>
+                                <td width="45%">Amount</td>
+                                <td width="45%" class="text-center">
+                                    <span t-esc="'{0:,.2f}'.format(amount)"/>
+                                </td>
+                                <td width="25%"></td>
+                            </tr>
+                            <tr>
+                                <td width="25%"></td>
+                                <td width="45%">Discount</td>
+                                <td width="25%" class="text-center">
+                                    <span t-esc="'{0:,.2f}'.format(discount)"/>
+                                </td>
+                                <td width="45%"></td>
+                            </tr>
+                            <tr>
+                                <td width="25%"></td>
+                                <td width="45%">Tax Amount</td>
+                                <td width="25%" class="text-center">
+                                    <span t-esc="'{0:,.2f}'.format(tax_amount)"/>
+                                </td>
+                                <td width="45%"></td>
+                            </tr>
+                            <tr>
+                                <td width="25%"></td>
+                                <td width="45%">Net Total</td>
+                                <td width="45%" class="text-center">
+                                    <span t-esc="'{0:,.2f}'.format(amount + tax_amount)"/>
+                                </td>
+                                <td width="25%"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="paperformat_portrait_pos_sales_report" model="report.paperformat">
+        <field name="name">Portrait format for POS Sales Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">3</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">3</field>
+        <field name="margin_right">3</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">3</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_pos_sales_report" model="ir.actions.report">
+        <field name="name">POS Sales Details</field>
+        <field name="model">pos.sales.wizard</field>
+        <field name="report_name">pos_sales_report.sales_report_document</field>
+        <field name="report_file">pos_sales_report.sales_report_document</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="paperformat_id" ref="pos_sales_report.paperformat_portrait_pos_sales_report"/>
+    </record>
+</odoo>

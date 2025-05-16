@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="new_arrival_menu" model="website.menu">
+        <field name="name">New Arrivals</field>
+        <field name="url">/shop</field>
+        <field name="page_id" ref="website.homepage_page"/>
+            <field name="parent_id" ref="website.main_menu"/>
+    </record>
+
+    <record id="ramadan_special_menu" model="website.menu">
+        <field name="name">Ramadan Special</field>
+        <field name="url">/shop</field>
+        <field name="page_id" ref="website.homepage_page"/>
+            <field name="parent_id" ref="website.main_menu"/>
+    </record>
+
+    <record id="7md_products_menu" model="website.menu">
+        <field name="name">7md Products</field>
+        <field name="url">/shop</field>
+        <field name="page_id" ref="website.homepage_page"/>
+            <field name="parent_id" ref="website.main_menu"/>
+    </record>
+
+
+    <record id="all_product_menu" model="website.menu">
+        <field name="name">All Products</field>
+        <field name="url">/shop</field>
+        <field name="page_id" ref="website.homepage_page"/>
+            <field name="parent_id" ref="website.main_menu"/>
+    </record>
+
+    <record id="offer_deals_menu" model="website.menu">
+        <field name="name">Offer Deals</field>
+        <field name="url">/shop</field>
+        <field name="page_id" ref="website.homepage_page"/>
+            <field name="parent_id" ref="website.main_menu"/>
+    </record>
+
+
+    <record id="brands_menu" model="website.menu">
+        <field name="name">Brands</field>
+        <field name="url">/shop</field>
+        <field name="page_id" ref="website.homepage_page"/>
+            <field name="parent_id" ref="website.main_menu"/>
+    </record>
+
+
+    <record id="download_app_menu" model="website.menu">
+        <field name="name">Download App</field>
+        <field name="url">/shop</field>
+        <field name="page_id" ref="website.homepage_page"/>
+            <field name="parent_id" ref="website.main_menu"/>
+    </record>
+
+
+    <record id="membership_menu" model="website.menu">
+        <field name="name">Membership</field>
+        <field name="url">/shop</field>
+        <field name="page_id" ref="website.homepage_page"/>
+            <field name="parent_id" ref="website.main_menu"/>
+    </record>
+</odoo>

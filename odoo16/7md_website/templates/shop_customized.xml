@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Shop page left categories sidebar -->
+    <template id="shop_customized_layout" name="shop customized layout"
+        inherit_id="website_sale.products">
+        <xpath expr="//aside[@id=('products_grid_before')]" position="replace">
+            <aside t-if="hasLeftColumn" id="products_grid_before"
+                class="d-none d-lg-block position-sticky col-3 px-3 clearfix">
+                <div
+                    class="d-flex justify-content-center product-side-filter">
+                    <div class="card shadow-lg flex-grow-1 w-100 shop-cat-sidebar-card-custom">
+                        <div
+                            class="card-body d-none d-lg-flex flex-column justify-content-between">
+                            <div class="product-header fw-bolder">
+                                <strong> PRODUCT CATEGORY</strong>
+                            </div>
+                            <hr />
+
+                            <ul class="list-group product-cat">
+                                <li class="list-group-item mb-3 border-none">
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/imac icon.svg" alt="icon image"  />
+                                        </span>
+                                        <span class="nav_selected_button_text">Electric &#38;
+                                            Electronics</span>
+                                    </a>
+                                </li>
+                                <li class="list-group-item mb-3 border-none">
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/Path 46660.svg" alt="icon image"  />
+                                        </span>
+                                        <span class="nav_button_text">Health &#38; Personal Care </span>
+                                    </a>
+                                </li>
+                                <li class="list-group-item mb-3 border-none">
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/noun-home-appliances-4976489.svg" alt="icon image" />
+                                        </span>
+                                        <span class="nav_button_text">Home Improvement &#38;
+                                            Tools</span>
+                                    </a>
+                                </li>
+                                <li class="list-group-item mb-3 border-none">
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/Path 46658.svg" alt="icon image" />
+                                        </span>
+                                        <span class="nav_button_text">Men's &#38; Women's
+                                            Fashion</span>
+                                    </a>
+                                </li>
+                                <li class="list-group-item mb-3 border-none">
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/phone icon.svg" alt="icon image" />
+                                        </span>
+                                        <span class="nav_button_text">Mobiles, Tablets &#38;
+                                            Accessories</span>
+                                    </a>
+                                </li>
+                                <li class="list-group-item mb-3 border-none">
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/Path 46669.svg" alt="icon image" />
+                                        </span>
+                                        <span class="nav_button_text">Outdoors, Fitness &#38;
+                                            Sports</span>
+                                    </a>
+                                </li>
+                                <li class="list-group-item mb-3 border-none">
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/Group 15825.svg" alt="icon image" />
+                                        </span>
+                                        <span class="nav_button_text">Smart Devices &#38;
+                                            Accessories</span>
+                                    </a>
+                                </li>
+                                <li class="list-group-item mb-3 border-none">
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/noun-games-3323124.svg" alt="icon image" />
+                                        </span>
+                                        <span class="nav_button_text">Smart Watch &#38; Band</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="product-header fw-bolder">
+                                <strong> LATEST PRODUCTS</strong>
+                            </div>
+                            <hr />
+                            <ul class="latest-product-ul">
+                                <li class="mb-4 border-none">
+                                    <a href="javascript:void(0);">
+                                        <div class="latest-product-outer-div">
+                                            <div class="img-div">
+                                                <img
+                                                src="https://www.7md.ae/storage/media/X9hodNaNKMp5j43a7bbSW9BDz9oxhNkMcu31z60l.png"
+                                                    alt="card-img-top" class="" />
+                                            </div>
+                                            <div class="details-div">
+                                                <div class="products-name">
+                                                    Porodo 3in1 Ice Maker With
+                                                </div>
+                                                <div class="ratings-div">
+                                                    <div
+                                                        class="small-ratings justify-content-center">
+                                                        <i class="fa fa-star rating-color"></i>
+                                                        <i class="fa fa-star rating-color"></i>
+                                                        <i class="fa fa-star rating-color"></i>
+                                                        <i class="fa fa-star rating-color"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="price-div">
+                                                    AED 990.00
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-4 border-none">
+                                    <a href="javascript:void(0);">
+                                        <div class="latest-product-outer-div">
+                                            <div class="img-div">
+                                                <img
+                                                    src="https://www.7md.ae/storage/media/X9hodNaNKMp5j43a7bbSW9BDz9oxhNkMcu31z60l.png"
+                                                    alt="card-img-top" class="" />
+                                            </div>
+                                            <div class="details-div">
+                                                <div class="products-name">
+                                                    Porodo 3in1 Ice Maker With
+                                                </div>
+                                                <div class="ratings-div">
+                                                    <div
+                                                        class="small-ratings justify-content-center">
+                                                        <i class="fa fa-star rating-color"></i>
+                                                        <i class="fa fa-star rating-color"></i>
+                                                        <i class="fa fa-star rating-color"></i>
+                                                        <i class="fa fa-star rating-color"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="price-div">
+                                                    AED 990.00
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-4 border-none">
+                                    <a href="javascript:void(0);">
+                                        <div class="latest-product-outer-div">
+                                            <div class="img-div">
+                                                <img
+                                                    src="https://www.7md.ae/storage/media/X9hodNaNKMp5j43a7bbSW9BDz9oxhNkMcu31z60l.png"
+                                                    alt="card-img-top" class="" />
+                                            </div>
+                                            <div class="details-div">
+                                                <div class="products-name">
+                                                    Porodo 3in1 Ice Maker With
+                                                </div>
+                                                <div class="ratings-div">
+                                                    <div
+                                                        class="small-ratings justify-content-center">
+                                                        <i class="fa fa-star rating-color"></i>
+                                                        <i class="fa fa-star rating-color"></i>
+                                                        <i class="fa fa-star rating-color"></i>
+                                                        <i class="fa fa-star rating-color"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="price-div">
+                                                    AED 990.00
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="btn-group w-100 d-lg-none">
+                            <button class="btn py-3 btn-primary btn-lg" type="button"
+                                id="filter-by" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <img src="/7md_website/static/src/images/filter.svg" alt="icon image" />
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="filter-by">
+                                <li>
+                                    <a class="dropdown-item" href="#">Top Selling Items</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Trending Items</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">You May Like</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Recently Viewed</a>
+                                </li>
+                            </ul>
+                            <button
+                                class="btn py-3 btn-primary w-100 btn-lg text-white dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"> Filter By Categories <span
+                                    class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu product-cat w-100">
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/noun-home-appliances-4976489.svg" alt="icon image" 
+                                                class="nav_selected__button_icon" />
+                                        </span>
+                                        <span class="nav_selected_button_text">Home
+                                            Appliances</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/imac icon.svg"
+                                                alt="nav_button_icon" />
+                                        </span>
+                                        <span class="nav_button_text">Electronics</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/Path 46658.svg"
+                                                alt="nav_button_icon" />
+                                        </span>
+                                        <span class="nav_button_text">Fashion</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/Path 46660.svg"
+                                                alt="nav_button_icon" />
+                                        </span>
+                                        <span class="nav_button_text">Health personal
+                                            care</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/Group 15825.svg"
+                                                alt="nav_button_icon" />
+                                        </span>
+                                        <span class="nav_button_text">Projectors</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/noun-teddy-bear-1041229.svg"
+                                                alt="nav_button_icon" />
+                                        </span>
+                                        <span class="nav_button_text">Kids</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/phone icon.svg"
+                                                alt="nav_button_icon" />
+                                        </span>
+                                        <span class="nav_button_text">Cell Phones</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/Path 46669.svg"
+                                                alt="nav_button_icon" />
+                                        </span>
+                                        <span class="nav_button_text">Sports</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span class="img">
+                                            <img
+                                                src="/7md_website/static/src/images/noun-games-3323124.svg"
+                                                alt="nav_button_icon" />
+                                        </span>
+                                        <span class="nav_button_text">Game consoles</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </xpath>
+    </template>
+
+    <!-- Add class in container layout -->
+    <template id="shop_layout_custom_class" name="shop layout container class"
+        inherit_id="website_sale.products">
+        <xpath expr="//div[hasclass('oe_website_sale')]" position="attributes">
+            <attribute name="class">oe_website_sale pt-2 shop_layout_custom_section</attribute>
+        </xpath>
+
+    </template>
+</odoo>

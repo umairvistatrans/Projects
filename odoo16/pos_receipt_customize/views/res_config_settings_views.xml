@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="l4l_pos_note_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.l4l_pos_note</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='pos_bills_and_receipts_section']" position="inside">
+<!--                <div class="row mt16 o_settings_container" id="receipt-customisation-container">-->
+                <div class="col-12 col-lg-6 o_setting_box" id="receipt-customisation">
+                    <div class="o_setting_right_pane">
+                        <field name="trn_name"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="trn_name" string="Translated Name" />
+                        <div class="text-muted">
+                            Translated Name of POS
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_right_pane">
+                        <field name="whatsapp"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="whatsapp" string="Whatsapp" />
+                        <div class="text-muted">
+                            Whatsapp of POS
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_right_pane">
+                        <field name="snapchat"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="snapchat" string="Snapchat" />
+                        <div class="text-muted">
+                            Snapchat of POS
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_right_pane">
+                        <field name="instagram"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="instagram" string="Instagram" />
+                        <div class="text-muted">
+                            Instagram of POS
+                        </div>
+                    </div>
+                </div>
+<!--                </div>-->
+            </xpath>
+<!--            <div id="pos_interface_section" position="after">-->
+<!--                <h2 class="mt16">Order &amp; Line Note</h2>-->
+<!--                <div class="row mt16 o_settings_container" id="pos_note_section">-->
+<!--                    <div class="col-12 col-lg-6 o_setting_box" id="add_note">-->
+<!--                        <div class="o_setting_left_pane">-->
+<!--                            <field name="add_note"/>-->
+<!--                        </div>-->
+<!--                        <div class="o_setting_right_pane">-->
+<!--                            <label for="add_note" string="POS Note"/>-->
+<!--                            <div class="text-muted">-->
+<!--                                Advance POS Notes-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-12 col-lg-6 o_setting_box" id="activate_predefined_note"-->
+<!--                    attrs="{'invisible': [('add_note','=',False)]}">-->
+<!--                        <div class="o_setting_left_pane">-->
+<!--                            <field name="activate_predefined_note"/>-->
+<!--                        </div>-->
+<!--                        <div class="o_setting_right_pane">-->
+<!--                            <label for="activate_predefined_note" string="Predefined Notes"/>-->
+<!--                            <div class="text-muted">-->
+<!--                                Predefined note-->
+<!--                            </div>-->
+<!--                            <div class="content-group" attrs="{'invisible': [('activate_predefined_note','=',False)]}">-->
+<!--                                <div class="mt16">-->
+<!--                                    <label string="Notes" for="note_ids" class="o_light_label"/>-->
+<!--                                    <field name="note_ids" widget="many2many_tags" attrs="{'required': [('activate_predefined_note','=',True)]}"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-12 col-lg-6 o_setting_box" id="add_line_note" attrs="{'invisible': [('add_note','=',False)]}">-->
+<!--                        <div class="o_setting_left_pane">-->
+<!--                            <field name="add_line_note"/>-->
+<!--                        </div>-->
+<!--                        <div class="o_setting_right_pane">-->
+<!--                            <label for="add_line_note" string="OrderLine Notes"/>-->
+<!--                            <div class="text-muted">-->
+<!--                                Add internal notes on order lines.-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-12 col-lg-6 o_setting_box" id="restrict_manual_notes" attrs="{'invisible': [('add_note','=',False)]}">-->
+<!--                        <div class="o_setting_left_pane">-->
+<!--                            <field name="restrict_manual_notes"/>-->
+<!--                        </div>-->
+<!--                        <div class="o_setting_right_pane">-->
+<!--                            <label for="restrict_manual_notes" string="Restrict Manual Note" />-->
+<!--                            <div class="text-muted">-->
+<!--                                Disable user input for note-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+        </field>
+    </record>
+</odoo>

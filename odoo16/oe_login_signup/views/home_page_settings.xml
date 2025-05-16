@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_homepage_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.homepage.inherit.website</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="50"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block"
+                     id="custom_setting_website_homepage"
+                     data-string="Website HomePage"
+                     string="Website HomePage"
+                     data-key="website_homepage"
+                     groups="website.group_website_designer">
+                    <div class="col-xs-12 row o_settings_container" id="website_info_settings">
+                        <h2>New Offered Products Section</h2>
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="New Offered Product Selection Criteria: "
+                                               for="new_offered_product_type"/>
+                                        <field name="new_offered_product_type"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('new_offered_product_type', '!=', 'by_product')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12" string="New Offered Products: "
+                                               for="new_offered_product_ids"/>
+                                        <field name="new_offered_product_ids"
+                                               title="Add products which will appeared in new offered carousel."
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('new_offered_product_type', '!=', 'by_category')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12" string="New Offered Categories"
+                                               for="new_offered_category_ids"/>
+                                        <field name="new_offered_category_ids"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 row o_settings_container" id="website_info_settings">
+                        <h2>Best Selling Products Section</h2>
+
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Best Selling Product Type: "
+                                               for="best_selling_product_type"/>
+                                        <field name="best_selling_product_type"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('best_selling_product_type', '!=', 'by_category')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Best Selling Product Categories: "
+                                               for="best_selling_category_ids"/>
+                                        <field name="best_selling_category_ids"
+                                               title="Add products which will appeared in best selling div."
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('best_selling_product_type', '!=', 'by_product')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12" string="Best Selling Products: "
+                                               for="best_selling_product_ids"/>
+                                        <field name="best_selling_product_ids"
+                                               title="Add products which will appeared in best selling div."
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 row o_settings_container" id="website_info_settings">
+                        <h2>Top Brands Section</h2>
+
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12" string="Top Brands: "
+                                               for="top_pro_brand_ids"/>
+                                        <field name="top_pro_brand_ids" title="Add Top Brands."
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 row o_settings_container" id="website_info_settings">
+                        <h2>Right Side Bar Products Section</h2>
+
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Right Side Bar Product Selection Criteria: "
+                                               for="sidecards_product_r_type"/>
+                                        <field name="sidecards_product_r_type"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('sidecards_product_r_type', '!=', 'by_category')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Right Side Bar Product Categories: "
+                                               for="sidecards_product_r_category_ids"/>
+                                        <field name="sidecards_product_r_category_ids"
+                                               title="Select products for show in right sidebar cards"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('sidecards_product_r_type', '!=', 'by_product')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12" string="Right Side Bar Products: "
+                                               for="sidecards_products_r"/>
+                                        <field name="sidecards_products_r"
+                                               title="Select products for show in right sidebar cards"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 row o_settings_container" id="website_info_settings">
+                        <h2>Multi Product Banner Section</h2>
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Multi Product Banner Type: "
+                                               for="card_product_type"/>
+                                        <field name="card_product_type"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('card_product_type', '!=', 'by_category')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Multi Product Banner Categories: "
+                                               for="card_product_category_ids"/>
+                                        <field name="card_product_category_ids"
+                                               title="Add products which will appeared in div after product categories."
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('card_product_type', '!=', 'by_product')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12" string="Multi Product Banner: "
+                                               for="card_product_ids"/>
+                                        <field name="card_product_ids"
+                                               title="Add products which will appeared in div after product categories."
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 row o_settings_container" id="website_info_settings">
+                        <h2>Second Side Bar Products Section</h2>
+
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Second Side Bar Product Selection Criteria: "
+                                               for="second_sidecards_product_type"/>
+                                        <field name="second_sidecards_product_type"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('second_sidecards_product_type', '!=', 'by_category')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Second Side Bar Product Categories: "
+                                               for="second_sidecards_product_category_ids"/>
+                                        <field name="second_sidecards_product_category_ids"
+                                               title="Select products for show in second sidebar cards"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('second_sidecards_product_type', '!=', 'by_product')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12" string="Second Side Bar Products: "
+                                               for="second_sidecards_products"/>
+                                        <field name="second_sidecards_products"
+                                               title="Select products for show in second sidebar cards"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 row o_settings_container" id="website_info_settings">
+                        <h2>Product Categories Section</h2>
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12" string="Product Categories: "
+                                               for="product_category_ids"/>
+                                        <field name="product_category_ids"
+                                               title="Add product categories."
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 row o_settings_container" id="website_info_settings">
+                        <h2>Top categories slider Section</h2>
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12" string="Top categories slider: "
+                                               for="top_categories_ids"/>
+                                        <field name="top_categories_ids"
+                                               title="Select top brands for show in slider"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 row o_settings_container" id="website_info_settings">
+                        <h2>Side Bar Products Section</h2>
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Side Bar Product Selection Criteria: "
+                                               for="sidecards_product_type"/>
+                                        <field name="sidecards_product_type"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('sidecards_product_type', '!=', 'by_category')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Side Bar Product Categories: "
+                                               for="sidecards_product_category_ids"/>
+                                        <field name="sidecards_product_category_ids"
+                                               title="Select top brands for show in slider"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('sidecards_product_type', '!=', 'by_product')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12" string="Side Bar Products: "
+                                               for="sidecards_products"/>
+                                        <field name="sidecards_products"
+                                               title="Select top brands for show in slider"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 row o_settings_container" id="website_info_settings">
+                        <h2>Second Side Bar Products Section</h2>
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Second side bar Product Selection Criteria: "
+                                               for="second_sidecards_product_type"/>
+                                        <field name="second_sidecards_product_type"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('second_sidecards_product_type', '!=', 'by_category')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Second side bar product Categories: "
+                                               for="second_sidecards_product_category_ids"/>
+                                        <field name="second_sidecards_product_category_ids"
+                                               title="Select products for show in second sidebar cards"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('second_sidecards_product_type', '!=', 'by_product')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12" string="Second side bar products: "
+                                               for="second_sidecards_products"/>
+                                        <field name="second_sidecards_products"
+                                               title="Select products for show in second sidebar cards"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 row o_settings_container" id="website_info_settings">
+                        <h2>Second Right Side Bar Products Section</h2>
+
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Second right side bar Product Selection Criteria: "
+                                               for="second_sidecards_product_r_type"/>
+                                        <field name="second_sidecards_product_r_type"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('second_sidecards_product_r_type', '!=', 'by_category')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Second right side bar product categories: "
+                                               for="second_sidecards_product_r_category_ids"/>
+                                        <field name="second_sidecards_product_r_category_ids"
+                                               title="Select products for show in second right sidebar cards"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 col-lg-12 o_setting_box"
+                             attrs="{'invisible': [('second_sidecards_product_r_type', '!=', 'by_product')]}">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label class="col-lg-12"
+                                               string="Second right side bar products: "
+                                               for="second_sidecards_products_r"/>
+                                        <field name="second_sidecards_products_r"
+                                               title="Select products for show in second right sidebar cards"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 row o_settings_container" id="website_info_settings">
+                        <h2>Latest Products</h2>
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt8">
+                                        <label class="col-lg-3" string="Shop page three products"
+                                               for="shop_products_three"/>
+                                        <field name="shop_products_three"
+                                               title="Select products for show in shop under categroies"
+                                               widget="many2many_tags"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="action_website_configuration_homepage" model="ir.actions.act_window">
+        <field name="name">HomePage Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+    </record>
+    <menuitem name="HomePage Settings"
+              id="menu_website_website_settings_homepage"
+              action="action_website_configuration_homepage"
+              parent="website.menu_website_global_configuration"
+              groups="base.group_system"
+              sequence="11"/>
+</odoo>

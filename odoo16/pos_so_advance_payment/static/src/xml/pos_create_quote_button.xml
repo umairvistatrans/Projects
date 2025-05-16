@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+  <t t-name="pos_so_advance_payment.CreateQuotationButton" owl="1">
+      <div class="control-button" t-on-click="onClick">
+          <i class="fa fa-shopping-cart"/>Create Quotation
+      </div>
+  </t>
+
+    <t t-name="CreateSaleOrderPopupWidget" owl='1'>
+    <div class="modal-dialog">
+        <div class="popup" style="height:590px;max-width:720px;">
+            <p class="title" style="height:4%;padding-top:2%;padding-bottom:1%">
+                Create Sale Order
+            </p>
+
+            <!-- Partner's Delivery Address -->
+            <div class="popup_main">
+            <div class="option_create_delivery">
+                <div id="error_msg" style="display:none;text-align:center;"> 
+                    <span class="error_msg_create"
+                          style="display:none;">Name is required to create delivery order.</span>
+                    <span class="error_msg_delivery"
+                          style="display:none;">Please select any one delivery address.</span>
+                </div>
+                <ul class="delivery_ul">
+                <li>
+                    <p>
+                        <input id="use_ex_radio" type="radio" name="radio_address" value="use_ex_delivery"
+                               t-on-click="(ev)=>this.OnClickAddressRadio(ev)"/>
+                        <label for="use_ex_radio">Use Existing Delivery Address </label>
+                    </p>
+                </li>
+                    <li>
+                    <p>
+                        <input id="create_new_radio" type="radio" checked="checked" name="radio_address"
+                               value="create_new_delivery" t-on-click="(ev)=>this.OnClickAddressRadio(ev)"/>
+                        <label for="create_new_radio">Create New Delivery Address</label>
+                    </p>
+                </li>
+              </ul>
+            </div>
+                <table class="table_delivery">
+                <tr id="delivery_selection_row" style="display:none;">
+                    <td>
+                      <span>Delivery Address</span>
+                    </td>
+                    <td>
+                      <select id="ptr_contacts" style="height:30px;width: 80%;" t-on-change="onchange_ptr_contacts">
+                          <option value="" disabled="true" selected="true">Select Delivery Address</option>
+                          <t t-foreach="props.contacts" t-as="contact" t-key="contact.id">
+                              <option t-att-value="contact.id" style="display:grid;">
+                                <t t-out="contact.name + ' ' + contact.street or '' + ' ' + contact.street2 or ''"/>
+                              </option>
+                          </t>
+                      </select>
+                    </td>
+                </tr>
+                    <tr id="new_contact_name">
+                    <td>
+                        <span>Name: *</span>
+                    </td>
+                        <td>
+                        <input type="text" name="c_name" class="c_name"/>
+                    </td>
+                </tr>
+                    <tr>
+                    <td>
+                        <span>Address Line1:</span>
+                    </td>
+                        <td>
+                        <input type="text" name="add_line1" class="street1"/>
+                    </td>
+                </tr>
+                    <tr>
+                    <td>
+                        <span>Address Line2:</span>
+                    </td>
+                        <td>
+                        <input type="text" name="add_line2" class="street2"/>
+                    </td>
+                </tr>
+                    <tr>
+                    <td>
+                        <span>City:</span>
+                    </td>
+                        <td>
+                        <input type="text" name="add_city" class="add_city"/>
+                    </td>
+                </tr>
+                    <tr>
+                    <td style="padding-bottom: 20px;">
+                        <span>Phone:</span>
+                    </td>
+                        <td style="padding-bottom: 20px;">
+                        <div>
+                            <input class="add_phone" name="add_phone" type="text" style="width: 32%;"/>
+                            <span style="padding-left: 20px;"> M:</span>
+                            <input class="add_mobile" name="add_mobile" type="text"
+                                   style="width: 38%;margin-left: 10px;"/>
+                        </div>
+                    </td>
+                </tr>
+                    <tr t-if="props.adv_pay" class="adv_pay_row">
+                    <td style="padding-top:15px;">
+                        <span>Advance Payment</span>
+                    </td>
+                        <td style="padding-top:15px;">
+                        <input type="text" class="adv_pay_value" style="width: 22%;text-align: right;"/>
+                            <span style="padding-left:5px;">
+                            <span t-esc="props.currency_symbol"/>
+                        </span>
+                            <select id="payment_journal" style="height:30px;width: 44%;margin-left: 12%;">
+                            <option value="" disabled="true" selected="true">Select Payment Method</option>
+                                <t t-foreach="props.journals" t-as="journal" t-key="journal.id">
+                              <option t-att-value="journal.id" style="display:grid;">
+                                <t t-out="journal.name"/>
+                              </option>
+                          </t>
+                        </select> 
+                    </td>
+                </tr>
+                    <tr t-att-class="(!props.adv_pay) and 'adv_pay_row'">
+                    <td colspan="2">
+                        <h3><strong>Sale Order Note:</strong></h3>
+                        <textarea class="so_notes" rows="2" placeholder="Enter note"></textarea>
+                    </td>
+                        <td colspan="2">
+                        <h3><strong>Attachments</strong></h3>
+                        <div class="choices_content">
+                                <div>
+                                    <input type="file" id="upload_file" name="upload_file[]" multiple=""/>
+                                </div>
+                            <div class="flex-container">
+
+                                </div>
+                            </div>
+                    </td>
+                </tr>
+
+            </table>
+          </div>
+            <!-- end of the partner's delivery address -->
+
+            <div id="sale_order_details" class="content-container">
+                </div>
+            <div class="footer">
+                    <div class="button save_quotation_bill" style="margin-right: 20px;" t-on-click="onClickSave">
+                        Save
+                    </div>
+                <div class="button print_quotation_bill" style="margin-right: 20px;" t-on-click="onClickSavePrint">
+                        Save/Print 
+                    </div>
+                <div class="button cancel" style="margin-right: 20px;" t-on-click="onClickCancel">
+                        Cancel 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="ProductAvailabilityPopupWidget" owl="1">
+        <Draggable>
+            <div class="popup oe-pos-product">
+                <header class="title drag-handle">
+                    <t t-esc="props.title" />
+                </header>
+                <div class="body">
+                    <table class="table table-bordered table-sm oe-table">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Product</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="props.info">
+                                <t t-foreach="props.info" t-as="data" t-key="data.id">
+                                    <tr t-if="(data.quantity - data.reserved_quantity) != 0">
+                                        <td class="text-left"><span><t t-esc="data.product_id[1]"/></span></td>
+                                        <t t-set="qty" t-value="(data.quantity - data.reserved_quantity)"/>
+                                        <td><span><t t-esc="qty"/></span></td>
+                                        <td><span><t t-esc="data.product_uom_id[1]"/></span></td>
+                                        <td><span><t t-esc="data.location_id[1]"/></span></td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+                <footer class="footer">
+                    <div class="button confirm highlight" t-on-click="confirm">
+                        <t t-esc="props.confirmText" />
+                    </div>
+                </footer>
+            </div>
+        </Draggable>
+    </t>
+
+</templates>

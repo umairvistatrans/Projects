@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="oe_login_signup.contact" inherit_id="7md_website.contact" name="7md Contact">
+        <xpath expr="//t[1]/section[1]/div[1]" position="replace">
+            <div class="row mt-4">
+                <t t-foreach="stores" t-as="store">
+                    <div class="col-md-3">
+                        <div class="card mb-4 p-3">
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10">
+
+                                <a t-att-href="'/contact/' + store.url_name" class="branch_link">
+                                    <t t-esc="store.name"/>
+                                </a>
+                            </h4>
+                            <t t-if="store.phone_number">
+                                <ul class="list-inline contact-info mb20">
+                                    <li class="shop-no">
+                                        <i class="fa fa-phone"></i>
+                                        <span>
+                                            <a t-att-href="'tel:' + store.phone_number.replace(' ', '')">
+                                                <t t-esc="store.phone_number"/>
+                                            </a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </xpath>
+        <xpath expr="//t[1]/section[2]/div[1]/div[1]/div[1]/div[2]" position="replace">
+            <div class="card-body p-4">
+                <form action="/contact/submit" method="post" class="flex-column  align-items-stretch ">
+
+                    <div class="row row-cols-2 mb-4">
+                        <div class="col-12 col-md-6">
+                            <label class="form-label text-muted">First Name
+                                <small
+                                        class="text-danger">*
+                                </small>
+                            </label>
+                            <input type="text"
+                                   class="form-control form-control-lg rounded-0" name="first_name" required="1"/>
+                            <input type="hidden" name="store_url_name" t-att-value="store_url"/>
+                        </div>
+                        <div class="col-12 col-md-6 mt-4 mt-md-0">
+                            <label class="form-label text-muted">Last Name
+                                <small
+                                        class="text-danger">*
+                                </small>
+                            </label>
+                            <input type="text"
+                                   class="form-control form-control-lg rounded-0" name="last_name" required="1"/>
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 mb-4">
+                        <div class="col-12 col-md-6">
+                            <label class="form-label text-muted">Email
+                                <small
+                                        class="text-danger">*
+                                </small>
+                            </label>
+                            <input type="email"
+                                   class="form-control form-control-lg rounded-0" name="email" required="1"/>
+                        </div>
+                        <div class="col-12 col-md-6 mt-4 mt-md-0">
+                            <div>
+                                <label class="form-label text-muted">Phone Number
+                                    <small
+                                            class="text-danger">*
+                                    </small>
+                                </label>
+                            </div>
+                            <input type="text"
+                                   class="form-control form-control-lg rounded-0 w-100" name="phone_number" required="1" maxlength="16"  id="mobile_code"/>
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 mb-4">
+                        <div class="col-12">
+                            <label class="form-label text-muted">Message  <small class="text-danger">* </small>
+                            </label>
+                            <textarea class="form-control rounded-0"
+                                      id="exampleFormControlTextarea1" rows="3" name="message_text" required="1"></textarea>
+                        </div>
+                    </div>
+                    <script src="https://www.google.com/recaptcha/api.js"/>
+                                    <div id="captcha" class="imageContainer">
+                                        <div class="form-group">
+                                            <!-- Specify your site key in data-sitekey attribute -->
+                                            <div class="g-recaptcha"
+                                                 data-sitekey="6Le5nMQUAAAAALpK02mtPPGnpjVlnq6orhz4Zj0u"
+                                                 data-callback="verifyRecaptchaCallback"
+                                                 data-expired-callback="expiredRecaptchaCallback"></div>
+                                            <input id="recaptcha_verified" type="hidden" data-recaptcha="true"/>
+                                            <div class="help-block with-errors" id="err" style='color: red'></div>
+                                        </div>
+                                    </div>
+                    <div class="row row-cols-2 my-4">
+                        <div class="col-12 text-center">
+<!--                            <a href="#"-->
+<!--                               class="btn btn-primary btn-lg btn-w text-uppercase">-->
+<!--                                Send-->
+<!--                            </a>-->
+                            <button type="submit" class="btn btn-primary btn-lg btn-w text-uppercase">Send</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </xpath>
+
+    </template>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="7md_website.product_wishlist_msg" inherit_id="website_sale_wishlist.product_wishlist" name="Wishlist Page message">
+            <xpath expr="//div[@class='checkbox']" position="replace">
+              <div t-if="wishes" class="checkbox">
+                    <label class='text-muted'><input type="checkbox" id='b2b_wish' value="1" class="mr8"/>Add product to my cart but keep it in my wishlist</label>
+                </div>
+            <div t-if="not wishes">
+                
+                Your Wishlist is empty!
+    
+            </div>
+        </xpath>
+        </template>
+
+</odoo>

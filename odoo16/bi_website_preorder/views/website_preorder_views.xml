@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="website_preorder_form" model="ir.ui.view">
+        <field name="name">website.preorder.form</field>
+        <field name="model">website.preorder</field>
+        <field name="arch" type="xml">
+            <form string="Website Pre-order Configration" class="oe_form_configuration">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="status" string="Active"/>
+                        <field name="preorder_payment_type"/>
+                        <label for="percent"
+                               attrs="{'invisible': [('preorder_payment_type','=','full')]}"/>
+                        <div attrs="{'invisible': [('preorder_payment_type','=','full')]}">
+                            <field name="percent" class="oe_inline"
+                                   attrs="{'required': [('preorder_payment_type','=','partial')]}"/>
+                            <label for="percent" string="%"/>
+                        </div>
+                        <field name="add_to_button_text"/>
+                        <field name="available_date_on_preorder_product"/>
+                        <field name="preorder_expiry"
+                               attrs="{'invisible': [('available_date_on_preorder_product','!=',True)]}"/>
+                        <field name="display_preorder_qty_range"/>
+                        <field name="allowed_preorder_qty"/>
+                        <field name="minimum_preorder_qty"/>
+                        <field name="maximum_preorder_qty"/>
+                        <field name="custom_message"/>
+                        <field name="warning_message"/>
+                        <field name="conditional_message"/>
+                        <field name="preoreder_amount_visible"/>
+                        <field name="send_mail"/>
+                        <field name="email_template"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="website_preorder_tree" model="ir.ui.view">
+        <field name="name">website.preorder.tree</field>
+        <field name="model">website.preorder</field>
+        <field name="arch" type="xml">
+            <tree string="Website Pre-order Configration">
+                <field name="name"/>
+                <field name="status"/>
+                <field name="preorder_payment_type"/>
+                <field name="add_to_button_text"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_website_preorder" model="ir.actions.act_window">
+        <field name="name">Pre-order Configration</field>
+        <field name="res_model">website.preorder</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="website_preorder_menu" parent="website.menu_website_global_configuration" sequence="7"
+              name="Pre-order" action="action_website_preorder"/>
+
+</odoo>

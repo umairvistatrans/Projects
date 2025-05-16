@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="7md_website.about" name="7md About">
+        <t t-call="website.layout">
+
+            <section
+                class="py-2 breadcrumb-section mb-4 about-container">
+                <div class="container">
+                    <div class="">
+                        <div class="nasa-title clearfix hr-type-none">
+                            <div class="nasa-wrap">
+                                <h3 class="nasa-heading-title">
+                                    <span style="text-decoration: underline;">
+                                        <span class="nasa-title-wrap">ABOUT 7MD STORE :</span>
+                                    </span>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="wpb_text_column wpb_content_element  vc_custom_1584364019132">
+                            <div class="wpb_wrapper">
+                                <p></p>
+                                <p>- 7md Store specializes in all that is new and rare of exclusive
+                                    and electronic special products and daily products at
+                                    competitive prices that we cannot get a competitor for us.</p>
+                                <p></p>
+                                <p>- 7md Store was established by a self-made figure who started
+                                    working through the home and by choosing products that were not
+                                    available in the market and at competitive prices that led to
+                                    opening a mass base for the store everywhere.</p>
+                                <p></p>
+                                <p>- The 7md Store store is considered one of the electronic stores
+                                    specialized in electronic products, home and family products,
+                                    office and others, which are carefully chosen and offered at
+                                    competitive prices to confirm the customers permanent loyalty to
+                                    the store.</p>
+                                <p></p>
+                                <p>- We are always keen on selecting and providing all that is new
+                                    and everything that is exclusive and distinctive through our
+                                    hard work in searching for these products and we offer many
+                                    after-sales services and our team works constantly to update
+                                    products and services and we deliver our products everywhere
+                                    around the world through our partners companies Shipping and
+                                    delivery.</p>
+                                <p></p>
+                                <p>- We are always working to satisfy you and provide everything
+                                    that distinguishes you and serves your daily life, so we make
+                                    our best efforts in that and we hope to be the first supplier in
+                                    this field through quality, price and speed of delivery.</p>
+                                <p></p>
+                                <h3>
+                                    <span style="text-decoration: underline;">Company Profile :</span>
+                                </h3>
+                                <p></p>
+
+                                <div class="outer-img-div">
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about1.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about2.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about3.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about4.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about5.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about6.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about7.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about8.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about9.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about10.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about11.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about12.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                    <div class="img-div">
+                                        <img
+                                            src="/7md_website/static/src/images/about13.jpeg"
+                                            alt="image here" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+</odoo>

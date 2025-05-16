@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="pos_sync_wizard_form" model="ir.ui.view">
+            <field name="name">pos.order.syn.form</field>
+            <field name="model">pos.order.wizard.syn</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="date"/>
+                    </group>
+                    <footer>
+                        <button string="Update POS" type="object" class="oe_highlight" name="perform_action"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="pos_sync_wizard" model="ir.actions.act_window">
+            <field name="name">POS SYNC</field>
+            <field name="res_model">pos.order.wizard.syn</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="pos_script.pos_sync_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_pos_order_syn" name="POS SYNC Wizard" parent="base.menu_administration" action="pos_sync_wizard"/>
+
+    </data>
+</odoo>

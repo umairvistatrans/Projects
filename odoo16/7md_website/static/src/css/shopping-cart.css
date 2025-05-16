@@ -1,0 +1,107 @@
+.shopping-cart-header .card-body img{
+    height: 80px;
+}
+.shopping-cart-header .nav-link.active{
+    color: #d9981c;
+    border-bottom: 2px solid #d9981c !important;
+}
+.shopping-cart-header .nav-link{
+    color: #495057;
+}
+.cart-table .cart-img{
+    max-width: 70px;
+}
+.cart-table .quantity-input{
+    max-width: 115px;
+    width: 115px;
+}
+.cart-table .cart-table-price{
+    width: 115px;
+    vertical-align: baseline;
+}
+.cart-table .quantity-input .btn{
+    border-color: #ced4da;
+}
+.cart-side .discount-input{
+    border: 2px solid #a9afb5;
+}
+.cart-side .total-cart,
+.cart-table-price .price
+{
+    font-weight: 700;
+}
+@media (max-width: 500px){
+    .cart-tabs-box {
+        font-size: 12px;
+    }
+    .cart-tabs-box h4{
+        font-size: 14px;
+    }
+    .shopping-cart-header .card-body img {
+        height: 60px;
+    }
+}
+.cat-tabs .fade:not(.show){
+    display: none !important;
+}
+.tab-content > .active{
+    display: flex;
+}
+.account-tabs  .nav-link.active{
+    border-bottom: 2px solid #d9981c !important;
+}
+.account-tabs .nav-link{
+    color: #495057;
+}
+.account-tabs .nav-tabs{
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+@media (max-width: 767px){
+    .account-tabs .nav-tabs h2{
+        font-size: 14px;
+    }
+    .account-tabs .nav-tabs{
+        justify-content: flex-start !important;
+    }
+    .account-tabs .card-body{
+        padding: 1rem;
+    }
+    .account-tabs .nav-item{
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+}
+
+.orders-tab-content .cart-img{
+    max-width: 70px;
+}
+.orders-tab-content .order-btn{
+    width:60px;
+}
+@media (min-width: 768px){
+    .orders-tab-content{
+        min-height: calc( 100vh - 466px);
+    }
+}
+/*.orders-table thead th,td{*/
+/*    font-size: 1.5rem;*/
+/*    line-height: 1;*/
+/*}*/
+.orders-tab-content .order-btn .fa-angle-down:before {
+    content: "\f106"
+}
+.orders-tab-content .order-btn.collapsed .fa-angle-down:before {
+    content: "\f107"
+}
+/* {
+    width: 60px;
+} */
+.orders-tab-content .order-number{
+    flex-grow: 2;
+}
+@media (max-width: 767px){
+    .orders-tab-content .order-number{
+        flex:1 0 51%;
+    }
+}

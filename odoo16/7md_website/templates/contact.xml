@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="7md_website.contact" name="7md Contact">
+        <t t-call="website.layout">
+            <section class="container-fluid bg-white  py-2 breadcrumb-section mb-4">
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <div class="card mb-4 p-3">
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10">
+                                <a href="https://www.7md.ae/en/contact/dalma-mall"
+                                    class="branch_link">
+                                    Dalma Mall - Abu Dhabi
+                                </a>
+                            </h4>
+                            <ul class="list-inline contact-info mb20">
+                                <li class="shop-no">
+                                    <i class="fa fa-phone"></i>
+                                    <span>
+                                        <a href="tel:0509070268">0509070268</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mb-4 p-3">
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10">
+                                <a href="https://www.7md.ae/en/contact/zawaya-walk-sharjah"
+                                    class="branch_link">
+                                    Zawaya Walk - Sharjah
+                                </a>
+                            </h4>
+                            <ul class="list-inline contact-info mb20">
+                                <li class="shop-no">
+                                    <i class="fa fa-phone"></i>
+                                    <span>
+                                        <a href="tel:058 648 8784">058 648 8784</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mb-4 p-3">
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10">
+                                <a href="https://www.7md.ae/en/contact/sun-seat-dubi"
+                                    class="branch_link">
+                                    Sunset Mall - Dubai
+                                </a>
+                            </h4>
+                            <ul class="list-inline contact-info mb20">
+                                <li class="shop-no">
+                                    <i class="fa fa-phone"></i>
+                                    <span>
+                                        <a href="tel:050 901 0485">050 901 0485</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mb-4 p-3">
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10">
+                                <a href="https://www.7md.ae/en/contact/jimi" class="branch_link">
+                                    AlJimi Mall - Al Ain
+                                </a>
+                            </h4>
+                            <ul class="list-inline contact-info mb20">
+                                <li class="shop-no">
+                                    <i class="fa fa-phone"></i>
+                                    <span>
+                                        <a href="tel:0501030895">0501030895</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mb-4 p-3">
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10">
+                                <a href="https://www.7md.ae/en/contact/al-reem" class="branch_link">
+                                    Reem Mall - Abu Dhabi
+                                </a>
+                            </h4>
+                            <ul class="list-inline contact-info mb20">
+                                <li class="shop-no">
+                                    <i class="fa fa-phone"></i>
+                                    <span>
+                                        <a href="tel:0509020736">0509020736</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mb-4 p-3">
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10">
+                                <a href="https://www.7md.ae/en/contact/rahamaniyah-shj"
+                                    class="branch_link">
+                                    Rahmania Mall - Sharjah
+                                </a>
+                            </h4>
+                            <ul class="list-inline contact-info mb20">
+                                <li class="shop-no">
+                                    <i class="fa fa-phone"></i>
+                                    <span>
+                                        <a href="tel:0509040176">0509040176</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mb-4 p-3">
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10">
+                                <a href="https://www.7md.ae/en/contact/alfallah-mall"
+                                    class="branch_link">
+                                    Alfallah Mall
+                                </a>
+                            </h4>
+                            <ul class="list-inline contact-info mb20">
+                                <li class="shop-no">
+                                    <i class="fa fa-phone"></i>
+                                    <span>
+                                        <a href="tel:Coming&amp;nbsp;Soon">Coming Soon</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mb-4 p-3">
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10"></h4>
+                            <h4 class="mb10">
+                                <a href="https://www.7md.ae/en/contact/aldhafra-walk"
+                                    class="branch_link">
+                                    Aldhafra Walk
+                                </a>
+                            </h4>
+                            <ul class="list-inline contact-info mb20">
+                                <li class="shop-no">
+                                    <i class="fa fa-phone"></i>
+                                    <span>
+                                        <a href="tel:Coming&amp;nbsp;Soon">Coming Soon</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb p-2 mb-0">
+                                <li class="breadcrumb-item text-capitalize">home</li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    <a href="#"
+                                        class="text-decoration-none text-capitalize">Contact Us</a>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </section>
+            <section class="container-fluid px-lg-4 main_container  ">
+                <div class="row py-4 flex-column flex-md-row">
+                    <div class="col-12 col-md-6 ">
+                        <div class="card h-100">
+                            <div class="card-title border-bottom p-4 text-center">
+                                <h1 class=" custom-title position-relative">Contact US</h1>
+                            </div>
+                            <div class="card-body p-4">
+                                <form action="#" class="flex-column  align-items-stretch ">
+                                    <div class="row row-cols-2 mb-4">
+                                        <div class="col-12 col-md-6">
+                                            <label class="form-label text-muted">First Name<small
+                                                    class="text-danger">*</small></label>
+                                            <input type="text"
+                                                class="form-control form-control-lg rounded-0" />
+                                        </div>
+                                        <div class="col-12 col-md-6 mt-4 mt-md-0">
+                                            <label class="form-label text-muted">Last Name<small
+                                                    class="text-danger">*</small></label>
+                                            <input type="text"
+                                                class="form-control form-control-lg rounded-0" />
+                                        </div>
+                                    </div>
+                                    <div class="row row-cols-2 mb-4">
+                                        <div class="col-12 col-md-6">
+                                            <label class="form-label text-muted">Email<small
+                                                    class="text-danger">*</small></label>
+                                            <input type="email"
+                                                class="form-control form-control-lg rounded-0" />
+                                        </div>
+                                        <div class="col-12 col-md-6 mt-4 mt-md-0">
+                                            <label class="form-label text-muted">Phone Number<small
+                                                    class="text-danger">*</small></label>
+                                            <input type="number"
+                                                class="form-control form-control-lg rounded-0"/>
+                                        </div>
+                                    </div>
+                                    <div class="row row-cols-2 mb-4">
+                                        <div class="col-12">
+                                            <label class="form-label text-muted">Message</label>
+                                            <textarea class="form-control rounded-0"
+                                                id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <script src="https://www.google.com/recaptcha/api.js"/>
+                                    <div id="captcha1" class="imageContainer">
+                                        <div class="form-group">
+                                            <!-- Specify your site key in data-sitekey attribute -->
+                                            <div class="g-recaptcha"
+                                                 data-sitekey="6Le5nMQUAAAAALpK02mtPPGnpjVlnq6orhz4Zj0u"
+                                                 data-callback="verifyRecaptchaCallback"
+                                                 data-expired-callback="expiredRecaptchaCallback"></div>
+                                            <input id="recaptcha_verified1" type="hidden" data-recaptcha="true"/>
+                                            <div class="help-block with-errors" id="err1" style='color: red'></div>
+                                        </div>
+                                    </div>
+                                    <div class="row row-cols-2 my-4">
+                                        <div class="col-12 text-center">
+                                            <a href="#"
+                                                class="btn btn-primary btn-lg btn-w text-uppercase">
+                                                Send</a>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 align-self-stretch mt-4 mt-md-0 map-col">
+                        <iframe class="card"
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14541.744450870885!2d54.5240743!3d24.3312966!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd0faaf885c9434f4!2s7md%20store!5e0!3m2!1sen!2s!4v1676113204442!5m2!1sen!2s"
+                            width="100%" height="100%" style="border:0;" allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+            </section>
+
+
+        </t>
+    </template>
+
+</odoo>
