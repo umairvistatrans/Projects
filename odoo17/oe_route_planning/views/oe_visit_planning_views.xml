@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="oe_visit_planning_view_form" model="ir.ui.view">
+        <field name="name">oe.visit.planning.form</field>
+        <field name="model">oe.visit.planning</field>
+        <field name="arch" type="xml">
+            <form string="Visits">
+                <header>
+                        <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                    </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-user" name="action_view_visits"
+                            invisible="visit_count == 0">
+                            <field string="Visits" name="visit_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id" options="{'no_open': True}" readonly="state == 'confirmed'"/>
+                            <field name="recurrency" invisible="1" readonly="state == 'confirmed'"/>
+                            <field name="customer_ids" options="{'no_open': True}" widget="many2many_tags" readonly="state == 'confirmed'"/>
+                            <field name="route_id" options="{'no_create': True}" readonly="state == 'confirmed'"/>
+                        </group>
+                        <group>
+                            <field name="start_date" required="1" readonly="state == 'confirmed'"/>
+                            <field name="rrule_type_ui" class="w-auto" invisible="not recurrency" required="recurrency" readonly="state == 'confirmed'"/>
+                            <label for="interval" class="fw-bold text-900" invisible="not recurrency or rrule_type_ui != 'custom'"/>
+                            <div class="d-flex gap-1" invisible="not recurrency or rrule_type_ui != 'custom'">
+                                <field name="interval" string="Repeat every" class="oe_inline w-auto" readonly="state == 'confirmed'"/>
+                                <field name="rrule_type" nolabel="1" class="oe_inline" required="rrule_type_ui == 'custom'" readonly="state == 'confirmed'"/>
+                            </div>
+                            <field name="state" invisible="1"/>
+                            <span class="fw-bold text-nowrap"
+                                  invisible="rrule_type_ui not in ['weekly', 'custom'] or (rrule_type_ui == 'custom' and rrule_type != 'weekly')"> Repeat on
+                            </span>
+                            <div invisible="rrule_type_ui not in ['weekly', 'custom'] or (rrule_type_ui == 'custom' and rrule_type != 'weekly')">
+                                <widget name="calendar_week_days" options="{'no_create': True, 'no_open': True}" readonly="state == 'confirmed'"/>
+                            </div>
+
+                            <label string="Day of Month" for="month_by" class="fw-bold text-900" style="width: fit-content;" invisible="rrule_type_ui not in ['monthly', 'custom'] or (rrule_type_ui == 'custom' and rrule_type != 'monthly')"/>
+                            <div class="d-flex gap-2" invisible="rrule_type_ui not in ['monthly', 'custom'] or (rrule_type_ui == 'custom' and rrule_type != 'monthly')">
+                                <field name="month_by" nolabel="1" class="oe_inline w-auto" required="rrule_type_ui == 'monthly' or rrule_type == 'monthly'" readonly="state == 'confirmed'"/>
+                                <field name="day" nolabel="1" class="oe_inline w-auto" required="(rrule_type_ui == 'monthly' or rrule_type == 'monthly') and month_by == 'date'" invisible="month_by != 'date'" readonly="state == 'confirmed'"/>
+                                <field name="byday" string="The" class="oe_inline w-auto" nolabel="1" required="(rrule_type_ui == 'monthly' or rrule_type == 'monthly') and month_by == 'day'" invisible="month_by != 'day'" readonly="state == 'confirmed'"/>
+                                <field name="weekday" nolabel="1" class="oe_inline w-auto" required="(rrule_type_ui == 'monthly' or rrule_type == 'monthly') and month_by == 'day'" invisible="month_by != 'day'" readonly="state == 'confirmed'"/>
+                            </div>
+                            <label string="Until" for="end_type" class="fw-bold text-900"/>
+                            <div class="d-flex gap-2" invisible="not recurrency">
+                                <field name="end_type" class="oe_inline w-auto" nolabel="1" required="recurrency" readonly="state == 'confirmed'"/>
+                                <field name="count" class="oe_inline w-auto" nolabel="1" invisible="end_type != 'count'" required="recurrency" readonly="state == 'confirmed'"/>
+                                <field name="until" class="oe_inline w-auto" nolabel="1" invisible="end_type != 'end_date'" required="recurrency and end_type == 'end_date'" placeholder="e.g: 12/31/2023" readonly="state == 'confirmed'"/>
+                            </div>
+                        </group>
+                    </group>
+                    <field name="remarks" placeholder="Remarks if any..." readonly="state == 'confirmed'"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="oe_visit_planning_view_tree" model="ir.ui.view">
+        <field name="name">oe.visit.planning.view.tree</field>
+        <field name="model">oe.visit.planning</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="rrule_type_ui"/>
+                <field name="route_id"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'"
+                    decoration-success="state == 'confirmed'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_oe_visit_planning_search" model="ir.ui.view">
+        <field name="name">oe.visit.planning.search</field>
+        <field name="model">oe.visit.planning</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Name"/>
+                <field name="user_id" string="User"/>
+                <field name="rrule_type_ui" string="Recurrence Type"/>
+                <field name="route_id" string="Route ID"/>
+                <field name="state" string="Status"/>
+                <group expand="0" string="Group By">
+                    <filter string="User" name="user_id" context="{'group_by': 'user_id'}"/>
+                    <filter string="Recurrence Type" name="rrule_type_ui" context="{'group_by': 'rrule_type_ui'}"/>
+                    <filter string="Route ID" name="route_id" context="{'group_by': 'route_id'}"/>
+                    <filter string="Status" name="state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="oe_visit_planning_action_window" model="ir.actions.act_window">
+        <field name="name">Planning</field>
+        <field name="res_model">oe.visit.planning</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menuitem -->
+    <menuitem name="Planning" 
+        id="oe_visits_planning_menu" 
+        parent="oe_sub_menu_visits" 
+        action="oe_visit_planning_action_window" 
+        sequence="2"/>
+
+</odoo>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="message_popup" name="Message Popup"
+        inherit_id="oe_route_planning_portal.portal_searchbar_visits">
+        <xpath expr="//div[hasclass('nav')]" position="inside">
+            <button id="openModalButton" class="btn btn-primary"><i class="fa fa-plus"></i> <strong>New</strong></button>
+
+            <div id="exampleModalCenter" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create Unplanned Visit</h5>
+                            <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close" id="closeModalButton">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="formContainer">
+                            <form id="modalForm">
+                                <div class="form-group">
+                                    <label for="inputField1">Customer<span class="text-danger">*</span></label>
+                                    <select class="form-control" id="partner_id" name="partner_id" required="1" t-on-change="updateRouteId(this)">
+                                        <t t-foreach="request.env['res.partner'].sudo().search([('customer_rank', '!=', False)])" t-as="partner">
+                                            <option t-att-value="partner.id" t-esc="partner.name"/>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputField3">Route<span class="text-danger">*</span></label>
+                                    <select class="form-control" id="route_id" name="route_id" required="1">
+                                        <t t-foreach="request.env['oe.route.master'].sudo().search([])" t-as="route">
+                                            <option t-att-value="route.id" t-esc="route.name"/>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputField2">Date<span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="current_date" name="current_date" required="1"/>
+                                </div>
+
+                            </form>
+                            <div id="message" class="mt-3"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="submitFormBtn">Create</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

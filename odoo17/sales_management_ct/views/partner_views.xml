@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ======= Res Partner Inheritance ======= -->
+        <!-- Adding newly added measurement and design fields in res.partner base form view -->
+        <record model="ir.ui.view" id="view_res_partner_form">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Insert the new page before the Internal Notes page -->
+                <xpath expr="//page[@name='internal_notes']" position="before">
+                    <page string="Measurements" name="measurements">
+                        <group>
+                            <!-- Thobe Length -->
+                            <group string="Thobe Length">
+                                <field name="thobe_length_total" class="o_measurement"/>
+                                <field name="thobe_length_front" class="o_measurement"/>
+                                <field name="thobe_length_back" class="o_measurement"/>
+                                <field name="thobe_length_notes" class="o_measurement"/>
+                            </group>
+                            <!-- Codes Categories -->
+                            <group string="Codes">
+                                <label for="logo_code_1" string="Logo Codes"/>
+                                <div class="d-flex">
+                                    <field name="logo_code_1" class="o_measurement_code"/>
+                                    <field name="logo_code_2" class="o_measurement_code"/>
+                                    <field name="logo_code_3" class="o_measurement_code_last"/>
+                                </div>
+                                <label for="button_code_1" string="Button Codes"/>
+                                <div class="d-flex">
+                                    <field name="button_code_1" class="o_measurement_code"/>
+                                    <field name="button_code_2" class="o_measurement_code"/>
+                                    <field name="button_code_3" class="o_measurement_code_last"/>
+                                </div>
+                                <field name="external_buttons_available" widget="radio" options="{'horizontal': True}"/>
+                                <label for="fabric_code_1" string="Fabric Codes"/>
+                                <div class="d-flex">
+                                    <field name="fabric_code_1" class="o_measurement_code"/>
+                                    <field name="fabric_code_2" class="o_measurement_code"/>
+                                    <field name="fabric_code_3" class="o_measurement_code_last"/>
+                                </div>
+                                <field name="codes_additional_notes" class="o_measurement"/>
+                            </group>
+                            <!-- Chest + Waist + Middle -->
+                            <group string="Chest, Waist &amp; Middle">
+                                <field name="chest_width" class="o_measurement"/>
+                                <field name="waist_width" class="o_measurement"/>
+                                <field name="middle_width" class="o_measurement"/>
+                                <field name="chest_waist_middle_notes" class="o_measurement"/>
+                            </group>
+                            <!-- Front Pocket -->
+                            <group string="Front Pocket">
+                                <field name="pocket_start_extension" class="o_measurement"/>
+                                <field name="pocket_length" class="o_measurement"/>
+                                <field name="pocket_width" class="o_measurement"/>
+                                <field name="pocket_shape_id" class="o_measurement" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                                <field name="pocket_additions" widget="radio" options="{'horizontal': True}"/>
+                                <field name="pocket_padding" widget="radio" options="{'horizontal': True}"/>
+                                <field name="pocket_notes" class="o_measurement"/>
+                            </group>
+                            <!-- Sleeve Width -->
+                            <group string="Sleeve Width">
+                                <field name="muscle_width" class="o_measurement"/>
+                                <field name="mid_wrist_width" class="o_measurement"/>
+                                <field name="sleeve_width_notes" class="o_measurement"/>
+                            </group>
+                            <!-- Side Pocket -->
+                            <group string="Side Pocket">
+                                <field name="side_pocket_length" class="o_measurement"/>
+                                <field name="side_pocket_width" class="o_measurement"/>
+                                <field name="side_pocket_zipper" widget="radio" options="{'horizontal': True}"/>
+                                <field name="side_pocket_additions" class="o_measurement"/>
+                                <field name="mobile_pocket" widget="radio" options="{'horizontal': True}"/>
+                                <field name="mobile_pocket_id" class="o_measurement" invisible="mobile_pocket != 'yes'" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                            </group>
+                            <!-- Bottom of Thobe -->
+                            <group string="Bottom of Thobe">
+                                <field name="bottom_width" class="o_measurement"/>
+                                <field name="bottom_pleat" class="o_measurement"/>
+                                <field name="bottom_notes" class="o_measurement"/>
+                            </group>
+                             <!-- Sleeve & Underarm -->
+                            <group string="Sleeve &amp; Underarm">
+                                <field name="plain_sleeve_length" class="o_measurement"/>
+                                <field name="cuff_sleeve_length" class="o_measurement"/>
+                                <field name="underarm_length" class="o_measurement"/>
+                                <field name="upper_underarm_width" class="o_measurement"/>
+                                <field name="lower_underarm_width" class="o_measurement"/>
+                                <field name="sleeve_underarm_notes" class="o_measurement"/>
+                            </group>
+                            <!-- Collar -->
+                            <group string="Collar">
+                                <field name="collar_width" class="o_measurement"/>
+                                <field name="collar_height" class="o_measurement"/>
+                                <field name="collar_shape_id" class="o_measurement" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                                <field name="collar_padding" widget="radio" options="{'horizontal': True}"/>
+                                <field name="collar_notes" class="o_measurement"/>
+                            </group>
+                            <!-- Cuff -->
+                            <group string="Cuff">
+                                <field name="cuff_type" widget="radio" options="{'horizontal': True}"/>
+                                <field name="cuff_plain_length" class="o_measurement" invisible="cuff_type != 'plain'"/>
+                                <field name="cuff_plain_width" class="o_measurement" invisible="cuff_type != 'plain'"/>
+                                <field name="cuff_plain_shape_id" class="o_measurement" invisible="cuff_type != 'plain'" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+
+                                <field name="cuff_length" class="o_measurement" invisible="cuff_type != 'cufflink'"/>
+                                <field name="cuff_width" class="o_measurement" invisible="cuff_type != 'cufflink'"/>
+                                <field name="cufflink_shape_id" class="o_measurement" invisible="cuff_type != 'cufflink'" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+
+                                <field name="pleat_padding" widget="radio" options="{'horizontal': True}"/>
+                                <field name="cuff_notes" class="o_measurement"/>
+                            </group>
+                            <!-- Shoulder -->
+                            <group string="Shoulder">
+                                <field name="shoulder_width" class="o_measurement"/>
+                                <field name="shoulder_notes" class="o_measurement"/>
+                            </group>
+                            <!-- Zipper -->
+                            <group string="Zipper">
+                                <field name="zipper_length" class="o_measurement"/>
+                                <field name="zipper_width" class="o_measurement"/>
+                                <field name="zipper_shape_id" class="o_measurement" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                                <field name="zipper_padding" widget="radio" options="{'horizontal': True}"/>
+                                <field name="zipper_notes" class="o_measurement"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

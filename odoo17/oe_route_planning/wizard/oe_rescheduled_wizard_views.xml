@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- reschedule_wizard_view.xml -->
+<odoo>
+    <record id="view_reschedule_wizard_form" model="ir.ui.view">
+        <field name="name">oe.reschedule.wizard.form</field>
+        <field name="model">oe.reschedule.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reschedule Visit">
+                <group>
+                    <group>
+                        <field name="reschedule_date"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Reschedule" type="object" name="action_reschedule" class="btn-primary"/>
+                    <button string="Cancel" class="btn btn-danger" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_products_list" name="products List">
+        <t t-if="my_products">
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Product Type</th>
+                        <th>Brand</th>
+                        <th width="3">Internal Reference</th>
+                        <th>Image</th>
+                        <th class="text-end">Status</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <t t-foreach="my_products" t-as="product">
+                    <tbody t-if="product">
+                        <tr class="product-row" t-att-data-product-id="product.id">
+                            <td class="text-start">
+                                <span t-esc="product.product_name"/>
+
+                            </td>
+                            <td>
+                                <span t-field="product.product_type" t-options='{"widget": "selection"}'/>
+                            </td>
+                            <td>
+                                <span t-esc="product.brand_id.name"/>
+                            </td>
+                            <td>
+                                <span t-esc="product.default_code"/>
+                            </td>
+                            <td>
+                               <img t-attf-src="{{ '/web/image/oe.new.products/%s/photo' % product.id }}" class="img-fluid" id="product_image_update" alt="Product Image" style="width:100px"/>
+                            </td>
+                            <td class="text-end lh-1">
+                                <span t-attf-class="badge badge-product-status text-bg-primary fw-normal o_text_overflow"
+                                      t-field="product.state"/>
+                            </td>
+
+
+                            <td class="text-end">
+                                <t t-if="product.state == 'draft'">
+                                    <button type="button" class="btn btn-primary btn-sm edit-product"
+                                            t-att-data-product-id="product.id">
+                                        <i class="fa fa-edit"/>
+                                    </button>
+                                </t>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="portal_my_products" name="My Products">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="oe_route_planning_portal.portal_searchbar_products">
+                <t t-set="title">Products</t>
+            </t>
+            <t t-if="not my_products">
+                <div class="alert alert-warning" role="alert">
+                    There are no Products.
+                </div>
+            </t>
+            <t t-call="oe_route_planning_portal.portal_products_list"/>
+        </t>
+    </template>
+
+    <template id="portal_my_home_menu_products" name="Portal layout : Products menu entries"
+              inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="product" class="breadcrumb-item active">
+                <a t-attf-href="/my/products?{{ keep_query() }}">Products /</a>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_searchbar_products" name="Portal Products Search Bar">
+        <nav t-attf-class="navbar navbar-expand-lg flex-wrap mb-4 p-0 o_portal_navbar {{classes if classes else ''}}">
+            <t t-if="breadcrumbs_searchbar">
+                <t t-call="oe_route_planning_portal.portal_my_home_menu_products"/>
+            </t>
+            <span t-else="" class="navbar-brand mb-0 h1 me-auto" t-esc="title or 'Products'"/>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#o_portal_navbar_content" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle filters">
+                <span class="fa fa-fw fa-bars"/>
+            </button>
+            <div class="collapse navbar-collapse flex-wrap-reverse justify-content-end gap-3 custom-collapse"
+                 id="o_portal_navbar_content">
+                <div class="nav flex-column flex-sm-row gap-2 ms-auto p-0 mb-3 mb-lg-0 mt-1 mt-lg-0">
+                    <div t-if="searchbar_filters" class="ms-lg-2">
+                        <span class="small me-1 navbar-text">Filter By:</span>
+                        <div class="btn-group">
+                            <button id="portal_searchbar_filters" data-bs-toggle="dropdown"
+                                    class="btn btn-secondary dropdown-toggle">
+                                <t t-esc="searchbar_filters.get(filterby,searchbar_filters.get('all')).get('label', 'All')"/>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="portal_searchbar_filters">
+                                <t t-foreach="searchbar_filters" t-as="option">
+                                    <a t-att-href="'/my/products' + '?' + keep_query('*', filterby=option)"
+                                       t-attf-class="dropdown-item#{filterby == option and ' active' or ''}">
+                                        <span t-esc="searchbar_filters[option].get('label')"/>
+                                    </a>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <t t-out="0"/>
+                </div>
+                <form t-if="searchbar_inputs" class="o_portal_search_panel col-md-5 col-xl-4 ms-lg-2">
+                    <div class="input-group w-100">
+                        <button type="button" class="btn btn-secondary border-end dropdown-toggle"
+                                data-bs-toggle="dropdown"/>
+                        <div class="dropdown-menu dropdown-menu-end" role="menu">
+                            <t t-foreach='searchbar_inputs' t-as='input'>
+                                <a t-att-href="'#' + input_value['input']"
+                                   t-attf-class="dropdown-item#{search_in == input_value['input'] and ' active' or ''}">
+                                    <span t-out="input_value['label']"/>
+                                </a>
+                            </t>
+                        </div>
+                        <input type="search" class="form-control" placeholder="Search" t-att-value='search'
+                               name="search" id="searchInput"/>
+                        <button class="btn btn-secondary o_wait_lazy_js" type="submit">
+                            <span class="oi oi-search"/>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </template>
+
+    <template id="new_product_creation_popup" name="New Product Creation Popup"
+              inherit_id="oe_route_planning_portal.portal_searchbar_products">
+        <xpath expr="//div[hasclass('nav')]" position="inside">
+            <button id="openProductModalButton" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                <strong>New</strong>
+            </button>
+
+            <div id="productModalCenter" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create New Product</h5>
+                            <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close"
+                                    id="closeProductModalButton">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="formContainer">
+                            <form id="modalFormProduct">
+                                <div class="form-group">
+                                    <label for="inputField1">Product Image<span class="text-danger">*</span></label>
+                                    <input type="file" class="image_upload" required="1" id="product_image"
+                                           name="product_image"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputField1">Product Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="product_name" name="product_name"
+                                           required="1" maxlength="40"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputField3">Type<span class="text-danger">*</span></label>
+                                    <select class="form-control" id="product_type" name="product_type" required="1">
+                                        <option value="company_products">Company Products</option>
+                                        <option value="company_materials">Company Materials</option>
+                                        <option value="competitor_products">Competitor Products</option>
+                                        <option value="competitor_materials">Competitor Materials</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputField3">Brand<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="brand" name="brand" required="1" maxlength="40"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputField1">Internal Reference<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="internal_reference"
+                                           name="internal_reference" required="1" maxlength="20"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputField1">Description</label>
+                                    <input type="text" class="form-control" id="notes" name="notes"/>
+                                </div>
+
+                            </form>
+                            <div id="message" class="mt-3"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="submitProductFormBtn">Create</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="product_popup" inherit_id="oe_route_planning_portal.portal_products_list">
+        <xpath expr="//thead[1]" position="after">
+            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="productModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Product</h5>
+                            <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close"
+                                    id="closeProductEditModalButton">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="product_name">Product Name</label>
+                                    <input type="text" class="form-control" id="product_name_update"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_type">Product Type</label>
+                                    <input type="text" class="form-control" id="product_type_update"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="brand">Brand</label>
+                                    <input type="text" class="form-control" id="brand_update"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="internal_reference">Internal Reference</label>
+                                    <input type="text" class="form-control" id="internal_reference_update"/>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="updateProduct">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+    </template>
+
+</odoo>

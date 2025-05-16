@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="cancel_remark_view_id" model="ir.ui.view">
+            <field name="name">oe.cancel.remark.form</field>
+            <field name="model">oe.cancel.remark</field>
+            <field name="arch" type="xml">
+                <form >
+                    <group>
+                        <field name= "cancel_remarks" required="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_cancel_remark" string="Submit" type="object" class="oe_button oe_form_button_save oe_highlight" />
+                        or
+                        <button special="cancel" class="oe_link" string="Cancel" />
+                   </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_cancel_remark_wizard" model="ir.actions.act_window">
+            <field name="name">Cancek Remarks</field>
+            <field name="res_model">oe.cancel.remark</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

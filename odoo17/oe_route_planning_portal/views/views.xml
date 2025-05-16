@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="oe_route_planning_portal.list">
+      <field name="name">oe_route_planning_portal list</field>
+      <field name="model">oe_route_planning_portal.oe_route_planning_portal</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="oe_route_planning_portal.action_window">
+      <field name="name">oe_route_planning_portal window</field>
+      <field name="res_model">oe_route_planning_portal.oe_route_planning_portal</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="oe_route_planning_portal.action_server">
+      <field name="name">oe_route_planning_portal server</field>
+      <field name="model_id" ref="model_oe_route_planning_portal_oe_route_planning_portal"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="oe_route_planning_portal" id="oe_route_planning_portal.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="oe_route_planning_portal.menu_1" parent="oe_route_planning_portal.menu_root"/>
+    <menuitem name="Menu 2" id="oe_route_planning_portal.menu_2" parent="oe_route_planning_portal.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="oe_route_planning_portal.menu_1_list" parent="oe_route_planning_portal.menu_1"
+              action="oe_route_planning_portal.action_window"/>
+    <menuitem name="Server to list" id="oe_route_planning_portal" parent="oe_route_planning_portal.menu_2"
+              action="oe_route_planning_portal.action_server"/>
+-->
+  </data>
+</odoo>

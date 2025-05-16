@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <record id="route_master_sequence" model="ir.sequence">
+            <field name="name">oe.route.master.sequence</field>
+            <field name="code">oe.route.master.sequence</field>
+            <field name="prefix">R/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="oe_visit_planning_sequence" model="ir.sequence">
+            <field name="name">oe.visit.planning.sequence</field>
+            <field name="code">oe.visit.planning.sequence</field>
+            <field name="prefix">PLAN/</field>
+            <field name="padding">3</field>
+        </record>
+
+        <record id="oe_visits_sequence" model="ir.sequence">
+            <field name="name">oe.visit.sequence</field>
+            <field name="code">oe.visit.sequence</field>
+            <field name="padding">4</field>
+        </record>
+
+    </data>
+</odoo>

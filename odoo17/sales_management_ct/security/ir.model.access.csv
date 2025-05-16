@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_design_template_ct,design.template.ct,model_design_template_ct,base.group_user,1,1,1,1
+access_sale_order_measurement_line,sale.order.measurement.line,model_sale_order_measurement_line,base.group_user,1,1,1,1
+access_line_measurement,line.measurement,model_line_measurement,base.group_user,1,1,1,1

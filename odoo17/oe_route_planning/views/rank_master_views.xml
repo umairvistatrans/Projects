@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="rank_master_view_form_oe" model="ir.ui.view">
+        <field name="name">rank.rank.view.form</field>
+        <field name="model">oe.rank.master</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="no_of_visits"/>
+                            
+                        </group>
+                        <group>
+                            <field name="visit_duration"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="oe_rank_master_view_tree_oe" model="ir.ui.view">
+        <field name="name">oe.rank.master.view.tree</field>
+        <field name="model">oe.rank.master</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="no_of_visits"/>
+                <field name="visit_duration"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="rank_master_action_window" model="ir.actions.act_window">
+        <field name="name">Rank Master</field>
+        <field name="res_model">oe.rank.master</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menuitem -->
+        <menuitem name="Route Planning" id="menu_rout_planning" sequence="3" web_icon="oe_route_planning,static/description/module_icon.png"/>
+
+        <menuitem name="Configurations" id="conf_menu_rout_planning" parent="menu_rout_planning" sequence="10"/>
+
+        <menuitem name="Rank Master" id="sub_menu_rout_planning" parent="conf_menu_rout_planning" action="rank_master_action_window" sequence="1"/>
+
+</odoo>

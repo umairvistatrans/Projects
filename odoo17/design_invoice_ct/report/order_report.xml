@@ -1,0 +1,1275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Header and footer template -->
+    <template id="order_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <div class="article o_report_layout_standard page">
+            <t t-out="0"/>
+        </div>
+
+        <div class="footer o_standard_footer">
+            <!--            <div style="border-bottom:1px solid grey;" class="col-12 text-left"/>-->
+        </div>
+    </template>
+
+    <template id="design_invoice_ct.report_measurements_order">
+        <t t-call="web.html_container">
+
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="design_invoice_ct.order_layout">
+                    <t t-foreach="request.env['line.measurement'].browse(doc.mapped('measurement_lines').ids)"
+                       t-as="line">
+                        <style>
+                            .circular-div {
+                            border: 3px solid #ecab0f;
+                            border-radius: 20px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            text-align: center;
+                            line-height: 1.2;
+                            background-color:white;"
+                            }
+                            p, span, div{
+                            line-height: 0px;
+                            }
+                            p, span, div, h1, h2, h3, h4, h5, h6 {
+                            font-size: 13px;
+                            }
+                        </style>
+                        <!--1st page-->
+                        <div class="">
+                            <div class="row" style="padding-bottom:5px; height: 65px">
+                                <div class="col-6">
+                                    <img alt="img" t-if="doc.company_id.logo"
+                                         t-att-src="image_data_uri(doc.company_id.logo)" style=" height:60px;"/>
+                                </div>
+                                <div class="col-2">
+                                    <div style="border:2px solid #ecab0f; background-color:#ecab0f; margin-top: 20px">
+                                        <div class="circular-div">
+                                            <h3>
+                                                <b>فاتورة مقاسات</b>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1"/>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-1" style="text-align:right;"/>
+                                <div class="col-1" style="text-align:right;">
+                                    <h5 style="display: inline-block;">
+                                        <b>
+                                            الموديل
+                                             
+                                        </b>
+                                    </h5>
+                                    <input type="checkbox"/>
+
+                                </div>
+
+                                <div class="col-1" style="text-align:right;">
+                                    <h5 style="display: inline-block;">
+                                        <b>
+                                            العادي
+                                             
+                                        </b>
+                                    </h5>
+                                    <input type="checkbox"/>
+                                </div>
+                                <div class="col-1" style="text-align:right;">
+                                    <h5>
+                                        <b>
+                                            : عدد ▪
+                                        </b>
+                                    </h5>
+                                </div>
+                                <div class="col-2" style="text-align:right;">
+                                    <input type="text" class="text-center" style="border-radius:5px;"
+                                           name="your_field_name" value="1"/>
+                                </div>
+                                <div class="col-2" style="text-align:right;">
+                                    <h5>
+                                        <b>
+                                            : عدد القطع ▪
+                                        </b>
+                                    </h5>
+                                </div>
+                                <div class="col-2" style="text-align:right;">
+                                    <input type="text" class="text-center" style="border-radius:5px;"
+                                           name="your_field_name" t-att-value="doc.name"/>
+                                </div>
+                                <div class="col-2" style="text-align:right;">
+                                    <h5>
+                                        <b>
+                                            : رقم الفاتورة المرجعية ▪
+                                        </b>
+                                    </h5>
+                                </div>
+
+                            </div>
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-9"/>
+                                <div class="col-1" style="text-align:right;">
+                                    <h5 style="display: inline-block;">
+                                        <b>
+                                            نعم
+                                             
+                                        </b>
+                                    </h5>
+                                    <input type="checkbox"/>
+                                </div>
+                                <div class="col-1" style="text-align:right;">
+                                    <h5 style="display: inline-block;">
+                                        <b>
+                                            لا
+                                             
+                                        </b>
+                                    </h5>
+                                    <input type="checkbox"/>
+                                </div>
+
+                                <div class="col-1" style="text-align:right;">
+                                    <h5>
+                                        <b>
+                                            :مستعجل▪
+                                        </b>
+                                    </h5>
+                                </div>
+
+                            </div>
+                            <br/>
+                            <div class="row" style="margin-top:2px;">
+                                <div class="col-3">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>طول الثوب</b>
+                                    </h3>
+                                </div>
+                                <div class="col-3">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>أكواد القماش</b>
+                                    </h3>
+                                </div>
+                                <div class="col-3">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>أكواد االزارير</b>
+                                    </h3>
+                                </div>
+                                <div class="col-3">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>أكواد اللوجو</b>
+                                    </h3>
+                                </div>
+
+                            </div>
+                            <div class="row" style="margin-top:2px;">
+                                <div class="col-3" style="text-align: right">
+
+                                    <span style="border: 1px solid">
+                                        <t class="text-center"
+                                           style="border-radius:5px;display: inline-block; max-width: 40px"
+                                           name="thobe_length_back" t-esc="line.thobe_length_back"/>
+                                    </span>
+                                    <h5 style=" display: inline-block;">
+                                        <b>
+                                            : خلفي ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center"
+                                           style="border-radius:5px; display: inline-block; max-width: 40px;"
+                                           name="thobe_length_total" t-esc="line.thobe_length_total"/>
+                                    </span>
+                                    <h5 style="border-radius:5px; display: inline-block;">
+                                        <b>
+                                            : اإلجمايل ▪
+                                        </b>
+                                    </h5>
+
+                                    <span style="border: 1px solid">
+                                        <t class="text-center"
+                                           style="border-radius:5px; display: inline-block; max-width: 40px;"
+                                           name="thobe_length_front" t-esc="line.thobe_length_front"/>
+                                    </span>
+                                    <h5 style=" display: inline-block;">
+                                        <b>
+                                            : أمامي ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <h5 style="text-align: right">
+                                        <b>
+                                            : ملاحظات إضافية ▪
+                                             
+                                        </b>
+                                    </h5>
+                                    <div style="text-align:center; border:1px solid black; border-radius: 5px; height:30px; display: inline-block; min-width: 200px;">
+                                        <t t-esc="line.thobe_length_notes"/>
+                                    </div>
+                                </div>
+                                <div class="col-3" style="text-align: right">
+                                    <table style="border:2px solid black; width:100%; text-align:center;">
+                                        <tr>
+                                            <td>
+                                                <h2>
+                                                    <t t-esc="line.fabric_code_1"/>
+                                                </h2>
+                                            </td>
+                                            <td>
+                                                <h2>
+                                                    <t t-esc="line.fabric_code_2"/>
+                                                </h2>
+                                            </td>
+                                            <td>
+                                                <h2>
+                                                    <t t-esc="line.fabric_code_3"/>
+                                                </h2>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <h5 style="text-align: right; margin-top: 5px">
+                                        <b>
+                                            : ملاحظات إضافية ▪
+                                             
+                                        </b>
+                                    </h5>
+                                    <div style="text-align:center; border:1px solid black; border-radius: 5px; height:30px; display: inline-block; min-width: 200px;">
+                                        <t t-esc="line.codes_additional_notes"/>
+                                    </div>
+                                </div>
+                                <div class="col-3" style="text-align: right">
+                                    <table style="border:2px solid black; width:100%; text-align:center;">
+                                        <tr>
+                                            <td>
+                                                <h2>
+                                                    <t t-esc="line.button_code_1"/>
+                                                </h2>
+                                            </td>
+                                            <td>
+                                                <h2>
+                                                    <t t-esc="line.button_code_2"/>
+                                                </h2>
+                                            </td>
+                                            <td>
+                                                <h2>
+                                                    <t t-esc="line.button_code_3"/>
+                                                </h2>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <p style="display: inline-block;margin-top: 5px">
+                                        <label>
+                                            <b>
+                                                نعم
+                                            </b>
+                                             
+                                            <input type="checkbox"/>
+                                        </label>
+                                    </p>
+                                     
+                                    <p style="display: inline-block;margin-top: 5px">
+                                        <label>
+                                            <b>
+                                                لا
+                                            </b>
+                                        </label>
+                                        <input type="checkbox"/>
+                                    </p>
+                                     
+                                    <p style="display: inline-block;margin-top: 5px">
+                                        <label>
+                                            <b>
+                                                :يوجد أزارير خارجي
+                                            </b>
+                                        </label>
+                                    </p>
+                                     
+                                </div>
+                                <div class="col-3">
+                                    <table style="border:2px solid black; width:100%; text-align:center;">
+                                        <tr>
+                                            <td>
+                                                <h2>
+                                                    <t t-esc="line.logo_code_1"/>
+                                                </h2>
+                                            </td>
+                                            <td>
+                                                <h2>
+                                                    <t t-esc="line.logo_code_2"/>
+                                                </h2>
+                                            </td>
+                                            <td>
+                                                <h2>
+                                                    <t t-esc="line.logo_code_3"/>
+                                                </h2>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row mt-2" style="margin-top:2px;">
+
+                                <div class="col-1"/>
+                                <div class="col-3">
+
+
+                                </div>
+                                <div class="col-1"/>
+                                <div class="col-3" style="text-align: right">
+
+                                </div>
+                                <div class="col-4"/>
+
+                            </div>
+                            <br/>
+
+
+                            <div class="row" style="margin-top:2px;">
+                                <div class="col-3">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>وسع اليد</b>
+                                    </h3>
+                                </div>
+                                <div class="col-6" style="text-align:center;">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>الجيباألمامي</b>
+                                    </h3>
+                                </div>
+                                <div class="col-3">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>الصدر + الخرص +الوسط</b>
+                                    </h3>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="row" style="margin-top:2px;">
+                                <div class="col-3" style="text-align: right">
+
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.mid_wrist_width"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            : وسع منتصف المعصم ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.muscle_width"/>
+                                    </span>
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            : وسع العضلات ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <h5 style="text-align: right; margin-top: 5px">
+                                        <b>
+                                            : ملاحظات إضافية ▪
+                                             
+                                        </b>
+                                    </h5>
+                                    <div style="text-align:center; border:1px solid black; border-radius: 5px; height:30px; display: inline-block; min-width: 200px;">
+                                        <t t-esc="line.sleeve_width_notes"/>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-3" style="text-align: right">
+                                    <h3>
+                                        <b>:شكل الجيب</b>
+                                    </h3>
+                                    <t t-if="line.pocket_shape_id">
+                                        <img t-att-src="image_data_uri(line.pocket_shape_id.image)"
+                                             style="width: 80px; height: 80px;"/>
+                                    </t>
+
+                                    <h5 style="text-align: right; margin-top: 10px">
+                                        <b>
+                                            : ملاحظات إضافية ▪
+                                             
+                                        </b>
+                                    </h5>
+                                    <div style="text-align:center; border:1px solid black; border-radius: 5px; height:30px; display: inline-block; min-width: 200px;">
+                                        <t t-esc="line.pocket_notes"/>
+                                    </div>
+                                </div>
+
+                                <div class="col-3" style="text-align: right">
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="border-radius:5px; display: inline-block;"
+                                           name="chest_width" t-esc="line.pocket_start_extension"/>
+                                    </span>
+                                    <h5 style="display: inline-block;">
+                                        <b>
+                                            : امتداد بدايةالجيب ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="border-radius:5px; display: inline-block;"
+                                           name="pocket_length" t-esc="line.pocket_length"/>
+                                    </span>
+                                    <h5 style="display: inline-block;">
+                                        <b>
+                                            : طول الجيب ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="border-radius:5px; display: inline-block;"
+                                           name="pocket_width" t-esc="line.pocket_width"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block;">
+                                        <b>
+                                            : عرض الجيب ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <h5>
+                                        <b>:اضافاتالجيب</b>
+                                    </h5>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pocket_additions == 'no_pen'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+                                    <p style="display: inline-block;">
+
+                                        بدون قلم
+
+
+                                    </p>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pocket_additions == 'with_pen'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <p style="display: inline-block;">
+                                        مع قلم
+                                    </p>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pocket_additions == 'full_pen'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+                                    <p style="display: inline-block;">
+                                        مع قلم كامل
+                                    </p>
+
+
+                                    <br/>
+
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pocket_additions == 'with_logo'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+                                    <p style="display: inline-block;">
+
+                                        معلوقو
+
+
+                                    </p>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pocket_additions == 'without_logo'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <p style="display: inline-block;">
+                                        بدونلوقو
+                                    </p>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pocket_additions == 'glasses_pocket'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+                                    <p style="display: inline-block;">
+                                        جيبللنظارة
+                                    </p>
+
+
+                                    <br/>
+
+
+                                    <h5>
+                                        <b>:حشوة الجيب</b>
+                                    </h5>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pocket_padding == 'no_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+                                    <p style="display: inline-block;">
+
+                                        بدون قلم
+
+
+                                    </p>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pocket_padding == 'heavy_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <p style="display: inline-block;">
+                                        مع قلم
+                                    </p>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pocket_padding == 'very_light_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+                                    <p style="display: inline-block;">
+                                        مع قلم كامل
+                                    </p>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pocket_padding == 'light_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+                                    <p style="display: inline-block;">
+                                        معلوقو
+                                    </p>
+
+
+                                </div>
+                                <div class="col-3" style="text-align: right">
+
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="border-radius:5px;display: inline-block;"
+                                           name="middle_width" t-esc="line.waist_width"/>
+                                    </span>
+                                    <h5 style="display: inline-block;">
+                                        <b>
+                                            : عرض الوسط ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="border-radius:5px;display: inline-block;"
+                                           name="middle_width" t-esc="line.middle_width"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block;">
+                                        <b>
+                                            : عرض الخرص ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="border-radius:5px; display: inline-block;"
+                                           name="chest_width" t-esc="line.chest_width"/>
+                                    </span>
+                                    <h5 style="display: inline-block;">
+                                        <b>
+                                            : عرض الصدر ▪
+                                        </b>
+                                    </h5>
+
+                                    <h5 style="text-align: right">
+                                        <b>
+                                            : ملاحظات إضافية ▪
+                                             
+                                        </b>
+                                    </h5>
+                                    <div style="text-align:center; border:1px solid black; border-radius: 5px; height:30px; display: inline-block; min-width: 200px;">
+                                        <t t-esc="line.chest_waist_middle_notes"/>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="row" style="margin-top:2px;">
+                                <div class="col-3">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>الياقة</b>
+                                    </h3>
+
+                                </div>
+                                <div class="col-3" style="text-align:center;">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>الكم والاباط</b>
+                                    </h3>
+
+                                </div>
+                                <div class="col-3" style="text-align:center;">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>أسفل الثوب</b>
+                                    </h3>
+                                </div>
+                                <div class="col-3">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>الجيب الجانبي ▪</b>
+                                    </h3>
+                                </div>
+
+
+                            </div>
+                            <div class="row" style="margin-top:2px;">
+                                <div class="col-3" style="text-align:right;">
+
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.collar_width"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : وسع الياقة ▪
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.collar_height"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : ارتفاع الياقة ▪
+                                        </b>
+
+                                    </h5>
+
+
+                                    <br/>
+
+
+                                    <t t-if="line.collar_shape_id">
+
+                                        <img t-att-src="image_data_uri(line.collar_shape_id.image)"
+                                             style="width: 80px; height: 80px;"/>
+                                        <h5 style="display: inline-block">
+
+                                            <b>:شكل الياقة</b>
+
+                                        </h5>
+                                    </t>
+
+                                    <br/>
+
+
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.collar_padding == 'light_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            :حشوة الياقة حشوة خفيفة
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.collar_padding == 'heavy_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            :حشوة ثقيلة
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.collar_padding == 'no_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            :بدون حشوة
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+                                    <h5 style="text-align: right">
+                                        <b>
+                                            : ملاحظات إضافية ▪
+                                             
+                                        </b>
+                                    </h5>
+                                    <div style="text-align:center; border:1px solid black; border-radius: 5px; height:30px; display: inline-block; min-width: 200px;">
+                                        <t t-esc="line.collar_notes"/>
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="col-3" style="text-align:right;">
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.cuff_sleeve_length"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : طول الكم السادة ▪
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.bottom_pleat"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : طول الكم الكبك ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.underarm_length"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : طول الإبط ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.upper_underarm_width"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : عرض أعلى الإبط ▪
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.upper_underarm_width"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : عرض أسفل الإبط ▪
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+                                    <h5 style="text-align: right">
+                                        <b>
+                                            : ملاحظات إضافية ▪
+                                             
+                                        </b>
+                                    </h5>
+                                    <div style="text-align:center; border:1px solid black; border-radius: 5px; height:30px; display: inline-block; min-width: 200px;">
+                                        <t t-esc="line.sleeve_underarm_notes"/>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-3" style="text-align:right;">
+
+
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.bottom_pleat"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : خبنة أسفل الثوب ▪
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.bottom_width"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            : وسع أسفل الثوب ▪
+                                        </b>
+                                    </h5>
+                                    <h5 style="text-align: right">
+                                        <b>
+                                            : ملاحظات إضافية ▪
+                                             
+                                        </b>
+                                    </h5>
+                                    <div style="text-align:center; border:1px solid black; border-radius: 5px; height:30px; display: inline-block; min-width: 200px;">
+                                        <t t-esc="line.bottom_notes"/>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-3" style="text-align: right">
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.side_pocket_length"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            : طول الجيب ▪
+                                        </b>
+                                    </h5>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.side_pocket_width"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            : عرض الجيب ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            : عدد ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <input type="checkbox" style="display: inline-block"/>
+
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            بدون زرزور
+                                             
+                                        </b>
+                                    </h5>
+                                    <input type="checkbox" style="display: inline-block"/>
+
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            مع زرزور
+                                             
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            :نعم▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <input style="display: inline-block" type="checkbox"
+                                           t-att-checked="line.mobile_pocket == 'yes'"/>
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            لا
+                                             
+                                        </b>
+                                    </h5>
+                                    <input style="display: inline-block" type="checkbox"
+                                           t-att-checked="line.mobile_pocket == 'no'"/>
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            جيب الجوال
+                                             
+                                        </b>
+                                    </h5>
+                                    <t t-if="line.mobile_pocket_id">
+                                        <h3 style="font-size:10px">
+                                            <b>
+                                                :شكل جيب الجوال في حال كان ) مطلوب )
+                                            </b>
+                                        </h3>
+                                        <img t-att-src="image_data_uri(line.mobile_pocket_id.image)"
+                                             style="width: 80px; height: 80px;"/>
+                                    </t>
+
+
+                                </div>
+
+
+                            </div>
+                            <div class="row" style="margin-top:2px;">
+                                <div class="col-3">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>الكتف</b>
+                                    </h3>
+                                </div>
+                                <div class="col-3" style="text-align:center;">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>الزرزور</b>
+                                    </h3>
+
+                                </div>
+
+                                <div class="col-6">
+                                    <h3 style="border:5px solid #ecab0f; border-radius: 10px; text-align:center;">
+                                        <b>الكبك</b>
+                                    </h3>
+                                </div>
+                                <br/>
+
+
+                            </div>
+                            <div class="row" style="margin-top:2px;">
+                                <div class="col-3" style="text-align:right;">
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.shoulder_width"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            : عرض الكتف ▪
+                                        </b>
+                                    </h5>
+                                    <h5 style="text-align: right">
+                                        <b>
+                                            : ملاحظات إضافية ▪
+                                             
+                                        </b>
+                                    </h5>
+                                    <div style="text-align:center; border:1px solid black; border-radius: 5px; height:30px; display: inline-block; min-width: 200px;">
+                                        <t t-esc="line.shoulder_notes"/>
+                                    </div>
+                                </div>
+                                <div class="col-3" style="text-align:right;">
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.zipper_length"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            : طول الزرزور ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.zipper_width"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+                                        <b>
+                                            : عرض الزرزور ▪
+                                        </b>
+                                    </h5>
+                                    <br/>
+
+                                    <t t-if="line.zipper_shape_id">
+                                        <h5 style="display: inline-block">
+                                            <b>:شكل الزرزور</b>
+                                        </h5>
+                                        <br/>
+
+                                        <img t-att-src="image_data_uri(line.zipper_shape_id.image)"
+                                             style="width: 80px; height: 80px;"/>
+
+                                    </t>
+                                    <br/>
+                                    <h5 style="display: inline-block">
+                                        <b>نوع الحشوة :</b>
+                                    </h5>
+
+                                    <br/>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.zipper_padding == 'no_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <div style="display: inline-block">
+                                        <b>
+                                            :بدون حشوة
+                                        </b>
+                                    </div>
+                                    <br/>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.zipper_padding == 'heavy_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <div style="display: inline-block">
+                                        <b>
+                                            :حشوة ثقيلة
+                                        </b>
+                                    </div>
+
+                                    <br/>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.zipper_padding == 'very_light_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <div style="display: inline-block">
+                                        <b>
+                                            :حشوة خفيفة جدا
+                                        </b>
+                                    </div>
+                                    <br/>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.zipper_padding == 'light_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <div style="display: inline-block">
+                                        <b>
+                                            :حشوة خفيفة
+                                        </b>
+                                    </div>
+                                    <br/>
+                                    <h5 style="text-align: right">
+                                        <b>
+                                            : ملاحظات إضافية ▪
+                                             
+                                        </b>
+                                    </h5>
+                                    <div style="text-align:center; border:1px solid black; border-radius: 5px; height:30px; display: inline-block; min-width: 200px;">
+                                        <t t-esc="line.zipper_notes"/>
+                                    </div>
+
+                                </div>
+                                <div class="col-3" style="text-align:right;">
+                                    <h5 style="display: inline-block">
+
+                                        <b>شكل الخبنة السادة :</b>
+
+                                    </h5>
+                                    <br/>
+                                    <t t-if="line.cuff_type=='plain' and line.cuff_plain_shape_id">
+                                        <img t-att-src="image_data_uri(line.cuff_plain_shape_id.image)"
+                                             style="width: 80px; height: 80px;"/>
+                                    </t>
+                                    <t t-elif="line.cuff_type=='cufflink' and line.cufflink_shape_id">
+                                        <img t-att-src="image_data_uri(line.cufflink_shape_id.image)"
+                                             style="width: 80px; height: 80px;"/>
+
+                                    </t>
+                                    <br/>
+                                    <h5 style="display: inline-block">
+
+                                        <b>:حشوة الخبنة</b>
+
+                                    </h5>
+                                    <br/>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pleat_padding == 'light_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <div style="display: inline-block">
+                                        :حشوة خفيفة
+                                    </div>
+                                    <br/>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pleat_padding == 'very_light_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <div style="display: inline-block">
+
+
+                                        :شوة خفيفة جد
+
+
+                                    </div>
+                                    <br/>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pleat_padding == 'heavy_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <div style="display: inline-block">
+
+
+                                        :حشوة ثقيلة
+
+
+                                    </div>
+                                    <br/>
+                                    <div style="width:15px;height:15px; border:1px solid black;border-radius:8px;display: inline-block;">
+                                        <t t-if="line.pleat_padding == 'no_padding'">
+                                            <div style="background:black;width: 10px;height: 10px;border-radius: 5px;margin: 2px 2px 0px 2px;"/>
+                                        </t>
+                                    </div>
+
+                                    <div style="display: inline-block">
+                                        :بدون حشوة
+
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-3" style="text-align:right;">
+
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.cuff_sleeve_length"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : سادة ▪
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.cuff_plain_length"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : طول السادة ▪
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+                                    <span style="border: 1px solid">
+                                        <t class="text-center" style="display: inline-block" name="muscle_width"
+                                           t-esc="line.cuff_plain_width"/>
+                                    </span>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : عرض السادة ▪
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+
+                                    <input type="text" class="text-center" style="display: inline-block;width:20px;"
+                                           name="muscle_width"/>
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : كبك ▪
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+
+
+                                    <input type="text" class="text-center" style="display: inline-block;width:20px;"
+                                           name="cuff_width" t-att-value="line.cuff_width"/>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : عرض الكبك ▪
+                                        </b>
+
+                                    </h5>
+                                    <br/>
+                                    <input type="text" class="text-center" style="display: inline-block;width:20px;"
+                                           name="cuff_width" t-att-value="line.cuff_length"/>
+
+                                    <h5 style="display: inline-block">
+
+                                        <b>
+                                            : طول الكبك ▪
+                                        </b>
+
+                                    </h5>
+
+                                    <br/>
+
+                                    <t t-if="line.cuff_type == 'plain' and line.cufflink_shape_id">
+                                        <h5 style="display: inline-block">
+
+                                            <b>شكل الخبنة السادة :</b>
+
+                                        </h5>
+                                        <img t-att-src="image_data_uri(line.cufflink_shape_id.image)"
+                                             style="width: 50px; height: 50px"/>
+                                    </t>
+                                    <br/>
+
+
+                                    <br/>
+                                    <h5 style="text-align: right">
+                                        <b>
+                                            : ملاحظات إضافية ▪
+                                             
+                                        </b>
+                                    </h5>
+                                    <div style="text-align:center; border:1px solid black; border-radius: 5px; height:30px; display: inline-block; min-width: 200px;">
+                                        <t t-esc="line.cuff_notes"/>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

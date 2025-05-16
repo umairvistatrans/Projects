@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="oe_visits_view_form_oe" model="ir.ui.view">
+        <field name="name">oe.visits.form</field>
+        <field name="model">oe.visits</field>
+        <field name="arch" type="xml">
+            <form duplicate='false'>
+                <header>
+                    <button name="action_in_progress" string="In-Progress" type="object" class="oe_highlight" invisible="state != 'planned'"/>
+                    <button name="action_completed" string="Completed" type="object" class="oe_highlight" invisible="state != 'in_progress'"/>
+                    <button name="action_re_schedule" string="Re-Schedule" type="object" class="oe_highlight" 
+                        invisible="state not in ['in_progress']"/>
+                    <button name="action_rescheduled" string="Reschedule" type="object" class="oe_highlight" 
+                        invisible="state not in ['re_scheduled']"/>
+                    <button name="button_cancel" string="Cancel" type="object" class="oe_highlight btn-danger" 
+                        invisible="state in ['completed', 'cancelled']"/>
+                    <field name="state" widget="statusbar" statusbar_visible="planned,re_scheduled,in_progress,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id" required="1" options="{'no_open': True}" readonly="state != 'planned'"/>
+                            <field name="customer_id" required="1" readonly="state != 'planned'"/>
+                            <field name="pasi_code" readonly="state != 'planned'"/>
+                        </group>
+                        <group>
+                            <field name="scheduled_date" required="1" readonly="state != 'planned'"/>
+                            <field name="route_id" readonly="state != 'planned'"/>
+                            <field name="visit_type" required="1" readonly="state != 'planned'"/>
+                            <field name="visit_planning_id" readonly="1" invisible="visit_planning_id == False"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="remarks" string="Feedback">
+                            <field name="remarks" widget="html" readonly="state != 'planned'"/>
+                        </page>
+                        <page name="company_products" string="Company Products">
+                            <field name="comp_products_line_ids" readonly="state != 'planned'">
+                                <tree editable="bottom">
+                                    <field name="product_id" />
+                                    <field name="date_code" />
+                                    <field name="availability" />
+                                    <field name="quantity" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="company_material" string="Company Materials">
+                            <field name="comp_material_line_ids" readonly="state != 'planned'">
+                                <tree editable="bottom">
+                                    <field name="product_id" />
+                                    <field name="comment" />
+                                    <field name="photo" widget="image" class="oe_avatar"
+                                           options="{'max_width': 128, 'max_height': 128}"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="competitor_products" string="Competitor Products">
+                            <field name="com_products_line_ids" readonly="state != 'planned'">
+                                <tree editable="bottom">
+                                    <field name="product_id" />
+                                    <field name="comment" />
+                                    <field name="photo" widget="image" class="oe_avatar"
+                                           options="{'max_width': 128, 'max_height': 128}"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="competitor_material" string="Competitor Materials">
+                            <field name="com_material_line_ids" readonly="state != 'planned'">
+                                <tree editable="bottom">
+                                    <field name="product_id" />
+                                    <field name="comment" />
+                                    <field name="photo" widget="image" class="oe_avatar"
+                                           options="{'max_width': 128, 'max_height': 128}"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Location Details" name="location_details">
+                            <group>
+                                <group>
+                                    <field name="customer_latitude" string="Customer Latitude"/>
+                                    <field name="customer_longitude" string="Customer Longitude"/>
+                                    <field name="start_latitude" readonly="state != 'planned'"/>
+                                    <field name="start_longitude" readonly="state != 'planned'"/>
+                                    <field name="start_date_time" readonly="state != 'planned'"/>
+                                </group>
+                                <group>
+                                    <field name="meters"/>
+                                    <field name="end_latitude" readonly="state != 'planned'"/>
+                                    <field name="end_longitude" readonly="state != 'planned'"/>
+                                    <field name="end_date_time" readonly="state != 'planned'"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="Photos" string="Photos">
+                            <field name="photo_ids" widget="many2many_binary" readonly="state != 'planned'"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="oe_visits_view_tree" model="ir.ui.view">
+        <field name="name">oe.visits.view.tree</field>
+        <field name="model">oe.visits</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="customer_id"/>
+                <field name="scheduled_date"/>
+                <field name="pasi_code"/>
+                <field name="route_id"/>
+                <field name="visit_type"/>
+                <field name="state" widget="badge" decoration-info="state == 'planned'"
+                           decoration-primary="state == 'in_progress'" decoration-success="state == 'completed'"
+                           decoration-danger="state == 'cancelled'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_oe_visit_search" model="ir.ui.view">
+        <field name="name">oe.visits.search</field>
+        <field name="model">oe.visits</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Visit"/>
+                <field name="user_id" string="User"/>
+                <field name="customer_id" string="Customer"/>
+                <group expand="0" string="Group By">
+                    <filter string="User" name="user_id" context="{'group_by': 'user_id'}"/>
+                    <filter string="Customer" name="customer_id" context="{'group_by': 'customer_id'}"/>
+                    <filter string="Scheduled Date" name="scheduled_date" context="{'group_by': 'scheduled_date'}"/>
+                    <filter string="Route ID" name="route_id" context="{'group_by': 'route_id'}"/>
+                    <filter string="Visit Type" name="visit_type" context="{'group_by': 'visit_type'}"/>
+                    <filter string="Status" name="state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="oe_visits_action_window" model="ir.actions.act_window">
+        <field name="name">Visits</field>
+        <field name="res_model">oe.visits</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menuitem -->
+
+    <menuitem name="Visits" id="oe_sub_menu_visits" parent="menu_rout_planning" sequence="1"/>
+
+    <menuitem name="Visits" 
+        id="action_menu_oe_visits" 
+        parent="oe_sub_menu_visits" 
+        action="oe_visits_action_window" 
+        sequence="1"/>
+
+</odoo>

@@ -1,0 +1,1251 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sales_management_ct
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-01 20:26+0000\n"
+"PO-Revision-Date: 2024-09-01 20:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__collar_padding__heavy_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pleat_padding__heavy_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pocket_padding__heavy_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__zipper_padding__heavy_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__collar_padding__heavy_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pleat_padding__heavy_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pocket_padding__heavy_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__zipper_padding__heavy_padding
+msgid "(D) Heavy Padding"
+msgstr "حشوة ثقيلة (D)"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__collar_padding__light_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pleat_padding__light_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pocket_padding__light_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__zipper_padding__light_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__collar_padding__light_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pleat_padding__light_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pocket_padding__light_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__zipper_padding__light_padding
+msgid "(FD) Light Padding"
+msgstr "حشوة خفيفة (FD)"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pleat_padding__very_light_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pocket_padding__very_light_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__zipper_padding__very_light_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pleat_padding__very_light_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pocket_padding__very_light_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__zipper_padding__very_light_padding
+msgid "(P) Very Light Padding"
+msgstr "حشوة خفيفة جداً (P)"
+
+#. module: sales_management_ct
+#: model:ir.model.constraint,message:sales_management_ct.constraint_design_template_ct_name_uniq
+msgid "A shape with the same name already exists."
+msgstr "شكل بنفس الاسم موجود بالفعل."
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__message_needaction
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__message_needaction
+msgid "Action Needed"
+msgstr "مطلوب إجراء"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__activity_ids
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__activity_ids
+msgid "Activities"
+msgstr "أنشطة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__activity_exception_decoration
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "زخرفة استثناء النشاط"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__activity_state
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__activity_type_icon
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "رمز نوع النشاط"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__bottom_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__chest_waist_middle_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__codes_additional_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__collar_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__cuff_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__pocket_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__shoulder_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__sleeve_underarm_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__sleeve_width_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__thobe_length_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__zipper_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__bottom_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__chest_waist_middle_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__codes_additional_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__collar_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__cuff_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__pocket_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__shoulder_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__sleeve_underarm_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__sleeve_width_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__thobe_length_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__zipper_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__bottom_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__chest_waist_middle_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__codes_additional_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__collar_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__cuff_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__pocket_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__shoulder_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__sleeve_underarm_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__sleeve_width_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__thobe_length_notes
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__zipper_notes
+msgid "Additional Notes"
+msgstr "ملاحظات إضافية"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+msgid "Apply for All"
+msgstr "تطبيق على الجميع"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+msgid "Overwrite Master Data"
+msgstr "الكتابة فوق البيانات الرئيسية"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_design_template_form
+msgid "Archived"
+msgstr "أرشيفي"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__message_attachment_count
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__thobe_length_back
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__thobe_length_back
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__thobe_length_back
+msgid "Back Length"
+msgstr "طول الظهر"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__bottom_pleat
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__bottom_pleat
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__bottom_pleat
+msgid "Bottom Pleat"
+msgstr "طية السفلية"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__bottom_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__bottom_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__bottom_width
+msgid "Bottom Width"
+msgstr "عرض السفلية"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Bottom of Thobe"
+msgstr "أسفل الثوب"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__button_code_1
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__button_code_1
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__button_code_1
+msgid "Button Code 1"
+msgstr "رمز الزر 1"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__button_code_2
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__button_code_2
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__button_code_2
+msgid "Button Code 2"
+msgstr "رمز الزر 2"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__button_code_3
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__button_code_3
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__button_code_3
+msgid "Button Code 3"
+msgstr "رمز الزر 3"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Button Codes"
+msgstr "رموز الأزرار"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__chest_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__chest_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__chest_width
+msgid "Chest Width"
+msgstr "عرض الصدر"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Chest, Waist & Middle"
+msgstr "الصدر، الخصر والوسط"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Codes"
+msgstr "الرموز"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__design_template_ct__shape__collar
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Collar"
+msgstr "الياقة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__collar_height
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__collar_height
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__collar_height
+msgid "Collar Height"
+msgstr "ارتفاع الياقة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__collar_padding
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__collar_padding
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__collar_padding
+msgid "Collar Padding"
+msgstr "حشوة الياقة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__collar_shape_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__collar_shape_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__collar_shape_id
+msgid "Collar Shape"
+msgstr "شكل الياقة"
+
+#. module: sales_management_ct
+#: model:ir.actions.act_window,name:sales_management_ct.action_design_template_collar
+#: model:ir.ui.menu,name:sales_management_ct.menu_design_template_collar
+msgid "Collar Shapes"
+msgstr "أشكال الياقة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__collar_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__collar_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__collar_width
+msgid "Collar Width"
+msgstr "عرض الياقة"
+
+#. module: sales_management_ct
+#: model:ir.model,name:sales_management_ct.model_res_partner
+msgid "Contact"
+msgstr "جهة الاتصال"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__create_uid
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__create_uid
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__create_uid
+msgid "Created by"
+msgstr "أنشأ بواسطة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__create_date
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__create_date
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__create_date
+msgid "Created on"
+msgstr "تاريخ الإنشاء"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Cuff"
+msgstr "الكبك"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__cuff_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__cuff_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__cuff_length
+msgid "Cuff Length"
+msgstr "طول الكبك"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__cuff_sleeve_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__cuff_sleeve_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__cuff_sleeve_length
+msgid "Cuff Sleeve Length"
+msgstr "طول كم الكبك"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__cuff_type
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__cuff_type
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__cuff_type
+msgid "Cuff Type"
+msgstr "نوع الكبك"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__cuff_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__cuff_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__cuff_width
+msgid "Cuff Width"
+msgstr "عرض الكبك"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__design_template_ct__shape__cufflink
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__cuff_type__cufflink
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__cuff_type__cufflink
+msgid "Cufflink"
+msgstr "كبك"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__cufflink_shape_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__cufflink_shape_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__cufflink_shape_id
+msgid "Cufflink Shape"
+msgstr "شكل الكبك"
+
+#. module: sales_management_ct
+#: model:ir.actions.act_window,name:sales_management_ct.action_design_template_cufflink
+#: model:ir.ui.menu,name:sales_management_ct.menu_design_template_cufflink
+msgid "Cufflinks"
+msgstr "أكواب الكبك"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__order_type__customised
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__sale_order_measurement_line__order_type__customised
+msgid "Customised"
+msgstr "مخصص"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__description
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__description
+msgid "Description"
+msgstr "الوصف"
+
+#. module: sales_management_ct
+#: model:ir.model,name:sales_management_ct.model_design_template_ct
+msgid "Design Templates"
+msgstr "نماذج التصميم"
+
+#. module: sales_management_ct
+#: model:ir.ui.menu,name:sales_management_ct.menu_design_template_root
+msgid "Designs"
+msgstr "تصاميم"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+msgid "Discard"
+msgstr "تجاهل"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__display_name
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__display_name
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__display_name
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__external_buttons_available
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__external_buttons_available
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__external_buttons_available
+msgid "External Buttons"
+msgstr "الأزرار الخارجية"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__fabric_code_1
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__fabric_code_1
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__fabric_code_1
+msgid "Fabric Code 1"
+msgstr "رمز القماش 1"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__fabric_code_2
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__fabric_code_2
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__fabric_code_2
+msgid "Fabric Code 2"
+msgstr "رمز القماش 2"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__fabric_code_3
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__fabric_code_3
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__fabric_code_3
+msgid "Fabric Code 3"
+msgstr "رمز القماش 3"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Fabric Codes"
+msgstr "أكواد القماش"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__message_follower_ids
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__message_follower_ids
+msgid "Followers"
+msgstr "المتابعون"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__message_partner_ids
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعون (الشركاء)"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,help:sales_management_ct.field_design_template_ct__activity_type_icon
+#: model:ir.model.fields,help:sales_management_ct.field_line_measurement__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "أيقونة من Font Awesome مثل fa-tasks"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__thobe_length_front
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__thobe_length_front
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__thobe_length_front
+msgid "Front Length"
+msgstr "طول الأمام"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Front Pocket"
+msgstr "جيب أمامي"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pocket_additions__glasses_pocket
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pocket_additions__glasses_pocket
+msgid "Glasses Pocket"
+msgstr "جيب نظارات"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__has_message
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__has_message
+msgid "Has Message"
+msgstr "يوجد رسالة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__sale_order_measurement_line__priority__1
+msgid "High"
+msgstr "عالي"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__id
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__id
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__id
+msgid "ID"
+msgstr "الرقم التعريفي"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__activity_exception_icon
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__activity_exception_icon
+msgid "Icon"
+msgstr "أيقونة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,help:sales_management_ct.field_design_template_ct__activity_exception_icon
+#: model:ir.model.fields,help:sales_management_ct.field_line_measurement__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "أيقونة للإشارة إلى نشاط استثنائي."
+
+#. module: sales_management_ct
+#: model:ir.model.fields,help:sales_management_ct.field_product_product__measurements_required
+#: model:ir.model.fields,help:sales_management_ct.field_product_template__measurements_required
+msgid ""
+"If checked, a Measurements tab will appear in the sales order for this "
+"product to fill in the necessary measurements."
+msgstr "إذا تم تحديده، ستظهر علامة تبويب القياسات في طلب البيع لهذا المنتج لملء القياسات اللازمة."
+
+#. module: sales_management_ct
+#: model:ir.model.fields,help:sales_management_ct.field_design_template_ct__message_needaction
+#: model:ir.model.fields,help:sales_management_ct.field_line_measurement__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "إذا تم تحديده، فإن الرسائل الجديدة تتطلب اهتمامك."
+
+#. module: sales_management_ct
+#: model:ir.model.fields,help:sales_management_ct.field_design_template_ct__message_has_error
+#: model:ir.model.fields,help:sales_management_ct.field_design_template_ct__message_has_sms_error
+#: model:ir.model.fields,help:sales_management_ct.field_line_measurement__message_has_error
+#: model:ir.model.fields,help:sales_management_ct.field_line_measurement__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "إذا تم تحديده، فإن بعض الرسائل بها خطأ في التسليم."
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__image
+msgid "Image"
+msgstr "صورة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__message_is_follower
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__message_is_follower
+msgid "Is Follower"
+msgstr "هل هو متابع"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__write_uid
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__write_uid
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__write_date
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__write_date
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__logo_code_1
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__logo_code_1
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__logo_code_1
+msgid "Logo Code 1"
+msgstr "رمز الشعار 1"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__logo_code_2
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__logo_code_2
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__logo_code_2
+msgid "Logo Code 2"
+msgstr "رمز الشعار 2"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__logo_code_3
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__logo_code_3
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__logo_code_3
+msgid "Logo Code 3"
+msgstr "رمز الشعار 3"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Logo Codes"
+msgstr "أكواد الشعار"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__lower_underarm_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__lower_underarm_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__lower_underarm_width
+msgid "Lower Underarm Width"
+msgstr "عرض أسفل الإبط"
+
+#. module: sales_management_ct
+#: model:ir.model,name:sales_management_ct.model_line_measurement
+msgid "Measurement Details"
+msgstr "تفاصيل القياسات"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__measurement_line_id
+msgid "Measurement Line"
+msgstr "سطر القياسات"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order__measurement_lines
+msgid "Measurement Lines"
+msgstr "أسطر القياسات"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_sale_order_form_ct
+msgid "Measurements"
+msgstr "القياسات"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order__measurements_order
+msgid "Measurements Order"
+msgstr "ترتيب القياسات"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_product_product__measurements_required
+#: model:ir.model.fields,field_description:sales_management_ct.field_product_template__measurements_required
+msgid "Measurements Required?"
+msgstr "هل تحتاج إلى قياسات؟"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_product_product__min_price
+#: model:ir.model.fields,field_description:sales_management_ct.field_product_template__min_price
+msgid "Minimum Price"
+msgstr "الحد الأدنى للسعر"
+
+#. module: sales_management_ct
+#. odoo-python
+#: code:sales_management_ct/models/sale.py:164
+#, python-format
+msgid "Unit price for product %(product_display_name) is less than the minimum price of %(min_price)."
+msgstr "سعر الوحدة للمنتج %(product_display_name)s أقل من السعر الأدنى البالغ %(min_price)s."
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__message_has_error
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسالة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__message_ids
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__mid_wrist_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__mid_wrist_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__mid_wrist_width
+msgid "Mid-Wrist Width"
+msgstr "عرض منتصف المعصم"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__middle_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__middle_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__middle_width
+msgid "Middle Width"
+msgstr "العرض الأوسط"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__design_template_ct__shape__mobile_phone_pocket
+msgid "Mobile Phone Pocket"
+msgstr "جيب للهاتف المحمول"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__mobile_pocket
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__mobile_pocket
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__mobile_pocket
+msgid "Mobile Pocket"
+msgstr "جيب للهاتف المحمول"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__mobile_pocket_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__mobile_pocket_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__mobile_pocket_id
+msgid "Mobile Pocket Shape"
+msgstr "شكل جيب الهاتف المحمول"
+
+#. module: sales_management_ct
+#: model:ir.actions.act_window,name:sales_management_ct.action_design_template_mobile_phone_pocket
+#: model:ir.ui.menu,name:sales_management_ct.menu_design_template_mobile_phone_pocket
+msgid "Mobile Pockets"
+msgstr "جيوب الهواتف المحمولة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__muscle_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__muscle_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__muscle_width
+msgid "Muscle Width"
+msgstr "عرض العضلات"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__my_activity_date_deadline
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "موعد نهائي لنشاطي"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__activity_calendar_event_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "الحدث التالي في تقويم النشاط"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__activity_date_deadline
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "الموعد النهائي للنشاط التالي"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__activity_summary
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__activity_type_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__external_buttons_available__no
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__mobile_pocket__no
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__external_buttons_available__no
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__mobile_pocket__no
+msgid "No"
+msgstr "لا"
+
+#. module: sales_management_ct
+#: model_terms:ir.actions.act_window,help:sales_management_ct.action_design_template_collar
+msgid "No Collar Shapes defined yet!"
+msgstr "لا توجد أشكال ياقة معرفة بعد!"
+
+#. module: sales_management_ct
+#: model_terms:ir.actions.act_window,help:sales_management_ct.action_design_template_cufflink
+#: model_terms:ir.actions.act_window,help:sales_management_ct.action_design_template_plain_cuff
+#: model_terms:ir.actions.act_window,help:sales_management_ct.action_design_template_zipper
+msgid "No Entry yet!"
+msgstr "لا توجد إدخالات بعد!"
+
+#. module: sales_management_ct
+#: model_terms:ir.actions.act_window,help:sales_management_ct.action_design_template_mobile_phone_pocket
+msgid "No Mobile Pocket Shapes defined yet!"
+msgstr "لا توجد أشكال لجيوب الهاتف المحمول معرفة بعد!"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__collar_padding__no_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pleat_padding__no_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pocket_padding__no_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__zipper_padding__no_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__collar_padding__no_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pleat_padding__no_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pocket_padding__no_padding
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__zipper_padding__no_padding
+msgid "No Padding"
+msgstr "بدون حشوة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pocket_additions__no_pen
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pocket_additions__no_pen
+msgid "No Pen"
+msgstr "بدون قلم"
+
+#. module: sales_management_ct
+#: model_terms:ir.actions.act_window,help:sales_management_ct.action_design_template_pocket
+msgid "No Pocket Shapes defined yet!"
+msgstr "لا توجد أشكال جيوب معرفة بعد!"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__sale_order_measurement_line__priority__0
+msgid "Normal"
+msgstr "عادي"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__message_needaction_counter
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__message_has_error_counter
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الأخطاء"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,help:sales_management_ct.field_design_template_ct__message_needaction_counter
+#: model:ir.model.fields,help:sales_management_ct.field_line_measurement__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "عدد الرسائل التي تتطلب إجراء"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,help:sales_management_ct.field_design_template_ct__message_has_error_counter
+#: model:ir.model.fields,help:sales_management_ct.field_line_measurement__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل ذات خطأ في التسليم"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__order_type
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__order_type
+msgid "Order Type"
+msgstr "نوع الطلب"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__cuff_type__plain
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__cuff_type__plain
+msgid "Plain"
+msgstr "سادة"
+
+#. module: sales_management_ct
+#: model:ir.actions.act_window,name:sales_management_ct.action_design_template_plain_cuff
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__design_template_ct__shape__plain_cuff
+#: model:ir.ui.menu,name:sales_management_ct.menu_design_template_plain_cuff
+msgid "Plain Cuff"
+msgstr "كُبك سادة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__cuff_plain_shape_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__cuff_plain_shape_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__cuff_plain_shape_id
+msgid "Plain Cuff Shape"
+msgstr "شكل الكُبك السادة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__cuff_plain_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__cuff_plain_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__cuff_plain_length
+msgid "Plain Length"
+msgstr "طول سادة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__plain_sleeve_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__plain_sleeve_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__plain_sleeve_length
+msgid "Plain Sleeve Length"
+msgstr "طول الكم السادة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__cuff_plain_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__cuff_plain_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__cuff_plain_width
+msgid "Plain Width"
+msgstr "عرض سادة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__pleat_padding
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__pleat_padding
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__pleat_padding
+msgid "Pleat Padding"
+msgstr "حشوة الطيات"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__design_template_ct__shape__pocket
+msgid "Pocket"
+msgstr "جيب"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__pocket_additions
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__pocket_additions
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__pocket_additions
+msgid "Pocket Additions"
+msgstr "إضافات الجيب"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__pocket_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__side_pocket_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__pocket_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__side_pocket_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__pocket_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__side_pocket_length
+msgid "Pocket Length"
+msgstr "طول الجيب"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__pocket_padding
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__pocket_padding
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__pocket_padding
+msgid "Pocket Padding"
+msgstr "حشوة الجيب"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__pocket_shape_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__pocket_shape_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__pocket_shape_id
+msgid "Pocket Shape"
+msgstr "شكل الجيب"
+
+#. module: sales_management_ct
+#: model:ir.actions.act_window,name:sales_management_ct.action_design_template_pocket
+#: model:ir.ui.menu,name:sales_management_ct.menu_design_template_pocket
+msgid "Pocket Shapes"
+msgstr "أشكال الجيب"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__pocket_start_extension
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__pocket_start_extension
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__pocket_start_extension
+msgid "Pocket Start Extension"
+msgstr "تمديد بدء الجيب"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__pocket_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__side_pocket_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__pocket_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__side_pocket_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__pocket_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__side_pocket_width
+msgid "Pocket Width"
+msgstr "عرض الجيب"
+
+#. module: sales_management_ct
+#: model:ir.model,name:sales_management_ct.model_product_template
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__product_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: sales_management_ct
+#: model:ir.model,name:sales_management_ct.model_product_product
+msgid "Product Variant"
+msgstr "متغير المنتج"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__order_type__previous
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__sale_order_measurement_line__order_type__previous
+msgid "Previous"
+msgstr "مسبق"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__order_type__empty
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__sale_order_measurement_line__order_type__empty
+msgid "Empty"
+msgstr "فارغ"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__activity_user_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسؤول"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__message_has_sms_error
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم الرسائل النصية"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__sale_order_id
+msgid "Sale Order"
+msgstr "أمر البيع"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__sale_line_id
+msgid "Sale Order Line"
+msgstr "سطر أمر البيع"
+
+#. module: sales_management_ct
+#: model:ir.model,name:sales_management_ct.model_sale_order_measurement_line
+msgid "Sale Order Measurement Line"
+msgstr "سطر قياس أمر البيع"
+
+#. module: sales_management_ct
+#: model:ir.model,name:sales_management_ct.model_sale_order
+msgid "Sales Order"
+msgstr "أمر البيع"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+msgid "Save"
+msgstr "حفظ"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__sequence
+msgid "Sequence"
+msgstr "التسلسل"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__shape
+msgid "Shape"
+msgstr "الشكل"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Shoulder"
+msgstr "الكتف"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__shoulder_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__shoulder_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__shoulder_width
+msgid "Shoulder Width"
+msgstr "عرض الكتف"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Side Pocket"
+msgstr "جيب جانبي"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__side_pocket_additions
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__side_pocket_additions
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__side_pocket_additions
+msgid "Side Pocket Additions"
+msgstr "إضافات الجيب الجانبي"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Sleeve & Underarm"
+msgstr "الكم وتحت الإبط"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Sleeve Width"
+msgstr "عرض الكم"
+
+#. module: sales_management_ct
+#: model_terms:ir.actions.act_window,help:sales_management_ct.action_design_template_collar
+msgid "Start putting Collar Shape Designs."
+msgstr "ابدأ بوضع تصاميم أشكال الياقة."
+
+#. module: sales_management_ct
+#: model_terms:ir.actions.act_window,help:sales_management_ct.action_design_template_zipper
+msgid "Start putting Zipper Designs."
+msgstr "ابدأ بوضع تصاميم السحابات."
+
+#. module: sales_management_ct
+#: model_terms:ir.actions.act_window,help:sales_management_ct.action_design_template_cufflink
+msgid "Start setting Khubna Kubak Designs."
+msgstr "ابدأ بوضع تصاميم الكبك."
+
+#. module: sales_management_ct
+#: model_terms:ir.actions.act_window,help:sales_management_ct.action_design_template_mobile_phone_pocket
+msgid "Start setting Mobile Pocket Shape Designs."
+msgstr "ابدأ بوضع تصاميم أشكال جيب الهاتف المحمول."
+
+#. module: sales_management_ct
+#: model_terms:ir.actions.act_window,help:sales_management_ct.action_design_template_plain_cuff
+msgid "Start setting Plain Cuff Designs."
+msgstr "ابدأ بوضع تصاميم الكم السادة."
+
+#. module: sales_management_ct
+#: model_terms:ir.actions.act_window,help:sales_management_ct.action_design_template_pocket
+msgid "Start setting Pocket Shape Designs."
+msgstr "ابدأ بوضع تصاميم أشكال الجيب."
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__sale_order_state
+msgid "Status"
+msgstr "الحالة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,help:sales_management_ct.field_design_template_ct__activity_state
+#: model:ir.model.fields,help:sales_management_ct.field_line_measurement__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الحالة بناءً على الأنشطة\n"
+"متأخر: تاريخ الاستحقاق قد مضى\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"مخطط: الأنشطة المستقبلية."
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Thobe Length"
+msgstr "طول الثوب"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__thobe_length_total
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__thobe_length_total
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__thobe_length_total
+msgid "Total Length"
+msgstr "الطول الكلي"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,help:sales_management_ct.field_design_template_ct__activity_exception_decoration
+#: model:ir.model.fields,help:sales_management_ct.field_line_measurement__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "نوع النشاط الاستثنائي المسجل."
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__underarm_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__underarm_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__underarm_length
+msgid "Underarm Length"
+msgstr "طول تحت الإبط"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__upper_underarm_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__upper_underarm_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__upper_underarm_width
+msgid "Upper Underarm Width"
+msgstr "عرض تحت الإبط العلوي"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_sale_order_measurement_line__priority
+msgid "Urgency Level"
+msgstr "مستوى الطوارئ"
+
+#. module: sales_management_ct
+#: model:ir.ui.view,arch_db:sales_management_ct.view_sale_order_form_ct
+msgid "View Measurements"
+msgstr "عرض القياسات"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__waist_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__waist_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__waist_width
+msgid "Waist Width"
+msgstr "عرض الخصر"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_design_template_ct__website_message_ids
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,help:sales_management_ct.field_design_template_ct__website_message_ids
+#: model:ir.model.fields,help:sales_management_ct.field_line_measurement__website_message_ids
+msgid "Website communication history"
+msgstr "سجل التواصل عبر الموقع"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pocket_additions__full_pen
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pocket_additions__full_pen
+msgid "With Full Pen"
+msgstr "مع قلم كامل"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pocket_additions__with_logo
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pocket_additions__with_logo
+msgid "With Logo"
+msgstr "مع شعار"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pocket_additions__with_pen
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pocket_additions__with_pen
+msgid "With Pen"
+msgstr "مع قلم"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__side_pocket_zipper
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__side_pocket_zipper
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__side_pocket_zipper
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__side_pocket_zipper__with_zipper
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__side_pocket_zipper__with_zipper
+msgid "With Zipper"
+msgstr "مع زرزور"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__pocket_additions__without_logo
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__pocket_additions__without_logo
+msgid "Without Logo"
+msgstr "بدون شعار"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__side_pocket_zipper__without_zipper
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__side_pocket_zipper__without_zipper
+msgid "Without Zipper"
+msgstr "بدون زرزور"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__external_buttons_available__yes
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__line_measurement__mobile_pocket__yes
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__external_buttons_available__yes
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__res_partner__mobile_pocket__yes
+msgid "Yes"
+msgstr "نعم"
+
+#. module: sales_management_ct
+#: model:ir.model.fields.selection,name:sales_management_ct.selection__design_template_ct__shape__zipper
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_partner_form
+msgid "Zipper"
+msgstr "زرزور"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__zipper_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__zipper_length
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__zipper_length
+msgid "Zipper Length"
+msgstr "طول الزرزور"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__zipper_padding
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__zipper_padding
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__zipper_padding
+msgid "Zipper Padding"
+msgstr "تبطين الزرزور"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__zipper_shape_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__zipper_shape_id
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__zipper_shape_id
+msgid "Zipper Shape"
+msgstr "شكل الزرزور"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__zipper_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_partner__zipper_width
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_users__zipper_width
+msgid "Zipper Width"
+msgstr "عرض الزرزور"
+
+#. module: sales_management_ct
+#: model:ir.actions.act_window,name:sales_management_ct.action_design_template_zipper
+#: model:ir.ui.menu,name:sales_management_ct.menu_design_template_zipper
+msgid "Zippers"
+msgstr "زرزور"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_design_template_form
+msgid "e.g. Lumber Inc"
+msgstr "مثال: شركة الأخشاب"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_sale_order_form_ct
+msgid "View Measurements"
+msgstr "عرض القياسات"
+
+#. module: sales_management_ct
+#. odoo-python
+#: code:sales_management_ct/models/models.py:0
+#, python-format
+msgid "Measurement Details"
+msgstr "تفاصيل القياس"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_company__ref_pocket_shape
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__ref_pocket_shape
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+msgid "Pocket Shapes"
+msgstr "شكل الجيب"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_company__ref_mobile_pocket_shape
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__ref_mobile_pocket_shape
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+msgid "Mobile Pocket Shapes"
+msgstr "شكل جيب الجوال"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_company__ref_plain_cuff
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__ref_plain_cuff
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+msgid "Plain Cuff Shapes"
+msgstr "شكل الخبنة السادة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_company__ref_cufflink
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__ref_cufflink
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+msgid "Cufflink Shapes"
+msgstr "شكل الخبنة الكبك"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_company__ref_collar
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__ref_collar
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+msgid "Collar Shapes"
+msgstr "شكل الياقة"
+
+#. module: sales_management_ct
+#: model:ir.model.fields,field_description:sales_management_ct.field_res_company__ref_zipper
+#: model:ir.model.fields,field_description:sales_management_ct.field_line_measurement__ref_zipper
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_measurements_template_form
+msgid "Zipper Shapes"
+msgstr "شكل الزرزور"
+
+#. module: sales_management_ct
+#: model_terms:ir.ui.view,arch_db:sales_management_ct.view_res_company_form_inherit
+msgid "Designs Reference"
+msgstr "مرجع التصاميم"

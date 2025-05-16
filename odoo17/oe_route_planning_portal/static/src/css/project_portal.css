@@ -1,0 +1,218 @@
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  display: flex;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  font-weight: 600;
+  flex: 1;
+}
+
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+/* card-css */
+
+.custom-card-class img {
+  width: 100%;
+}
+
+.custom-card-class .card-title {
+  text-align: center;
+  margin-top: 12px;
+  margin-bottom: 0px;
+  font-weight: 600;
+}
+
+.custom-card-class .card-brand {
+  min-height: 20px;
+  text-align: center;
+  margin-top: 10px;
+  color: gray;
+}
+
+.qty_input {
+  width: 100% !important;
+  margin-top: 10px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #c9c9c9;
+  padding: 4px 8px;
+}
+
+.feedback-div {
+  margin-bottom: 8px;
+}
+
+.feedback-div textarea {
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  padding: 8px;
+  border-radius: 8px;
+  outline: none;
+}
+
+.parallel-btn-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.parallel-btn-div button {
+  outline: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 16px;
+  font-weight: 600px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease all;
+}
+
+.parallel-btn-div button:hover {
+  transform: scale(1.04);
+}
+
+
+.parallel-btn-div .request-cancel-btn {
+  background-color: #cf0808;
+}
+
+.parallel-btn-div .request-reschedule-btn {
+  background-color: #009f00;
+}
+
+.comment-boxx {
+  margin-top: 12px;
+}
+
+.comment-boxx textarea {
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  padding: 8px;
+  border-radius: 8px;
+  outline: none;
+}
+
+@media(max-width:768px) {
+
+  .tab {
+    display: block;
+  }
+
+  .tab button {
+    width: 100%;
+  }
+
+  .parallel-btn-div {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .parallel-btn-div button {
+    width: 100%;
+  }
+}
+
+.list-btn-calendar {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  transition: 0.4s ease all;
+}
+
+.list-btn-list {
+  background-color: #8595A2;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  transition: 0.4s ease all;
+}
+
+#calendar-div {
+  display: none;
+}
+
+nav.navbar .custom-collapse .nav {
+  flex-direction: row-reverse !important;
+  align-items: center;
+}
+
+.custom_service_category .o_portal_index_card:nth-child(2) {
+  display: none;
+}
+
+.checkin-btn {
+  background-color: #714b67 !important;
+}
+
+.badge.o_text_overflow {
+  min-width: 118px;
+}
+.badge.badge-product-status.o_text_overflow {
+  min-width: 118px;
+}
+
+.modal-close-btn{
+  background: #de3730;
+  color: white;
+  padding: 0px 10px 3px;
+  border: none;
+  border-radius: 4px;
+  line-height: 24px;
+  font-weight: 600;
+  font-size: 16px;
+}
+.modal-dialog .modal-body .form-group{
+  margin-bottom: 16px;
+}
+.modal-dialog .modal-body .form-group label{
+  margin-bottom: 6px;
+}
+
+.o_portal_wrap .o_portal_my_doc_table td{
+  padding-right: 16px;
+  padding-left: 16px;
+}
+.o_portal_wrap .o_portal_my_doc_table th{
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.o_day_today {
+    background-color: #714b67;  /* Highlight color, adjust as needed */
+    border-color: #714b67;
+      color:white;/* Border color, adjust as needed */
+}

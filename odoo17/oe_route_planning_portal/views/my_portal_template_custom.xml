@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_portal_template" name="template_name" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[contains(@class, 'o_portal_docs')]" position="attributes">
+            <attribute name="t-attf-class" add="{{'d-none' if user_type == 'app_user' else ''}}" separator=" "/>
+        </xpath>
+    </template>
+
+    <template id="portal_docs_entry_inherit" name="Portal Doc Entry Inherit" inherit_id="portal.portal_docs_entry">
+        <xpath expr="//div[1]" position="attributes">
+            <attribute name="t-attf-class"
+                       add="{{'o_portal_index_card col-md-12' if user_type == 'app_user' else 'o_portal_index_card col-md-6'}}"
+                       separator=" "/>
+        </xpath>
+    </template>
+</odoo>

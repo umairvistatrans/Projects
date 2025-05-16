@@ -1,0 +1,188 @@
+<odoo>
+    <data>
+
+        <!-- Tree View -->
+        <record id="view_design_template_tree" model="ir.ui.view">
+            <field name="name">design.template.ct.tree</field>
+            <field name="model">design.template.ct</field>
+            <field name="arch" type="xml">
+                <tree sample="1">
+                    <field name="name" width="30%"/>
+                    <field name="description" width="30%"/>
+                    <field name="shape" column_invisible="context.get('default_shape', 0)"/>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_design_template_form" model="ir.ui.view">
+            <field name="name">design.template.ct.form</field>
+            <field name="model">design.template.ct</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                        <field name="image" widget="image" class="oe_avatar"
+                               options="{&quot;preview_image&quot;: &quot;image&quot;}"/>
+                        <div class="oe_title">
+                            <field name="active" invisible="1"/>
+                            <h1>
+                                <field options="{'line_breaks': False}" widget="text" class="text-break" name="name"
+                                       default_focus="1" placeholder="e.g. Lumber Inc"/>
+                            </h1>
+                        </div>
+                        <br/>
+                        <group>
+                            <field name="description"/>
+                            <field name="shape" invisible="context.get('default_shape', 0)"/>
+                        </group>
+                    </sheet>
+                    <!-- Chatter -->
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" options="{'post_refresh': 'always'}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_design_template_search" model="ir.ui.view">
+            <field name="name">design.template.ct.search</field>
+            <field name="model">design.template.ct</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="description"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_design_template_pocket" model="ir.actions.act_window">
+            <field name="name">Pocket Shapes</field>
+            <field name="res_model">design.template.ct</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('shape', '=', 'pocket')]</field>
+            <field name="context">{'default_shape': 'pocket'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Pocket Shapes defined yet!
+                </p>
+                <p>
+                    Start setting Pocket Shape Designs.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_design_template_mobile_phone_pocket" model="ir.actions.act_window">
+            <field name="name">Mobile Pockets</field>
+            <field name="res_model">design.template.ct</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('shape', '=', 'mobile_phone_pocket')]</field>
+            <field name="context">{'default_shape': 'mobile_phone_pocket'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Mobile Pocket Shapes defined yet!
+                </p>
+                <p>
+                    Start setting Mobile Pocket Shape Designs.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_design_template_plain_cuff" model="ir.actions.act_window">
+            <field name="name">Plain Cuff</field>
+            <field name="res_model">design.template.ct</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('shape', '=', 'plain_cuff')]</field>
+            <field name="context">{'default_shape': 'plain_cuff'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Entry yet!
+                </p>
+                <p>
+                    Start setting Plain Cuff Designs.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_design_template_cufflink" model="ir.actions.act_window">
+            <field name="name">Cufflinks</field>
+            <field name="res_model">design.template.ct</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('shape', '=', 'cufflink')]</field>
+            <field name="context">{'default_shape': 'cufflink'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Entry yet!
+                </p>
+                <p>
+                    Start setting Khubna Kubak Designs.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_design_template_collar" model="ir.actions.act_window">
+            <field name="name">Collar Shapes</field>
+            <field name="res_model">design.template.ct</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('shape', '=', 'collar')]</field>
+            <field name="context">{'default_shape': 'collar'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Collar Shapes defined yet!
+                </p>
+                <p>
+                    Start putting Collar Shape Designs.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_design_template_zipper" model="ir.actions.act_window">
+            <field name="name">Zippers</field>
+            <field name="res_model">design.template.ct</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('shape', '=', 'zipper')]</field>
+            <field name="context">{'default_shape': 'zipper'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Entry yet!
+                </p>
+                <p>
+                    Start putting Zipper Designs.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Items -->
+        <menuitem id="menu_design_template_root" name="Designs" parent="sale.sale_menu_root" sequence="35"/>
+
+        <!-- Sub Menus for Each Action -->
+        <menuitem id="menu_design_template_pocket" name="Pocket Shapes"
+                  parent="menu_design_template_root"
+                  action="action_design_template_pocket" sequence="10"/>
+
+        <menuitem id="menu_design_template_mobile_phone_pocket" name="Mobile Pockets"
+                  parent="menu_design_template_root"
+                  action="action_design_template_mobile_phone_pocket" sequence="20"/>
+
+        <menuitem id="menu_design_template_plain_cuff" name="Plain Cuff"
+                  parent="menu_design_template_root"
+                  action="action_design_template_plain_cuff" sequence="30"/>
+
+        <menuitem id="menu_design_template_cufflink" name="Cufflinks"
+                  parent="menu_design_template_root"
+                  action="action_design_template_cufflink" sequence="40"/>
+
+        <menuitem id="menu_design_template_collar" name="Collar Shapes"
+                  parent="menu_design_template_root"
+                  action="action_design_template_collar" sequence="50"/>
+
+        <menuitem id="menu_design_template_zipper" name="Zippers"
+                  parent="menu_design_template_root"
+                  action="action_design_template_zipper" sequence="60"/>
+
+    </data>
+</odoo>

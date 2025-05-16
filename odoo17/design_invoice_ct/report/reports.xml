@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--  Paper formate Order -->
+    <record id="paper_format_new_so" model="report.paperformat">
+        <field name="name">Sale Order</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">2.00</field>
+        <field name="margin_bottom">2.00</field>
+        <field name="margin_left">3.0</field>
+        <field name="margin_right">3.0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">20</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_report_measurements_order" model="ir.actions.report">
+        <field name="name">Measurements Invoice</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">design_invoice_ct.report_measurements_order</field>
+        <field name="report_file">design_invoice_ct.report_measurements_order</field>
+        <field name="print_report_name">(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="design_invoice_ct.paper_format_new_so" />
+    </record>
+
+</odoo>

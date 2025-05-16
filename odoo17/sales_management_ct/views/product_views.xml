@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ======= Product Template Inheritance ======= -->
+        <record model="ir.ui.view" id="view_product_template_form_ct">
+            <field name="name">product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='purchase_ok']/parent::node()" position="after">
+                    <span class="d-inline-block">
+                        <field name="measurements_required"/>
+                        <label for="measurements_required"/>
+                    </span>
+                </xpath>
+                <xpath expr="//field[@name='list_price']/parent::node()" position="after">
+                    <field name="min_price"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

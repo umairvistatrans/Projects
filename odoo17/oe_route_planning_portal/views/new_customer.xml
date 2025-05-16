@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_customers_list" name="Customers List">
+        <t t-if="my_customers">
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>VAT</th>
+                        <th>Licence</th>
+                        <th>Image</th>
+                        <th class="text-end">Status</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <t t-foreach="my_customers" t-as="customer">
+                    <tbody t-if="customer">
+                        <tr class="customer-row" t-att-data-customer-id="customer.id">
+                            <td class="text-start">
+                                <span t-esc="customer.customer_name"/>
+
+                            </td>
+                            <td>
+                                <span t-field="customer.taxid"/>
+                            </td>
+                            <td>
+                                <span t-esc="customer.licence"/>
+                            </td>
+                            <td>
+                                <img t-attf-src="{{ '/web/image/oe.new.customer/%s/photo' % customer.id }}"
+                                     class="img-fluid" id="customer_image_update" alt="customer Image"
+                                     style="width:100px"/>
+                            </td>
+                            <td class="text-end lh-1">
+                                <span t-attf-class="badge text-bg-primary fw-normal o_text_overflow"
+                                      t-field="customer.state"/>
+                            </td>
+
+
+                            <td class="text-end">
+                                <t t-if="customer.state == 'draft'">
+                                    <button type="button" class="btn btn-primary btn-sm edit-customer"
+                                            t-att-data-customer-id="customer.id">
+                                        <i class="fa fa-edit"/>
+                                    </button>
+                                </t>
+                                <button type="button" class="btn btn-primary btn-sm view-customer"
+                                        t-att-data-customer-id="customer.id">
+                                    <i class="fa fa-eye"/>
+                                </button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="portal_my_customers" name="My customers">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="oe_route_planning_portal.portal_searchbar_customers">
+                <t t-set="title">customers</t>
+            </t>
+            <t t-if="not my_customers">
+                <div class="alert alert-warning" role="alert">
+                    There are no customers.
+                </div>
+            </t>
+            <t t-call="oe_route_planning_portal.portal_customers_list"/>
+        </t>
+    </template>
+
+    <template id="portal_my_home_menu_customers" name="Portal layout : customers menu entries"
+              inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="customer" class="breadcrumb-item active">
+                <a t-attf-href="/my/customers?{{ keep_query() }}">customers /</a>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_searchbar_customers" name="Portal customers Search Bar">
+        <nav t-attf-class="navbar navbar-expand-lg flex-wrap mb-4 p-0 o_portal_navbar {{classes if classes else ''}}">
+            <t t-if="breadcrumbs_searchbar">
+                <t t-call="oe_route_planning_portal.portal_my_home_menu_customers"/>
+            </t>
+            <span t-else="" class="navbar-brand mb-0 h1 me-auto" t-esc="title or 'customers'"/>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#o_portal_navbar_content" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle filters">
+                <span class="fa fa-fw fa-bars"/>
+            </button>
+            <div class="collapse navbar-collapse flex-wrap-reverse justify-content-end gap-3 custom-collapse"
+                 id="o_portal_navbar_content">
+                <div class="nav flex-column flex-sm-row gap-2 ms-auto p-0 mb-3 mb-lg-0 mt-1 mt-lg-0">
+                    <div t-if="searchbar_filters" class="ms-lg-2">
+                        <span class="small me-1 navbar-text">Filter By:</span>
+                        <div class="btn-group">
+                            <button id="portal_searchbar_filters" data-bs-toggle="dropdown"
+                                    class="btn btn-secondary dropdown-toggle">
+                                <t t-esc="searchbar_filters.get(filterby,searchbar_filters.get('all')).get('label', 'All')"/>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="portal_searchbar_filters">
+                                <t t-foreach="searchbar_filters" t-as="option">
+                                    <a t-att-href="'/my/customers' + '?' + keep_query('*', filterby=option)"
+                                       t-attf-class="dropdown-item#{filterby == option and ' active' or ''}">
+                                        <span t-esc="searchbar_filters[option].get('label')"/>
+                                    </a>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <t t-out="0"/>
+                </div>
+                <form t-if="searchbar_inputs" class="o_portal_search_panel col-md-5 col-xl-4 ms-lg-2">
+                    <div class="input-group w-100">
+                        <button type="button" class="btn btn-secondary border-end dropdown-toggle"
+                                data-bs-toggle="dropdown"/>
+                        <div class="dropdown-menu dropdown-menu-end" role="menu">
+                            <t t-foreach='searchbar_inputs' t-as='input'>
+                                <a t-att-href="'#' + input_value['input']"
+                                   t-attf-class="dropdown-item#{search_in == input_value['input'] and ' active' or ''}">
+                                    <span t-out="input_value['label']"/>
+                                </a>
+                            </t>
+                        </div>
+                        <input type="search" class="form-control" placeholder="Search" t-att-value='search'
+                               name="search" id="searchInput"/>
+
+
+                        <button class="btn btn-secondary o_wait_lazy_js" type="submit">
+                            <span class="oi oi-search"/>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </template>
+
+    <template id="new_customer_creation_popup" name="New customer Creation Popup"
+              inherit_id="oe_route_planning_portal.portal_searchbar_customers">
+        <xpath expr="//div[hasclass('nav')]" position="inside">
+            <button id="opencustomerModalButton" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                <strong>New</strong>
+            </button>
+
+            <div id="customerModalCenter" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create New customer</h5>
+                            <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close"
+                                    id="closecustomerModalButton">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="formContainer">
+                            <form id="modalFormcustomer">
+                                <div class="form-group">
+                                    <label for="inputField1">Customer Image
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="file" class="image_upload" required="1" id="customer_image"
+                                           name="customer_image"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputField1">Customer Name
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="customer_name" name="customer_name"
+                                           required="1" maxlength="40"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputField3">VAT
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="vat" name="vat" required="1"
+                                           maxlength="20"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputField3">License
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="licence" name="licence" required="1"
+                                           maxlength="20"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address:</label>
+                                    <label for="address">Line 1
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="street" placeholder="Street"/>
+                                    <label for="address">Line 2</label>
+                                    <input type="text" class="form-control mt-2" id="street2"
+                                           placeholder="Street 2 (optional)"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="city" placeholder="City"
+                                           maxlength="40"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-control" id="country" onchange="updateStates()">
+                                        <option value="">Select a country</option>
+                                        <t t-foreach="request.env['res.country'].sudo().search([])" t-as="country">
+                                            <option t-att-value="country.id">
+                                                <t t-esc="country.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="state">State
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-control" id="state">
+                                        <option value="">Select a state</option>
+                                        <!-- States will be populated by JavaScript -->
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="zip">ZIP
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="zip" placeholder="ZIP" maxlength="10"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputField1">Description</label>
+                                    <input type="text" class="form-control" id="notes" name="notes"/>
+                                </div>
+
+                            </form>
+                            <div id="message" class="mt-3"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="submitcustomerFormBtn">Create</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="customer_popup" inherit_id="oe_route_planning_portal.portal_customers_list">
+        <xpath expr="//thead[1]" position="after">
+            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="customerModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit customer</h5>
+                            <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close"
+                                    id="closecustomerEditModalButton">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="updatecustomer">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+    </template>
+
+    <template id="customer_view_popup" inherit_id="oe_route_planning_portal.portal_customers_list">
+        <xpath expr="//thead[1]" position="after">
+            <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="viewCustomerModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Customer Detail</h5>
+                            <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close"
+                                    id="closeviewcustomerEditModalButton">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+    </template>
+
+</odoo>

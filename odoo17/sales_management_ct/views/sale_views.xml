@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ======= Sale Order Template Inheritance ======= -->
+        <record model="ir.ui.view" id="view_sale_order_form_ct">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="measurements_order" invisible="1"/>
+                </xpath>
+                <xpath expr="//page[@name='other_information']" position="after">
+                    <page name="sale_measurements" string="Measurements" invisible="not measurements_order">
+                        <field name="measurement_lines">
+                            <tree editable="bottom" create="0" edit="1" delete="0">
+                                <field name="sale_order_id" column_invisible="True"/>
+                                <field name="sale_order_state" column_invisible="True"/>
+                                <field name="sale_line_id" column_invisible="True"/>
+                                <field name="sequence" widget="handle"/>
+                                <field name="priority" widget="priority" nolabel="1"/>
+                                <field name="product_id" readonly="1" options="{'no_create': 1, 'no_edit': 1, 'no_open': 1}"/>
+                                <field name="description" readonly="sale_order_state != 'draft'"/>
+                                <field name="order_type" widget="badge" decoration-info="order_type == 'regular'"
+                                       decoration-primary="order_type == 'customised'" readonly="1"/>
+                                <button name="action_open_measurement_form" type="object" title="View Measurements"
+                                        string="View Measurements" class="btn-primary float-end"
+                                        context="{'form_view_ref': 'sales_management_ct.view_measurements_template_form'}"
+                                        invisible="sale_order_state != 'draft'"/>
+                                <button name="action_open_measurement_form" type="object" title="View Measurements"
+                                        string="View Measurements" class="btn-link float-end"
+                                        context="{'form_view_ref': 'sales_management_ct.view_measurements_template_form', 'create': 0, 'edit': 0}"
+                                        invisible="sale_order_state == 'draft'"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
